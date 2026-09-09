@@ -38,7 +38,7 @@ export function App() {
     setIsAudienceModalOpen(false);
 
     if (role === "student") {
-      navigate("/");
+      navigate("/centers");
     } else {
       navigate("/#atl-solutions");
     }
@@ -69,7 +69,7 @@ export function App() {
             }
           />
           <Route
-            path="/"
+            path="/centers"
             element={
               <CentersPage
                 onOpenPartnerModal={() => setIsPartnerModalOpen(true)}
