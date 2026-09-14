@@ -264,23 +264,34 @@ export const StudentLearningPath: React.FC<StudentLearningPathProps> = ({
             transition={{ duration: 0.3, ease: "easeOut" }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 mb-12"
           >
-            {currentTierData.modules.map((mod) => {
+            {currentTierData.modules.map((mod, idx) => {
               const Icon = mod.icon;
+              const slideDirections = ["bottom", "left", "right", "top"];
+              const dir = slideDirections[idx % slideDirections.length];
+              const slideClass =
+                dir === "left"
+                  ? "-translate-x-full group-hover:translate-x-0"
+                  : dir === "right"
+                  ? "translate-x-full group-hover:translate-x-0"
+                  : dir === "top"
+                  ? "-translate-y-full group-hover:translate-y-0"
+                  : "translate-y-full group-hover:translate-y-0";
+
               return (
                 <div
                   key={mod.title}
                   onClick={() => onSelectCourseModal && onSelectCourseModal(mod.title)}
-                  className="group relative h-[330px] rounded-2xl overflow-hidden border border-white/15 hover:border-[#FF7711] transition-all duration-500 shadow-2xl cursor-pointer bg-[#101010]"
+                  className="group relative h-[330px] rounded-2xl overflow-hidden border border-white/15 hover:border-[#FF7711]/60 transition-all duration-500 shadow-2xl cursor-pointer bg-[#101010]"
                 >
                   {/* Background Image - Bright and clear */}
                   <img
                     src={mod.image}
                     alt={mod.title}
-                    className="absolute inset-0 w-full h-full object-cover filter brightness-[0.85] contrast-[1.05] group-hover:brightness-[0.92] group-hover:scale-105 transition-all duration-500"
+                    className="absolute inset-0 w-full h-full object-cover filter brightness-[0.85] contrast-[1.05] group-hover:scale-110 group-hover:brightness-[0.95] transition-transform duration-700 ease-out"
                   />
 
                   {/* Gentle gradient scrim to keep text legible while image stays clearly visible */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/10 group-hover:from-black/90 group-hover:via-black/50 group-hover:to-black/20 transition-all duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/10 pointer-events-none" />
 
                   {/* Top Badges */}
                   <div className="absolute top-3.5 inset-x-3.5 flex items-center justify-between z-10">
@@ -295,8 +306,8 @@ export const StudentLearningPath: React.FC<StudentLearningPathProps> = ({
                     </span>
                   </div>
 
-                  {/* Default Bottom Content (Visible by default, fades on hover) */}
-                  <div className="absolute bottom-0 inset-x-0 p-5 z-10 transition-all duration-300 group-hover:opacity-0 group-hover:translate-y-2 pointer-events-none">
+                  {/* Default Bottom Content (Visible by default, slides out on hover) */}
+                  <div className="absolute bottom-0 inset-x-0 p-5 z-10 transition-all duration-300 transform group-hover:opacity-0 group-hover:-translate-y-3 pointer-events-none">
                     <div className="flex items-center space-x-1.5 mb-1.5">
                       <span className="text-base drop-shadow-md">{mod.iconEmoji}</span>
                       <h4 className="text-base font-bold text-white tracking-tight leading-snug drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
@@ -308,8 +319,10 @@ export const StudentLearningPath: React.FC<StudentLearningPathProps> = ({
                     </p>
                   </div>
 
-                  {/* Hover Overlay: Lightweight Translucent Glass Overlay showing Full Content without heavy darkness */}
-                  <div className="absolute inset-0 p-5 z-20 flex flex-col justify-end bg-gradient-to-t from-black/95 via-black/65 to-black/20 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300">
+                  {/* Hover Overlay: Directional Slide-in Drawer showing full syllabus details */}
+                  <div
+                    className={`absolute inset-0 p-5 z-20 flex flex-col justify-end bg-gradient-to-t from-black/98 via-black/85 to-black/30 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-transform duration-500 ease-out transform ${slideClass}`}
+                  >
                     <div className="flex items-center space-x-1.5 mb-1.5">
                       <span className="text-base">{mod.iconEmoji}</span>
                       <h4 className="text-base font-bold text-white tracking-tight leading-snug drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">

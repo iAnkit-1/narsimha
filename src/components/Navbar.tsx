@@ -67,7 +67,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onPartnerClick }) => {
               <span className="font-extrabold text-sm sm:text-base tracking-wider text-[#F1F1F1] group-hover:text-[#FF7711] transition-colors leading-tight">
                 NARASIMHA
               </span>
-              <span className="text-[11px] font-mono tracking-widest text-[#FF7711] font-bold uppercase leading-none mt-0.5">
+              <span className="font-extrabold text-sm sm:text-base tracking-wider text-[#FF7711] leading-tight">
                 SKILL SPHERE
               </span>
             </div>
