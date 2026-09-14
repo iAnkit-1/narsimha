@@ -69,21 +69,23 @@ export const NarasimhaInAction: React.FC = () => {
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-14 gap-6">
           <div>
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#111111] border border-[#272727] mb-3.5">
+            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#FF7711]/40 mb-3.5 shadow-md">
               <Camera className="w-3.5 h-3.5 text-[#FF7711]" />
-              <span className="text-[11px] font-mono uppercase tracking-widest text-[#FF7711] font-bold">
+              <span className="text-xs font-mono uppercase tracking-widest text-[#FF7711] font-bold">
                 CAMPUS HIGHLIGHTS
               </span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#F1F1F1] tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
               Narasimha{" "}
-              <span className="font-serif italic font-normal text-[#FF7711]">In Action</span>
+              <span className="bg-gradient-to-r from-[#FF7711] via-[#FFA149] to-[#FF5500] bg-clip-text text-transparent">
+                In Action
+              </span>
             </h2>
           </div>
 
           <div className="max-w-md">
-            <p className="text-sm sm:text-base text-[#A1A1A1] mb-3">
+            <p className="text-sm sm:text-base text-[#A3A3A3] mb-3 leading-relaxed">
               Real labs, real students, real results. See how our training programs transform campuses into hubs of innovation.
             </p>
             <a

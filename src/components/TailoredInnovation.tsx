@@ -1,5 +1,5 @@
 import React from "react";
-import { FileText, CheckCircle2, ArrowRight, Layout, Cpu, ShieldCheck } from "lucide-react";
+import { Sparkles, FileText, CheckCircle2, ArrowRight, Layout, Cpu, ShieldCheck } from "lucide-react";
 
 interface TailoredInnovationProps {
   onRequestProposal: () => void;
@@ -39,16 +39,18 @@ export const TailoredInnovation: React.FC<TailoredInnovationProps> = ({ onReques
             {/* Left Narrative Column */}
             <div className="lg:col-span-7 flex flex-col justify-between">
               <div>
-                <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#1A1A1A] border border-[#333333] mb-6">
-                  <span className="text-sm">🧩</span>
-                  <span className="text-[11px] font-mono uppercase tracking-widest text-[#FF7711] font-bold">
+                <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#FF7711]/40 mb-4 shadow-md">
+                  <Sparkles className="w-3.5 h-3.5 text-[#FF7711]" />
+                  <span className="text-xs font-mono uppercase tracking-widest text-[#FF7711] font-bold">
                     TAILORED INNOVATION
                   </span>
                 </div>
 
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FFFFFF] tracking-tight leading-tight mb-6">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight mb-4">
                   Build Your Dream{" "}
-                  <span className="font-serif italic font-normal text-[#FF7711]">Innovation Hub</span>
+                  <span className="bg-gradient-to-r from-[#FF7711] via-[#FFA149] to-[#FF5500] bg-clip-text text-transparent">
+                    Innovation Hub
+                  </span>
                 </h2>
 
                 <blockquote className="text-base sm:text-lg text-[#E2E8F0] italic leading-relaxed border-l-2 border-[#FF7711] pl-5 mb-8 bg-[#151515]/60 py-3 rounded-r-xl">
