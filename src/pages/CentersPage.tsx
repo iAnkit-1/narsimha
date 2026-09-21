@@ -1,12 +1,43 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { 
-  MapPin, Clock, CheckCircle2, 
-  ArrowRight, Calendar, Send, Bot, Code2, BrainCircuit, Printer, 
-  Lightbulb, Wifi, Compass, Palette, Award, Sparkles 
+import confetti from "canvas-confetti";
+import {
+  Sparkles,
+  ArrowRight,
+  CheckCircle2,
+  MapPin,
+  Clock,
+  Phone,
+  Calendar,
+  Layers,
+  Wrench,
+  Activity,
+  MessageSquare,
+  Trophy,
+  Send,
+  ExternalLink,
+  Compass,
+  Laptop,
+  Flame,
+  BookOpen,
+  Users,
+  Target,
+  Rocket,
+  ShieldCheck,
+  Zap,
 } from "lucide-react";
 import { companyDetails } from "../data/navigation";
-import { centerFacilityHighlights, skillCentersList } from "../data/centers";
+import {
+  weeklyOfflineActivities,
+  learningJourneySteps,
+  learningLevelsList,
+  starterCourses,
+  learnerCourses,
+  studentPortfolioItems,
+  whyNarasimhaReasons,
+  centerGalleryItems,
+  type GalleryItem,
+} from "../data/centersPageData";
 
 interface CentersPageProps {
   onOpenPartnerModal: () => void;
@@ -14,689 +45,1154 @@ interface CentersPageProps {
 
 export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) => {
   const navigate = useNavigate();
-  // Category tabs for Common Courses:
-  const [activeCommonCategory, setActiveCommonCategory] = useState<"little" | "junior" | "senior">("little");
-  
-  // Level filter for Specialized Courses:
-  const [activeLevelFilter, setActiveLevelFilter] = useState<"ALL" | "STARTER" | "LEARNER" | "PERFORMER">("ALL");
 
+  // Active level tab in Courses section
+  const [activeCourseLevel, setActiveCourseLevel] = useState<"STARTER" | "LEARNER">("STARTER");
+  
+  // Gallery category filter
+  const [selectedGalleryCategory, setSelectedGalleryCategory] = useState<
+    "all" | "learning" | "robotics" | "coding" | "3dprinting" | "projects" | "events"
+  >("all");
+
+  // Lightbox / image modal preview
+  const [activeGalleryPreview, setActiveGalleryPreview] = useState<GalleryItem | null>(null);
+
+  // Visit booking form state
   const [visitSubmitted, setVisitSubmitted] = useState(false);
   const [visitForm, setVisitForm] = useState({
     parentName: "",
     studentName: "",
-    studentGrade: "Grades 6-8 (Junior Champs)",
+    studentGrade: "Grade 6-8 (Junior)",
     phone: "",
     email: "",
     preferredDate: "",
-    interestedCourse: "Robotics & Embedded Systems",
+    interestedTrack: "Robotics & Hardware",
   });
 
-  // 1. Common Courses Data across 3 Age Categories:
-  const commonCoursesData = {
-    little: {
-      category: "Little Champs",
-      grades: "Grades K – 5",
-      tagline: "Foundational STEM exploration through tactile play, visual block building, and simple circuits.",
-      courses: [
-        {
-          title: "Foundational Robotics",
-          icon: Bot,
-          tag: "Robotics",
-          focus: "Lego robotics assembly, motor drives, gears & pulleys, and movement physics.",
-          tools: "Lego Kits, Micro-motors, Chassis Blocks",
-        },
-        {
-          title: "Block Coding & Logic",
-          icon: Code2,
-          tag: "Coding",
-          focus: "Visual programming with Scratch & MIT App Inventor, story animations & puzzle loops.",
-          tools: "Scratch, Block Code, Visual Game Engines",
-        },
-        {
-          title: "Early AI & Smart Systems",
-          icon: BrainCircuit,
-          tag: "Artificial Intelligence",
-          focus: "Demystifying smart cameras, voice recognition games, and human-machine interaction.",
-          tools: "Teachable Machine, Voice Kits",
-        },
-        {
-          title: "3D Spatial Design & Pens",
-          icon: Printer,
-          tag: "3D Printing",
-          focus: "3D printing pens, spatial structure prototyping, geometric stability, and creative models.",
-          tools: "3D Printing Pens, PLA Filament, Mesh Stencils",
-        },
-        {
-          title: "Junior Entrepreneur Mindset",
-          icon: Lightbulb,
-          tag: "Entrepreneurial Mindset",
-          focus: "Idea generation, problem finding in daily life, creative teamwork, and project presentation.",
-          tools: "Maker Workbooks, Pitch Cards, Team Boards",
-        },
-      ],
-    },
-    junior: {
-      category: "Junior Champs",
-      grades: "Grades 6 – 8",
-      tagline: "Transitioning from blocks to text coding, microcontrollers, and autonomous smart systems.",
-      courses: [
-        {
-          title: "Autonomous Robotics Engineering",
-          icon: Bot,
-          tag: "Robotics",
-          focus: "Building line-followers, obstacle-avoiders, ultrasonic sonar rangers, and motor drivers.",
-          tools: "Arduino Nano/Uno, Servo Motors, Sonar Sensors",
-        },
-        {
-          title: "C++ & Python Programming",
-          icon: Code2,
-          tag: "Coding",
-          focus: "Text coding syntax, variables, conditionals, loops, functions, and microcontroller scripts.",
-          tools: "VS Code, Arduino IDE, Python 3",
-        },
-        {
-          title: "Computer Vision & Applied AI",
-          icon: BrainCircuit,
-          tag: "Artificial Intelligence",
-          focus: "Face detection, gesture controls, image classification models, and smart automation.",
-          tools: "OpenCV Python, Edge Vision Nodes",
-        },
-        {
-          title: "Parametric 3D CAD & Slicing",
-          icon: Printer,
-          tag: "3D Printing",
-          focus: "Tinkercad & Autodesk CAD modeling, slicing software calibration, and FDM 3D printing.",
-          tools: "Autodesk Tinkercad, Cura Slicer, 3D Printers",
-        },
-        {
-          title: "Maker Ideation & Prototype Pitching",
-          icon: Lightbulb,
-          tag: "Entrepreneurial Mindset",
-          focus: "Design thinking, user problem validation, bill of materials estimation, and demo pitching.",
-          tools: "Design Thinking Canvas, Pitch Decks",
-        },
-      ],
-    },
-    senior: {
-      category: "Senior Champs",
-      grades: "Grades 9 – 12",
-      tagline: "Mastering deep tech, industrial cloud telemetry, neural AI models, and real-world deployment.",
-      courses: [
-        {
-          title: "Advanced Kinematics & Robotics",
-          icon: Bot,
-          tag: "Robotics",
-          focus: "6-DOF robotic arms, inverse kinematics, PID tuning, precision actuators, and ROS basics.",
-          tools: "ESP32 Boards, Precision Servos, Motor Encoders",
-        },
-        {
-          title: "Full-Stack Software & Embedded C",
-          icon: Code2,
-          tag: "Coding",
-          focus: "Object-oriented software architectures, hardware communication protocols (I2C, SPI, UART).",
-          tools: "Python, C++, PlatformIO, Git",
-        },
-        {
-          title: "Neural Networks & Deep Learning",
-          icon: BrainCircuit,
-          tag: "Artificial Intelligence",
-          focus: "Training neural network classifiers, predictive data models, and edge computing deployment.",
-          tools: "TensorFlow Lite, Python NumPy/Pandas",
-        },
-        {
-          title: "Industrial Rapid Prototyping & CAD",
-          icon: Printer,
-          tag: "3D Printing",
-          focus: "Fusion 360 mechanical assemblies, tolerance fitting, custom enclosures, and PCB integration.",
-          tools: "Autodesk Fusion 360, High-Precision FDM Labs",
-        },
-        {
-          title: "Tech Startup Lab & Venture Pitch",
-          icon: Lightbulb,
-          tag: "Entrepreneurial Mindset",
-          focus: "Building functional MVPs, patenting awareness, cost modeling, and competition entry.",
-          tools: "Business Model Canvas, Product Roadmap",
-        },
-      ],
-    },
-  };
-
-  // 2. Specialized Courses Data (with 3 Opting Levels: Starter, Learner, Performer)
-  const specializedCoursesList = [
-    {
-      id: "coding-spec",
-      title: "Coding & Computational Logic",
-      category: "Software",
-      levels: ["STARTER", "LEARNER", "PERFORMER"],
-      description: "From block-based problem solving to full Python programming, data structures, and embedded system scripting.",
-      skills: ["Logic Building", "Object-Oriented Python", "API & Cloud Hooks", "Data Structures"],
-      tools: ["Block Logic", "Python 3", "VS Code", "MicroPython"],
-      icon: Code2,
-    },
-    {
-      id: "iot-spec",
-      title: "Internet of Things (IoT) & Smart Tech",
-      category: "Connected Hardware",
-      levels: ["STARTER", "LEARNER", "PERFORMER"],
-      description: "Sensor telemetry, wireless protocols (Wi-Fi, Bluetooth, MQTT), cloud dashboards, and home automation.",
-      skills: ["ESP32 / NodeMCU", "MQTT Protocols", "Cloud Telemetry", "Relay Control"],
-      tools: ["ESP32", "DHT Sensors", "Adafruit IO", "Blynk Cloud"],
-      icon: Wifi,
-    },
-    {
-      id: "3d-printing-spec",
-      title: "3D Printing & Parametric CAD",
-      category: "Rapid Fabrication",
-      levels: ["STARTER", "LEARNER", "PERFORMER"],
-      description: "Transforming 2D sketches into 3D CAD models and fabricating physical parts with modern additive manufacturing.",
-      skills: ["3D CAD Modeling", "Slicing & Infill Tuning", "FDM Maintenance", "Tolerance Fitting"],
-      tools: ["Tinkercad", "Autodesk Fusion", "UltiMaker Cura", "FDM Printers"],
-      icon: Printer,
-    },
-    {
-      id: "robotics-spec",
-      title: "Robotics & Embedded Systems",
-      category: "Physical Computing",
-      levels: ["STARTER", "LEARNER", "PERFORMER"],
-      description: "Hands-on robotics covering chassis design, sensor fusion, servo kinematics, and microcontroller code.",
-      skills: ["Microcontrollers", "Motor Drivers", "Autonomous Sensors", "Feedback Loops"],
-      tools: ["Arduino Boards", "Sonar Modules", "Motor Shields", "Chassis Hardware"],
-      icon: Bot,
-    },
-    {
-      id: "ai-spec",
-      title: "AI & Machine Intelligence",
-      category: "Future Tech",
-      levels: ["LEARNER", "PERFORMER"],
-      description: "Explore machine learning models, computer vision, voice recognition, and edge AI applications.",
-      skills: ["Computer Vision", "Neural Classifiers", "Model Training", "Prompt Engineering"],
-      tools: ["Teachable Machine", "OpenCV", "Python ML", "Edge AI Nodes"],
-      icon: BrainCircuit,
-    },
-    {
-      id: "young-innovator-spec",
-      title: "Young Innovator & Maker Lab",
-      category: "Applied Innovation",
-      levels: ["STARTER", "LEARNER", "PERFORMER"],
-      description: "Multi-disciplinary maker experience solving real-world challenges through hands-on prototyping and pitching.",
-      skills: ["Design Thinking", "Rapid Prototyping", "Troubleshooting", "Project Demo"],
-      tools: ["Tinkering Kit", "Sensors", "Soldering Station", "Pitch Deck Tools"],
-      icon: Lightbulb,
-    },
-    {
-      id: "graphic-design-spec",
-      title: "Graphic Design & Digital UI/UX",
-      category: "Creative Media",
-      levels: ["STARTER", "LEARNER"],
-      description: "Master visual communication, color psychology, vector illustration, and digital product interface layouts.",
-      skills: ["Typography", "Vector Illustration", "Wireframing", "UI Prototyping"],
-      tools: ["Figma", "Vector Editors", "Canva Pro", "Design Tokens"],
-      icon: Palette,
-    },
-    {
-      id: "drone-spec",
-      title: "Drone Technology & Aerodynamics",
-      category: "Aviation & Robotics",
-      levels: ["LEARNER", "PERFORMER"],
-      description: "Aerodynamics, flight controller calibration, propeller thrust, and autonomous aerial navigation.",
-      skills: ["Quadcopter Assembly", "ESC Telemetry", "Gyro Calibration", "Safety Protocols"],
-      tools: ["Quadcopter Kits", "Flight Controllers", "Radio Transmitters"],
-      icon: Compass,
-    },
-  ];
-
-  // Filter specialized courses by level:
-  const filteredSpecializedCourses = specializedCoursesList.filter((course) => {
-    if (activeLevelFilter === "ALL") return true;
-    return course.levels.includes(activeLevelFilter);
-  });
-
-  const handleVisitSubmit = (e: React.FormEvent) => {
+  const handleBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setVisitSubmitted(true);
+    try {
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ["#FF7711", "#FF8A33", "#38BDF8", "#4ADE80", "#FFFFFF"],
+      });
+    } catch {
+      // ignore
+    }
   };
 
-  const activeCommonTrack = commonCoursesData[activeCommonCategory];
+  const filteredGallery = centerGalleryItems.filter((item) => {
+    if (selectedGalleryCategory === "all") return true;
+    return item.category === selectedGalleryCategory;
+  });
+
+  const activeCourseList = activeCourseLevel === "STARTER" ? starterCourses : learnerCourses;
+
+  // Step icon helper
+  const getStepIcon = (iconName: string) => {
+    switch (iconName) {
+      case "Lightbulb":
+        return <Zap className="w-5 h-5" />;
+      case "Layers":
+        return <Layers className="w-5 h-5" />;
+      case "Wrench":
+        return <Wrench className="w-5 h-5" />;
+      case "Activity":
+        return <Activity className="w-5 h-5" />;
+      case "MessageSquare":
+        return <MessageSquare className="w-5 h-5" />;
+      case "Trophy":
+        return <Trophy className="w-5 h-5" />;
+      default:
+        return <Sparkles className="w-5 h-5" />;
+    }
+  };
 
   return (
     <div className="w-full bg-[#080808] text-[#F1F1F1] min-h-screen selection:bg-[#FF7711] selection:text-black">
       
-      {/* 1. HERO / CENTER HEADER */}
-      <section className="relative w-full bg-[#0D0D0D] border-b border-[#272727] py-16 lg:py-24 overflow-hidden">
-        <div className="absolute inset-0 tech-grid opacity-20 pointer-events-none" />
-        <div className="absolute top-1/2 right-10 w-96 h-96 bg-[#FF7711]/5 blur-[120px] rounded-full pointer-events-none" />
-        
+      {/* ========================================================================= */}
+      {/* 1. HERO SECTION                                                          */}
+      {/* ========================================================================= */}
+      <section className="relative w-full bg-[#090909] border-b border-[#222222] pt-14 pb-20 lg:pt-20 lg:pb-28 overflow-hidden">
+        {/* Background glow effects & technical grid */}
+        <div className="absolute inset-0 tech-grid opacity-15 pointer-events-none" />
+        <div className="absolute -top-24 right-0 w-[550px] h-[550px] bg-[#FF7711]/10 blur-[140px] rounded-full pointer-events-none" />
+        <div className="absolute bottom-0 left-10 w-[450px] h-[450px] bg-[#38BDF8]/5 blur-[160px] rounded-full pointer-events-none" />
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
             
-            <div className="lg:col-span-8">
-              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#151515] border border-[#272727] mb-4">
-                <span className="w-2 h-2 rounded-full bg-[#FF7711] animate-pulse" />
+            {/* Left Content Column */}
+            <div className="lg:col-span-7">
+              {/* Center Badge */}
+              <div className="inline-flex items-center space-x-2.5 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#2D2D2D] mb-6 shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-[#FF7711] animate-ping" />
                 <span className="text-[11px] font-mono tracking-widest text-[#FF7711] font-bold uppercase">
-                  OUR INNOVATION CENTERS
+                  OUR CENTER • OFFLINE LEARNING LAB
                 </span>
               </div>
 
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#FFFFFF] tracking-tight leading-[1.1] mb-5">
-                Step Into The{" "}
-                <span className="font-serif italic font-normal text-[#FF7711]">Maker Space.</span>
+              {/* Main Headlines */}
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#FFFFFF] tracking-tight leading-[1.08] mb-4">
+                Where Curiosity <br className="hidden sm:inline" />
+                Becomes{" "}
+                <span className="font-serif italic font-normal text-[#FF7711]">
+                  Creation.
+                </span>
               </h1>
 
-              <p className="text-base sm:text-lg text-[#CCCCCC] leading-relaxed max-w-2xl font-normal mb-8">
-                Equipped with microcontrollers, 3D printers, autonomous rovers, and sensor arrays. Explore our structured common pathways and specialized certification courses.
+              {/* Subhead */}
+              <p className="text-lg sm:text-xl font-medium text-[#E2E8F0] mb-5">
+                Learning by Doing. Building Skills for Tomorrow.
               </p>
 
-              <div className="flex flex-wrap items-center gap-4 text-xs font-mono">
-                <div className="flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-[#141414] border border-[#272727] text-[#E2E8F0]">
+              {/* Description */}
+              <p className="text-sm sm:text-base text-[#A1A1A1] leading-relaxed max-w-2xl font-normal mb-8">
+                At Narasimha Skill Sphere, students don't just learn technology — they experience it, build with it, and turn ideas into real-world projects. From Robotics and Coding with AI to 3D Printing, our center provides a hands-on environment where young learners explore, experiment, solve problems, and create.
+              </p>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-wrap items-center gap-4 mb-10">
+                <a
+                  href="#our-courses"
+                  className="btn-orange-primary px-7 py-3.5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center space-x-2 shadow-lg hover:shadow-orange-glow transition-all cursor-pointer"
+                >
+                  <span>Explore Our Courses</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+
+                <a
+                  href="#book-visit"
+                  className="btn-dark-secondary px-6 py-3.5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center space-x-2 hover:border-[#FF7711] transition-all cursor-pointer"
+                >
+                  <Calendar className="w-4 h-4 text-[#FF7711]" />
+                  <span>Visit Our Center</span>
+                </a>
+              </div>
+
+              {/* Center Quick Coordinates & Hours */}
+              <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-[#D4D4D4]">
+                <div className="flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-[#121212] border border-[#262626]">
                   <MapPin className="w-4 h-4 text-[#FF7711]" />
-                  <span>Patna Flagship Center</span>
+                  <span>NC/10B, Kankarbagh, Patna</span>
                 </div>
-                <div className="flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-[#141414] border border-[#272727] text-[#E2E8F0]">
+                <div className="flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-[#121212] border border-[#262626]">
                   <Clock className="w-4 h-4 text-[#FF7711]" />
                   <span>Mon – Sat: 9:00 AM – 6:30 PM</span>
+                </div>
+                <div className="flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-[#121212] border border-[#262626]">
+                  <Phone className="w-4 h-4 text-[#FF7711]" />
+                  <span>+91 {companyDetails.phone}</span>
                 </div>
               </div>
             </div>
 
-            {/* Quick Action Box */}
-            <div className="lg:col-span-4 rounded-2xl bg-[#141414] border border-[#272727] p-6 shadow-2xl flex flex-col justify-between">
-              <div>
-                <span className="text-[10px] font-mono text-[#FF7711] font-bold uppercase tracking-wider block mb-1">
-                  FLAGSHIP INNOVATION CENTER
-                </span>
-                <h3 className="text-lg font-bold text-white mb-2">
-                  {skillCentersList[0]?.name || "Patna Central Lab"}
-                </h3>
-                <p className="text-xs text-[#A1A1A1] leading-relaxed mb-4">
-                  {skillCentersList[0]?.address}, {skillCentersList[0]?.landmark}, {skillCentersList[0]?.city}
-                </p>
-                <div className="text-xs text-[#FF7711] font-mono mb-4">
-                  Helpline: {skillCentersList[0]?.phone || companyDetails.phone}
+            {/* Right Interactive Lab Card & Visual Showcase */}
+            <div className="lg:col-span-5">
+              <div className="relative rounded-3xl bg-gradient-to-b from-[#181818] via-[#121212] to-[#0D0D0D] border border-[#2A2A2A] p-2 shadow-2xl overflow-hidden group">
+                
+                {/* Visual Image with Overlay */}
+                <div className="relative h-64 sm:h-72 rounded-2xl overflow-hidden bg-[#181818]">
+                  <img
+                    src="/High tech lab .png"
+                    alt="Narasimha Skill Sphere Robotics & Innovation Lab"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0E0E0E] via-[#0E0E0E]/40 to-transparent" />
+                  
+                  {/* Floating Live Badge */}
+                  <div className="absolute top-3 left-3 inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-[#333333] text-[10px] font-mono font-bold text-[#FF7711]">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>PATNA FLAGSHIP LAB</span>
+                  </div>
+
+                  {/* Floating Metric Badge */}
+                  <div className="absolute bottom-3 right-3 px-3 py-1.5 rounded-xl bg-black/85 backdrop-blur-md border border-[#333333] text-right">
+                    <span className="text-[10px] font-mono text-[#888888] block">STUDENT RATIO</span>
+                    <span className="text-xs font-mono font-bold text-white">1:8 Dedicated Mentorship</span>
+                  </div>
+                </div>
+
+                {/* Card Features Info */}
+                <div className="p-5 sm:p-6">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-xs font-mono text-[#FF7711] font-bold tracking-wider uppercase">
+                      IN-CENTER IMMERSION
+                    </span>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#202020] text-[#CCCCCC]">
+                      Grades K – 12
+                    </span>
+                  </div>
+
+                  <h3 className="text-base sm:text-lg font-bold text-white mb-2">
+                    Robotics, IoT, 3D Printing & AI Workbenches
+                  </h3>
+
+                  <p className="text-xs text-[#A1A1A1] leading-relaxed mb-5">
+                    Equipped with real microcontrollers, additive manufacturing 3D printers, autonomous rovers, and sensor testing enclosures.
+                  </p>
+
+                  {/* 4 Mini Stat Pills */}
+                  <div className="grid grid-cols-2 gap-2.5 pt-3 border-t border-[#222222] text-[11px] font-mono">
+                    <div className="flex items-center space-x-2 p-2 rounded-lg bg-[#141414] text-[#E2E8F0]">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FF7711] shrink-0" />
+                      <span>100% Hands-On</span>
+                    </div>
+                    <div className="flex items-center space-x-2 p-2 rounded-lg bg-[#141414] text-[#E2E8F0]">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#38BDF8] shrink-0" />
+                      <span>7 Core Tracks</span>
+                    </div>
+                    <div className="flex items-center space-x-2 p-2 rounded-lg bg-[#141414] text-[#E2E8F0]">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#4ADE80] shrink-0" />
+                      <span>Real Hardware Kits</span>
+                    </div>
+                    <div className="flex items-center space-x-2 p-2 rounded-lg bg-[#141414] text-[#E2E8F0]">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-purple-400 shrink-0" />
+                      <span>Hackathon Prep</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 2. WEEKLY OFFLINE SESSIONS                                               */}
+      {/* ========================================================================= */}
+      <section className="w-full bg-[#0C0C0C] border-b border-[#222222] py-20 lg:py-28 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* Section Heading */}
+          <div className="max-w-3xl mb-14">
+            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#151515] border border-[#272727] mb-3">
+              <Sparkles className="w-3.5 h-3.5 text-[#FF7711]" />
+              <span className="text-[11px] font-mono uppercase tracking-widest text-[#FF7711] font-bold">
+                WEEKLY OFFLINE SESSIONS
+              </span>
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FFFFFF] tracking-tight leading-tight mb-3">
+              Learning Happens{" "}
+              <span className="font-serif italic font-normal text-[#FF7711]">
+                Beyond the Screen.
+              </span>
+            </h2>
+
+            <p className="text-base sm:text-lg font-medium text-[#E2E8F0] mb-3">
+              Every Week. Every Project. Every Learner.
+            </p>
+
+            <p className="text-sm sm:text-base text-[#A1A1A1] leading-relaxed">
+              Our offline sessions give students the opportunity to move from learning concepts to building things with their own hands. Students work with real components, tools, and technology while receiving personalized guidance from mentors.
+            </p>
+          </div>
+
+          {/* 100% Hands-On Learning Spotlight Banner */}
+          <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#171717] via-[#1A1510] to-[#171717] border border-[#FF7711]/40 mb-12 shadow-xl relative overflow-hidden">
+            <div className="absolute right-0 top-0 w-64 h-64 bg-[#FF7711]/10 blur-[90px] rounded-full pointer-events-none" />
+            
+            <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              <div className="flex items-start space-x-4">
+                <div className="w-12 h-12 rounded-2xl bg-[#FF7711]/20 border border-[#FF7711] flex items-center justify-center text-[#FF7711] shrink-0 mt-1">
+                  <Flame className="w-6 h-6" />
+                </div>
+                <div>
+                  <span className="text-xs font-mono font-bold text-[#FF7711] uppercase tracking-wider block mb-1">
+                    OUR CORE PHILOSOPHY
+                  </span>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">
+                    100% Hands-On Learning
+                  </h3>
+                  <p className="text-sm sm:text-base text-[#CCCCCC] font-normal">
+                    Students don't simply watch a project being made. <strong className="text-white font-semibold">They build it themselves.</strong>
+                  </p>
                 </div>
               </div>
 
               <a
                 href="#book-visit"
-                className="w-full btn-orange-primary py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center space-x-2 shadow-md hover:shadow-orange-glow transition-all"
+                className="btn-orange-primary shrink-0 px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center space-x-2"
               >
-                <span>Book Free Trial Demo</span>
+                <span>Book a Weekly Trial</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
             </div>
-
           </div>
+
+          {/* What Happens in Our Weekly Sessions? (7 Modern Grid Cards) */}
+          <div>
+            <div className="flex items-center space-x-3 mb-8">
+              <h3 className="text-xl sm:text-2xl font-bold text-white">
+                What Happens in Our Weekly Sessions?
+              </h3>
+              <div className="h-[1px] flex-1 bg-[#262626]" />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {weeklyOfflineActivities.map((act, index) => (
+                <div
+                  key={act.id}
+                  className="group relative rounded-2xl bg-[#131313] border border-[#252525] hover:border-[#FF7711]/60 transition-all duration-300 overflow-hidden flex flex-col justify-between hover:-translate-y-1 shadow-lg"
+                >
+                  {/* Card Image */}
+                  <div className="relative h-40 w-full overflow-hidden bg-[#181818]">
+                    <img
+                      src={act.image}
+                      alt={act.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#131313] via-[#131313]/30 to-transparent" />
+                    <span className="absolute top-3 left-3 text-[10px] font-mono px-2.5 py-1 rounded-md bg-black/80 backdrop-blur-md text-[#FF7711] font-bold border border-[#2A2A2A]">
+                      0{index + 1} • {act.category}
+                    </span>
+                  </div>
+
+                  {/* Card Body */}
+                  <div className="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h4 className="text-base font-bold text-white group-hover:text-[#FF7711] transition-colors mb-2 leading-snug">
+                        {act.title}
+                      </h4>
+                      <p className="text-xs text-[#A1A1A1] leading-relaxed mb-4">
+                        {act.description}
+                      </p>
+                    </div>
+
+                    {/* Tools Chips */}
+                    <div className="pt-3 border-t border-[#222222]">
+                      <span className="text-[10px] font-mono text-[#666666] uppercase block mb-1.5">
+                        Tools & Activities:
+                      </span>
+                      <div className="flex flex-wrap gap-1">
+                        {act.tools.map((tool) => (
+                          <span
+                            key={tool}
+                            className="px-2 py-0.5 rounded bg-[#1C1C1C] text-[10px] font-mono text-[#D4D4D4] border border-[#282828]"
+                          >
+                            {tool}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </section>
 
-      {/* 1.5. CENTER FACILITIES & LAB INFRASTRUCTURE SHOWCASE */}
-      <section className="w-full bg-[#0B0B0B] border-b border-[#272727] py-16 lg:py-24 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-            <div>
-              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#151515] border border-[#272727] mb-3">
-                <Sparkles className="w-3.5 h-3.5 text-[#FF7711]" />
-                <span className="text-[11px] font-mono uppercase tracking-widest text-[#FF7711] font-bold">
-                  ADVANCED LAB INFRASTRUCTURE
-                </span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#F1F1F1] tracking-tight leading-tight">
-                Our Center <span className="font-serif italic font-normal text-[#FF7711]">Facilities & Labs</span>
-              </h2>
+      {/* ========================================================================= */}
+      {/* 3. LEARNING JOURNEY & LEARNING LEVELS                                    */}
+      {/* ========================================================================= */}
+      <section className="w-full bg-[#080808] border-b border-[#222222] py-20 lg:py-28 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* 3A. LEARNING JOURNEY */}
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#272727] mb-3">
+              <Compass className="w-3.5 h-3.5 text-[#FF7711]" />
+              <span className="text-[11px] font-mono uppercase tracking-widest text-[#FF7711] font-bold">
+                OUR STRUCTURED PEDAGOGY
+              </span>
             </div>
-            <p className="text-sm sm:text-base text-[#A1A1A1] max-w-md">
-              Purpose-built spaces for high-engagement learning. Every station is outfitted with industry-grade tools, testing bays, and microcontroller equipment.
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FFFFFF] tracking-tight leading-tight mb-4">
+              From Curious Learner to{" "}
+              <span className="font-serif italic font-normal text-[#FF7711]">
+                Future-Ready Creator
+              </span>
+            </h2>
+
+            <p className="text-sm sm:text-base text-[#A1A1A1] leading-relaxed">
+              Every child starts with curiosity. At Narasimha Skill Sphere, we transform that curiosity into practical skills, confidence, and career-oriented capabilities through 6 structured milestones.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {centerFacilityHighlights.map((facility) => (
+          {/* 6 Steps Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {learningJourneySteps.map((step) => (
               <div
-                key={facility.title}
-                className="group relative rounded-2xl bg-[#121212] border border-[#272727] overflow-hidden hover:border-[#FF7711]/60 transition-all duration-300 shadow-xl flex flex-col justify-between"
+                key={step.step}
+                className="relative p-6 sm:p-7 rounded-2xl bg-[#111111] border border-[#242424] hover:border-[#FF7711]/50 transition-all duration-300 group hover:-translate-y-1 shadow-lg flex flex-col justify-between"
               >
-                <div className="relative h-44 w-full overflow-hidden bg-[#181818]">
-                  <img
-                    src={facility.image}
-                    alt={facility.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#121212] via-[#121212]/30 to-transparent" />
-                  <span className="absolute top-3 left-3 text-[10px] font-mono px-2.5 py-1 rounded bg-black/80 backdrop-blur-md text-[#FF7711] font-bold border border-[#272727]">
-                    {facility.tag}
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-2xl font-mono font-extrabold text-[#FF7711]">
+                      {step.step}.
+                    </span>
+                    <div className="w-10 h-10 rounded-xl bg-[#1A1A1A] border border-[#2A2A2A] flex items-center justify-center text-[#FF7711] group-hover:bg-[#FF7711] group-hover:text-black transition-colors">
+                      {getStepIcon(step.icon)}
+                    </div>
+                  </div>
+
+                  <h3 className="text-xl font-bold text-white mb-1 group-hover:text-[#FF7711] transition-colors">
+                    {step.title}
+                  </h3>
+                  <span className="text-xs font-mono text-[#888888] block mb-3">
+                    {step.subtitle}
                   </span>
+
+                  <p className="text-xs sm:text-sm text-[#A1A1A1] leading-relaxed mb-4">
+                    {step.description}
+                  </p>
                 </div>
 
-                <div className="p-5 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-base font-bold text-white mb-2 group-hover:text-[#FF7711] transition-colors">
-                      {facility.title}
-                    </h3>
-                    <p className="text-xs text-[#A1A1A1] leading-relaxed">
-                      {facility.description}
-                    </p>
-                  </div>
+                <div className="pt-3 border-t border-[#202020] space-y-1">
+                  {step.details.map((d) => (
+                    <div key={d} className="flex items-center space-x-2 text-[11px] font-mono text-[#D4D4D4]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#FF7711]" />
+                      <span>{d}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* 2. COMMON COURSES SECTION (Robotics, Coding, AI, 3D Printing, Entrepreneurial Mindset) */}
-      <section id="common-courses" className="w-full bg-[#080808] border-b border-[#272727] py-20 lg:py-28 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-14">
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#111111] border border-[#272727] mb-4">
-              <Sparkles className="w-3.5 h-3.5 text-[#FF7711]" />
-              <span className="text-[11px] font-mono uppercase tracking-widest text-[#FF7711] font-bold">
-                CORE STEM PATHWAY
-              </span>
-            </div>
-
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#F1F1F1] tracking-tight leading-tight mb-4">
-              Common Courses For{" "}
-              <span className="font-serif italic font-normal text-[#FF7711]">Every Student</span>
-            </h2>
-
-            <p className="text-base sm:text-lg text-[#A1A1A1] leading-relaxed">
-              Every student develops a 360° practical foundation across robotics, coding, AI, 3D printing, and entrepreneurial problem-solving.
-            </p>
-          </div>
-
-          {/* 3 Category Tabs (Little Champs, Junior Champs, Senior Champs) */}
-          <div className="grid grid-cols-3 gap-2 sm:gap-4 p-1.5 rounded-2xl bg-[#111111] border border-[#272727] max-w-2xl mx-auto mb-12">
-            {(["little", "junior", "senior"] as const).map((tabKey) => {
-              const track = commonCoursesData[tabKey];
-              const isActive = activeCommonCategory === tabKey;
-              return (
-                <button
-                  key={tabKey}
-                  onClick={() => setActiveCommonCategory(tabKey)}
-                  className={`py-3 sm:py-3.5 px-3 rounded-xl font-mono text-xs sm:text-sm font-bold transition-all cursor-pointer flex flex-col items-center justify-center space-y-0.5 ${
-                    isActive
-                      ? "bg-[#1E1E1E] text-white border border-[#FF7711]/60 shadow-lg shadow-black"
-                      : "text-[#888888] hover:text-[#D4D4D4] hover:bg-[#151515]"
-                  }`}
-                >
-                  <span>{track.category}</span>
-                  <span className={`text-[10px] ${isActive ? "text-[#FF7711]" : "text-[#666666]"}`}>
-                    {track.grades}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Active Category Description */}
-          <div className="p-5 rounded-2xl bg-[#111111] border border-[#272727] mb-8 text-center max-w-3xl mx-auto">
-            <span className="text-xs font-mono uppercase tracking-wider text-[#FF7711] font-bold">
-              {activeCommonTrack.category} ({activeCommonTrack.grades})
+          {/* The Goal Bar */}
+          <div className="p-4 sm:p-5 rounded-2xl bg-[#141414] border border-[#292929] text-center max-w-3xl mx-auto mb-20 shadow-md">
+            <span className="text-xs font-mono uppercase tracking-wider text-[#FF7711] font-bold block mb-1">
+              THE END GOAL
             </span>
-            <p className="text-xs sm:text-sm text-[#CCCCCC] mt-1">
-              {activeCommonTrack.tagline}
+            <p className="text-sm sm:text-base font-bold text-white tracking-wide">
+              Learn skills. • Build projects. • Develop confidence. • Prepare for the future.
             </p>
           </div>
 
-          {/* 5 Common Course Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {activeCommonTrack.courses.map((course) => {
-              const Icon = course.icon;
-              return (
-                <div
-                  key={course.title}
-                  className="p-6 rounded-2xl bg-[#121212] border border-[#272727] hover:border-[#FF7711]/60 transition-all duration-300 group hover:-translate-y-1 shadow-lg flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-11 h-11 rounded-xl bg-[#1A1A1A] border border-[#2E2E2E] flex items-center justify-center text-[#FF7711] group-hover:bg-[#FF7711] group-hover:text-black transition-colors">
-                        <Icon className="w-5 h-5" />
-                      </div>
-                      <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-[#181818] border border-[#2A2A2A] text-[#FF7711] font-bold">
-                        {course.tag}
-                      </span>
-                    </div>
-
-                    <h3 className="text-lg font-bold text-[#F1F1F1] group-hover:text-white mb-2">
-                      {course.title}
-                    </h3>
-
-                    <p className="text-xs sm:text-sm text-[#A1A1A1] leading-relaxed mb-6 font-normal">
-                      {course.focus}
-                    </p>
-                  </div>
-
-                  <div className="pt-4 border-t border-[#222222]">
-                    <span className="text-[10px] font-mono text-[#707070] uppercase block mb-1">Tools & Hardware:</span>
-                    <span className="text-xs font-mono text-[#E2E8F0] font-medium">{course.tools}</span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-        </div>
-      </section>
-
-      {/* 3. SPECIALIZED COURSES (Coding, IoT, 3D Printing, Robotics, AI, Young Innovator, Graphics Design, Drones) */}
-      <section id="specialized-courses" className="w-full bg-[#0D0D0D] border-b border-[#272727] py-20 lg:py-28 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          {/* Section Header */}
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
-            <div>
-              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#151515] border border-[#272727] mb-3">
-                <Award className="w-3.5 h-3.5 text-[#FF7711]" />
+          {/* 3B. LEARNING LEVELS (STARTER • LEARNER • PERFORMER) */}
+          <div className="pt-10 border-t border-[#222222]">
+            <div className="text-center max-w-3xl mx-auto mb-14">
+              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#272727] mb-3">
+                <Target className="w-3.5 h-3.5 text-[#FF7711]" />
                 <span className="text-[11px] font-mono uppercase tracking-widest text-[#FF7711] font-bold">
-                  DEEP-DIVE CERTIFICATIONS
+                  PROGRESSION MILESTONES
                 </span>
               </div>
 
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#F1F1F1] tracking-tight leading-tight">
-                Specialized <span className="font-serif italic font-normal text-[#FF7711]">Electives & Levels</span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FFFFFF] tracking-tight leading-tight mb-4">
+                One Journey. Three Levels.{" "}
+                <span className="font-serif italic font-normal text-[#FF7711]">
+                  A Future of Possibilities.
+                </span>
               </h2>
+
+              <p className="text-sm sm:text-base text-[#A1A1A1] leading-relaxed">
+                Learning should grow with the learner — from curiosity to skills, and from skills to careers. At Narasimha Skill Sphere, our three progressive levels help learners build foundations, develop practical skills, create projects, and become career-ready.
+              </p>
             </div>
 
-            <p className="text-sm sm:text-base text-[#A1A1A1] max-w-md">
-              Choose dedicated technology tracks tailored to your interest. Each course offers 3 opting levels from foundational start to advanced deployment.
-            </p>
-          </div>
-
-          {/* 3 Levels Opting Filter Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-4 p-3 rounded-2xl bg-[#141414] border border-[#272727] mb-12">
-            <div className="flex items-center space-x-2">
-              <span className="text-xs font-mono text-[#777777] uppercase px-2 hidden sm:inline">SELECT LEVEL:</span>
-              {(["ALL", "STARTER", "LEARNER", "PERFORMER"] as const).map((level) => (
-                <button
-                  key={level}
-                  onClick={() => setActiveLevelFilter(level)}
-                  className={`px-3.5 py-2 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer ${
-                    activeLevelFilter === level
-                      ? "bg-[#FF7711] text-black shadow-md shadow-orange-glow/30"
-                      : "text-[#A1A1A1] hover:text-white hover:bg-[#1C1C1C]"
-                  }`}
-                >
-                  {level === "ALL" ? "All Levels" : level}
-                </button>
-              ))}
-            </div>
-
-            <div className="text-xs font-mono text-[#888888] px-2 hidden md:block">
-              Starter: Level 01 • Learner: Level 02 • Performer: Level 03
-            </div>
-          </div>
-
-          {/* Specialized Course Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            {filteredSpecializedCourses.map((course) => {
-              const Icon = course.icon;
-              return (
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {learningLevelsList.map((lvl) => (
                 <div
-                  key={course.id}
-                  className="p-6 rounded-2xl bg-[#121212] border border-[#272727] hover:border-[#FF7711]/60 transition-all duration-300 group hover:-translate-y-1 shadow-lg flex flex-col justify-between"
+                  key={lvl.id}
+                  className={`p-7 rounded-3xl bg-gradient-to-b ${lvl.bgGradient} border ${lvl.borderColor} flex flex-col justify-between shadow-2xl relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300`}
                 >
                   <div>
+                    {/* Level Tag & Badge */}
                     <div className="flex items-center justify-between mb-4">
-                      <div className="w-10 h-10 rounded-xl bg-[#1A1A1A] border border-[#2E2E2E] flex items-center justify-center text-[#FF7711] group-hover:bg-[#FF7711] group-hover:text-black transition-colors">
-                        <Icon className="w-5 h-5" />
-                      </div>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#181818] border border-[#2A2A2A] text-[#888888]">
-                        {course.category}
+                      <span className={`text-xs font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-black/60 border border-[#333333] ${lvl.accentColor}`}>
+                        {lvl.badge}
+                      </span>
+                      <span className="text-[10px] font-mono text-[#888888]">
+                        {lvl.targetAudience}
                       </span>
                     </div>
 
-                    <h3 className="text-base sm:text-lg font-bold text-[#F1F1F1] group-hover:text-white mb-2 leading-tight">
-                      {course.title}
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-1">
+                      {lvl.name}
                     </h3>
-
-                    <p className="text-xs text-[#A1A1A1] leading-relaxed mb-4">
-                      {course.description}
+                    <p className={`text-xs font-mono font-bold mb-4 ${lvl.accentColor}`}>
+                      {lvl.tagline}
                     </p>
 
-                    {/* Level Badges */}
-                    <div className="flex flex-wrap gap-1 mb-4">
-                      {course.levels.map((lvl) => (
-                        <span
-                          key={lvl}
-                          className="px-2 py-0.5 rounded bg-[#1A1A1A] text-[9px] font-mono font-bold text-[#FF7711] border border-[#2E2E2E]"
-                        >
-                          {lvl}
-                        </span>
-                      ))}
+                    <p className="text-xs sm:text-sm text-[#CCCCCC] leading-relaxed mb-6 font-normal">
+                      {lvl.description}
+                    </p>
+
+                    {/* Goal Box */}
+                    <div className="p-4 rounded-xl bg-black/60 border border-[#272727] mb-6">
+                      <span className="text-[10px] font-mono text-[#888888] uppercase tracking-wider block mb-1">
+                        🎯 CORE LEVEL GOAL:
+                      </span>
+                      <p className="text-xs text-[#E2E8F0] font-medium leading-snug">
+                        {lvl.goal}
+                      </p>
                     </div>
                   </div>
 
-                  <div>
-                    <div className="space-y-1 pt-3 border-t border-[#222222]">
-                      {course.skills.map((skill) => (
-                        <div key={skill} className="flex items-center space-x-1.5 text-[10px] font-mono text-[#CCCCCC]">
-                          <CheckCircle2 className="w-3 h-3 text-[#FF7711] shrink-0" />
+                  {/* Skills List */}
+                  <div className="pt-4 border-t border-[#252525]">
+                    <span className="text-[10px] font-mono text-[#888888] uppercase block mb-2">
+                      Key Competencies Developed:
+                    </span>
+                    <div className="space-y-1.5">
+                      {lvl.skills.map((skill) => (
+                        <div key={skill} className="flex items-center space-x-2 text-xs font-mono text-[#D4D4D4]">
+                          <CheckCircle2 className={`w-3.5 h-3.5 ${lvl.accentColor} shrink-0`} />
                           <span>{skill}</span>
                         </div>
                       ))}
                     </div>
                   </div>
                 </div>
-              );
-            })}
+              ))}
+            </div>
           </div>
 
         </div>
       </section>
 
-      {/* 4. LAB VISIT BOOKING FORM */}
-      <section id="book-visit" className="w-full bg-[#080808] border-b border-[#272727] py-20 lg:py-28 relative">
+      {/* ========================================================================= */}
+      {/* 4. OUR COURSES (STARTER & LEARNER PATHWAYS)                              */}
+      {/* ========================================================================= */}
+      <section id="our-courses" className="w-full bg-[#0B0B0B] border-b border-[#222222] py-20 lg:py-28 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-            
-            <div className="lg:col-span-6">
-              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#111111] border border-[#272727] mb-4">
-                <Calendar className="w-3.5 h-3.5 text-[#FF7711]" />
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#272727] mb-3">
+              <Laptop className="w-3.5 h-3.5 text-[#FF7711]" />
+              <span className="text-[11px] font-mono uppercase tracking-widest text-[#FF7711] font-bold">
+                HANDS-ON CURRICULUM
+              </span>
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FFFFFF] tracking-tight leading-tight mb-3">
+              OUR <span className="font-serif italic font-normal text-[#FF7711]">COURSES</span>
+            </h2>
+
+            <p className="text-base sm:text-lg font-medium text-[#E2E8F0] mb-3">
+              A Progressive Learning Path
+            </p>
+
+            <p className="text-sm sm:text-base text-[#A1A1A1] leading-relaxed">
+              From building strong foundations to creating advanced real-world projects, students progress through two practical learning levels.
+            </p>
+          </div>
+
+          {/* Level Switcher (STARTER vs LEARNER) */}
+          <div className="flex justify-center mb-12">
+            <div className="inline-flex p-1.5 rounded-2xl bg-[#141414] border border-[#2B2B2B] shadow-2xl">
+              <button
+                onClick={() => setActiveCourseLevel("STARTER")}
+                className={`px-6 sm:px-8 py-3 rounded-xl font-mono text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center space-x-2 ${
+                  activeCourseLevel === "STARTER"
+                    ? "bg-[#FF7711] text-black shadow-lg shadow-[#FF7711]/20"
+                    : "text-[#A1A1A1] hover:text-white hover:bg-[#1C1C1C]"
+                }`}
+              >
+                <span>🌱 LEVEL 1: STARTER</span>
+                <span className="text-[10px] opacity-80">(Foundation)</span>
+              </button>
+
+              <button
+                onClick={() => setActiveCourseLevel("LEARNER")}
+                className={`px-6 sm:px-8 py-3 rounded-xl font-mono text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center space-x-2 ${
+                  activeCourseLevel === "LEARNER"
+                    ? "bg-[#38BDF8] text-black shadow-lg shadow-[#38BDF8]/20"
+                    : "text-[#A1A1A1] hover:text-white hover:bg-[#1C1C1C]"
+                }`}
+              >
+                <span>⚡ LEVEL 2: LEARNER</span>
+                <span className="text-[10px] opacity-80">(Advanced)</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Active Level Description Strip */}
+          <div className="p-5 rounded-2xl bg-[#121212] border border-[#242424] mb-10 text-center max-w-3xl mx-auto">
+            <span className="text-xs font-mono uppercase tracking-wider text-[#FF7711] font-bold block mb-1">
+              {activeCourseLevel === "STARTER" ? "STARTER TRACK • EXPLORE • LEARN • CREATE" : "LEARNER TRACK • BUILD • APPLY • INNOVATE"}
+            </span>
+            <p className="text-xs sm:text-sm text-[#CCCCCC]">
+              {activeCourseLevel === "STARTER"
+                ? "Students explore foundational electronics, block logic, simple AI experiments, 3D pens, basic drones, money management, and creative problem solving."
+                : "Students master Arduino microcontrollers, text coding with Python/C++, neural networks, precision Fusion 360 CAD, autonomous drones, equity finance, and startup MVP pitching."}
+            </p>
+          </div>
+
+          {/* 7 Course Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {activeCourseList.map((course) => (
+              <div
+                key={course.id}
+                className="group rounded-2xl bg-[#131313] border border-[#242424] hover:border-[#FF7711]/60 transition-all duration-300 overflow-hidden flex flex-col justify-between hover:-translate-y-1 shadow-lg"
+              >
+                {/* Course Image Header */}
+                <div className="relative h-44 w-full overflow-hidden bg-[#181818]">
+                  <img
+                    src={course.image}
+                    alt={course.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#131313] via-[#131313]/40 to-transparent" />
+                  
+                  {/* Domain Tag */}
+                  <div className="absolute top-3 left-3 flex items-center space-x-1.5 px-2.5 py-1 rounded-md bg-black/85 backdrop-blur-md border border-[#2E2E2E] text-[10px] font-mono font-bold text-white">
+                    <span>{course.emoji}</span>
+                    <span>{course.domain}</span>
+                  </div>
+
+                  <span className={`absolute top-3 right-3 text-[9px] font-mono px-2 py-0.5 rounded border font-bold ${course.badgeColor}`}>
+                    {course.level}
+                  </span>
+                </div>
+
+                {/* Course Body */}
+                <div className="p-5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-lg font-bold text-white group-hover:text-[#FF7711] transition-colors mb-1.5">
+                      {course.title}
+                    </h3>
+                    
+                    <p className="text-xs text-[#FF7711] font-mono mb-3">
+                      {course.tagline}
+                    </p>
+
+                    <p className="text-xs text-[#A1A1A1] leading-relaxed mb-4">
+                      {course.focus}
+                    </p>
+
+                    {/* What Students Learn Topics */}
+                    <div className="mb-4">
+                      <span className="text-[10px] font-mono text-[#888888] uppercase block mb-1.5">
+                        Students Learn:
+                      </span>
+                      <div className="flex flex-wrap gap-1">
+                        {course.topics.map((topic) => (
+                          <span
+                            key={topic}
+                            className="px-2 py-0.5 rounded bg-[#1A1A1A] text-[10px] font-mono text-[#CCCCCC] border border-[#272727]"
+                          >
+                            {topic}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* What Students Build */}
+                  <div className="pt-3 border-t border-[#222222]">
+                    <span className="text-[10px] font-mono text-[#FF7711] uppercase font-bold block mb-1">
+                      🛠️ Students Build / Create:
+                    </span>
+                    <p className="text-xs font-mono text-[#E2E8F0] leading-snug">
+                      {course.builds.join(" · ")}
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            ))}
+          </div>
+
+          {/* Quick Enquire CTA Bar */}
+          <div className="mt-14 p-6 rounded-2xl bg-[#141414] border border-[#262626] flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+              <h4 className="text-base font-bold text-white">
+                Interested in enrolling your child in a specialized track?
+              </h4>
+              <p className="text-xs text-[#A1A1A1]">
+                Our mentors evaluate the student's background and map the best level for optimal growth.
+              </p>
+            </div>
+            <a
+              href="#book-visit"
+              className="btn-orange-primary px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider shrink-0"
+            >
+              Request Syllabus & Trial
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 5. STUDENT PORTFOLIO                                                     */}
+      {/* ========================================================================= */}
+      <section className="w-full bg-[#080808] border-b border-[#222222] py-20 lg:py-28 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+            <div>
+              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#272727] mb-3">
+                <Rocket className="w-3.5 h-3.5 text-[#FF7711]" />
                 <span className="text-[11px] font-mono uppercase tracking-widest text-[#FF7711] font-bold">
-                  EXPERIENCE CENTER VISIT
+                  TANGIBLE INNOVATIONS
                 </span>
               </div>
-
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FFFFFF] tracking-tight leading-tight mb-4">
-                Visit our{" "}
-                <span className="font-serif italic font-normal text-[#FF7711]">Innovation Center</span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FFFFFF] tracking-tight leading-tight">
+                STUDENT <span className="font-serif italic font-normal text-[#FF7711]">PORTFOLIO</span>
               </h2>
+            </div>
+            <p className="text-sm sm:text-base text-[#A1A1A1] max-w-md">
+              Real projects built by our young innovators inside our center. From autonomous rovers to cloud telemetry systems.
+            </p>
+          </div>
 
-              <p className="text-sm sm:text-base text-[#A1A1A1] leading-relaxed mb-6">
-                Parents and students are welcome for a free 45-minute maker orientation, hands-on robotics trial, and level evaluation with our senior mentors.
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {studentPortfolioItems.map((proj) => (
+              <div
+                key={proj.id}
+                className="group rounded-2xl bg-[#121212] border border-[#242424] hover:border-[#FF7711]/60 transition-all duration-300 overflow-hidden flex flex-col justify-between shadow-xl"
+              >
+                <div className="relative h-48 w-full overflow-hidden bg-[#181818]">
+                  <img
+                    src={proj.image}
+                    alt={proj.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#121212] via-[#121212]/30 to-transparent" />
+                  <span className="absolute top-3 left-3 text-[10px] font-mono px-2.5 py-1 rounded bg-black/80 backdrop-blur-md text-[#FF7711] font-bold border border-[#2A2A2A]">
+                    {proj.tag}
+                  </span>
+                  <span className="absolute bottom-3 left-3 text-[10px] font-mono px-2 py-0.5 rounded bg-black/70 text-[#D4D4D4]">
+                    {proj.authorGrade}
+                  </span>
+                </div>
+
+                <div className="p-5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-[#888888] block mb-1">
+                      {proj.domain}
+                    </span>
+                    <h3 className="text-base font-bold text-white mb-2 group-hover:text-[#FF7711] transition-colors">
+                      {proj.title}
+                    </h3>
+                    <p className="text-xs text-[#A1A1A1] leading-relaxed mb-4">
+                      {proj.description}
+                    </p>
+                  </div>
+
+                  <div className="pt-3 border-t border-[#222222]">
+                    <span className="text-[10px] font-mono text-[#666666] uppercase block mb-1">
+                      Hardware & Tech Stack:
+                    </span>
+                    <div className="flex flex-wrap gap-1">
+                      {proj.hardware.map((hw) => (
+                        <span
+                          key={hw}
+                          className="px-2 py-0.5 rounded bg-[#181818] text-[10px] font-mono text-[#E2E8F0] border border-[#292929]"
+                        >
+                          {hw}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 6. PARENT MESSAGE                                                         */}
+      {/* ========================================================================= */}
+      <section className="w-full bg-[#0D0D0D] border-b border-[#222222] py-20 lg:py-28 relative overflow-hidden">
+        {/* Glow ambient background */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#FF7711]/5 blur-[180px] rounded-full pointer-events-none" />
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          
+          <div className="rounded-3xl bg-gradient-to-b from-[#161616] via-[#121212] to-[#0E0E0E] border border-[#2D2D2D] p-8 sm:p-12 lg:p-14 shadow-2xl relative">
+            
+            {/* Top Badge */}
+            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#1C1C1C] border border-[#333333] mb-6">
+              <Users className="w-3.5 h-3.5 text-[#FF7711]" />
+              <span className="text-[11px] font-mono uppercase tracking-widest text-[#FF7711] font-bold">
+                A MESSAGE TO PARENTS
+              </span>
+            </div>
+
+            {/* Heart of the Message Headline */}
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight mb-8">
+              Is your child ready for the world they will enter{" "}
+              <span className="font-serif italic font-normal text-[#FF7711]">
+                tomorrow?
+              </span>
+            </h2>
+
+            {/* Editorial Body Text */}
+            <div className="space-y-5 text-sm sm:text-base text-[#CCCCCC] leading-relaxed font-normal">
+              <p>
+                The world is changing faster than ever. Technology, AI, robotics, and digital skills are becoming part of everyday life — and children who start exploring these skills early get more opportunities to learn, experiment, and build confidence.
               </p>
 
-              <div className="space-y-3.5 text-xs font-mono text-[#D4D4D4] mb-8">
-                <div className="flex items-center space-x-3 p-3 rounded-xl bg-[#111111] border border-[#222222]">
-                  <MapPin className="w-4 h-4 text-[#FF7711]" />
-                  <span>{companyDetails.address.center}</span>
-                </div>
-                <div className="flex items-center space-x-3 p-3 rounded-xl bg-[#111111] border border-[#222222]">
-                  <Clock className="w-4 h-4 text-[#FF7711]" />
-                  <span>Mon – Sat: 9:00 AM – 6:30 PM | Sunday By Appointment</span>
-                </div>
+              <p>
+                At Narasimha Skill Sphere, we don't want your child to simply watch the future being created. <strong className="text-white font-semibold">We want them to learn it, build it, and become part of it.</strong>
+              </p>
+
+              <p>
+                Through Robotics, Coding, Artificial Intelligence, 3D Printing, and more, children get hands-on opportunities to turn ideas into real projects and develop skills beyond textbooks.
+              </p>
+
+              {/* Callout Quote Box */}
+              <div className="p-6 rounded-2xl bg-black/60 border-l-4 border-[#FF7711] border-y border-r border-[#262626] my-6">
+                <p className="text-base sm:text-lg font-medium text-white italic font-serif leading-relaxed">
+                  “Because the future is not something children should only prepare for — it is something they should experience, explore, and create.”
+                </p>
+              </div>
+
+              <p>
+                Every child has the potential to become a problem-solver, creator, and innovator when given the right environment, guidance, and opportunities.
+              </p>
+
+              <p className="text-white font-semibold text-base sm:text-lg">
+                Give your child a place to explore. Give them the freedom to create. Give them the opportunity to build their future.
+              </p>
+
+              <div className="pt-4 flex flex-wrap items-center justify-between gap-4">
+                <span className="text-base sm:text-lg font-bold text-[#FF7711]">
+                  Let’s start their journey together.
+                </span>
+
+                <a
+                  href="#book-visit"
+                  className="btn-orange-primary px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center space-x-2"
+                >
+                  <span>Book Free Orientation Session</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
               </div>
             </div>
 
-            {/* Form */}
-            <div className="lg:col-span-6 bg-[#111111] border border-[#272727] rounded-3xl p-6 sm:p-8 shadow-2xl">
-              <h3 className="text-xl font-bold text-white mb-1">
-                Book a Free Trial Class
-              </h3>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 7. WHY NARASIMHA SKILL SPHERE? (6 Core Pillars)                          */}
+      {/* ========================================================================= */}
+      <section className="w-full bg-[#080808] border-b border-[#222222] py-20 lg:py-28 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#272727] mb-3">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#FF7711]" />
+              <span className="text-[11px] font-mono uppercase tracking-widest text-[#FF7711] font-bold">
+                THE NSS ADVANTAGE
+              </span>
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FFFFFF] tracking-tight leading-tight mb-4">
+              WHY <span className="font-serif italic font-normal text-[#FF7711]">NARASIMHA SKILL SPHERE?</span>
+            </h2>
+
+            <p className="text-sm sm:text-base text-[#A1A1A1] leading-relaxed">
+              We bridge the gap between classroom theory and real engineering creation with industry-aligned maker learning.
+            </p>
+          </div>
+
+          {/* 6 Reasons Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {whyNarasimhaReasons.map((reason) => (
+              <div
+                key={reason.id}
+                className="p-7 rounded-2xl bg-[#111111] border border-[#242424] hover:border-[#FF7711]/50 transition-all duration-300 group hover:-translate-y-1 shadow-lg flex flex-col justify-between"
+              >
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-[#1A1A1A] border border-[#2A2A2A] flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                    {reason.emoji}
+                  </div>
+
+                  <h3 className="text-xl font-bold text-white group-hover:text-[#FF7711] transition-colors mb-1.5">
+                    {reason.title}
+                  </h3>
+
+                  <p className="text-xs font-mono text-[#FF7711] font-medium mb-3">
+                    {reason.tagline}
+                  </p>
+
+                  <p className="text-xs sm:text-sm text-[#A1A1A1] leading-relaxed mb-6 font-normal">
+                    {reason.description}
+                  </p>
+                </div>
+
+                <div className="pt-4 border-t border-[#202020] space-y-1.5">
+                  {reason.highlights.map((item) => (
+                    <div key={item} className="flex items-center space-x-2 text-[11px] font-mono text-[#CCCCCC]">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FF7711] shrink-0" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 8. CENTER GALLERY (Inside Our Learning Space)                            */}
+      {/* ========================================================================= */}
+      <section className="w-full bg-[#0C0C0C] border-b border-[#222222] py-20 lg:py-28 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* Section Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+            <div>
+              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#272727] mb-3">
+                <Sparkles className="w-3.5 h-3.5 text-[#FF7711]" />
+                <span className="text-[11px] font-mono uppercase tracking-widest text-[#FF7711] font-bold">
+                  CENTER GALLERY
+                </span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FFFFFF] tracking-tight leading-tight">
+                Inside Our <span className="font-serif italic font-normal text-[#FF7711]">Learning Space</span>
+              </h2>
+              <p className="text-sm sm:text-base text-[#FF7711] font-mono mt-2">
+                Learn. Build. Create. Repeat.
+              </p>
+            </div>
+            <p className="text-sm sm:text-base text-[#A1A1A1] max-w-md">
+              A glimpse into the real experiences, experiments, and projects that happen daily inside our center.
+            </p>
+          </div>
+
+          {/* Category Filter Pills */}
+          <div className="flex flex-wrap items-center gap-2 mb-10">
+            {[
+              { id: "all", label: "All Photos" },
+              { id: "learning", label: "Learning Sessions" },
+              { id: "robotics", label: "Robotics Lab" },
+              { id: "coding", label: "Coding Sessions" },
+              { id: "3dprinting", label: "3D Printing" },
+              { id: "projects", label: "Student Projects" },
+              { id: "events", label: "Events & Showcases" },
+            ].map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setSelectedGalleryCategory(cat.id as any)}
+                className={`px-3.5 py-2 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer ${
+                  selectedGalleryCategory === cat.id
+                    ? "bg-[#FF7711] text-black shadow-md shadow-[#FF7711]/20"
+                    : "bg-[#141414] text-[#A1A1A1] hover:text-white hover:bg-[#1E1E1E] border border-[#272727]"
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Gallery Grid */}
+          <div className="grid grid-cols-12 gap-5 mb-12">
+            {filteredGallery.map((item) => (
+              <div
+                key={item.id}
+                onClick={() => setActiveGalleryPreview(item)}
+                className={`group relative rounded-2xl overflow-hidden bg-[#151515] border border-[#262626] hover:border-[#FF7711] transition-all duration-300 cursor-pointer ${item.span || "col-span-12 sm:col-span-6 md:col-span-4"}`}
+                style={{ minHeight: "260px" }}
+              >
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
+
+                <div className="absolute top-3 left-3">
+                  <span className="text-[10px] font-mono px-2.5 py-1 rounded bg-black/80 backdrop-blur-md text-[#FF7711] font-bold border border-[#2E2E2E]">
+                    {item.categoryLabel}
+                  </span>
+                </div>
+
+                <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5">
+                  <h4 className="text-base font-bold text-white group-hover:text-[#FF7711] transition-colors mb-1">
+                    {item.title}
+                  </h4>
+                  <p className="text-xs text-[#CCCCCC] leading-snug line-clamp-2">
+                    {item.caption}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Gallery CTA Button */}
+          <div className="text-center">
+            <a
+              href="#book-visit"
+              className="inline-flex items-center space-x-2 text-sm font-mono font-bold text-[#FF7711] hover:text-[#FF8A33] transition-colors group"
+            >
+              <span>See What Our Students Are Creating →</span>
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 9. FINAL CALL TO ACTION & BOOKING FORM                                   */}
+      {/* ========================================================================= */}
+      <section id="book-visit" className="w-full bg-[#080808] border-b border-[#222222] py-20 lg:py-28 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
+            
+            {/* Left Content Column */}
+            <div className="lg:col-span-6">
+              {/* Bold Badge */}
+              <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#FF7711]/10 border border-[#FF7711]/40 text-[#FF7711] font-mono text-xs font-bold uppercase tracking-wider mb-5">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>LET THEM BUILD THEIR FUTURE.</span>
+              </div>
+
+              {/* Headline */}
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FFFFFF] tracking-tight leading-tight mb-4">
+                Their Future Starts With What They{" "}
+                <span className="font-serif italic font-normal text-[#FF7711]">
+                  Build Today.
+                </span>
+              </h2>
+
+              {/* Subhead */}
+              <p className="text-base sm:text-lg text-[#CCCCCC] leading-relaxed mb-6 font-normal">
+                Give your child an environment where they can explore technology, solve problems, build projects, and discover their potential.
+              </p>
+
+              {/* Center Location & Timings Details */}
+              <div className="space-y-3.5 text-xs font-mono text-[#D4D4D4] mb-8">
+                <div className="flex items-center space-x-3 p-3.5 rounded-xl bg-[#111111] border border-[#222222]">
+                  <MapPin className="w-4 h-4 text-[#FF7711] shrink-0" />
+                  <div>
+                    <span className="text-[#888888] block text-[10px]">PATNA FLAGSHIP CENTER</span>
+                    <span className="font-bold text-white">{companyDetails.address.center}</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-3 p-3.5 rounded-xl bg-[#111111] border border-[#222222]">
+                  <Clock className="w-4 h-4 text-[#FF7711] shrink-0" />
+                  <div>
+                    <span className="text-[#888888] block text-[10px]">OPERATING HOURS</span>
+                    <span className="font-bold text-white">Mon – Sat: 9:00 AM – 6:30 PM (Sunday By Appointment)</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-3 p-3.5 rounded-xl bg-[#111111] border border-[#222222]">
+                  <Phone className="w-4 h-4 text-[#FF7711] shrink-0" />
+                  <div>
+                    <span className="text-[#888888] block text-[10px]">DIRECT COUNSELLOR HELPLINE</span>
+                    <span className="font-bold text-white">+91 {companyDetails.phone}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3">
+                <a
+                  href="#our-courses"
+                  className="btn-dark-secondary px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center space-x-2"
+                >
+                  <BookOpen className="w-4 h-4 text-[#FF7711]" />
+                  <span>Explore Programs</span>
+                </a>
+
+                <button
+                  onClick={onOpenPartnerModal}
+                  className="btn-dark-secondary px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center space-x-2 hover:border-[#FF7711]"
+                >
+                  <span>For Schools: Setup Lab</span>
+                  <ExternalLink className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Right Booking Form */}
+            <div className="lg:col-span-6 bg-[#111111] border border-[#2A2A2A] rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl relative">
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="text-xl sm:text-2xl font-bold text-white">
+                  Visit Our Center
+                </h3>
+                <span className="text-[10px] font-mono px-2.5 py-1 rounded bg-[#1C1C1C] text-[#FF7711] font-bold border border-[#2E2E2E]">
+                  FREE TRIAL DEMO
+                </span>
+              </div>
               <p className="text-xs text-[#A1A1A1] mb-6">
-                Fill in the details below. Our academic mentor will contact you to confirm your slot.
+                Book a 45-minute hands-on robotics trial and level orientation with our senior technical mentors.
               </p>
 
               {visitSubmitted ? (
-                <div className="p-6 rounded-2xl bg-[#151515] border border-emerald-500/40 text-center my-4">
-                  <CheckCircle2 className="w-10 h-10 text-emerald-400 mx-auto mb-3" />
-                  <h4 className="text-base font-bold text-[#F1F1F1] mb-1">
-                    Slot Request Confirmed!
+                <div className="p-7 rounded-2xl bg-[#151515] border border-emerald-500/40 text-center my-4 animate-in fade-in zoom-in duration-300">
+                  <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto mb-3" />
+                  <h4 className="text-lg font-bold text-[#F1F1F1] mb-1">
+                    Free Trial Slot Reserved!
                   </h4>
-                  <p className="text-xs text-[#A1A1A1] leading-relaxed">
-                    Thank you! We have received your request for <span className="text-white font-semibold">{visitForm.studentName || "your child"}</span>. Our center coordinator will call you shortly.
+                  <p className="text-xs text-[#A1A1A1] leading-relaxed mb-4">
+                    Thank you, <strong className="text-white">{visitForm.parentName}</strong>! We have registered your trial request for <strong className="text-[#FF7711]">{visitForm.studentName || "your child"}</strong>. Our Patna center coordinator will call you at <strong className="text-white">{visitForm.phone}</strong> shortly to confirm your preferred time slot.
                   </p>
                   <button
                     onClick={() => setVisitSubmitted(false)}
-                    className="btn-dark-secondary mt-4 px-4 py-2 rounded-xl text-xs font-mono"
+                    className="btn-dark-secondary px-5 py-2.5 rounded-xl text-xs font-mono cursor-pointer"
                   >
                     Book Another Slot
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleVisitSubmit} className="space-y-3.5">
+                <form onSubmit={handleBookingSubmit} className="space-y-4">
                   <div>
                     <label className="block text-xs font-mono text-[#A1A1A1] mb-1">
-                      Parent / Guardian Name *
+                      Parent / Guardian Full Name *
                     </label>
                     <input
                       type="text"
                       required
-                      placeholder="Your full name"
+                      placeholder="e.g. Ramesh Kumar"
                       value={visitForm.parentName}
                       onChange={(e) => setVisitForm({ ...visitForm, parentName: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#151515] border border-[#272727] text-xs text-[#F1F1F1] placeholder-[#666666] focus:outline-none focus:border-[#FF7711]"
+                      className="w-full px-4 py-3 rounded-xl bg-[#161616] border border-[#2C2C2C] text-xs text-[#F1F1F1] placeholder-[#666666] focus:outline-none focus:border-[#FF7711] transition-colors"
                     />
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     <div>
                       <label className="block text-xs font-mono text-[#A1A1A1] mb-1">
-                        Student Name *
+                        Student / Child's Name *
                       </label>
                       <input
                         type="text"
                         required
-                        placeholder="Child's name"
+                        placeholder="e.g. Aarav"
                         value={visitForm.studentName}
                         onChange={(e) => setVisitForm({ ...visitForm, studentName: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#151515] border border-[#272727] text-xs text-[#F1F1F1] placeholder-[#666666] focus:outline-none focus:border-[#FF7711]"
+                        className="w-full px-4 py-3 rounded-xl bg-[#161616] border border-[#2C2C2C] text-xs text-[#F1F1F1] placeholder-[#666666] focus:outline-none focus:border-[#FF7711] transition-colors"
                       />
                     </div>
 
                     <div>
                       <label className="block text-xs font-mono text-[#A1A1A1] mb-1">
-                        Category Level *
+                        Grade / Learning Level *
                       </label>
                       <select
                         value={visitForm.studentGrade}
                         onChange={(e) => setVisitForm({ ...visitForm, studentGrade: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#151515] border border-[#272727] text-xs text-[#F1F1F1] focus:outline-none focus:border-[#FF7711]"
+                        className="w-full px-4 py-3 rounded-xl bg-[#161616] border border-[#2C2C2C] text-xs text-[#F1F1F1] focus:outline-none focus:border-[#FF7711] transition-colors"
                       >
-                        <option value="Little Champs (Grades K-5)">Little Champs (Grades K-5)</option>
-                        <option value="Junior Champs (Grades 6-8)">Junior Champs (Grades 6-8)</option>
-                        <option value="Senior Champs (Grades 9-12)">Senior Champs (Grades 9-12)</option>
+                        <option value="Grades K-5 (Starter / Little Champs)">Grades K-5 (Starter)</option>
+                        <option value="Grades 6-8 (Learner / Junior Champs)">Grades 6-8 (Learner)</option>
+                        <option value="Grades 9-12 (Performer / Senior Champs)">Grades 9-12 (Performer)</option>
                       </select>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     <div>
                       <label className="block text-xs font-mono text-[#A1A1A1] mb-1">
-                        Mobile Number *
+                        Contact Mobile Number *
                       </label>
                       <input
                         type="tel"
@@ -704,34 +1200,35 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
                         placeholder="10-digit number"
                         value={visitForm.phone}
                         onChange={(e) => setVisitForm({ ...visitForm, phone: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#151515] border border-[#272727] text-xs text-[#F1F1F1] placeholder-[#666666] focus:outline-none focus:border-[#FF7711]"
+                        className="w-full px-4 py-3 rounded-xl bg-[#161616] border border-[#2C2C2C] text-xs text-[#F1F1F1] placeholder-[#666666] focus:outline-none focus:border-[#FF7711] transition-colors"
                       />
                     </div>
 
                     <div>
                       <label className="block text-xs font-mono text-[#A1A1A1] mb-1">
-                        Interested Track
+                        Preferred Track / Interest
                       </label>
                       <select
-                        value={visitForm.interestedCourse}
-                        onChange={(e) => setVisitForm({ ...visitForm, interestedCourse: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#151515] border border-[#272727] text-xs text-[#F1F1F1] focus:outline-none focus:border-[#FF7711]"
+                        value={visitForm.interestedTrack}
+                        onChange={(e) => setVisitForm({ ...visitForm, interestedTrack: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl bg-[#161616] border border-[#2C2C2C] text-xs text-[#F1F1F1] focus:outline-none focus:border-[#FF7711] transition-colors"
                       >
-                        <option value="Robotics & Embedded Systems">Robotics & Embedded Systems</option>
-                        <option value="Coding & Computational Logic">Coding & Logic</option>
-                        <option value="AI & Machine Intelligence">AI & Machine Learning</option>
-                        <option value="3D Printing & CAD">3D Printing & CAD</option>
-                        <option value="Internet of Things (IoT)">Internet of Things (IoT)</option>
-                        <option value="Drone Technology">Drone Technology</option>
+                        <option value="Robotics & Hardware">🤖 Robotics & Hardware</option>
+                        <option value="Coding & Software">💻 Coding & Programming</option>
+                        <option value="Artificial Intelligence">🧠 AI & Machine Learning</option>
+                        <option value="3D Printing & CAD">🖨️ 3D Printing & CAD</option>
+                        <option value="Drone Technology">🚁 Drone Technology</option>
+                        <option value="Financial Literacy">💰 Financial Literacy</option>
+                        <option value="Entrepreneur Mindset">🚀 Entrepreneur Mindset</option>
                       </select>
                     </div>
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full btn-orange-primary py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center space-x-2 mt-4 cursor-pointer shadow-md hover:shadow-orange-glow transition-all"
+                    className="w-full btn-orange-primary py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center space-x-2 mt-4 cursor-pointer shadow-lg hover:shadow-orange-glow transition-all"
                   >
-                    <span>Confirm Trial Booking</span>
+                    <span>Confirm Free Trial Booking</span>
                     <Send className="w-3.5 h-3.5" />
                   </button>
                 </form>
@@ -743,8 +1240,10 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
         </div>
       </section>
 
-      {/* Return to Homepage / For Schools */}
-      <section className="w-full bg-[#080808] py-12 text-center border-t border-[#222222]">
+      {/* ========================================================================= */}
+      {/* Return to Homepage / Footer Navigation Strip                             */}
+      {/* ========================================================================= */}
+      <section className="w-full bg-[#080808] py-12 text-center border-t border-[#1C1C1C]">
         <div className="max-w-4xl mx-auto px-4 flex flex-wrap items-center justify-center gap-4">
           <button
             onClick={() => {
@@ -765,6 +1264,48 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
           </button>
         </div>
       </section>
+
+      {/* ========================================================================= */}
+      {/* Gallery Lightbox Modal Preview                                            */}
+      {/* ========================================================================= */}
+      {activeGalleryPreview && (
+        <div
+          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4"
+          onClick={() => setActiveGalleryPreview(null)}
+        >
+          <div
+            className="relative max-w-4xl w-full bg-[#121212] border border-[#2C2C2C] rounded-3xl overflow-hidden shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="relative h-80 sm:h-[420px] bg-black">
+              <img
+                src={activeGalleryPreview.image}
+                alt={activeGalleryPreview.title}
+                className="w-full h-full object-contain"
+              />
+              <button
+                onClick={() => setActiveGalleryPreview(null)}
+                className="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/80 text-white flex items-center justify-center border border-[#333333] hover:bg-[#FF7711] hover:text-black transition-colors cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="p-6">
+              <div className="flex items-center space-x-2 mb-2">
+                <span className="text-[10px] font-mono px-2.5 py-0.5 rounded bg-[#1C1C1C] text-[#FF7711] font-bold border border-[#2E2E2E]">
+                  {activeGalleryPreview.categoryLabel}
+                </span>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-1">
+                {activeGalleryPreview.title}
+              </h3>
+              <p className="text-xs sm:text-sm text-[#A1A1A1]">
+                {activeGalleryPreview.caption}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );
