@@ -8,7 +8,7 @@ import { PartnerModal } from "./components/PartnerModal";
 import { ProgramModal } from "./components/ProgramModal";
 import { HomePage } from "./pages/HomePage";
 import { CentersPage } from "./pages/CentersPage";
-import type { Course } from "./data/specializedCourses";
+import type { Course } from "./assets/data/specializedCourses";
 
 export function App() {
   const navigate = useNavigate();

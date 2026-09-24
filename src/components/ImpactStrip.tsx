@@ -1,5 +1,5 @@
 import React from "react";
-import { impactStats } from "../data/stats";
+import { impactStats } from "../assets/data/stats";
 import { DynamicIcon } from "./DynamicIcon";
 
 export const ImpactStrip: React.FC = () => {
@@ -10,9 +10,8 @@ export const ImpactStrip: React.FC = () => {
           {impactStats.map((item, idx) => (
             <div
               key={item.id}
-              className={`flex flex-col ${
-                idx > 0 ? "pt-4 sm:pt-0 sm:pl-6 lg:pl-8" : "pr-4"
-              }`}
+              className={`flex flex-col ${idx > 0 ? "pt-4 sm:pt-0 sm:pl-6 lg:pl-8" : "pr-4"
+                }`}
             >
               <div className="flex items-center space-x-2 mb-1.5">
                 <span className="p-1 rounded bg-[#151515] border border-[#272727] text-[#FF7711]">

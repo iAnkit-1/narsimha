@@ -1,11 +1,11 @@
 import React from "react";
-import { 
-  Building2, 
-  Sparkles, 
-  ArrowRight, 
-  X 
+import {
+  Building2,
+  Sparkles,
+  ArrowRight,
+  X
 } from "lucide-react";
-import { media } from "../data/media";
+import { media } from "../assets/data/media";
 
 interface AudienceModalProps {
   isOpen: boolean;
@@ -17,13 +17,13 @@ export const AudienceModal: React.FC<AudienceModalProps> = ({ isOpen, onSelectRo
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-xl animate-in fade-in duration-300">
-      
+
       {/* Subtle Outer Neon Ambient Glow */}
       <div className="absolute w-[500px] h-[320px] bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-orange-500/10 blur-[110px] rounded-full pointer-events-none" />
 
       {/* Compact Glassmorphic Modal */}
       <div className="relative w-full max-w-3xl bg-[#0D0D11]/95 backdrop-blur-2xl border border-white/10 rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_16px_50px_rgba(0,0,0,0.85)] grid grid-cols-1 md:grid-cols-12 z-10">
-        
+
         {/* Close Button */}
         <button
           onClick={() => onSelectRole("school")}
@@ -37,7 +37,7 @@ export const AudienceModal: React.FC<AudienceModalProps> = ({ isOpen, onSelectRo
         {/* LEFT BRANDING PANEL (5 cols)                                              */}
         {/* ========================================================================= */}
         <div className="md:col-span-5 bg-gradient-to-br from-[#121218] via-[#0E0E14] to-[#0A0A0E] border-b md:border-b-0 md:border-r border-white/10 p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
-          
+
           {/* Subtle Cyber Grid Background */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
           <div className="absolute -top-12 -left-12 w-40 h-40 bg-cyan-500/15 blur-[60px] rounded-full pointer-events-none" />
@@ -47,10 +47,10 @@ export const AudienceModal: React.FC<AudienceModalProps> = ({ isOpen, onSelectRo
             {/* Logo & Brand Header */}
             <div className="flex items-center space-x-2.5 mb-5">
               <div className="w-9 h-9 rounded-xl bg-white/5 backdrop-blur-md border border-white/15 p-1 flex items-center justify-center shadow-inner">
-                <img 
-                  src={media.logo} 
-                  alt="Narasimha Skill Sphere" 
-                  className="w-full h-full object-contain" 
+                <img
+                  src={media.logo}
+                  alt="Narasimha Skill Sphere"
+                  className="w-full h-full object-contain"
                 />
               </div>
               <div>
@@ -95,7 +95,7 @@ export const AudienceModal: React.FC<AudienceModalProps> = ({ isOpen, onSelectRo
         {/* RIGHT SELECTION PANEL (7 cols)                                            */}
         {/* ========================================================================= */}
         <div className="md:col-span-7 bg-[#0A0A0E]/95 p-5 sm:p-6 flex flex-col justify-center relative">
-          
+
           {/* Header */}
           <div className="mb-4">
             <span className="text-[9px] font-mono font-bold tracking-widest text-white/50 uppercase block mb-0.5">
@@ -108,7 +108,7 @@ export const AudienceModal: React.FC<AudienceModalProps> = ({ isOpen, onSelectRo
 
           {/* 2 Clean Balanced Option Cards */}
           <div className="space-y-3">
-            
+
             {/* Option 1: SCHOOL */}
             <button
               onClick={() => onSelectRole("school")}

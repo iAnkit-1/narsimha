@@ -1,6 +1,6 @@
 import React from "react";
 import { ArrowRight, Hammer, RefreshCw, Trophy, Lightbulb } from "lucide-react";
-import { coreFourProgression } from "../data/learningMethod";
+import { coreFourProgression } from "../assets/data/learningMethod";
 import learningMethodImg from "../assets/learning_method.png";
 
 export const LearningFlow: React.FC = () => {
@@ -37,10 +37,10 @@ export const LearningFlow: React.FC = () => {
       <div className="absolute inset-0 tech-grid opacity-20 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* 2-Column: Left Side Content | Right Side Directly Pasted learning_method.png */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          
+
           {/* Left Column (6 cols): Relevant Editorial Content */}
           <div className="lg:col-span-6 flex flex-col justify-center text-left">
             <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#151515] border border-[#272727] w-fit mb-3">

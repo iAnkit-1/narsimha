@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Building2, Truck, Users, GraduationCap, 
-  Presentation, Trophy, ArrowRight, CheckCircle2, Sparkles 
+import {
+  Building2, Truck, Users, GraduationCap,
+  Presentation, Trophy, ArrowRight, CheckCircle2, Sparkles
 } from "lucide-react";
-import { media } from "../data/media";
+import { media } from "../assets/data/media";
 
 interface CoreOfferingsProps {
   onPartnerClick?: () => void;
@@ -84,13 +84,13 @@ export const CoreOfferings: React.FC<CoreOfferingsProps> = ({ onPartnerClick }) 
 
   return (
     <section id="atl-solutions" className="w-full bg-[#080808] border-b border-[#222222] py-16 lg:py-24 relative overflow-hidden">
-      
+
       {/* Ambient background glow */}
       <div className="absolute top-1/4 left-1/3 w-[600px] h-[350px] bg-[#FF7711]/10 blur-[150px] rounded-full pointer-events-none" />
       <div className="absolute bottom-10 right-1/4 w-[500px] h-[350px] bg-[#38BDF8]/10 blur-[150px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#FF7711]/40 mb-3.5 shadow-md">
@@ -123,37 +123,33 @@ export const CoreOfferings: React.FC<CoreOfferingsProps> = ({ onPartnerClick }) 
                 key={offering.id}
                 onMouseEnter={() => setActiveOfferingId(offering.id)}
                 onClick={() => setActiveOfferingId(offering.id)}
-                className={`relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 ease-out bg-[#111111] border shadow-2xl ${
-                  isExpanded
+                className={`relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 ease-out bg-[#111111] border shadow-2xl ${isExpanded
                     ? "lg:flex-[3.5] xl:flex-[4] border-[#FF7711] shadow-[0_10px_35px_rgba(255,119,17,0.2)] h-[360px] sm:h-[400px] lg:h-full"
                     : "lg:flex-[1] border-white/10 hover:border-white/30 h-[100px] sm:h-[120px] lg:h-full opacity-85 hover:opacity-100"
-                }`}
+                  }`}
               >
                 {/* Background Image */}
                 <img
                   src={offering.image}
                   alt={offering.title}
-                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
-                    isExpanded
+                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${isExpanded
                       ? "filter brightness-[0.88] contrast-[1.05] scale-105"
                       : "filter brightness-[0.4] contrast-[1.1] grayscale-[40%]"
-                  }`}
+                    }`}
                 />
 
                 {/* Gradient Scrim */}
-                <div 
-                  className={`absolute inset-0 transition-opacity duration-500 ${
-                    isExpanded
+                <div
+                  className={`absolute inset-0 transition-opacity duration-500 ${isExpanded
                       ? "bg-gradient-to-t from-black/95 via-black/45 to-transparent"
                       : "bg-gradient-to-t from-black/90 via-black/60 to-black/30"
-                  }`}
+                    }`}
                 />
 
                 {/* Collapsed Vertical State (Visible when collapsed on desktop) */}
                 <div
-                  className={`absolute inset-0 p-4 flex flex-col justify-end items-center text-center transition-all duration-300 pointer-events-none ${
-                    isExpanded ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
-                  }`}
+                  className={`absolute inset-0 p-4 flex flex-col justify-end items-center text-center transition-all duration-300 pointer-events-none ${isExpanded ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
+                    }`}
                 >
                   <div className="w-10 h-10 rounded-full bg-black/80 backdrop-blur-md border border-white/20 flex items-center justify-center text-white mb-2 shadow-lg">
                     <Icon className="w-4 h-4" />

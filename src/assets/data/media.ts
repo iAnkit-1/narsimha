@@ -1,7 +1,7 @@
 // Centralized Media Repository for Narasimha Skill Sphere
 // Real company photography & assets from src/assets/
 
-import heroVid from "../assets/hero_vid.mp4";
+import heroVid from "../hero_vid.mp4";
 
 export const media = {
   logo: "/logo.png",

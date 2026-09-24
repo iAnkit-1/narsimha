@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Bot, BrainCircuit, Code2, 
+import {
+  Bot, BrainCircuit, Code2,
   Printer, Compass, Sparkles, Activity, CheckCircle2,
   Boxes, Lightbulb, Wifi
 } from "lucide-react";
-import { media } from "../data/media";
+import { media } from "../assets/data/media";
 
 interface HeroProps {
   onExplorePrograms?: () => void;
@@ -125,7 +125,7 @@ export const Hero: React.FC<HeroProps> = () => {
 
   return (
     <section className="relative w-full min-h-[600px] lg:min-h-[680px] overflow-hidden flex flex-col justify-between pt-8 sm:pt-12 pb-0">
-      
+
       {/* 1. Full-Width Background Video Player with Crystal-Clear Contrast */}
       <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
         <video
@@ -149,7 +149,7 @@ export const Hero: React.FC<HeroProps> = () => {
       {/* 2. Left-Center Dynamic Hero Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col justify-center text-left my-auto py-8 sm:py-12 lg:py-16">
         <div className="max-w-2xl xl:max-w-3xl flex flex-col items-start text-left">
-          
+
           {/* Animated Slide Content */}
           <AnimatePresence mode="wait">
             <motion.div
@@ -194,11 +194,10 @@ export const Hero: React.FC<HeroProps> = () => {
                     if (typingTimerRef.current) clearTimeout(typingTimerRef.current);
                     setCurrentSlideIndex(idx);
                   }}
-                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                    idx === currentSlideIndex
+                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${idx === currentSlideIndex
                       ? "w-7 bg-[#FF7711]"
                       : "w-2 bg-white/30 hover:bg-white/60"
-                  }`}
+                    }`}
                   aria-label={`Slide ${idx + 1}`}
                 />
               ))}
@@ -211,7 +210,7 @@ export const Hero: React.FC<HeroProps> = () => {
       {/* 3. Essential Skills Of 21st Century Card - Independently Positioned at Bottom Right */}
       <div className="w-full lg:w-auto relative lg:absolute lg:bottom-0 lg:right-6 xl:right-10 z-20 flex justify-end px-4 sm:px-6 lg:px-0 mt-auto">
         <div className="relative w-full sm:max-w-md lg:w-[380px] xl:w-[410px] rounded-t-2xl rounded-b-none border-t border-x border-b-0 border-white/20 shadow-2xl shadow-black/95 group hover:border-[#FF7711]/70 transition-all duration-300 overflow-hidden">
-          
+
           {/* Changing Background Images Carousel Layer */}
           <div className="absolute inset-0 w-full h-full z-0 bg-[#080808]">
             <AnimatePresence mode="wait">
@@ -238,7 +237,7 @@ export const Hero: React.FC<HeroProps> = () => {
 
           {/* Foreground Text, Header & Skill Badges Placed DIRECTLY OVER the Changing Image */}
           <div className="relative z-10 p-4 sm:p-4.5 flex flex-col justify-between">
-            
+
             {/* Header Row: We Offer + 100% Customizable badge */}
             <div className="flex items-center justify-between gap-2 mb-1">
               <div className="flex items-center space-x-1.5">
@@ -273,11 +272,10 @@ export const Hero: React.FC<HeroProps> = () => {
                   <button
                     key={idx}
                     onClick={() => setCurrentImageIndex(idx)}
-                    className={`h-1 rounded-full transition-all cursor-pointer ${
-                      idx === currentImageIndex
+                    className={`h-1 rounded-full transition-all cursor-pointer ${idx === currentImageIndex
                         ? "w-3.5 bg-[#FF7711]"
                         : "w-1 bg-white/40 hover:bg-white/70"
-                    }`}
+                      }`}
                     aria-label={`Go to slide ${idx + 1}`}
                   />
                 ))}
@@ -291,11 +289,10 @@ export const Hero: React.FC<HeroProps> = () => {
                 return (
                   <div
                     key={skill.name}
-                    className={`flex items-center space-x-1 px-2 py-0.5 sm:py-0.5 rounded text-[10px] sm:text-[11px] font-mono font-medium transition-all backdrop-blur-md shadow-sm ${
-                      skill.highlight
+                    className={`flex items-center space-x-1 px-2 py-0.5 sm:py-0.5 rounded text-[10px] sm:text-[11px] font-mono font-medium transition-all backdrop-blur-md shadow-sm ${skill.highlight
                         ? "bg-[#111111]/85 border border-[#FF7711]/70 text-[#FFFFFF] group-hover:bg-[#111111]/75 shadow-[0_0_10px_rgba(255,119,17,0.2)]"
                         : "bg-[#0A0A0A]/75 border border-white/15 text-white/90 group-hover:bg-[#0A0A0A]/60 hover:text-white hover:border-white/40"
-                    }`}
+                      }`}
                   >
                     <Icon className={`w-2.5 h-2.5 sm:w-3 sm:h-3 ${skill.highlight ? "text-[#FF7711]" : "text-white/70"}`} />
                     <span>{skill.name}</span>

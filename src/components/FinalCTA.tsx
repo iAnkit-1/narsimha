@@ -1,6 +1,6 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
-import { media } from "../data/media";
+import { media } from "../assets/data/media";
 
 interface FinalCTAProps {
   onExplorePrograms: () => void;
@@ -11,10 +11,10 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onExplorePrograms, onPartner
   return (
     <section className="w-full bg-[#080808] border-b border-[#272727] py-16 lg:py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Large Photographic CTA Container */}
         <div className="relative rounded-3xl overflow-hidden border border-[#272727] bg-[#111111] p-8 sm:p-12 lg:p-16 shadow-2xl">
-          
+
           {/* Background Realistic Student Collaboration Photo */}
           <div className="absolute inset-0 z-0">
             <img

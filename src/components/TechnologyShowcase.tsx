@@ -1,7 +1,7 @@
 import React from "react";
 import { ArrowRight, Bot, Code2, BrainCircuit, Cpu, Printer, Compass, Globe, Palette } from "lucide-react";
-import { technologyShowcase } from "../data/skills";
-import type { TechCard } from "../data/skills";
+import { technologyShowcase } from "../assets/data/skills";
+import type { TechCard } from "../assets/data/skills";
 
 interface TechnologyShowcaseProps {
   onCardClick?: (tech: TechCard) => void;
@@ -25,7 +25,7 @@ export const TechnologyShowcase: React.FC<TechnologyShowcaseProps> = ({ onCardCl
   return (
     <section className="w-full bg-[#080808] border-b border-[#272727] py-16 lg:py-24 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16">
           <div>
@@ -43,7 +43,7 @@ export const TechnologyShowcase: React.FC<TechnologyShowcaseProps> = ({ onCardCl
 
         {/* Varied Editorial Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
-          
+
           {/* Featured Large Card: Robotics (Takes 7 cols on Desktop) */}
           <div
             onClick={() => onCardClick?.(featured)}
@@ -58,7 +58,7 @@ export const TechnologyShowcase: React.FC<TechnologyShowcaseProps> = ({ onCardCl
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#151515] via-transparent to-black/20" />
-              
+
               <div className="absolute top-4 left-4">
                 <span className="px-3 py-1 rounded-md bg-[#080808]/90 text-[#FF7711] border border-[#FF7711]/40 text-xs font-mono font-bold tracking-wider uppercase backdrop-blur-sm">
                   ★ FEATURED CORE DOMAIN
@@ -73,7 +73,7 @@ export const TechnologyShowcase: React.FC<TechnologyShowcaseProps> = ({ onCardCl
                   <Bot className="w-4 h-4" />
                   <span>{featured.category}</span>
                 </div>
-                
+
                 <h3 className="text-2xl sm:text-3xl font-bold text-[#F1F1F1] group-hover:text-[#FF7711] transition-colors mb-3">
                   {featured.title}
                 </h3>

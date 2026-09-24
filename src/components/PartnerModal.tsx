@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { X, Building2, CheckCircle2, Send } from "lucide-react";
-import { companyDetails } from "../data/navigation";
+import { companyDetails } from "../assets/data/navigation";
 
 interface PartnerModalProps {
   isOpen: boolean;
@@ -34,7 +34,7 @@ export const PartnerModal: React.FC<PartnerModalProps> = ({ isOpen, onClose }) =
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm animate-in fade-in duration-200">
       <div className="relative w-full max-w-2xl bg-[#111111] border border-[#272727] rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col">
-        
+
         {/* Header */}
         <div className="p-6 bg-[#151515] border-b border-[#272727] flex items-center justify-between">
           <div className="flex items-center space-x-3">

@@ -2,9 +2,9 @@ import React from "react";
 import { motion } from "framer-motion";
 import { 
   Lightbulb, PenTool, Cog, RefreshCw, 
-  Presentation, Trophy, Sparkles, Quote
+  Presentation, Trophy, Sparkles, Target
 } from "lucide-react";
-import learningMethodImg from "../assets/learning_method.png";
+import stairsImg from "../assets/stairs.png";
 
 export const ChampsLearningPathway: React.FC = () => {
   const pathwaySteps = [
@@ -74,12 +74,12 @@ export const ChampsLearningPathway: React.FC = () => {
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
-          {/* Left Part (5 cols): Backgroundless Visual Diagram Placed Directly */}
+          {/* Left Part (5 cols): Backgroundless Visual Diagram */}
           <div className="lg:col-span-5 flex items-center justify-center">
             <div className="relative w-full max-w-[480px] flex items-center justify-center p-2">
               <img
-                src={learningMethodImg}
-                alt="Champs Learning Pathway - Think, Design, Create, Improve, Explain, Showcase"
+                src={stairsImg}
+                alt="Learning Journey - From Curious Learner to Future-Ready Creator"
                 className="w-full h-auto max-h-[460px] object-contain drop-shadow-[0_15px_35px_rgba(0,0,0,0.9)] hover:scale-105 transition-transform duration-500"
               />
             </div>
@@ -92,20 +92,25 @@ export const ChampsLearningPathway: React.FC = () => {
             <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#161616] border border-[#FF7711]/40 w-fit mb-3.5 shadow-md">
               <Sparkles className="w-3.5 h-3.5 text-[#FF7711]" />
               <span className="text-xs font-mono uppercase tracking-widest text-[#FF7711] font-bold">
-                CHAMPS LEARNING PATHWAY
+                LEARNING JOURNEY
               </span>
             </div>
 
             {/* Main Heading */}
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight mb-3">
-              From Curiosity <br className="hidden sm:inline" />
+              From Curious Learner to <br className="hidden sm:inline" />
               <span className="bg-gradient-to-r from-[#FF7711] via-[#FFA149] to-[#FF5500] bg-clip-text text-transparent">
-                to Creation
+                Future-Ready Creator
               </span>
             </h2>
 
+            {/* Sub-paragraph */}
+            <p className="text-sm sm:text-base text-[#A1A1A1] leading-relaxed mb-4">
+              Every child starts with curiosity. At Narasimha Skill Sphere, we transform that curiosity into practical skills, confidence, and career-oriented capabilities.
+            </p>
+
             {/* 6-Step Micro Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 my-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 my-4">
               {pathwaySteps.map((step, idx) => {
                 const Icon = step.icon;
                 return (
@@ -138,16 +143,16 @@ export const ChampsLearningPathway: React.FC = () => {
               })}
             </div>
 
-            {/* Philosophy Highlight Quote Box */}
+            {/* The Goal Bar */}
             <div className="relative rounded-2xl bg-gradient-to-r from-[#171717] via-[#141414] to-[#171717] border-l-4 border-l-[#FF7711] border border-white/10 p-4 sm:p-5 shadow-lg">
-              <div className="flex items-start space-x-3">
-                <Quote className="w-5 h-5 text-[#FF7711] shrink-0 mt-1" />
-                <div className="flex flex-col">
-                  <p className="text-sm sm:text-base font-bold text-[#F1F1F1] leading-relaxed">
-                    We don’t just teach technology.
-                  </p>
-                  <p className="text-xs sm:text-sm text-[#FF7711] font-medium leading-relaxed mt-0.5">
-                    We help children understand, build, experiment and create with it.
+              <div className="flex items-start sm:items-center space-x-3">
+                <Target className="w-5 h-5 text-[#FF7711] shrink-0 mt-0.5 sm:mt-0" />
+                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#FF7711]">
+                    The Goal:
+                  </span>
+                  <p className="text-xs sm:text-sm font-semibold text-[#F1F1F1] leading-relaxed">
+                    Learn skills. Build projects. Develop confidence. Prepare for the future.
                   </p>
                 </div>
               </div>

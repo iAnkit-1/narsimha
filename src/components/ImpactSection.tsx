@@ -1,6 +1,6 @@
 import React from "react";
 import { Building2, Users, CheckCircle2, ShieldCheck, ArrowRight } from "lucide-react";
-import { impactStats } from "../data/stats";
+import { impactStats } from "../assets/data/stats";
 
 interface ImpactSectionProps {
   onPartnerClick?: () => void;
@@ -17,7 +17,7 @@ export const ImpactSection: React.FC<ImpactSectionProps> = ({ onPartnerClick }) 
   return (
     <section className="w-full bg-[#080808] border-b border-[#272727] py-16 lg:py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#111111] border border-[#272727] mb-3">

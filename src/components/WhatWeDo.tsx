@@ -1,6 +1,6 @@
 import React from "react";
 import { Compass, Hammer, RefreshCw, Trophy } from "lucide-react";
-import { media } from "../data/media";
+import { media } from "../assets/data/media";
 
 export const WhatWeDo: React.FC = () => {
   const capabilityRows = [
@@ -38,7 +38,7 @@ export const WhatWeDo: React.FC = () => {
     <section id="about" className="w-full bg-[#080808] border-b border-[#272727] py-16 lg:py-24 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-          
+
           {/* Left: Large Realistic Photograph */}
           <div className="lg:col-span-6 order-2 lg:order-1">
             <div className="relative rounded-2xl overflow-hidden border border-[#272727] bg-[#111111] group shadow-xl">

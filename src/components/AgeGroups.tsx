@@ -1,7 +1,7 @@
 import React from "react";
 import { CheckCircle2, ArrowRight } from "lucide-react";
-import { ageGroups } from "../data/ageGroups";
-import type { AgeGroup } from "../data/ageGroups";
+import { ageGroups } from "../assets/data/ageGroups";
+import type { AgeGroup } from "../assets/data/ageGroups";
 
 interface AgeGroupsProps {
   onSelectGroup?: (group: AgeGroup) => void;
@@ -11,7 +11,7 @@ export const AgeGroups: React.FC<AgeGroupsProps> = ({ onSelectGroup }) => {
   return (
     <section className="w-full bg-[#080808] border-b border-[#272727] py-16 lg:py-24 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#111111] border border-[#272727] mb-3">
@@ -45,7 +45,7 @@ export const AgeGroups: React.FC<AgeGroupsProps> = ({ onSelectGroup }) => {
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#151515] via-transparent to-transparent" />
-                
+
                 {/* Grade Badge */}
                 <div className="absolute top-3 left-3">
                   <span className="px-2.5 py-1 rounded bg-[#080808]/90 text-[#FF7711] border border-[#FF7711]/40 text-xs font-mono font-bold tracking-wider uppercase backdrop-blur-sm">

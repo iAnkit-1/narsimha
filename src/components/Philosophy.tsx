@@ -1,7 +1,7 @@
 import React from "react";
 import { Shield, Target, Sparkles } from "lucide-react";
-import { philosophyPillars } from "../data/pedagogy";
-import { media } from "../data/media";
+import { philosophyPillars } from "../assets/data/pedagogy";
+import { media } from "../assets/data/media";
 
 export const Philosophy: React.FC = () => {
   const iconLookup: Record<string, React.ElementType> = {
@@ -13,9 +13,9 @@ export const Philosophy: React.FC = () => {
   return (
     <section className="w-full bg-[#080808] border-b border-[#272727] py-16 lg:py-24 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-          
+
           {/* Left: Photograph with Dark Editorial Overlay */}
           <div className="lg:col-span-6">
             <div className="relative rounded-2xl overflow-hidden border border-[#272727] bg-[#111111] group shadow-xl">

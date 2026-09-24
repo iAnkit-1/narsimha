@@ -1,7 +1,7 @@
 import React from "react";
 import { ArrowDown, Building2, FileSpreadsheet, Wrench, Cpu, Trophy } from "lucide-react";
-import { schoolImplementationSteps } from "../data/programs";
-import { media } from "../data/media";
+import { schoolImplementationSteps } from "../assets/data/programs";
+import { media } from "../assets/data/media";
 
 export const SchoolFlow: React.FC = () => {
   const iconMap: Record<string, React.ElementType> = {
@@ -15,7 +15,7 @@ export const SchoolFlow: React.FC = () => {
   return (
     <section id="atl" className="w-full bg-[#0D0D0D] border-b border-[#272727] py-16 lg:py-24 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#151515] border border-[#272727] mb-3">
@@ -34,7 +34,7 @@ export const SchoolFlow: React.FC = () => {
 
         {/* 2-Column: 5-Stage Diagram + Real Photograph */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          
+
           {/* Left: 5 Sequential Stages (7 cols) */}
           <div className="lg:col-span-7 flex flex-col justify-between space-y-3.5">
             {schoolImplementationSteps.map((step, idx) => {
@@ -87,7 +87,7 @@ export const SchoolFlow: React.FC = () => {
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent" />
-              
+
               <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-[#080808]/90 border border-[#272727] backdrop-blur-sm">
                 <span className="text-[10px] font-mono text-[#FF7711] uppercase font-bold tracking-wider block mb-1">
                   FACULTY & LAB ECOSYSTEM

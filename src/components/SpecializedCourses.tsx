@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Bot, Code2, BrainCircuit, Printer, Palette, Lightbulb, 
-  ArrowRight 
+import {
+  Bot, Code2, BrainCircuit, Printer, Palette, Lightbulb,
+  ArrowRight
 } from "lucide-react";
-import { specializedCourses, journeyStageDetails } from "../data/specializedCourses";
-import type { JourneyLevel, Course } from "../data/specializedCourses";
+import { specializedCourses, journeyStageDetails } from "../assets/data/specializedCourses";
+import type { JourneyLevel, Course } from "../assets/data/specializedCourses";
 
 interface SpecializedCoursesProps {
   onSelectCourse?: (course: Course) => void;
@@ -35,7 +35,7 @@ export const SpecializedCourses: React.FC<SpecializedCoursesProps> = ({ onSelect
   return (
     <section className="w-full bg-[#0D0D0D] border-b border-[#272727] py-16 lg:py-24 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10">
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#151515] border border-[#272727] mb-3">
@@ -61,11 +61,10 @@ export const SpecializedCourses: React.FC<SpecializedCoursesProps> = ({ onSelect
                 <button
                   key={lvl}
                   onClick={() => setActiveLevel(lvl)}
-                  className={`relative px-5 sm:px-8 py-2.5 rounded-xl text-xs sm:text-sm font-mono font-bold tracking-wider transition-all cursor-pointer focus:outline-none ${
-                    isSelected
+                  className={`relative px-5 sm:px-8 py-2.5 rounded-xl text-xs sm:text-sm font-mono font-bold tracking-wider transition-all cursor-pointer focus:outline-none ${isSelected
                       ? "bg-[#FF7711] text-[#080808] shadow-[0_0_20px_rgba(255,119,17,0.3)]"
                       : "text-[#A1A1A1] hover:text-[#F1F1F1] hover:bg-[#151515]"
-                  }`}
+                    }`}
                 >
                   {lvl}
                 </button>

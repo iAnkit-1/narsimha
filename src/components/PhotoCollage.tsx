@@ -1,11 +1,11 @@
 import React from "react";
-import { media } from "../data/media";
+import { media } from "../assets/data/media";
 
 export const PhotoCollage: React.FC = () => {
   return (
     <section className="w-full bg-[#0D0D0D] border-b border-[#272727] py-16 lg:py-24 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12">
           <div>
@@ -37,7 +37,7 @@ export const PhotoCollage: React.FC = () => {
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter brightness-95 contrast-105"
                 loading="lazy"
               />
-              
+
               {/* Dark Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#080808]/90 via-black/20 to-transparent" />
 

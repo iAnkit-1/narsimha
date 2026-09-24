@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Phone, Mail, MapPin, ArrowUp, Building } from "lucide-react";
-import { companyDetails } from "../data/navigation";
-import { media } from "../data/media";
+import { companyDetails } from "../assets/data/navigation";
+import { media } from "../assets/data/media";
 
 export const Footer: React.FC = () => {
   const navigate = useNavigate();
@@ -42,7 +42,7 @@ export const Footer: React.FC = () => {
 
   return (
     <footer id="contact" className="w-full bg-[#060606] border-t border-[#222222] text-[#A1A1A1] pt-16 pb-10 relative overflow-hidden">
-      
+
       {/* Huge NARASIMHA Stylized Background Watermark Decor */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none select-none z-0 overflow-hidden opacity-40">
         <span className="text-[120px] sm:text-[180px] lg:text-[230px] font-extrabold tracking-widest font-mono text-outline uppercase whitespace-nowrap block">
@@ -51,10 +51,10 @@ export const Footer: React.FC = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Main Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-14 border-b border-[#222222]">
-          
+
           {/* Brand Block (4 cols) */}
           <div className="lg:col-span-4 flex flex-col justify-between">
             <div>
@@ -161,7 +161,7 @@ export const Footer: React.FC = () => {
               GET IN TOUCH
             </span>
             <div className="space-y-3.5 text-xs">
-              
+
               <div className="flex items-start space-x-2.5">
                 <MapPin className="w-4 h-4 text-[#FF7711] shrink-0 mt-0.5" />
                 <div className="leading-relaxed">

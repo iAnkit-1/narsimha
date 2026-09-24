@@ -1,12 +1,12 @@
 import React from "react";
 import { ArrowUpRight } from "lucide-react";
-import { media } from "../data/media";
+import { media } from "../assets/data/media";
 
 export const ProjectShowcase: React.FC = () => {
   return (
     <section className="w-full bg-[#0D0D0D] border-b border-[#272727] py-16 lg:py-24 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16">
           <div>
@@ -32,7 +32,7 @@ export const ProjectShowcase: React.FC = () => {
 
         {/* Magazine-Style Irregular Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-          
+
           {/* Project 1: Large Featured (7 cols) */}
           <div className="md:col-span-7 bg-[#151515] border border-[#272727] hover:border-[#FF7711]/60 rounded-2xl overflow-hidden group transition-all flex flex-col justify-between">
             <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#080808]">
@@ -43,7 +43,7 @@ export const ProjectShowcase: React.FC = () => {
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#151515] via-transparent to-transparent" />
-              
+
               <div className="absolute top-4 left-4">
                 <span className="px-2.5 py-1 rounded bg-[#080808]/90 text-[#FF7711] border border-[#FF7711]/40 text-xs font-mono font-bold uppercase tracking-wider backdrop-blur-sm">
                   {media.projects[0].category}
@@ -76,7 +76,7 @@ export const ProjectShowcase: React.FC = () => {
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#151515] via-transparent to-transparent" />
-              
+
               <div className="absolute top-4 left-4">
                 <span className="px-2.5 py-1 rounded bg-[#080808]/90 text-[#FF7711] border border-[#FF7711]/40 text-xs font-mono font-bold uppercase tracking-wider backdrop-blur-sm">
                   {media.projects[1].category}
@@ -113,7 +113,7 @@ export const ProjectShowcase: React.FC = () => {
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#151515] via-transparent to-transparent" />
-                
+
                 <div className="absolute top-3 left-3">
                   <span className="px-2 py-0.5 rounded bg-[#080808]/90 text-[#FF7711] border border-[#FF7711]/40 text-[10px] font-mono font-bold uppercase tracking-wider backdrop-blur-sm">
                     {proj.category}

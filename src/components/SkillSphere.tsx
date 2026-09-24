@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { 
-  Bot, BrainCircuit, Code2, Cpu, Wifi, Box, Printer, 
-  Compass, Glasses, Globe, Smartphone, Palette, Lightbulb, 
-  Sparkles, CheckCircle2 
+import {
+  Bot, BrainCircuit, Code2, Cpu, Wifi, Box, Printer,
+  Compass, Glasses, Globe, Smartphone, Palette, Lightbulb,
+  Sparkles, CheckCircle2
 } from "lucide-react";
-import { skillSphereNodes } from "../data/skills";
-import type { EcosystemNode } from "../data/skills";
-import { media } from "../data/media";
+import { skillSphereNodes } from "../assets/data/skills";
+import type { EcosystemNode } from "../assets/data/skills";
+import { media } from "../assets/data/media";
 
 export const SkillSphere: React.FC = () => {
   const [selectedNode, setSelectedNode] = useState<EcosystemNode>(skillSphereNodes[0]);
@@ -31,9 +31,9 @@ export const SkillSphere: React.FC = () => {
     <section className="w-full bg-[#0D0D0D] border-b border-[#272727] py-16 lg:py-24 relative overflow-hidden">
       {/* Background radial glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#FF7711]/5 rounded-full blur-3xl pointer-events-none" />
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#151515] border border-[#272727] mb-3">
@@ -52,17 +52,17 @@ export const SkillSphere: React.FC = () => {
 
         {/* Main Grid: Visual Ecosystem Canvas + Real Photography Context & Inspector */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          
+
           {/* Left / Center 7 cols: Interactive Ecosystem Diagram */}
           <div className="lg:col-span-7 bg-[#080808] border border-[#272727] rounded-2xl p-6 sm:p-8 relative min-h-[480px] sm:min-h-[540px] flex flex-col justify-between overflow-hidden">
-            
+
             {/* SVG Orbital Background Rings & Connecting Lines */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-40">
               {/* Concentric subtle orbital rings */}
               <circle cx="50%" cy="50%" r="42%" fill="none" stroke="#272727" strokeWidth="1" strokeDasharray="4 4" />
               <circle cx="50%" cy="50%" r="28%" fill="none" stroke="#FF7711" strokeOpacity="0.25" strokeWidth="1" />
               <circle cx="50%" cy="50%" r="14%" fill="none" stroke="#272727" strokeWidth="1" />
-              
+
               {/* Diagonal axis rays */}
               <line x1="10%" y1="10%" x2="90%" y2="90%" stroke="#272727" strokeWidth="0.75" strokeDasharray="3 3" />
               <line x1="90%" y1="10%" x2="10%" y2="90%" stroke="#272727" strokeWidth="0.75" strokeDasharray="3 3" />
@@ -99,17 +99,16 @@ export const SkillSphere: React.FC = () => {
               {skillSphereNodes.map((node) => {
                 const Icon = iconLookup[node.iconName] || Sparkles;
                 const isSelected = selectedNode.id === node.id;
-                
+
                 return (
                   <button
                     key={node.id}
                     onClick={() => setSelectedNode(node)}
                     style={{ left: `${node.x}%`, top: `${node.y}%` }}
-                    className={`absolute -translate-x-1/2 -translate-y-1/2 z-30 flex items-center space-x-1.5 px-2.5 py-1.5 rounded-full border transition-all cursor-pointer focus:outline-none ${
-                      isSelected
+                    className={`absolute -translate-x-1/2 -translate-y-1/2 z-30 flex items-center space-x-1.5 px-2.5 py-1.5 rounded-full border transition-all cursor-pointer focus:outline-none ${isSelected
                         ? "bg-[#FF7711] text-[#080808] border-[#FF7711] shadow-[0_0_15px_rgba(255,119,17,0.5)] scale-110 font-bold"
                         : "bg-[#111111]/90 text-[#F1F1F1] border-[#272727] hover:border-[#FF7711] hover:bg-[#151515] font-medium"
-                    }`}
+                      }`}
                   >
                     <Icon className={`w-3.5 h-3.5 ${isSelected ? "text-[#080808]" : "text-[#FF7711]"}`} />
                     <span className="text-[11px] whitespace-nowrap font-mono tracking-tight">
@@ -139,7 +138,7 @@ export const SkillSphere: React.FC = () => {
 
           {/* Right 5 cols: Node Inspector Card + Real Photography Integration */}
           <div className="lg:col-span-5 flex flex-col justify-between space-y-4">
-            
+
             {/* Active Node Detail Card */}
             <div className="bg-[#151515] border border-[#272727] rounded-2xl p-6 relative">
               <div className="flex items-center justify-between mb-4">
@@ -187,7 +186,7 @@ export const SkillSphere: React.FC = () => {
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent" />
-              
+
               <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-[#080808]/85 border border-[#272727] backdrop-blur-sm flex items-center justify-between">
                 <div className="flex flex-col">
                   <span className="text-xs font-bold text-[#F1F1F1]">

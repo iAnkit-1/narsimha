@@ -1,6 +1,6 @@
 import React from "react";
 import { Hammer, Award, Cpu, GraduationCap, ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
-import { media } from "../data/media";
+import { media } from "../assets/data/media";
 
 interface NarasimhaMethodProps {
   onExploreMethodology?: () => void;
@@ -41,7 +41,7 @@ export const NarasimhaMethod: React.FC<NarasimhaMethodProps> = ({ onExploreMetho
   return (
     <section id="narasimha-method" className="w-full bg-[#0D0D0D] border-b border-[#272727] py-20 lg:py-28 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Top Header */}
         <div className="max-w-3xl mb-14">
           <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#151515] border border-[#272727] mb-3.5">
@@ -63,7 +63,7 @@ export const NarasimhaMethod: React.FC<NarasimhaMethodProps> = ({ onExploreMetho
 
         {/* 2-Column Layout: Left Image + Right 4 Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-          
+
           {/* Left Column: High Quality Photographic Showcase */}
           <div className="lg:col-span-5">
             <div className="relative rounded-3xl overflow-hidden border border-[#272727] bg-[#151515] group shadow-2xl">
@@ -73,7 +73,7 @@ export const NarasimhaMethod: React.FC<NarasimhaMethodProps> = ({ onExploreMetho
                   alt="Narasimha High-Tech Maker Lab with Active Students"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                
+
                 {/* Gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
 

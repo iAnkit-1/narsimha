@@ -1,6 +1,6 @@
 import React from "react";
 import { Camera, ArrowRight, ArrowUpRight, MapPin } from "lucide-react";
-import { media } from "../data/media";
+import { media } from "../assets/data/media";
 
 export const NarasimhaInAction: React.FC = () => {
   const stories = [
@@ -85,12 +85,12 @@ export const NarasimhaInAction: React.FC = () => {
 
   return (
     <section id="narasimha-in-action" className="w-full bg-[#080808] border-b border-[#272727] py-20 lg:py-28 relative overflow-hidden">
-      
+
       {/* Background ambient lighting */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#FF7711]/5 blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Section Header (Centered) */}
         <div className="text-center max-w-3xl mx-auto mb-14">
           <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#FF7711]/40 mb-3.5 shadow-md">
@@ -129,9 +129,8 @@ export const NarasimhaInAction: React.FC = () => {
             return (
               <div
                 key={story.id}
-                className={`relative rounded-3xl overflow-hidden group border border-white/10 hover:border-[#FF7711]/60 transition-all duration-500 shadow-xl bg-[#111111] h-[280px] sm:h-[320px] ${
-                  isFeatured ? "md:col-span-2 lg:col-span-3 lg:h-[340px]" : ""
-                }`}
+                className={`relative rounded-3xl overflow-hidden group border border-white/10 hover:border-[#FF7711]/60 transition-all duration-500 shadow-xl bg-[#111111] h-[280px] sm:h-[320px] ${isFeatured ? "md:col-span-2 lg:col-span-3 lg:h-[340px]" : ""
+                  }`}
               >
                 {/* Full Card Background Image */}
                 <img

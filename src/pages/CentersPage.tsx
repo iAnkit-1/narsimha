@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
 import {
   Sparkles,
@@ -11,25 +12,28 @@ import {
   Calendar,
   Layers,
   Wrench,
-  Activity,
-  MessageSquare,
   Trophy,
   Send,
   ExternalLink,
-  Compass,
   Laptop,
-  Flame,
   BookOpen,
   Users,
   Target,
   Rocket,
   ShieldCheck,
   Zap,
+  Bot,
+  Lightbulb,
+  Code,
+  PenTool,
+  Cog,
+  RefreshCw,
+  Presentation,
 } from "lucide-react";
-import { companyDetails } from "../data/navigation";
+import { companyDetails } from "../assets/data/navigation";
+import roboWithStudentsImg from "../assets/robo with students.png";
+import stairsImg from "../assets/stairs.png";
 import {
-  weeklyOfflineActivities,
-  learningJourneySteps,
   learningLevelsList,
   starterCourses,
   learnerCourses,
@@ -37,7 +41,7 @@ import {
   whyNarasimhaReasons,
   centerGalleryItems,
   type GalleryItem,
-} from "../data/centersPageData";
+} from "../assets/data/centersPageData";
 
 interface CentersPageProps {
   onOpenPartnerModal: () => void;
@@ -48,7 +52,7 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
 
   // Active level tab in Courses section
   const [activeCourseLevel, setActiveCourseLevel] = useState<"STARTER" | "LEARNER">("STARTER");
-  
+
   // Gallery category filter
   const [selectedGalleryCategory, setSelectedGalleryCategory] = useState<
     "all" | "learning" | "robotics" | "coding" | "3dprinting" | "projects" | "events"
@@ -91,29 +95,9 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
 
   const activeCourseList = activeCourseLevel === "STARTER" ? starterCourses : learnerCourses;
 
-  // Step icon helper
-  const getStepIcon = (iconName: string) => {
-    switch (iconName) {
-      case "Lightbulb":
-        return <Zap className="w-5 h-5" />;
-      case "Layers":
-        return <Layers className="w-5 h-5" />;
-      case "Wrench":
-        return <Wrench className="w-5 h-5" />;
-      case "Activity":
-        return <Activity className="w-5 h-5" />;
-      case "MessageSquare":
-        return <MessageSquare className="w-5 h-5" />;
-      case "Trophy":
-        return <Trophy className="w-5 h-5" />;
-      default:
-        return <Sparkles className="w-5 h-5" />;
-    }
-  };
-
   return (
     <div className="w-full bg-[#080808] text-[#F1F1F1] min-h-screen selection:bg-[#FF7711] selection:text-black">
-      
+
       {/* ========================================================================= */}
       {/* 1. HERO SECTION                                                          */}
       {/* ========================================================================= */}
@@ -125,7 +109,7 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-            
+
             {/* Left Content Column */}
             <div className="lg:col-span-7">
               {/* Center Badge */}
@@ -194,7 +178,7 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
             {/* Right Interactive Lab Card & Visual Showcase */}
             <div className="lg:col-span-5">
               <div className="relative rounded-3xl bg-gradient-to-b from-[#181818] via-[#121212] to-[#0D0D0D] border border-[#2A2A2A] p-2 shadow-2xl overflow-hidden group">
-                
+
                 {/* Visual Image with Overlay */}
                 <div className="relative h-64 sm:h-72 rounded-2xl overflow-hidden bg-[#181818]">
                   <img
@@ -203,7 +187,7 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0E0E0E] via-[#0E0E0E]/40 to-transparent" />
-                  
+
                   {/* Floating Live Badge */}
                   <div className="absolute top-3 left-3 inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-[#333333] text-[10px] font-mono font-bold text-[#FF7711]">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -265,50 +249,133 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
       </section>
 
       {/* ========================================================================= */}
-      {/* 2. WEEKLY OFFLINE SESSIONS                                               */}
+      {/* 2. WEEKLY OFFLINE                                                         */}
       {/* ========================================================================= */}
-      <section className="w-full bg-[#0C0C0C] border-b border-[#222222] py-20 lg:py-28 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          {/* Section Heading */}
-          <div className="max-w-3xl mb-14">
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#151515] border border-[#272727] mb-3">
-              <Sparkles className="w-3.5 h-3.5 text-[#FF7711]" />
-              <span className="text-[11px] font-mono uppercase tracking-widest text-[#FF7711] font-bold">
-                WEEKLY OFFLINE SESSIONS
-              </span>
+      <section id="weekly-offline" className="relative w-full py-16 lg:py-24 bg-[#080808] border-b border-[#222222] overflow-hidden">
+        {/* Background ambient lighting */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#FF7711]/10 blur-[130px] rounded-full pointer-events-none" />
+        <div className="absolute bottom-10 right-10 w-[400px] h-[300px] bg-[#3B82F6]/10 blur-[120px] rounded-full pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+          {/* Main Hero Banner Card */}
+          <div className="relative rounded-3xl bg-gradient-to-b from-[#161616] to-[#0D0D0D] border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.8)] p-6 sm:p-8 lg:p-10 overflow-hidden mb-12">
+
+            {/* Subtle radial grid background pattern */}
+            <div
+              className="absolute inset-0 opacity-[0.04] pointer-events-none"
+              style={{
+                backgroundImage: "radial-gradient(#FFFFFF 1px, transparent 1px)",
+                backgroundSize: "24px 24px"
+              }}
+            />
+
+            {/* Top Main Section: Content (Left) + Robot & Students (Right) */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center relative z-10 mb-8 lg:mb-10">
+
+              {/* Left Content (7 cols) */}
+              <div className="lg:col-span-7 flex flex-col text-left">
+
+                {/* Badge: WEEKLY OFFLINE */}
+                <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#1A1A1A] border border-[#FF7711]/40 w-fit mb-5 shadow-lg shadow-black/40">
+                  <Sparkles className="w-3.5 h-3.5 text-[#FF7711]" />
+                  <span className="text-xs font-mono font-bold tracking-widest text-[#FF7711] uppercase">
+                    WEEKLY OFFLINE
+                  </span>
+                </div>
+
+                {/* Main Headline */}
+                <h2 className="text-3xl sm:text-5xl lg:text-5xl font-black text-white tracking-tight leading-[1.08] mb-3">
+                  Learning Happens <br />
+                  <span className="bg-gradient-to-r from-[#FF7711] via-[#FFA149] to-[#FF5500] bg-clip-text text-transparent">
+                    Beyond the Screen.
+                  </span>
+                </h2>
+
+                {/* Subheading */}
+                <p className="text-base sm:text-lg font-bold text-[#38BDF8] tracking-tight mb-4">
+                  Every Week. Every Project. Every Learner.
+                </p>
+
+                {/* Paragraph Description */}
+                <p className="text-sm sm:text-base text-[#D4D4D4] leading-relaxed mb-3">
+                  Our offline sessions give students the opportunity to move from learning concepts to building things with their own hands.
+                </p>
+
+                <p className="text-sm sm:text-base text-[#A1A1A1] leading-relaxed">
+                  Students work with real components, tools and technology while receiving guidance from mentors.
+                </p>
+
+              </div>
+
+              {/* Right Visual Image & Floating Badges (5 cols) */}
+              <div className="lg:col-span-5 relative flex items-center justify-center pt-4 lg:pt-0">
+
+                {/* Glow background behind students */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-[#FF7711]/20 via-[#3B82F6]/15 to-transparent rounded-3xl blur-2xl pointer-events-none" />
+
+                {/* Floating Doodle Sticker 1 (Top Left) */}
+                <motion.div
+                  initial={{ y: 0 }}
+                  animate={{ y: [-4, 4, -4] }}
+                  transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                  className="absolute top-2 left-0 sm:left-2 z-20 px-3 py-1.5 rounded-xl bg-[#181818]/90 border border-[#38BDF8]/40 shadow-xl backdrop-blur-md flex items-center space-x-1.5"
+                >
+                  <Bot className="w-4 h-4 text-[#38BDF8]" />
+                  <span className="text-[10px] sm:text-[11px] font-bold text-white tracking-wide">
+                    Weekly Offline
+                  </span>
+                </motion.div>
+
+                {/* Floating Doodle Sticker 2 (Top Right) */}
+                <motion.div
+                  initial={{ y: 0 }}
+                  animate={{ y: [4, -4, 4] }}
+                  transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut" }}
+                  className="absolute top-2 right-0 sm:right-2 z-20 px-3 py-1.5 rounded-xl bg-[#181818]/90 border border-[#F59E0B]/40 shadow-xl backdrop-blur-md flex items-center space-x-1.5"
+                >
+                  <Lightbulb className="w-4 h-4 text-[#F59E0B]" />
+                  <span className="text-[10px] sm:text-[11px] font-bold text-[#F59E0B] tracking-wide">
+                    Hands-On
+                  </span>
+                </motion.div>
+
+                {/* Main Image Container */}
+                <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-gradient-to-b from-[#1C1C1C] to-[#121212] w-full max-w-[480px]">
+                  <img
+                    src={roboWithStudentsImg}
+                    alt="Learning Happens Beyond the Screen"
+                    className="w-full h-auto object-cover filter brightness-[1.02] contrast-[1.05]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D]/60 via-transparent to-transparent pointer-events-none" />
+                </div>
+
+                {/* Floating Sticky Note (Bottom Right) */}
+                <motion.div
+                  initial={{ rotate: 3 }}
+                  animate={{ rotate: [3, 0, 3] }}
+                  transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+                  className="absolute -bottom-3 right-2 sm:right-4 z-20 px-3.5 py-2 rounded-xl bg-gradient-to-br from-[#FEF08A] to-[#FDE047] text-black shadow-2xl border border-yellow-200/50 flex items-center space-x-1.5 font-sans"
+                >
+                  <Sparkles className="w-4 h-4 text-amber-900" />
+                  <div className="flex flex-col text-left leading-tight">
+                    <span className="text-[11px] font-black text-amber-950">Every Project</span>
+                    <span className="text-[10px] font-bold text-amber-900">Every Learner</span>
+                  </div>
+                </motion.div>
+
+              </div>
+
             </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FFFFFF] tracking-tight leading-tight mb-3">
-              Learning Happens{" "}
-              <span className="font-serif italic font-normal text-[#FF7711]">
-                Beyond the Screen.
-              </span>
-            </h2>
-
-            <p className="text-base sm:text-lg font-medium text-[#E2E8F0] mb-3">
-              Every Week. Every Project. Every Learner.
-            </p>
-
-            <p className="text-sm sm:text-base text-[#A1A1A1] leading-relaxed">
-              Our offline sessions give students the opportunity to move from learning concepts to building things with their own hands. Students work with real components, tools, and technology while receiving personalized guidance from mentors.
-            </p>
-          </div>
-
-          {/* 100% Hands-On Learning Spotlight Banner */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#171717] via-[#1A1510] to-[#171717] border border-[#FF7711]/40 mb-12 shadow-xl relative overflow-hidden">
-            <div className="absolute right-0 top-0 w-64 h-64 bg-[#FF7711]/10 blur-[90px] rounded-full pointer-events-none" />
-            
-            <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 rounded-2xl bg-[#FF7711]/20 border border-[#FF7711] flex items-center justify-center text-[#FF7711] shrink-0 mt-1">
-                  <Flame className="w-6 h-6" />
+            {/* Bottom Card: 100% Hands-On Learning Highlight */}
+            <div className="rounded-2xl bg-[#101010]/95 border border-[#FF7711]/40 p-5 sm:p-6 shadow-xl relative z-10">
+              <div className="flex items-start sm:items-center space-x-4">
+                <div className="w-12 h-12 rounded-2xl bg-[#FF7711]/20 border border-[#FF7711] flex items-center justify-center text-[#FF7711] shrink-0">
+                  <Wrench className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="text-xs font-mono font-bold text-[#FF7711] uppercase tracking-wider block mb-1">
-                    OUR CORE PHILOSOPHY
-                  </span>
-                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-1">
                     100% Hands-On Learning
                   </h3>
                   <p className="text-sm sm:text-base text-[#CCCCCC] font-normal">
@@ -316,75 +383,49 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
                   </p>
                 </div>
               </div>
-
-              <a
-                href="#book-visit"
-                className="btn-orange-primary shrink-0 px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center space-x-2"
-              >
-                <span>Book a Weekly Trial</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
             </div>
+
           </div>
 
-          {/* What Happens in Our Weekly Sessions? (7 Modern Grid Cards) */}
+          {/* What Happens in Our Weekly Sessions? */}
           <div>
             <div className="flex items-center space-x-3 mb-8">
-              <h3 className="text-xl sm:text-2xl font-bold text-white">
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">
                 What Happens in Our Weekly Sessions?
               </h3>
               <div className="h-[1px] flex-1 bg-[#262626]" />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {weeklyOfflineActivities.map((act, index) => (
-                <div
-                  key={act.id}
-                  className="group relative rounded-2xl bg-[#131313] border border-[#252525] hover:border-[#FF7711]/60 transition-all duration-300 overflow-hidden flex flex-col justify-between hover:-translate-y-1 shadow-lg"
-                >
-                  {/* Card Image */}
-                  <div className="relative h-40 w-full overflow-hidden bg-[#181818]">
-                    <img
-                      src={act.image}
-                      alt={act.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#131313] via-[#131313]/30 to-transparent" />
-                    <span className="absolute top-3 left-3 text-[10px] font-mono px-2.5 py-1 rounded-md bg-black/80 backdrop-blur-md text-[#FF7711] font-bold border border-[#2A2A2A]">
-                      0{index + 1} • {act.category}
-                    </span>
-                  </div>
-
-                  {/* Card Body */}
-                  <div className="p-5 flex-1 flex flex-col justify-between">
-                    <div>
-                      <h4 className="text-base font-bold text-white group-hover:text-[#FF7711] transition-colors mb-2 leading-snug">
-                        {act.title}
-                      </h4>
-                      <p className="text-xs text-[#A1A1A1] leading-relaxed mb-4">
-                        {act.description}
-                      </p>
-                    </div>
-
-                    {/* Tools Chips */}
-                    <div className="pt-3 border-t border-[#222222]">
-                      <span className="text-[10px] font-mono text-[#666666] uppercase block mb-1.5">
-                        Tools & Activities:
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
+              {[
+                { number: "01", title: "Hands-on electronics & robotics", icon: Zap, color: "text-[#FF7711]", border: "hover:border-[#FF7711]/60" },
+                { number: "02", title: "Coding & programming activities", icon: Code, color: "text-[#38BDF8]", border: "hover:border-[#38BDF8]/60" },
+                { number: "03", title: "Robot building and automation", icon: Bot, color: "text-[#4ADE80]", border: "hover:border-[#4ADE80]/60" },
+                { number: "04", title: "Problem-solving challenges", icon: Target, color: "text-[#FACC15]", border: "hover:border-[#FACC15]/60" },
+                { number: "05", title: "3D design & printing", icon: Layers, color: "text-[#C084FC]", border: "hover:border-[#C084FC]/60" },
+                { number: "06", title: "Real-world project development", icon: Rocket, color: "text-[#FB7185]", border: "hover:border-[#FB7185]/60" },
+                { number: "07", title: "Project presentation & demonstration", icon: Trophy, color: "text-[#38BDF8]", border: "hover:border-[#38BDF8]/60" },
+              ].map((item) => {
+                const ItemIcon = item.icon;
+                return (
+                  <div
+                    key={item.number}
+                    className={`group relative p-5 rounded-2xl bg-[#121212] border border-[#242424] ${item.border} transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 shadow-lg`}
+                  >
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-xs font-mono font-bold text-[#888888]">
+                        {item.number}
                       </span>
-                      <div className="flex flex-wrap gap-1">
-                        {act.tools.map((tool) => (
-                          <span
-                            key={tool}
-                            className="px-2 py-0.5 rounded bg-[#1C1C1C] text-[10px] font-mono text-[#D4D4D4] border border-[#282828]"
-                          >
-                            {tool}
-                          </span>
-                        ))}
+                      <div className={`w-9 h-9 rounded-xl bg-[#181818] border border-[#282828] flex items-center justify-center ${item.color} group-hover:scale-110 transition-transform`}>
+                        <ItemIcon className="w-4 h-4" />
                       </div>
                     </div>
+                    <h4 className="text-sm sm:text-base font-bold text-white group-hover:text-[#FF7711] transition-colors leading-snug">
+                      {item.title}
+                    </h4>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
@@ -396,77 +437,151 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
       {/* ========================================================================= */}
       <section className="w-full bg-[#080808] border-b border-[#222222] py-20 lg:py-28 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           {/* 3A. LEARNING JOURNEY */}
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#272727] mb-3">
-              <Compass className="w-3.5 h-3.5 text-[#FF7711]" />
-              <span className="text-[11px] font-mono uppercase tracking-widest text-[#FF7711] font-bold">
-                OUR STRUCTURED PEDAGOGY
-              </span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center mb-20">
+            
+            {/* Left Part (5 cols): Visual Diagram */}
+            <div className="lg:col-span-5 flex items-center justify-center">
+              <div className="relative w-full max-w-[480px] flex items-center justify-center p-2">
+                <img
+                  src={stairsImg}
+                  alt="Learning Journey - From Curious Learner to Future-Ready Creator"
+                  className="w-full h-auto max-h-[460px] object-contain drop-shadow-[0_15px_35px_rgba(0,0,0,0.9)] hover:scale-105 transition-transform duration-500"
+                />
+              </div>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FFFFFF] tracking-tight leading-tight mb-4">
-              From Curious Learner to{" "}
-              <span className="font-serif italic font-normal text-[#FF7711]">
-                Future-Ready Creator
-              </span>
-            </h2>
+            {/* Right Part (7 cols): Content & 6 Step Breakdown */}
+            <div className="lg:col-span-7 flex flex-col justify-center text-left">
+              
+              {/* Eyebrow Badge */}
+              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#161616] border border-[#FF7711]/40 w-fit mb-3.5 shadow-md">
+                <Sparkles className="w-3.5 h-3.5 text-[#FF7711]" />
+                <span className="text-xs font-mono uppercase tracking-widest text-[#FF7711] font-bold">
+                  LEARNING JOURNEY
+                </span>
+              </div>
 
-            <p className="text-sm sm:text-base text-[#A1A1A1] leading-relaxed">
-              Every child starts with curiosity. At Narasimha Skill Sphere, we transform that curiosity into practical skills, confidence, and career-oriented capabilities through 6 structured milestones.
-            </p>
-          </div>
+              {/* Main Heading */}
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight mb-3">
+                From Curious Learner to <br className="hidden sm:inline" />
+                <span className="bg-gradient-to-r from-[#FF7711] via-[#FFA149] to-[#FF5500] bg-clip-text text-transparent">
+                  Future-Ready Creator
+                </span>
+              </h2>
 
-          {/* 6 Steps Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {learningJourneySteps.map((step) => (
-              <div
-                key={step.step}
-                className="relative p-6 sm:p-7 rounded-2xl bg-[#111111] border border-[#242424] hover:border-[#FF7711]/50 transition-all duration-300 group hover:-translate-y-1 shadow-lg flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-2xl font-mono font-extrabold text-[#FF7711]">
-                      {step.step}.
+              {/* Sub-paragraph */}
+              <p className="text-sm sm:text-base text-[#A1A1A1] leading-relaxed mb-4">
+                Every child starts with curiosity. At Narasimha Skill Sphere, we transform that curiosity into practical skills, confidence, and career-oriented capabilities.
+              </p>
+
+              {/* 6-Step Micro Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 my-4">
+                {[
+                  {
+                    num: "01",
+                    step: "Think",
+                    icon: Lightbulb,
+                    desc: "Identify challenges, ask curious questions, and brainstorm original solutions.",
+                    color: "text-[#FF7711]",
+                    bg: "bg-[#FF7711]/10",
+                    border: "border-[#FF7711]/30",
+                  },
+                  {
+                    num: "02",
+                    step: "Design",
+                    icon: PenTool,
+                    desc: "Blueprint mechanisms, sketch architectural schemas, and model system workflows.",
+                    color: "text-[#EC4899]",
+                    bg: "bg-[#EC4899]/10",
+                    border: "border-[#EC4899]/30",
+                  },
+                  {
+                    num: "03",
+                    step: "Create",
+                    icon: Cog,
+                    desc: "Assemble physical robotics, wire sensors & microchips, and write executable code.",
+                    color: "text-[#A855F7]",
+                    bg: "bg-[#A855F7]/10",
+                    border: "border-[#A855F7]/30",
+                  },
+                  {
+                    num: "04",
+                    step: "Improve",
+                    icon: RefreshCw,
+                    desc: "Test prototypes under stress, debug glitches, and iteratively refine performance.",
+                    color: "text-[#3B82F6]",
+                    bg: "bg-[#3B82F6]/10",
+                    border: "border-[#3B82F6]/30",
+                  },
+                  {
+                    num: "05",
+                    step: "Explain",
+                    icon: Presentation,
+                    desc: "Articulate computational logic, explain how it works, and build communication mastery.",
+                    color: "text-[#06B6D4]",
+                    bg: "bg-[#06B6D4]/10",
+                    border: "border-[#06B6D4]/30",
+                  },
+                  {
+                    num: "06",
+                    step: "Showcase",
+                    icon: Trophy,
+                    desc: "Present working innovations at tech expos, school fests, and competitive hackathons.",
+                    color: "text-[#10B981]",
+                    bg: "bg-[#10B981]/10",
+                    border: "border-[#10B981]/30",
+                  },
+                ].map((step, idx) => {
+                  const Icon = step.icon;
+                  return (
+                    <motion.div
+                      key={step.num}
+                      initial={{ opacity: 0, y: 8 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.06 }}
+                      className="p-3 sm:p-3.5 rounded-xl bg-[#121212]/90 border border-white/10 hover:border-white/20 transition-all duration-300 group flex items-start space-x-3"
+                    >
+                      <div className={`w-8 h-8 rounded-lg ${step.bg} border ${step.border} flex items-center justify-center ${step.color} shrink-0 mt-0.5 group-hover:scale-110 transition-transform`}>
+                        <Icon className="w-4 h-4" />
+                      </div>
+                      <div className="flex flex-col min-w-0">
+                        <div className="flex items-center space-x-1.5 mb-0.5">
+                          <span className="text-[10px] font-mono text-[#888888] font-bold">
+                            {step.num}.
+                          </span>
+                          <span className={`text-sm font-bold text-white group-hover:${step.color} transition-colors`}>
+                            {step.step}
+                          </span>
+                        </div>
+                        <p className="text-xs text-[#A3A3A3] leading-snug line-clamp-2">
+                          {step.desc}
+                        </p>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              {/* The Goal Bar */}
+              <div className="relative rounded-2xl bg-gradient-to-r from-[#171717] via-[#141414] to-[#171717] border-l-4 border-l-[#FF7711] border border-white/10 p-4 sm:p-5 shadow-lg">
+                <div className="flex items-start sm:items-center space-x-3">
+                  <Target className="w-5 h-5 text-[#FF7711] shrink-0 mt-0.5 sm:mt-0" />
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#FF7711]">
+                      The Goal:
                     </span>
-                    <div className="w-10 h-10 rounded-xl bg-[#1A1A1A] border border-[#2A2A2A] flex items-center justify-center text-[#FF7711] group-hover:bg-[#FF7711] group-hover:text-black transition-colors">
-                      {getStepIcon(step.icon)}
-                    </div>
+                    <p className="text-xs sm:text-sm font-semibold text-[#F1F1F1] leading-relaxed">
+                      Learn skills. Build projects. Develop confidence. Prepare for the future.
+                    </p>
                   </div>
-
-                  <h3 className="text-xl font-bold text-white mb-1 group-hover:text-[#FF7711] transition-colors">
-                    {step.title}
-                  </h3>
-                  <span className="text-xs font-mono text-[#888888] block mb-3">
-                    {step.subtitle}
-                  </span>
-
-                  <p className="text-xs sm:text-sm text-[#A1A1A1] leading-relaxed mb-4">
-                    {step.description}
-                  </p>
-                </div>
-
-                <div className="pt-3 border-t border-[#202020] space-y-1">
-                  {step.details.map((d) => (
-                    <div key={d} className="flex items-center space-x-2 text-[11px] font-mono text-[#D4D4D4]">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#FF7711]" />
-                      <span>{d}</span>
-                    </div>
-                  ))}
                 </div>
               </div>
-            ))}
-          </div>
 
-          {/* The Goal Bar */}
-          <div className="p-4 sm:p-5 rounded-2xl bg-[#141414] border border-[#292929] text-center max-w-3xl mx-auto mb-20 shadow-md">
-            <span className="text-xs font-mono uppercase tracking-wider text-[#FF7711] font-bold block mb-1">
-              THE END GOAL
-            </span>
-            <p className="text-sm sm:text-base font-bold text-white tracking-wide">
-              Learn skills. • Build projects. • Develop confidence. • Prepare for the future.
-            </p>
+            </div>
+
           </div>
 
           {/* 3B. LEARNING LEVELS (STARTER • LEARNER • PERFORMER) */}
@@ -557,7 +672,7 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
       {/* ========================================================================= */}
       <section id="our-courses" className="w-full bg-[#0B0B0B] border-b border-[#222222] py-20 lg:py-28 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-12">
             <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#272727] mb-3">
@@ -585,11 +700,10 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
             <div className="inline-flex p-1.5 rounded-2xl bg-[#141414] border border-[#2B2B2B] shadow-2xl">
               <button
                 onClick={() => setActiveCourseLevel("STARTER")}
-                className={`px-6 sm:px-8 py-3 rounded-xl font-mono text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center space-x-2 ${
-                  activeCourseLevel === "STARTER"
+                className={`px-6 sm:px-8 py-3 rounded-xl font-mono text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center space-x-2 ${activeCourseLevel === "STARTER"
                     ? "bg-[#FF7711] text-black shadow-lg shadow-[#FF7711]/20"
                     : "text-[#A1A1A1] hover:text-white hover:bg-[#1C1C1C]"
-                }`}
+                  }`}
               >
                 <span>🌱 LEVEL 1: STARTER</span>
                 <span className="text-[10px] opacity-80">(Foundation)</span>
@@ -597,11 +711,10 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
 
               <button
                 onClick={() => setActiveCourseLevel("LEARNER")}
-                className={`px-6 sm:px-8 py-3 rounded-xl font-mono text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center space-x-2 ${
-                  activeCourseLevel === "LEARNER"
+                className={`px-6 sm:px-8 py-3 rounded-xl font-mono text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center space-x-2 ${activeCourseLevel === "LEARNER"
                     ? "bg-[#38BDF8] text-black shadow-lg shadow-[#38BDF8]/20"
                     : "text-[#A1A1A1] hover:text-white hover:bg-[#1C1C1C]"
-                }`}
+                  }`}
               >
                 <span>⚡ LEVEL 2: LEARNER</span>
                 <span className="text-[10px] opacity-80">(Advanced)</span>
@@ -636,7 +749,7 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#131313] via-[#131313]/40 to-transparent" />
-                  
+
                   {/* Domain Tag */}
                   <div className="absolute top-3 left-3 flex items-center space-x-1.5 px-2.5 py-1 rounded-md bg-black/85 backdrop-blur-md border border-[#2E2E2E] text-[10px] font-mono font-bold text-white">
                     <span>{course.emoji}</span>
@@ -654,7 +767,7 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
                     <h3 className="text-lg font-bold text-white group-hover:text-[#FF7711] transition-colors mb-1.5">
                       {course.title}
                     </h3>
-                    
+
                     <p className="text-xs text-[#FF7711] font-mono mb-3">
                       {course.tagline}
                     </p>
@@ -722,7 +835,7 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
       {/* ========================================================================= */}
       <section className="w-full bg-[#080808] border-b border-[#222222] py-20 lg:py-28 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
             <div>
               <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#272727] mb-3">
@@ -805,9 +918,9 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#FF7711]/5 blur-[180px] rounded-full pointer-events-none" />
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          
+
           <div className="rounded-3xl bg-gradient-to-b from-[#161616] via-[#121212] to-[#0E0E0E] border border-[#2D2D2D] p-8 sm:p-12 lg:p-14 shadow-2xl relative">
-            
+
             {/* Top Badge */}
             <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#1C1C1C] border border-[#333333] mb-6">
               <Users className="w-3.5 h-3.5 text-[#FF7711]" />
@@ -878,7 +991,7 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
       {/* ========================================================================= */}
       <section className="w-full bg-[#080808] border-b border-[#222222] py-20 lg:py-28 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#272727] mb-3">
@@ -942,7 +1055,7 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
       {/* ========================================================================= */}
       <section className="w-full bg-[#0C0C0C] border-b border-[#222222] py-20 lg:py-28 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           {/* Section Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
             <div>
@@ -978,11 +1091,10 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
               <button
                 key={cat.id}
                 onClick={() => setSelectedGalleryCategory(cat.id as any)}
-                className={`px-3.5 py-2 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer ${
-                  selectedGalleryCategory === cat.id
+                className={`px-3.5 py-2 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer ${selectedGalleryCategory === cat.id
                     ? "bg-[#FF7711] text-black shadow-md shadow-[#FF7711]/20"
                     : "bg-[#141414] text-[#A1A1A1] hover:text-white hover:bg-[#1E1E1E] border border-[#272727]"
-                }`}
+                  }`}
               >
                 {cat.label}
               </button>
@@ -1042,9 +1154,9 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
       {/* ========================================================================= */}
       <section id="book-visit" className="w-full bg-[#080808] border-b border-[#222222] py-20 lg:py-28 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
-            
+
             {/* Left Content Column */}
             <div className="lg:col-span-6">
               {/* Bold Badge */}

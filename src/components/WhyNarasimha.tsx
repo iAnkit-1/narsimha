@@ -12,7 +12,7 @@ import {
   Award,
   GraduationCap,
 } from "lucide-react";
-import { media } from "../data/media";
+import { media } from "../assets/data/media";
 
 interface WhyNarasimhaProps {
   onPartnerClick?: () => void;
@@ -128,7 +128,7 @@ export const WhyNarasimha: React.FC<WhyNarasimhaProps> = ({ onPartnerClick }) =>
 
   return (
     <section id="why-narasimha" className="w-full bg-[#080808] border-b border-[#222222] py-18 lg:py-28 relative overflow-hidden">
-      
+
       {/* Dynamic Ambient Background Glow */}
       <div
         className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[900px] h-[450px] blur-[150px] rounded-full pointer-events-none transition-all duration-700 opacity-20"
@@ -136,7 +136,7 @@ export const WhyNarasimha: React.FC<WhyNarasimhaProps> = ({ onPartnerClick }) =>
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 lg:mb-18">
           <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#FF7711]/40 mb-4 shadow-md">
@@ -161,7 +161,7 @@ export const WhyNarasimha: React.FC<WhyNarasimhaProps> = ({ onPartnerClick }) =>
 
         {/* Creative Interactive Showcase: 4 Horizontal Pillar Tabs + Live Interactive Spotlight Deck */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch mb-10">
-          
+
           {/* Left Column: 4 Interactive Pillars Selection List (lg:col-span-5) */}
           <div className="lg:col-span-5 flex flex-col space-y-2.5 justify-start">
             {pillars.map((pillar, idx) => {
@@ -172,11 +172,10 @@ export const WhyNarasimha: React.FC<WhyNarasimhaProps> = ({ onPartnerClick }) =>
                 <button
                   key={pillar.num}
                   onClick={() => setActivePillar(idx)}
-                  className={`w-full text-left p-3.5 sm:p-4 rounded-xl border transition-all duration-300 relative cursor-pointer group flex items-center justify-between ${
-                    isSelected
+                  className={`w-full text-left p-3.5 sm:p-4 rounded-xl border transition-all duration-300 relative cursor-pointer group flex items-center justify-between ${isSelected
                       ? "bg-[#141414] border-white/25 shadow-2xl shadow-black/60 translate-x-1"
                       : "bg-[#0E0E0E] border-white/5 hover:border-white/15 hover:bg-[#121212]"
-                  }`}
+                    }`}
                 >
                   {/* Left Accent Bar when active */}
                   {isSelected && (
@@ -189,11 +188,10 @@ export const WhyNarasimha: React.FC<WhyNarasimhaProps> = ({ onPartnerClick }) =>
                   <div className="flex items-center space-x-3.5 min-w-0">
                     {/* Number / Icon */}
                     <div
-                      className={`w-9 h-9 sm:w-10 sm:h-10 rounded-lg border flex items-center justify-center shrink-0 transition-all duration-300 ${
-                        isSelected
+                      className={`w-9 h-9 sm:w-10 sm:h-10 rounded-lg border flex items-center justify-center shrink-0 transition-all duration-300 ${isSelected
                           ? "shadow-md text-black"
                           : "bg-[#161616] border-white/10 text-[#A3A3A3] group-hover:text-white group-hover:border-white/20"
-                      }`}
+                        }`}
                       style={{
                         backgroundColor: isSelected ? pillar.accent : undefined,
                         borderColor: isSelected ? pillar.accent : undefined,
@@ -209,9 +207,8 @@ export const WhyNarasimha: React.FC<WhyNarasimhaProps> = ({ onPartnerClick }) =>
                           {pillar.num}
                         </span>
                         <h3
-                          className={`text-sm font-bold truncate transition-colors ${
-                            isSelected ? "text-white" : "text-[#D4D4D4] group-hover:text-white"
-                          }`}
+                          className={`text-sm font-bold truncate transition-colors ${isSelected ? "text-white" : "text-[#D4D4D4] group-hover:text-white"
+                            }`}
                         >
                           {pillar.title}
                         </h3>
@@ -224,11 +221,10 @@ export const WhyNarasimha: React.FC<WhyNarasimhaProps> = ({ onPartnerClick }) =>
 
                   {/* Arrow Indicator */}
                   <div
-                    className={`shrink-0 ml-2 p-1 rounded-lg transition-transform duration-300 ${
-                      isSelected
+                    className={`shrink-0 ml-2 p-1 rounded-lg transition-transform duration-300 ${isSelected
                         ? "text-white translate-x-0.5"
                         : "text-[#555555] group-hover:text-[#A3A3A3]"
-                    }`}
+                      }`}
                   >
                     <ChevronRight className="w-3.5 h-3.5" />
                   </div>
@@ -240,7 +236,7 @@ export const WhyNarasimha: React.FC<WhyNarasimhaProps> = ({ onPartnerClick }) =>
           {/* Right Column: Live Featured Spotlight Panel (lg:col-span-7) */}
           <div className="lg:col-span-7">
             <div className="h-full rounded-3xl bg-gradient-to-br from-[#151515] to-[#0E0E0E] border border-white/15 p-6 sm:p-8 lg:p-10 flex flex-col justify-between shadow-2xl relative overflow-hidden group">
-              
+
               {/* Corner Watermark Number */}
               <div className="absolute top-4 right-6 font-mono text-7xl sm:text-8xl font-black text-white/[0.03] select-none pointer-events-none">
                 {current.num}

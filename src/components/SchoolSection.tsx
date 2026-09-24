@@ -1,7 +1,7 @@
 import React from "react";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
-import { schoolPillars } from "../data/programs";
-import { media } from "../data/media";
+import { schoolPillars } from "../assets/data/programs";
+import { media } from "../assets/data/media";
 
 interface SchoolSectionProps {
   onPartnerClick: () => void;
@@ -11,7 +11,7 @@ export const SchoolSection: React.FC<SchoolSectionProps> = ({ onPartnerClick }) 
   return (
     <section id="school-program" className="w-full bg-[#080808] border-b border-[#272727] py-16 lg:py-24 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Top Header Block */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-12 lg:mb-16">
           <div className="lg:col-span-7">
@@ -21,7 +21,7 @@ export const SchoolSection: React.FC<SchoolSectionProps> = ({ onPartnerClick }) 
                 FOR SCHOOLS & INSTITUTIONS
               </span>
             </div>
-            
+
             <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#F1F1F1] tracking-tight leading-tight">
               Bring practical technology learning into your school.
             </h2>
@@ -45,7 +45,7 @@ export const SchoolSection: React.FC<SchoolSectionProps> = ({ onPartnerClick }) 
 
         {/* B2B Split Layout: Large Photograph + 3 Supporting Pillars */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          
+
           {/* Left: Large Realistic Classroom / STEM Lab Photograph (5 cols) */}
           <div className="lg:col-span-5 relative rounded-2xl overflow-hidden border border-[#272727] bg-[#111111] group flex flex-col justify-between shadow-xl min-h-[360px]">
             <img
@@ -55,7 +55,7 @@ export const SchoolSection: React.FC<SchoolSectionProps> = ({ onPartnerClick }) 
               loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent" />
-            
+
             {/* Overlay B2B Badge */}
             <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-[#080808]/90 border border-[#272727] backdrop-blur-sm">
               <div className="flex items-center justify-between text-xs font-mono text-[#A1A1A1] mb-1">

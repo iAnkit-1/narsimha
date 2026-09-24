@@ -1,7 +1,7 @@
 import React from "react";
 import { X, CheckCircle2, ArrowRight, BookOpen } from "lucide-react";
-import { specializedCourses } from "../data/specializedCourses";
-import type { Course } from "../data/specializedCourses";
+import { specializedCourses } from "../assets/data/specializedCourses";
+import type { Course } from "../assets/data/specializedCourses";
 
 interface ProgramModalProps {
   isOpen: boolean;
@@ -23,7 +23,7 @@ export const ProgramModal: React.FC<ProgramModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm animate-in fade-in duration-200">
       <div className="relative w-full max-w-2xl bg-[#111111] border border-[#272727] rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col">
-        
+
         {/* Header */}
         <div className="p-6 bg-[#151515] border-b border-[#272727] flex items-center justify-between">
           <div className="flex items-center space-x-3">

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Menu, X, ArrowRight } from "lucide-react";
-import { mainNavLinks } from "../data/navigation";
-import { media } from "../data/media";
+import { mainNavLinks } from "../assets/data/navigation";
+import { media } from "../assets/data/media";
 
 interface NavbarProps {
   onPartnerClick: () => void;
@@ -44,11 +44,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onPartnerClick }) => {
     <header className="sticky top-0 z-50 w-full transition-all duration-200">
       {/* Main Navbar */}
       <div
-        className={`w-full transition-all duration-200 ${
-          isScrolled
+        className={`w-full transition-all duration-200 ${isScrolled
             ? "bg-[#080808]/95 backdrop-blur-md border-b border-[#272727] py-2.5 shadow-lg shadow-black/60"
             : "bg-[#080808] border-b border-[#272727]/60 py-3.5"
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Brand Logo & Name */}
@@ -84,11 +83,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onPartnerClick }) => {
                 <button
                   key={link.label}
                   onClick={() => handleNavLinkClick(link.href)}
-                  className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
-                    isActive
+                  className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${isActive
                       ? "text-[#FF7711] bg-[#151515] border border-[#272727]"
                       : "text-[#A1A1A1] hover:text-[#F1F1F1] hover:bg-[#111111]"
-                  }`}
+                    }`}
                 >
                   {link.label}
                 </button>

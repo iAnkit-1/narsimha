@@ -13,8 +13,8 @@ import { RecognizedBy } from "../components/RecognizedBy";
 import { TailoredInnovation } from "../components/TailoredInnovation";
 import { NarasimhaInAction } from "../components/NarasimhaInAction";
 import { NewsletterCommunity } from "../components/NewsletterCommunity";
-import type { Course } from "../data/specializedCourses";
-import { specializedCourses } from "../data/specializedCourses";
+import type { Course } from "../assets/data/specializedCourses";
+import { specializedCourses } from "../assets/data/specializedCourses";
 
 interface HomePageProps {
   onOpenPartnerModal: () => void;
