@@ -25,19 +25,27 @@ import {
   Bot,
   Lightbulb,
   Code,
+  Code2,
+  BrainCircuit,
+  Printer,
+  Compass,
+  Coins,
   PenTool,
   Cog,
   RefreshCw,
   Presentation,
+  ChevronLeft,
+  ChevronRight,
+  Award,
+  BarChart3,
 } from "lucide-react";
 import { companyDetails } from "../assets/data/navigation";
 import roboWithStudentsImg from "../assets/robo with students.png";
 import stairsImg from "../assets/stairs.png";
 import {
-  learningLevelsList,
   starterCourses,
   learnerCourses,
-  studentPortfolioItems,
+  studentPortfolioProfiles,
   whyNarasimhaReasons,
   centerGalleryItems,
   type GalleryItem,
@@ -94,6 +102,42 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
   });
 
   const activeCourseList = activeCourseLevel === "STARTER" ? starterCourses : learnerCourses;
+
+  // Active student portfolio profile selection
+  const [selectedStudentIndex, setSelectedStudentIndex] = useState(0);
+
+  const handlePrevStudent = () => {
+    setSelectedStudentIndex((prev) =>
+      prev === 0 ? studentPortfolioProfiles.length - 1 : prev - 1
+    );
+  };
+
+  const handleNextStudent = () => {
+    setSelectedStudentIndex((prev) =>
+      prev === studentPortfolioProfiles.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  const getCourseDomainIcon = (domain: string) => {
+    switch (domain.toUpperCase()) {
+      case "ROBOTICS":
+        return Bot;
+      case "CODING":
+        return Code2;
+      case "AI / ML":
+        return BrainCircuit;
+      case "3D PRINTING":
+        return Printer;
+      case "DRONE TECHNOLOGY":
+        return Compass;
+      case "FINANCIAL LITERACY":
+        return Coins;
+      case "ENTREPRENEUR MINDSET":
+        return Rocket;
+      default:
+        return Sparkles;
+    }
+  };
 
   return (
     <div className="w-full bg-[#080808] text-[#F1F1F1] min-h-screen selection:bg-[#FF7711] selection:text-black">
@@ -439,45 +483,34 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* 3A. LEARNING JOURNEY */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center mb-20">
+          <div className="mb-20">
             
-            {/* Left Part (5 cols): Visual Diagram */}
-            <div className="lg:col-span-5 flex items-center justify-center">
-              <div className="relative w-full max-w-[480px] flex items-center justify-center p-2">
-                <img
-                  src={stairsImg}
-                  alt="Learning Journey - From Curious Learner to Future-Ready Creator"
-                  className="w-full h-auto max-h-[460px] object-contain drop-shadow-[0_15px_35px_rgba(0,0,0,0.9)] hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-            </div>
-
-            {/* Right Part (7 cols): Content & 6 Step Breakdown */}
-            <div className="lg:col-span-7 flex flex-col justify-center text-left">
-              
-              {/* Eyebrow Badge */}
-              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#161616] border border-[#FF7711]/40 w-fit mb-3.5 shadow-md">
+            {/* Top Heading & Description */}
+            <div className="text-center max-w-3xl mx-auto mb-14">
+              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#161616] border border-[#FF7711]/40 mb-3.5 shadow-md">
                 <Sparkles className="w-3.5 h-3.5 text-[#FF7711]" />
                 <span className="text-xs font-mono uppercase tracking-widest text-[#FF7711] font-bold">
                   LEARNING JOURNEY
                 </span>
               </div>
 
-              {/* Main Heading */}
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight mb-3">
-                From Curious Learner to <br className="hidden sm:inline" />
+                From Curious Learner to{" "}
                 <span className="bg-gradient-to-r from-[#FF7711] via-[#FFA149] to-[#FF5500] bg-clip-text text-transparent">
                   Future-Ready Creator
                 </span>
               </h2>
 
-              {/* Sub-paragraph */}
-              <p className="text-sm sm:text-base text-[#A1A1A1] leading-relaxed mb-4">
+              <p className="text-sm sm:text-base text-[#A1A1A1] leading-relaxed">
                 Every child starts with curiosity. At Narasimha Skill Sphere, we transform that curiosity into practical skills, confidence, and career-oriented capabilities.
               </p>
+            </div>
 
-              {/* 6-Step Micro Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 my-4">
+            {/* Central Stairs Layout: Left (01-03) • Center (Image) • Right (04-06) */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center mb-10">
+              
+              {/* Left Column: Steps 01, 02, 03 */}
+              <div className="lg:col-span-4 space-y-4">
                 {[
                   {
                     num: "01",
@@ -487,6 +520,7 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
                     color: "text-[#FF7711]",
                     bg: "bg-[#FF7711]/10",
                     border: "border-[#FF7711]/30",
+                    hoverBorder: "hover:border-[#FF7711]/70",
                   },
                   {
                     num: "02",
@@ -496,6 +530,7 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
                     color: "text-[#EC4899]",
                     bg: "bg-[#EC4899]/10",
                     border: "border-[#EC4899]/30",
+                    hoverBorder: "hover:border-[#EC4899]/70",
                   },
                   {
                     num: "03",
@@ -505,7 +540,55 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
                     color: "text-[#A855F7]",
                     bg: "bg-[#A855F7]/10",
                     border: "border-[#A855F7]/30",
+                    hoverBorder: "hover:border-[#A855F7]/70",
                   },
+                ].map((step, idx) => {
+                  const Icon = step.icon;
+                  return (
+                    <motion.div
+                      key={step.num}
+                      initial={{ opacity: 0, x: -15 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.1 }}
+                      className={`p-4 sm:p-5 rounded-2xl bg-[#121212]/95 border border-white/10 ${step.hoverBorder} transition-all duration-300 group flex items-start space-x-3.5 shadow-lg hover:-translate-y-0.5`}
+                    >
+                      <div className={`w-10 h-10 rounded-xl ${step.bg} border ${step.border} flex items-center justify-center ${step.color} shrink-0 mt-0.5 group-hover:scale-110 transition-transform`}>
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <div className="flex flex-col min-w-0">
+                        <div className="flex items-center space-x-2 mb-1">
+                          <span className="text-xs font-mono text-[#FF7711] font-bold">
+                            {step.num}.
+                          </span>
+                          <h3 className={`text-base font-bold text-white group-hover:${step.color} transition-colors`}>
+                            {step.step}
+                          </h3>
+                        </div>
+                        <p className="text-xs sm:text-sm text-[#A3A3A3] leading-relaxed">
+                          {step.desc}
+                        </p>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              {/* Center Column: Stairs Image */}
+              <div className="lg:col-span-4 flex items-center justify-center relative py-4 lg:py-0">
+                <div className="absolute inset-0 bg-gradient-to-tr from-[#FF7711]/15 via-[#38BDF8]/10 to-[#A855F7]/15 rounded-full blur-3xl pointer-events-none" />
+                <div className="relative w-full max-w-[420px] flex items-center justify-center">
+                  <img
+                    src={stairsImg}
+                    alt="Learning Journey Stairs - Think, Design, Create, Improve, Explain, Showcase"
+                    className="w-full h-auto max-h-[460px] object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.9)] hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+              </div>
+
+              {/* Right Column: Steps 04, 05, 06 */}
+              <div className="lg:col-span-4 space-y-4">
+                {[
                   {
                     num: "04",
                     step: "Improve",
@@ -514,6 +597,7 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
                     color: "text-[#3B82F6]",
                     bg: "bg-[#3B82F6]/10",
                     border: "border-[#3B82F6]/30",
+                    hoverBorder: "hover:border-[#3B82F6]/70",
                   },
                   {
                     num: "05",
@@ -523,6 +607,7 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
                     color: "text-[#06B6D4]",
                     bg: "bg-[#06B6D4]/10",
                     border: "border-[#06B6D4]/30",
+                    hoverBorder: "hover:border-[#06B6D4]/70",
                   },
                   {
                     num: "06",
@@ -532,31 +617,32 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
                     color: "text-[#10B981]",
                     bg: "bg-[#10B981]/10",
                     border: "border-[#10B981]/30",
+                    hoverBorder: "hover:border-[#10B981]/70",
                   },
                 ].map((step, idx) => {
                   const Icon = step.icon;
                   return (
                     <motion.div
                       key={step.num}
-                      initial={{ opacity: 0, y: 8 }}
-                      whileInView={{ opacity: 1, y: 0 }}
+                      initial={{ opacity: 0, x: 15 }}
+                      whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
-                      transition={{ delay: idx * 0.06 }}
-                      className="p-3 sm:p-3.5 rounded-xl bg-[#121212]/90 border border-white/10 hover:border-white/20 transition-all duration-300 group flex items-start space-x-3"
+                      transition={{ delay: idx * 0.1 }}
+                      className={`p-4 sm:p-5 rounded-2xl bg-[#121212]/95 border border-white/10 ${step.hoverBorder} transition-all duration-300 group flex items-start space-x-3.5 shadow-lg hover:-translate-y-0.5`}
                     >
-                      <div className={`w-8 h-8 rounded-lg ${step.bg} border ${step.border} flex items-center justify-center ${step.color} shrink-0 mt-0.5 group-hover:scale-110 transition-transform`}>
-                        <Icon className="w-4 h-4" />
+                      <div className={`w-10 h-10 rounded-xl ${step.bg} border ${step.border} flex items-center justify-center ${step.color} shrink-0 mt-0.5 group-hover:scale-110 transition-transform`}>
+                        <Icon className="w-5 h-5" />
                       </div>
                       <div className="flex flex-col min-w-0">
-                        <div className="flex items-center space-x-1.5 mb-0.5">
-                          <span className="text-[10px] font-mono text-[#888888] font-bold">
+                        <div className="flex items-center space-x-2 mb-1">
+                          <span className="text-xs font-mono text-[#FF7711] font-bold">
                             {step.num}.
                           </span>
-                          <span className={`text-sm font-bold text-white group-hover:${step.color} transition-colors`}>
+                          <h3 className={`text-base font-bold text-white group-hover:${step.color} transition-colors`}>
                             {step.step}
-                          </span>
+                          </h3>
                         </div>
-                        <p className="text-xs text-[#A3A3A3] leading-snug line-clamp-2">
+                        <p className="text-xs sm:text-sm text-[#A3A3A3] leading-relaxed">
                           {step.desc}
                         </p>
                       </div>
@@ -565,101 +651,139 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
                 })}
               </div>
 
-              {/* The Goal Bar */}
-              <div className="relative rounded-2xl bg-gradient-to-r from-[#171717] via-[#141414] to-[#171717] border-l-4 border-l-[#FF7711] border border-white/10 p-4 sm:p-5 shadow-lg">
-                <div className="flex items-start sm:items-center space-x-3">
-                  <Target className="w-5 h-5 text-[#FF7711] shrink-0 mt-0.5 sm:mt-0" />
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#FF7711]">
-                      The Goal:
-                    </span>
-                    <p className="text-xs sm:text-sm font-semibold text-[#F1F1F1] leading-relaxed">
-                      Learn skills. Build projects. Develop confidence. Prepare for the future.
-                    </p>
-                  </div>
+            </div>
+
+            {/* The Goal Bar */}
+            <div className="max-w-3xl mx-auto rounded-2xl bg-gradient-to-r from-[#171717] via-[#141414] to-[#171717] border-l-4 border-l-[#FF7711] border border-white/10 p-4 sm:p-5 shadow-lg">
+              <div className="flex items-start sm:items-center space-x-3">
+                <Target className="w-5 h-5 text-[#FF7711] shrink-0 mt-0.5 sm:mt-0" />
+                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#FF7711]">
+                    The Goal:
+                  </span>
+                  <p className="text-xs sm:text-sm font-semibold text-[#F1F1F1] leading-relaxed">
+                    Learn skills. Build projects. Develop confidence. Prepare for the future.
+                  </p>
                 </div>
               </div>
-
             </div>
 
           </div>
 
-          {/* 3B. LEARNING LEVELS (STARTER • LEARNER • PERFORMER) */}
-          <div className="pt-10 border-t border-[#222222]">
+          {/* 3B. LEARNING LEVELS */}
+          <div className="pt-14 border-t border-[#222222]">
+            {/* Header */}
             <div className="text-center max-w-3xl mx-auto mb-14">
-              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#272727] mb-3">
-                <Target className="w-3.5 h-3.5 text-[#FF7711]" />
-                <span className="text-[11px] font-mono uppercase tracking-widest text-[#FF7711] font-bold">
-                  PROGRESSION MILESTONES
+              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#161616] border border-[#FF7711]/40 mb-3.5 shadow-md">
+                <Sparkles className="w-3.5 h-3.5 text-[#FF7711]" />
+                <span className="text-xs font-mono uppercase tracking-widest text-[#FF7711] font-bold">
+                  LEARNING LEVELS
                 </span>
               </div>
 
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FFFFFF] tracking-tight leading-tight mb-4">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight mb-4">
                 One Journey. Three Levels.{" "}
-                <span className="font-serif italic font-normal text-[#FF7711]">
+                <span className="bg-gradient-to-r from-[#FF7711] via-[#FFA149] to-[#FF5500] bg-clip-text text-transparent">
                   A Future of Possibilities.
                 </span>
               </h2>
 
-              <p className="text-sm sm:text-base text-[#A1A1A1] leading-relaxed">
-                Learning should grow with the learner — from curiosity to skills, and from skills to careers. At Narasimha Skill Sphere, our three progressive levels help learners build foundations, develop practical skills, create projects, and become career-ready.
+              <p className="text-sm sm:text-base text-[#D4D4D4] leading-relaxed mb-2 font-medium">
+                Learning should grow with the learner — from curiosity to skills, and from skills to careers.
+              </p>
+              <p className="text-xs sm:text-sm text-[#A1A1A1] leading-relaxed">
+                At Narasimha Skill Sphere, our three progressive levels help learners build foundations, develop practical skills, create projects, and become career-ready.
               </p>
             </div>
 
+            {/* 3 Beautiful Level Cards */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {learningLevelsList.map((lvl) => (
-                <div
+              {[
+                {
+                  id: "starter",
+                  level: "LEVEL 01",
+                  name: "STARTER",
+                  tagline: "Explore • Learn • Create",
+                  description:
+                    "Students begin their learning journey by exploring technology through hands-on activities, experiments, creativity, and guided projects.",
+                  goal: "Build strong foundations, develop curiosity, and create a “learning by doing” mindset.",
+                  accentColor: "text-[#FF7711]",
+                  bgGradient: "from-[#FF7711]/15 via-[#141414] to-[#0D0D0D]",
+                  borderColor: "border-[#FF7711]/30 hover:border-[#FF7711]/70",
+                  badgeBg: "bg-[#FF7711]/10 text-[#FF7711] border-[#FF7711]/30",
+                  goalBg: "bg-black/60 border-[#FF7711]/30",
+                },
+                {
+                  id: "learner",
+                  level: "LEVEL 02",
+                  name: "LEARNER",
+                  tagline: "Build • Apply • Innovate",
+                  description:
+                    "Students move beyond the basics and begin applying their knowledge through meaningful projects, teamwork, experimentation, and real-world problem-solving.",
+                  goal: "Turn learning into practical skills, innovation, and impressive projects.",
+                  accentColor: "text-[#38BDF8]",
+                  bgGradient: "from-[#38BDF8]/15 via-[#141414] to-[#0D0D0D]",
+                  borderColor: "border-[#38BDF8]/30 hover:border-[#38BDF8]/70",
+                  badgeBg: "bg-[#38BDF8]/10 text-[#38BDF8] border-[#38BDF8]/30",
+                  goalBg: "bg-black/60 border-[#38BDF8]/30",
+                },
+                {
+                  id: "performer",
+                  level: "LEVEL 03",
+                  name: "PERFORMER",
+                  tagline: "Master • Build • Get Career-Ready",
+                  description:
+                    "Learners take their skills further through advanced projects, professional skill development, portfolio building, industry-oriented training, and real-world problem-solving.",
+                  goal: "Transform technical skills into strong portfolios, professional confidence, internship opportunities, and job & placement readiness.",
+                  accentColor: "text-[#4ADE80]",
+                  bgGradient: "from-[#4ADE80]/15 via-[#141414] to-[#0D0D0D]",
+                  borderColor: "border-[#4ADE80]/30 hover:border-[#4ADE80]/70",
+                  badgeBg: "bg-[#4ADE80]/10 text-[#4ADE80] border-[#4ADE80]/30",
+                  goalBg: "bg-black/60 border-[#4ADE80]/30",
+                },
+              ].map((lvl, idx) => (
+                <motion.div
                   key={lvl.id}
-                  className={`p-7 rounded-3xl bg-gradient-to-b ${lvl.bgGradient} border ${lvl.borderColor} flex flex-col justify-between shadow-2xl relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300`}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.12 }}
+                  className={`p-7 sm:p-8 rounded-3xl bg-gradient-to-b ${lvl.bgGradient} border ${lvl.borderColor} flex flex-col justify-between shadow-2xl relative overflow-hidden group hover:-translate-y-1.5 transition-all duration-300`}
                 >
                   <div>
-                    {/* Level Tag & Badge */}
-                    <div className="flex items-center justify-between mb-4">
-                      <span className={`text-xs font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-black/60 border border-[#333333] ${lvl.accentColor}`}>
-                        {lvl.badge}
-                      </span>
-                      <span className="text-[10px] font-mono text-[#888888]">
-                        {lvl.targetAudience}
+                    {/* Level Badge */}
+                    <div className="flex items-center justify-between mb-5">
+                      <span className={`text-[11px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full border ${lvl.badgeBg}`}>
+                        {lvl.level}
                       </span>
                     </div>
 
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-1">
+                    {/* Level Title */}
+                    <h3 className="text-2xl sm:text-3xl font-black text-white mb-1.5 tracking-tight">
                       {lvl.name}
                     </h3>
-                    <p className={`text-xs font-mono font-bold mb-4 ${lvl.accentColor}`}>
+                    
+                    {/* Tagline */}
+                    <p className={`text-sm font-mono font-bold mb-5 ${lvl.accentColor}`}>
                       {lvl.tagline}
                     </p>
 
-                    <p className="text-xs sm:text-sm text-[#CCCCCC] leading-relaxed mb-6 font-normal">
+                    {/* Description */}
+                    <p className="text-xs sm:text-sm text-[#CCCCCC] leading-relaxed mb-8 font-normal">
                       {lvl.description}
                     </p>
-
-                    {/* Goal Box */}
-                    <div className="p-4 rounded-xl bg-black/60 border border-[#272727] mb-6">
-                      <span className="text-[10px] font-mono text-[#888888] uppercase tracking-wider block mb-1">
-                        🎯 CORE LEVEL GOAL:
-                      </span>
-                      <p className="text-xs text-[#E2E8F0] font-medium leading-snug">
-                        {lvl.goal}
-                      </p>
-                    </div>
                   </div>
 
-                  {/* Skills List */}
-                  <div className="pt-4 border-t border-[#252525]">
-                    <span className="text-[10px] font-mono text-[#888888] uppercase block mb-2">
-                      Key Competencies Developed:
+                  {/* Goal Box */}
+                  <div className={`p-4 sm:p-5 rounded-2xl ${lvl.goalBg} border`}>
+                    <span className={`text-xs font-mono font-bold uppercase tracking-wider block mb-1.5 ${lvl.accentColor}`}>
+                      Goal:
                     </span>
-                    <div className="space-y-1.5">
-                      {lvl.skills.map((skill) => (
-                        <div key={skill} className="flex items-center space-x-2 text-xs font-mono text-[#D4D4D4]">
-                          <CheckCircle2 className={`w-3.5 h-3.5 ${lvl.accentColor} shrink-0`} />
-                          <span>{skill}</span>
-                        </div>
-                      ))}
-                    </div>
+                    <p className="text-xs sm:text-sm text-[#E2E8F0] font-medium leading-relaxed">
+                      {lvl.goal}
+                    </p>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -670,11 +794,11 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
       {/* ========================================================================= */}
       {/* 4. OUR COURSES (STARTER & LEARNER PATHWAYS)                              */}
       {/* ========================================================================= */}
-      <section id="our-courses" className="w-full bg-[#0B0B0B] border-b border-[#222222] py-20 lg:py-28 relative">
+      <section id="our-courses" className="w-full bg-[#0B0B0B] border-b border-[#222222] py-20 lg:py-28 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-12">
+          <div className="text-center max-w-3xl mx-auto mb-10">
             <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#272727] mb-3">
               <Laptop className="w-3.5 h-3.5 text-[#FF7711]" />
               <span className="text-[11px] font-mono uppercase tracking-widest text-[#FF7711] font-bold">
@@ -686,131 +810,171 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
               OUR <span className="font-serif italic font-normal text-[#FF7711]">COURSES</span>
             </h2>
 
-            <p className="text-base sm:text-lg font-medium text-[#E2E8F0] mb-3">
-              A Progressive Learning Path
-            </p>
-
             <p className="text-sm sm:text-base text-[#A1A1A1] leading-relaxed">
-              From building strong foundations to creating advanced real-world projects, students progress through two practical learning levels.
+              Explore our structured learning tracks designed for foundational discovery and advanced innovation.
             </p>
           </div>
 
           {/* Level Switcher (STARTER vs LEARNER) */}
-          <div className="flex justify-center mb-12">
+          <div className="flex flex-col items-center justify-center mb-8">
             <div className="inline-flex p-1.5 rounded-2xl bg-[#141414] border border-[#2B2B2B] shadow-2xl">
               <button
                 onClick={() => setActiveCourseLevel("STARTER")}
-                className={`px-6 sm:px-8 py-3 rounded-xl font-mono text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center space-x-2 ${activeCourseLevel === "STARTER"
+                className={`px-6 sm:px-8 py-3 rounded-xl font-mono text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center space-x-2 ${
+                  activeCourseLevel === "STARTER"
                     ? "bg-[#FF7711] text-black shadow-lg shadow-[#FF7711]/20"
                     : "text-[#A1A1A1] hover:text-white hover:bg-[#1C1C1C]"
-                  }`}
+                }`}
               >
-                <span>🌱 LEVEL 1: STARTER</span>
+                <span>🌱 STARTER</span>
                 <span className="text-[10px] opacity-80">(Foundation)</span>
               </button>
 
               <button
                 onClick={() => setActiveCourseLevel("LEARNER")}
-                className={`px-6 sm:px-8 py-3 rounded-xl font-mono text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center space-x-2 ${activeCourseLevel === "LEARNER"
+                className={`px-6 sm:px-8 py-3 rounded-xl font-mono text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center space-x-2 ${
+                  activeCourseLevel === "LEARNER"
                     ? "bg-[#38BDF8] text-black shadow-lg shadow-[#38BDF8]/20"
                     : "text-[#A1A1A1] hover:text-white hover:bg-[#1C1C1C]"
-                  }`}
+                }`}
               >
-                <span>⚡ LEVEL 2: LEARNER</span>
+                <span>⚡ LEARNER</span>
                 <span className="text-[10px] opacity-80">(Advanced)</span>
               </button>
             </div>
-          </div>
 
-          {/* Active Level Description Strip */}
-          <div className="p-5 rounded-2xl bg-[#121212] border border-[#242424] mb-10 text-center max-w-3xl mx-auto">
-            <span className="text-xs font-mono uppercase tracking-wider text-[#FF7711] font-bold block mb-1">
-              {activeCourseLevel === "STARTER" ? "STARTER TRACK • EXPLORE • LEARN • CREATE" : "LEARNER TRACK • BUILD • APPLY • INNOVATE"}
+            <span className="text-[11px] font-mono text-white/50 mt-4">
+              ✨ Hover over any card to pause scroll and view full details
             </span>
-            <p className="text-xs sm:text-sm text-[#CCCCCC]">
-              {activeCourseLevel === "STARTER"
-                ? "Students explore foundational electronics, block logic, simple AI experiments, 3D pens, basic drones, money management, and creative problem solving."
-                : "Students master Arduino microcontrollers, text coding with Python/C++, neural networks, precision Fusion 360 CAD, autonomous drones, equity finance, and startup MVP pitching."}
-            </p>
           </div>
 
-          {/* 7 Course Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {activeCourseList.map((course) => (
-              <div
-                key={course.id}
-                className="group rounded-2xl bg-[#131313] border border-[#242424] hover:border-[#FF7711]/60 transition-all duration-300 overflow-hidden flex flex-col justify-between hover:-translate-y-1 shadow-lg"
-              >
-                {/* Course Image Header */}
-                <div className="relative h-44 w-full overflow-hidden bg-[#181818]">
+        </div>
+
+        {/* Automatic Horizontally Moving Cards Track */}
+        <div className="relative w-full overflow-hidden py-4">
+          {/* Side Gradient Masks for Smooth Fade */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-r from-[#0B0B0B] to-transparent z-20 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-[#0B0B0B] to-transparent z-20 pointer-events-none" />
+
+          {/* Continuous Marquee Track */}
+          <div className="flex animate-marquee-scroll space-x-6 px-4">
+            {[...activeCourseList, ...activeCourseList].map((course, idx) => {
+              const DomainIcon = getCourseDomainIcon(course.domain);
+              const slideDirections = [
+                "translate-y-full group-hover:translate-y-0",
+                "-translate-x-full group-hover:translate-x-0",
+                "translate-x-full group-hover:translate-x-0",
+                "-translate-y-full group-hover:translate-y-0",
+              ];
+              const slideClass = slideDirections[idx % slideDirections.length];
+
+              return (
+                <div
+                  key={`${course.id}-${idx}`}
+                  className="group relative h-[420px] w-[320px] sm:w-[350px] shrink-0 rounded-2xl overflow-hidden border border-white/15 hover:border-[#FF7711]/70 transition-all duration-500 shadow-2xl cursor-pointer bg-[#101010]"
+                >
+                  {/* Background Image */}
                   <img
                     src={course.image}
                     alt={course.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="absolute inset-0 w-full h-full object-cover filter brightness-[0.85] contrast-[1.05] group-hover:scale-110 group-hover:brightness-[0.95] transition-transform duration-700 ease-out"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#131313] via-[#131313]/40 to-transparent" />
 
-                  {/* Domain Tag */}
-                  <div className="absolute top-3 left-3 flex items-center space-x-1.5 px-2.5 py-1 rounded-md bg-black/85 backdrop-blur-md border border-[#2E2E2E] text-[10px] font-mono font-bold text-white">
-                    <span>{course.emoji}</span>
-                    <span>{course.domain}</span>
+                  {/* Gentle gradient scrim */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/15 pointer-events-none" />
+
+                  {/* Top Badges */}
+                  <div className="absolute top-3.5 inset-x-3.5 flex items-center justify-between z-10">
+                    <div className="w-9 h-9 rounded-xl bg-black/70 backdrop-blur-md border border-white/25 flex items-center justify-center shadow-lg text-[#FF7711]">
+                      <DomainIcon className="w-4 h-4" />
+                    </div>
+                    <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-black/80 border border-white/20 text-white font-bold backdrop-blur-md shadow-sm">
+                      {course.domain}
+                    </span>
                   </div>
 
-                  <span className={`absolute top-3 right-3 text-[9px] font-mono px-2 py-0.5 rounded border font-bold ${course.badgeColor}`}>
-                    {course.level}
-                  </span>
-                </div>
-
-                {/* Course Body */}
-                <div className="p-5 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-lg font-bold text-white group-hover:text-[#FF7711] transition-colors mb-1.5">
+                  {/* Default Bottom Content (Visible by default, slides out on hover) */}
+                  <div className="absolute bottom-0 inset-x-0 p-5 z-10 transition-all duration-300 transform group-hover:opacity-0 group-hover:-translate-y-3 pointer-events-none">
+                    <div className="flex items-center space-x-1.5 mb-1">
+                      <span className="text-base drop-shadow-md">{course.emoji}</span>
+                      <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#FF7711]">
+                        {course.domain}
+                      </span>
+                    </div>
+                    <h4 className="text-lg font-bold text-white tracking-tight leading-snug drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] mb-1.5">
                       {course.title}
-                    </h3>
+                    </h4>
+                    <p className="text-xs text-[#E5E5E5] line-clamp-2 leading-relaxed drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
+                      {course.detail}
+                    </p>
+                  </div>
 
-                    <p className="text-xs text-[#FF7711] font-mono mb-3">
-                      {course.tagline}
+                  {/* Hover Overlay: Directional Slide-in Drawer */}
+                  <div
+                    className={`absolute inset-0 p-5 z-20 flex flex-col justify-end bg-gradient-to-t from-black/98 via-black/90 to-black/40 backdrop-blur-[3px] opacity-0 group-hover:opacity-100 transition-transform duration-500 ease-out transform ${slideClass}`}
+                  >
+                    <div className="flex items-center space-x-1.5 mb-1">
+                      <span className="text-base">{course.emoji}</span>
+                      <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#FF7711]">
+                        {course.domain}
+                      </span>
+                    </div>
+
+                    <h4 className="text-base font-bold text-white tracking-tight leading-snug drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] mb-1">
+                      {course.title}
+                    </h4>
+
+                    <p className="text-xs text-[#FFA149] font-medium leading-relaxed mb-3 drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+                      {course.detail}
                     </p>
 
-                    <p className="text-xs text-[#A1A1A1] leading-relaxed mb-4">
-                      {course.focus}
-                    </p>
+                    {/* Students Learn (if present) */}
+                    {course.learn && course.learn.length > 0 && (
+                      <div className="mb-2.5 pt-2.5 border-t border-white/20">
+                        <span className="text-[10px] font-mono uppercase text-[#A1A1A1] block mb-1 font-semibold">
+                          Students Learn:
+                        </span>
+                        <div className="flex flex-wrap gap-1">
+                          {course.learn.map((item) => (
+                            <span
+                              key={item}
+                              className="px-2 py-0.5 rounded bg-white/10 text-[10px] font-mono text-white border border-white/15"
+                            >
+                              {item}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
 
-                    {/* What Students Learn Topics */}
-                    <div className="mb-4">
-                      <span className="text-[10px] font-mono text-[#888888] uppercase block mb-1.5">
-                        Students Learn:
+                    {/* Students Build / Create */}
+                    <div className="pt-2 border-t border-white/20">
+                      <span className="text-[10px] font-mono uppercase text-[#FF7711] block mb-1 font-bold">
+                        {course.buildLabel}
                       </span>
                       <div className="flex flex-wrap gap-1">
-                        {course.topics.map((topic) => (
+                        {course.build.map((bItem) => (
                           <span
-                            key={topic}
-                            className="px-2 py-0.5 rounded bg-[#1A1A1A] text-[10px] font-mono text-[#CCCCCC] border border-[#272727]"
+                            key={bItem}
+                            className="inline-flex items-center space-x-1 px-2 py-0.5 rounded bg-[#FF7711]/15 text-[10px] font-mono text-[#FFA149] border border-[#FF7711]/30 font-medium"
                           >
-                            {topic}
+                            <CheckCircle2 className="w-3 h-3 text-[#FF7711] shrink-0" />
+                            <span>{bItem}</span>
                           </span>
                         ))}
                       </div>
                     </div>
                   </div>
 
-                  {/* What Students Build */}
-                  <div className="pt-3 border-t border-[#222222]">
-                    <span className="text-[10px] font-mono text-[#FF7711] uppercase font-bold block mb-1">
-                      🛠️ Students Build / Create:
-                    </span>
-                    <p className="text-xs font-mono text-[#E2E8F0] leading-snug">
-                      {course.builds.join(" · ")}
-                    </p>
-                  </div>
                 </div>
-
-              </div>
-            ))}
+              );
+            })}
           </div>
+        </div>
 
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
           {/* Quick Enquire CTA Bar */}
-          <div className="mt-14 p-6 rounded-2xl bg-[#141414] border border-[#262626] flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="p-6 rounded-2xl bg-[#141414] border border-[#262626] flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
               <h4 className="text-base font-bold text-white">
                 Interested in enrolling your child in a specialized track?
@@ -826,88 +990,282 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
               Request Syllabus & Trial
             </a>
           </div>
-
         </div>
       </section>
 
       {/* ========================================================================= */}
       {/* 5. STUDENT PORTFOLIO                                                     */}
       {/* ========================================================================= */}
-      <section className="w-full bg-[#080808] border-b border-[#222222] py-20 lg:py-28 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="w-full bg-[#080808] border-b border-[#222222] py-20 lg:py-28 relative overflow-hidden">
+        {/* Background ambient lighting */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-[#FF7711]/5 blur-[160px] pointer-events-none rounded-full" />
+        <div className="absolute top-10 left-10 w-96 h-96 bg-[#38BDF8]/5 blur-[140px] pointer-events-none rounded-full" />
 
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
-            <div>
-              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#272727] mb-3">
-                <Rocket className="w-3.5 h-3.5 text-[#FF7711]" />
-                <span className="text-[11px] font-mono uppercase tracking-widest text-[#FF7711] font-bold">
-                  TANGIBLE INNOVATIONS
-                </span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FFFFFF] tracking-tight leading-tight">
-                STUDENT <span className="font-serif italic font-normal text-[#FF7711]">PORTFOLIO</span>
-              </h2>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+          {/* Section Header */}
+          <div className="text-center max-w-4xl mx-auto mb-12">
+            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#272727] mb-4 shadow-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8]" />
+              <span className="text-[11px] font-mono uppercase tracking-widest text-[#38BDF8] font-bold">
+                STUDENT PORTFOLIO
+              </span>
             </div>
-            <p className="text-sm sm:text-base text-[#A1A1A1] max-w-md">
-              Real projects built by our young innovators inside our center. From autonomous rovers to cloud telemetry systems.
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FFFFFF] tracking-tight leading-tight mb-4">
+              Don't Just Tell <span className="text-[#38BDF8]">Us What You Learned.</span><br />
+              Show Us What You <span className="text-[#FF7711]">Built.</span>
+            </h2>
+
+            <p className="text-sm sm:text-base text-[#A1A1A1] max-w-3xl mx-auto leading-relaxed">
+              Every student creates a learning journey of their own. Our Student Portfolio section documents the student's projects, progress, achievements and growth throughout their time at Narasimha Skill Sphere.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {studentPortfolioItems.map((proj) => (
-              <div
-                key={proj.id}
-                className="group rounded-2xl bg-[#121212] border border-[#242424] hover:border-[#FF7711]/60 transition-all duration-300 overflow-hidden flex flex-col justify-between shadow-xl"
-              >
-                <div className="relative h-48 w-full overflow-hidden bg-[#181818]">
-                  <img
-                    src={proj.image}
-                    alt={proj.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#121212] via-[#121212]/30 to-transparent" />
-                  <span className="absolute top-3 left-3 text-[10px] font-mono px-2.5 py-1 rounded bg-black/80 backdrop-blur-md text-[#FF7711] font-bold border border-[#2A2A2A]">
-                    {proj.tag}
-                  </span>
-                  <span className="absolute bottom-3 left-3 text-[10px] font-mono px-2 py-0.5 rounded bg-black/70 text-[#D4D4D4]">
-                    {proj.authorGrade}
-                  </span>
-                </div>
+          {/* Featured Student Showcase Card */}
+          {(() => {
+            const currentStudent = studentPortfolioProfiles[selectedStudentIndex] || studentPortfolioProfiles[0];
+            return (
+              <div className="relative max-w-6xl mx-auto mb-8">
+                {/* Desktop Left / Right Floating Circular Navigation Buttons */}
+                <button
+                  onClick={handlePrevStudent}
+                  aria-label="Previous Student Portfolio"
+                  className="hidden md:flex absolute -left-5 lg:-left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-[#1A1A1A] border border-[#333333] hover:border-[#38BDF8] hover:text-[#38BDF8] text-white items-center justify-center transition-all shadow-2xl cursor-pointer hover:scale-110 active:scale-95"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={handleNextStudent}
+                  aria-label="Next Student Portfolio"
+                  className="hidden md:flex absolute -right-5 lg:-right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-[#1A1A1A] border border-[#333333] hover:border-[#38BDF8] hover:text-[#38BDF8] text-white items-center justify-center transition-all shadow-2xl cursor-pointer hover:scale-110 active:scale-95"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
 
-                <div className="p-5 flex-1 flex flex-col justify-between">
-                  <div>
-                    <span className="text-[10px] font-mono uppercase text-[#888888] block mb-1">
-                      {proj.domain}
-                    </span>
-                    <h3 className="text-base font-bold text-white mb-2 group-hover:text-[#FF7711] transition-colors">
-                      {proj.title}
-                    </h3>
-                    <p className="text-xs text-[#A1A1A1] leading-relaxed mb-4">
-                      {proj.description}
-                    </p>
-                  </div>
+                {/* Main Card Frame */}
+                <motion.div
+                  key={currentStudent.id}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                  className="bg-[#121212] border border-[#272727] rounded-3xl p-5 sm:p-7 shadow-2xl relative overflow-hidden"
+                >
+                  {/* Subtle ambient gradient highlights */}
+                  <div className="absolute top-0 right-0 w-80 h-80 bg-[#38BDF8]/5 blur-[120px] pointer-events-none rounded-full" />
+                  <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#FF7711]/5 blur-[120px] pointer-events-none rounded-full" />
 
-                  <div className="pt-3 border-t border-[#222222]">
-                    <span className="text-[10px] font-mono text-[#666666] uppercase block mb-1">
-                      Hardware & Tech Stack:
-                    </span>
-                    <div className="flex flex-wrap gap-1">
-                      {proj.hardware.map((hw) => (
-                        <span
-                          key={hw}
-                          className="px-2 py-0.5 rounded bg-[#181818] text-[10px] font-mono text-[#E2E8F0] border border-[#292929]"
-                        >
-                          {hw}
-                        </span>
-                      ))}
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch relative z-10">
+                    
+                    {/* Column 1: Student Portrait & Quote Box (4 cols) */}
+                    <div className="lg:col-span-4 flex flex-col justify-between bg-[#151515] border border-[#262626] rounded-2xl overflow-hidden relative min-h-[380px] lg:min-h-[420px] shadow-lg">
+                      <div className="relative w-full h-full min-h-[360px] overflow-hidden flex flex-col justify-end p-3.5">
+                        <img
+                          src={currentStudent.avatar}
+                          alt={currentStudent.name}
+                          className="absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.92] contrast-[1.05]"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
+
+                        {/* Bottom Testimonial Quote Overlay Card */}
+                        <div className="relative z-10 p-3.5 rounded-xl bg-[#0B1528]/90 backdrop-blur-md border border-[#1E3A5F]/80 shadow-2xl">
+                          <div className="flex items-start space-x-2">
+                            <span className="text-xl font-serif text-[#38BDF8] leading-none shrink-0 font-black">
+                              “
+                            </span>
+                            <div>
+                              <p className="text-xs text-[#E2E8F0] font-medium leading-snug mb-1">
+                                {currentStudent.quote}
+                              </p>
+                              <span className="text-[11px] font-mono font-bold text-[#38BDF8] block">
+                                — {currentStudent.name}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+
+                    {/* Column 2: Completed & Currently Working On Projects (5 cols) */}
+                    <div className="lg:col-span-5 flex flex-col justify-between space-y-4">
+                      {/* Top Student Header Row */}
+                      <div className="pb-3 border-b border-[#242424]">
+                        <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-none mb-2">
+                          {currentStudent.name}
+                        </h3>
+                        <div className="flex items-center space-x-2">
+                          <span className={`text-[11px] font-mono px-2.5 py-0.5 rounded-md border font-bold ${currentStudent.tierColor}`}>
+                            🛡️ {currentStudent.tier}
+                          </span>
+                          <span className="text-[#555555] font-bold">|</span>
+                          <span className={`text-[11px] font-mono px-2.5 py-0.5 rounded-md border font-bold flex items-center space-x-1 ${currentStudent.domainColor}`}>
+                            <span>{currentStudent.domainEmoji}</span>
+                            <span>{currentStudent.domain}</span>
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Completed Project Box */}
+                      <div className="p-3.5 rounded-2xl bg-[#171717] border border-[#272727] flex flex-col sm:flex-row gap-3.5 items-center hover:border-emerald-500/40 transition-colors">
+                        <div className="flex-1">
+                          <div className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-[10px] font-mono font-bold mb-1.5">
+                            <CheckCircle2 className="w-3 h-3" />
+                            <span>Completed Project</span>
+                          </div>
+                          <h4 className="text-sm sm:text-base font-bold text-white mb-1 leading-snug">
+                            {currentStudent.completedProject.title}
+                          </h4>
+                          <p className="text-xs text-[#9CA3AF] leading-relaxed">
+                            {currentStudent.completedProject.description}
+                          </p>
+                        </div>
+                        <div className="relative w-full sm:w-44 h-28 rounded-xl overflow-hidden shrink-0 border border-white/10 bg-black">
+                          <img
+                            src={currentStudent.completedProject.image}
+                            alt={currentStudent.completedProject.title}
+                            className="w-full h-full object-cover"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
+                          <span className="absolute bottom-1 inset-x-1 text-[8px] font-mono text-white truncate text-center px-1 font-semibold bg-black/70 rounded py-0.5">
+                            {currentStudent.completedProject.caption}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Currently Working On Box */}
+                      <div className="p-3.5 rounded-2xl bg-[#171717] border border-[#272727] flex flex-col sm:flex-row gap-3.5 items-center hover:border-orange-500/40 transition-colors">
+                        <div className="flex-1">
+                          <div className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full bg-orange-500/15 text-orange-400 border border-orange-500/30 text-[10px] font-mono font-bold mb-1.5">
+                            <Cog className="w-3 h-3 animate-spin" />
+                            <span>Currently Working On</span>
+                          </div>
+                          <h4 className="text-sm sm:text-base font-bold text-white mb-1 leading-snug">
+                            {currentStudent.workingOnProject.title}
+                          </h4>
+                          <p className="text-xs text-[#9CA3AF] leading-relaxed">
+                            {currentStudent.workingOnProject.description}
+                          </p>
+                        </div>
+                        <div className="relative w-full sm:w-44 h-28 rounded-xl overflow-hidden shrink-0 border border-white/10 bg-black">
+                          <img
+                            src={currentStudent.workingOnProject.image}
+                            alt={currentStudent.workingOnProject.title}
+                            className="w-full h-full object-cover"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
+                          <span className="absolute bottom-1 inset-x-1 text-[8px] font-mono text-white truncate text-center px-1 font-semibold bg-black/70 rounded py-0.5">
+                            {currentStudent.workingOnProject.caption}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Column 3: Achievements & Progress Bars (3 cols) */}
+                    <div className="lg:col-span-3 flex flex-col justify-between space-y-3.5">
+                      {/* Achievements Box */}
+                      <div className="p-4 rounded-2xl bg-[#1A1813] border border-amber-500/25 shadow-md flex-1 flex flex-col justify-between">
+                        <div className="flex items-center space-x-2 text-amber-400 text-xs font-mono font-bold uppercase tracking-wider mb-2.5">
+                          <Trophy className="w-4 h-4 text-amber-400" />
+                          <span>Achievements</span>
+                        </div>
+
+                        <div className="space-y-2">
+                          {currentStudent.achievements.map((ach) => (
+                            <div
+                              key={ach.title}
+                              className="p-2.5 rounded-xl bg-[#231F16] border border-amber-500/20 flex items-center space-x-2.5 hover:border-amber-400/40 transition-colors"
+                            >
+                              <Award className="w-4 h-4 text-amber-400 shrink-0" />
+                              <span className="text-xs text-[#E2E8F0] font-semibold leading-tight">
+                                {ach.title}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Progress Metrics Box */}
+                      <div className="p-4 rounded-2xl bg-[#0E1624] border border-blue-500/25 shadow-md flex-1 flex flex-col justify-between">
+                        <div className="flex items-center space-x-2 text-[#38BDF8] text-xs font-mono font-bold uppercase tracking-wider mb-2.5">
+                          <BarChart3 className="w-4 h-4 text-[#38BDF8]" />
+                          <span>Progress</span>
+                        </div>
+
+                        <div className="space-y-2.5">
+                          {currentStudent.progress.map((prog) => (
+                            <div key={prog.label}>
+                              <div className="flex justify-between text-xs font-mono mb-1">
+                                <span className="text-[#CBD5E1] text-[11px]">{prog.label}</span>
+                                <span className="text-white font-bold text-[11px]">{prog.value}%</span>
+                              </div>
+                              <div className="w-full h-2 rounded-full bg-[#1A2638] overflow-hidden">
+                                <div
+                                  className={`h-full rounded-full ${prog.color} transition-all duration-700`}
+                                  style={{ width: `${prog.value}%` }}
+                                />
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
                   </div>
-                </div>
+                </motion.div>
               </div>
+            );
+          })()}
+
+          {/* Quick Student Selector Tabs Strip */}
+          <div className="flex flex-wrap items-center justify-center gap-3 mt-8 mb-8">
+            {studentPortfolioProfiles.map((student, idx) => (
+              <button
+                key={student.id}
+                onClick={() => setSelectedStudentIndex(idx)}
+                className={`px-3.5 py-2 rounded-2xl border transition-all cursor-pointer flex items-center space-x-2.5 shadow-md ${
+                  selectedStudentIndex === idx
+                    ? "bg-[#162235] border-[#38BDF8] text-white shadow-lg shadow-[#38BDF8]/20 scale-105"
+                    : "bg-[#131313] border-[#262626] text-[#A1A1A1] hover:text-white hover:bg-[#181818]"
+                }`}
+              >
+                <img
+                  src={student.avatar}
+                  alt={student.name}
+                  className="w-7 h-7 rounded-full object-cover border border-white/20 shrink-0"
+                />
+                <div className="text-left">
+                  <span className="text-xs font-bold block text-white leading-tight">
+                    {student.name}
+                  </span>
+                  <span className="text-[10px] font-mono text-[#38BDF8]">
+                    {student.domain}
+                  </span>
+                </div>
+              </button>
             ))}
+
+            <button
+              onClick={onOpenPartnerModal}
+              className="px-4 py-2 rounded-2xl border border-[#333333] bg-[#141414] hover:bg-[#1C1C1C] hover:border-[#38BDF8]/60 text-white transition-all cursor-pointer flex items-center space-x-2 text-xs font-mono shadow-md"
+            >
+              <Users className="w-3.5 h-3.5 text-[#38BDF8]" />
+              <span>Many More Innovators...</span>
+            </button>
+          </div>
+
+          {/* Bottom CTA Button */}
+          <div className="text-center mt-6">
+            <button
+              onClick={onOpenPartnerModal}
+              className="btn-orange-primary px-8 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider inline-flex items-center space-x-2 shadow-lg hover:shadow-orange-glow transition-all cursor-pointer"
+            >
+              <span>Explore More Student Projects</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
 
         </div>
+
       </section>
 
       {/* ========================================================================= */}

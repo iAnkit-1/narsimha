@@ -38,15 +38,14 @@ export interface LearningLevel {
 export interface CourseDetail {
   id: string;
   domain: string;
-  title: string;
-  tagline: string;
   emoji: string;
+  title: string;
+  detail: string;
+  learn?: string[];
+  build: string[];
+  buildLabel: string;
   image: string;
   level: "STARTER" | "LEARNER";
-  focus: string;
-  topics: string[];
-  builds: string[];
-  badgeColor: string;
 }
 
 export interface StudentProject {
@@ -58,6 +57,41 @@ export interface StudentProject {
   hardware: string[];
   image: string;
   tag: string;
+}
+
+export interface StudentPortfolioProfile {
+  id: string;
+  name: string;
+  avatar: string;
+  photoBadge: string;
+  quote: string;
+  taglineQuote: string;
+  tier: string;
+  tierColor: string;
+  domain: string;
+  domainEmoji: string;
+  domainColor: string;
+  completedProject: {
+    title: string;
+    description: string;
+    image: string;
+    caption: string;
+  };
+  workingOnProject: {
+    title: string;
+    description: string;
+    image: string;
+    caption: string;
+  };
+  achievements: {
+    icon: string;
+    title: string;
+  }[];
+  progress: {
+    label: string;
+    value: number;
+    color: string;
+  }[];
 }
 
 export interface GalleryItem {
@@ -253,98 +287,90 @@ export const learningLevelsList: LearningLevel[] = [
   },
 ];
 
-// 4. Our Courses: 2 Practical Learning Levels (STARTER & LEARNER) across 7 Domains
+// 4. Our Courses: STARTER & LEARNER Across 7 Tracks
 export const starterCourses: CourseDetail[] = [
   {
     id: "starter-robotics",
     domain: "ROBOTICS",
-    title: "Build Your First Robots",
-    tagline: "Learn electronics, circuits, motors, sensors, mechanical systems, and basic robotics.",
     emoji: "🤖",
-    image: "/High tech lab .png",
+    title: "Build Your First Robots",
+    detail: "Learn electronics, circuits, motors, sensors, mechanical systems, and basic robotics.",
+    build: ["Line Follower", "Sensor Robot", "Obstacle Detection", "Basic Automation"],
+    buildLabel: "Students Build:",
+    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80",
     level: "STARTER",
-    focus: "Tactile electronics, basic circuits, gear ratios, DC motors, and autonomous obstacle detection.",
-    topics: ["Circuit Basics", "Motors & Gears", "Sensors & Switches", "Chassis Assembly", "Basic Automation"],
-    builds: ["Line Follower Robot", "Sensor-Triggered Rover", "Obstacle Detection Car", "Basic Automation Gate"],
-    badgeColor: "bg-orange-500/10 text-orange-400 border-orange-500/30",
   },
   {
     id: "starter-coding",
     domain: "CODING",
-    title: "Build Your First Programs",
-    tagline: "Develop computational thinking, programming logic, creativity, and basic AI awareness.",
     emoji: "💻",
+    title: "Build Your First Programs",
+    detail: "Develop computational thinking, programming logic, creativity, and basic AI awareness.",
+    learn: ["Computer Basics", "Coding Logic", "Algorithms", "Variables", "Loops", "Game Development", "AI Basics"],
+    build: ["Games", "Animations", "Interactive Apps", "Simple Coding Projects"],
+    buildLabel: "Students Build:",
     image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
     level: "STARTER",
-    focus: "Core programming logic, algorithms, event listeners, loops, and playful game development.",
-    topics: ["Computer Basics", "Coding Logic", "Algorithms", "Variables", "Loops", "Game Development", "AI Basics"],
-    builds: ["Interactive Arcade Games", "Animated Storybooks", "Mini Math Solvers", "Simple Coding Projects"],
-    badgeColor: "bg-blue-500/10 text-blue-400 border-blue-500/30",
   },
   {
     id: "starter-ai",
     domain: "AI / ML",
-    title: "Discover the World of AI",
-    tagline: "Understand how AI works and explore machine learning through simple, practical activities.",
     emoji: "🧠",
+    title: "Discover the World of Artificial Intelligence",
+    detail: "Understand how AI works and explore machine learning through simple, practical activities.",
+    learn: ["AI Fundamentals", "Data Basics", "Machine Learning Concepts", "Pattern Recognition", "AI Tools", "Responsible AI"],
+    build: ["Simple AI Models", "Prediction Projects", "Image Recognition", "AI Experiments"],
+    buildLabel: "Students Build:",
     image: "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=800&q=80",
     level: "STARTER",
-    focus: "Demystifying computer intelligence, training vision models, voice recognition, and responsible AI.",
-    topics: ["AI Fundamentals", "Data Basics", "Machine Learning Concepts", "Pattern Recognition", "AI Tools", "Responsible AI"],
-    builds: ["Simple AI Image Classifier", "Prediction Toy Models", "Voice-Controlled Bot", "AI Experiment Demos"],
-    badgeColor: "bg-purple-500/10 text-purple-400 border-purple-500/30",
   },
   {
     id: "starter-3d",
     domain: "3D PRINTING",
-    title: "Turn Ideas Into Objects",
-    tagline: "Learn how digital designs are transformed into real physical products.",
     emoji: "🖨️",
+    title: "Turn Ideas Into Objects",
+    detail: "Learn how digital designs are transformed into real physical products.",
+    learn: ["3D Printing", "CAD Basics", "Tinkercad", "3D Modelling", "Materials", "Slicing"],
+    build: ["Keychains", "Mini Models", "Mechanical Parts", "Custom Designs"],
+    buildLabel: "Students Build:",
     image: "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=800&q=80",
     level: "STARTER",
-    focus: "Spatial geometry, CAD visualization in Tinkercad, nozzle temperatures, and filament fabrication.",
-    topics: ["3D Printing Concepts", "CAD Basics", "Tinkercad", "3D Modelling", "Materials", "Slicing"],
-    builds: ["Custom Name Keychains", "Mini Geometric Models", "Mechanical Gears", "Custom Desk Accessories"],
-    badgeColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/30",
   },
   {
     id: "starter-drone",
     domain: "DRONE TECHNOLOGY",
-    title: "Explore the World of Drones",
-    tagline: "Discover drone technology, flight principles, components, and safe operation.",
     emoji: "🚁",
+    title: "Explore the World of Drones",
+    detail: "Discover drone technology, flight principles, components, and safe operation.",
+    learn: ["Drone Basics", "Components", "Flight Principles", "Propellers", "Motors", "Safety"],
+    build: ["Flight Activities", "Basic Drone Projects"],
+    buildLabel: "Students Build / Explore:",
     image: "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&w=800&q=80",
     level: "STARTER",
-    focus: "Aerodynamics, propeller lift, balance, remote controller radio telemetry, and flight safety.",
-    topics: ["Drone Basics", "Components", "Flight Principles", "Propellers", "Motors", "Safety Protocols"],
-    builds: ["Indoor Flight Manoeuvres", "Propeller Thrust Rig", "Basic Mini-Drone Projects", "Obstacle Course Run"],
-    badgeColor: "bg-cyan-500/10 text-cyan-400 border-cyan-500/30",
   },
   {
     id: "starter-finance",
     domain: "FINANCIAL LITERACY",
-    title: "Learn to Manage Money",
-    tagline: "Develop practical money-management skills and understand how financial decisions work.",
     emoji: "💰",
+    title: "Learn to Manage Money",
+    detail: "Develop practical money-management skills and understand how financial decisions work.",
+    learn: ["Money Basics", "Saving", "Budgeting", "Needs vs Wants", "Banking", "Smart Spending"],
+    build: ["Personal Budget", "Savings Plan", "Money Management Activities"],
+    buildLabel: "Students Create:",
     image: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&w=800&q=80",
     level: "STARTER",
-    focus: "Everyday money awareness, piggy banks vs bank accounts, budgeting for projects, and smart choices.",
-    topics: ["Money Basics", "Saving", "Budgeting", "Needs vs Wants", "Banking Concepts", "Smart Spending"],
-    builds: ["Personal Piggy Budget", "Savings Target Tracker", "Maker Materials Cost Sheet", "Financial Quiz Game"],
-    badgeColor: "bg-amber-500/10 text-amber-400 border-amber-500/30",
   },
   {
     id: "starter-entrepreneur",
     domain: "ENTREPRENEUR MINDSET",
-    title: "Turn Ideas Into Opportunities",
-    tagline: "Develop creativity, confidence, problem-solving, and the mindset to turn ideas into meaningful solutions.",
     emoji: "🚀",
+    title: "Turn Ideas Into Opportunities",
+    detail: "Develop creativity, confidence, problem-solving, and the mindset to turn ideas into meaningful solutions.",
+    learn: ["Idea Generation", "Problem Solving", "Creativity", "Teamwork", "Communication", "Basic Business Thinking"],
+    build: ["Business Ideas", "Product Concepts", "Simple Pitches", "Innovation Projects"],
+    buildLabel: "Students Create:",
     image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80",
     level: "STARTER",
-    focus: "Finding real everyday problems, team collaboration, sketching ideas, and presenting solutions.",
-    topics: ["Idea Generation", "Problem Solving", "Creativity", "Teamwork", "Communication", "Basic Business Thinking"],
-    builds: ["Problem-Solution Canvas", "Product Invention Sketch", "60-Second Mini Pitch", "Innovation Fair Poster"],
-    badgeColor: "bg-rose-500/10 text-rose-400 border-rose-500/30",
   },
 ];
 
@@ -352,93 +378,86 @@ export const learnerCourses: CourseDetail[] = [
   {
     id: "learner-robotics",
     domain: "ROBOTICS",
-    title: "Build Intelligent Robots",
-    tagline: "Explore Arduino, programming, sensors, automation, IoT, and advanced robotics.",
     emoji: "🤖",
-    image: "/robo with students.png",
+    title: "Build Intelligent Robots",
+    detail: "Explore Arduino, programming, sensors, automation, IoT, and advanced robotics.",
+    learn: ["Arduino", "Programming", "Electronics", "Sensors", "Motor Control", "IoT", "Automation"],
+    build: ["Smart Robots", "IoT Systems", "Automation Projects", "Advanced Robotics"],
+    buildLabel: "Students Build:",
+    image: "https://images.unsplash.com/photo-1563770660941-20978e870e26?auto=format&fit=crop&w=800&q=80",
     level: "LEARNER",
-    focus: "Microcontroller logic, sensor fusion, servo kinematics, IoT telemetry, and autonomous decision loops.",
-    topics: ["Arduino C++", "Programming", "Electronics", "Sensors", "Motor Control", "IoT", "Automation"],
-    builds: ["Smart IoT Bot", "Bluetooth Controlled Arm", "Autonomous Maze Solver", "Smart Factory Conveyor"],
-    badgeColor: "bg-orange-500/10 text-orange-400 border-orange-500/30",
   },
   {
     id: "learner-coding",
     domain: "CODING",
-    title: "Build Intelligent Software",
-    tagline: "Develop programming and software-development skills while using AI-assisted development.",
     emoji: "💻",
+    title: "Build Intelligent Software",
+    detail: "Develop programming and software-development skills while using AI-assisted development.",
+    learn: ["Python", "Java", "C/C++", "OOP", "APIs", "Data Handling", "Debugging", "Git", "AI-Assisted Coding"],
+    build: ["Web Applications", "Management Systems", "Chatbots", "AI Applications", "Smart Utilities"],
+    buildLabel: "Students Build:",
     image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80",
     level: "LEARNER",
-    focus: "Text coding in Python & C++, object-oriented structures, database APIs, Git versioning, and AI tooling.",
-    topics: ["Python", "Java", "C/C++", "OOP", "APIs", "Data Handling", "Debugging", "Git", "AI-Assisted Coding"],
-    builds: ["Full-Stack Web App", "Student Management System", "AI Chatbot Assistant", "Automated Desktop Utility"],
-    badgeColor: "bg-blue-500/10 text-blue-400 border-blue-500/30",
   },
   {
     id: "learner-ai",
     domain: "AI / ML",
-    title: "Build Intelligent Solutions",
-    tagline: "Move from AI concepts to practical machine-learning and AI application development.",
     emoji: "🧠",
+    title: "Build Intelligent Solutions",
+    detail: "Move from AI concepts to practical machine-learning and AI application development.",
+    learn: ["Python for AI", "Data Processing", "Machine Learning", "Model Training", "Computer Vision", "Generative AI", "AI APIs"],
+    build: ["Prediction Models", "AI Assistants", "Image Recognition", "Recommendation Systems", "AI Applications"],
+    buildLabel: "Students Build:",
     image: "https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=800&q=80",
     level: "LEARNER",
-    focus: "Dataset training, computer vision with OpenCV, neural classification, and integrating LLM APIs.",
-    topics: ["Python for AI", "Data Processing", "Machine Learning", "Model Training", "Computer Vision", "Generative AI", "AI APIs"],
-    builds: ["Real-Time Face/Gesture Recognition", "Predictive House Price Model", "AI Medical Diagnostic Demo", "Custom Smart Assistant"],
-    badgeColor: "bg-purple-500/10 text-purple-400 border-purple-500/30",
   },
   {
     id: "learner-3d",
     domain: "3D PRINTING",
-    title: "Build Professional Products",
-    tagline: "Move into advanced CAD, engineering design, prototyping, and product development.",
     emoji: "🖨️",
+    title: "Build Professional Products",
+    detail: "Move into advanced CAD, engineering design, prototyping, and product development.",
+    learn: ["Advanced CAD", "Fusion 360", "Precision Design", "Advanced Slicing", "Materials", "Prototyping", "Manufacturing"],
+    build: ["Mechanical Components", "Robot Parts", "Product Prototypes", "Functional Enclosures"],
+    buildLabel: "Students Build:",
     image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
     level: "LEARNER",
-    focus: "Autodesk Fusion 360, parametric assemblies, mechanical tolerances, stress simulation, and FDM manufacturing.",
-    topics: ["Advanced CAD", "Fusion 360", "Precision Design", "Advanced Slicing", "Materials", "Prototyping", "Manufacturing"],
-    builds: ["Functional Gearbox Assembly", "Robotic End-Effector Gripper", "Custom Weatherproof Sensor Enclosure", "Drone Frame Prototype"],
-    badgeColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/30",
   },
   {
     id: "learner-drone",
     domain: "DRONE TECHNOLOGY",
-    title: "Build & Understand Advanced Drones",
-    tagline: "Explore drone systems, flight control, sensors, programming, and real-world applications.",
     emoji: "🚁",
+    title: "Build & Understand Advanced Drones",
+    detail: "Explore drone systems, flight control, sensors, programming, and real-world applications.",
+    learn: ["Drone Components", "Flight Controllers", "Sensors", "Motors", "GPS", "Programming", "Automation", "Safety"],
+    build: ["Drone Assembly", "Autonomous Flight Concepts", "Sensor-Based Systems", "Drone Applications"],
+    buildLabel: "Students Build / Explore:",
     image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=800&q=80",
     level: "LEARNER",
-    focus: "Flight controller configuration, PID tuning, GPS waypoints, telemetry radios, and autonomous mission design.",
-    topics: ["Drone Components", "Flight Controllers", "Sensors", "Motors", "GPS", "Programming", "Automation", "Safety"],
-    builds: ["Custom Quadcopter Assembly", "Autonomous GPS Waypoint Flight", "Livestream FPV Video System", "Aerial Mapping Survey Demo"],
-    badgeColor: "bg-cyan-500/10 text-cyan-400 border-cyan-500/30",
   },
   {
     id: "learner-finance",
     domain: "FINANCIAL LITERACY",
-    title: "Build Financial Confidence",
-    tagline: "Develop the knowledge needed to make informed financial decisions and understand personal finance.",
     emoji: "💰",
+    title: "Build Financial Confidence",
+    detail: "Develop the knowledge needed to make informed financial decisions and understand personal finance.",
+    learn: ["Budgeting", "Saving & Investing", "Banking", "Digital Payments", "Financial Planning", "Risk", "Entrepreneurship Finance"],
+    build: ["Personal Financial Plan", "Investment Simulation", "Business Budget", "Financial Goals"],
+    buildLabel: "Students Create:",
     image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80",
     level: "LEARNER",
-    focus: "Compound interest, stock market simulations, risk analysis, cash flow management, and startup cap tables.",
-    topics: ["Budgeting", "Saving & Investing", "Banking", "Digital Payments", "Financial Planning", "Risk", "Entrepreneurship Finance"],
-    builds: ["Comprehensive Personal Finance Plan", "Virtual Equity Portfolio Simulation", "Hardware Startup Unit Economics Sheet", "Tax & Investment Dashboard"],
-    badgeColor: "bg-amber-500/10 text-amber-400 border-amber-500/30",
   },
   {
     id: "learner-entrepreneur",
     domain: "ENTREPRENEUR MINDSET",
-    title: "Turn Ideas Into Real Ventures",
-    tagline: "Develop the skills to identify problems, create solutions, communicate ideas, and understand how businesses grow.",
     emoji: "🚀",
+    title: "Turn Ideas Into Real Ventures",
+    detail: "Develop the skills to identify problems, create solutions, communicate ideas, and understand how businesses grow.",
+    learn: ["Design Thinking", "Market Research", "Business Models", "Product Development", "Marketing", "Communication", "Leadership"],
+    build: ["Business Ideas", "Product Prototypes", "Business Models", "Pitch Decks", "Startup Projects"],
+    buildLabel: "Students Build:",
     image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80",
     level: "LEARNER",
-    focus: "Lean startup methodology, MVP prototyping, customer interviews, unit economics, and venture pitching.",
-    topics: ["Design Thinking", "Market Research", "Business Models", "Product Development", "Marketing", "Communication", "Leadership"],
-    builds: ["Validated MVP Prototype", "Investor-Ready 10-Slide Pitch Deck", "Business Model Canvas (BMC)", "Go-to-Market Launch Strategy"],
-    badgeColor: "bg-rose-500/10 text-rose-400 border-rose-500/30",
   },
 ];
 
@@ -503,6 +522,269 @@ export const studentPortfolioItems: StudentProject[] = [
     hardware: ["4x LDR Sensors", "Micro Servos", "Photovoltaic Cell", "LCD Monitor"],
     image: "https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=800&q=80",
     tag: "CleanTech",
+  },
+];
+
+export const studentPortfolioProfiles: StudentPortfolioProfile[] = [
+  {
+    id: "azad",
+    name: "Azad",
+    avatar: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80",
+    photoBadge: "BUILD EXPLORE LEARN REPEAT",
+    quote: "I love building things that solve real problems.",
+    taglineQuote: "Small ideas. Big possibilities.",
+    tier: "Junior Champs",
+    tierColor: "bg-cyan-500/15 text-cyan-400 border-cyan-500/30",
+    domain: "Robotics",
+    domainEmoji: "🤖",
+    domainColor: "bg-orange-500/15 text-orange-400 border-orange-500/30",
+    completedProject: {
+      title: "Smart Obstacle Avoiding Robot",
+      description: "Built and programmed a robot capable of detecting obstacles and changing its direction automatically.",
+      image: "https://images.unsplash.com/photo-1563770660941-20978e870e26?auto=format&fit=crop&w=800&q=80",
+      caption: "Smart Obstacle Avoiding Robot",
+    },
+    workingOnProject: {
+      title: "Smart Home Automation",
+      description: "Exploring sensors, IoT and automated control systems.",
+      image: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&w=800&q=80",
+      caption: "Smart Home Automation (Work in Progress)",
+    },
+    achievements: [
+      {
+        icon: "Trophy",
+        title: "School Innovation Showcase",
+      },
+      {
+        icon: "Award",
+        title: "Robotics Level Certificate",
+      },
+    ],
+    progress: [
+      {
+        label: "Concept Understanding",
+        value: 90,
+        color: "bg-[#38BDF8]",
+      },
+      {
+        label: "Hands-on Skills",
+        value: 80,
+        color: "bg-[#FF7711]",
+      },
+      {
+        label: "Creativity & Innovation",
+        value: 85,
+        color: "bg-[#22C55E]",
+      },
+    ],
+  },
+  {
+    id: "ananya",
+    name: "Ananya Singh",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
+    photoBadge: "AI FOR GOOD • SOLVE WITH CODE",
+    quote: "Teaching neural models to recognize patterns feels like building tomorrow's assistants today.",
+    taglineQuote: "Curiosity decoded into intelligence.",
+    tier: "Senior Champs",
+    tierColor: "bg-purple-500/15 text-purple-400 border-purple-500/30",
+    domain: "AI / ML",
+    domainEmoji: "🧠",
+    domainColor: "bg-blue-500/15 text-blue-400 border-blue-500/30",
+    completedProject: {
+      title: "AI Real-Time Hand Gesture Controller",
+      description: "Implemented OpenCV and MediaPipe computer vision to interpret hand gestures and control robotic actuators.",
+      image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80",
+      caption: "AI Gesture Controller (Live Model)",
+    },
+    workingOnProject: {
+      title: "Smart Eco-Sort Computer Vision",
+      description: "Training neural network classifiers to identify recyclable waste types in real time.",
+      image: "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=800&q=80",
+      caption: "Eco-Sort Vision (Work in Progress)",
+    },
+    achievements: [
+      {
+        icon: "Trophy",
+        title: "National Young AI Innovator Top 10",
+      },
+      {
+        icon: "Award",
+        title: "Applied Machine Learning Certificate",
+      },
+    ],
+    progress: [
+      {
+        label: "Concept Understanding",
+        value: 95,
+        color: "bg-[#38BDF8]",
+      },
+      {
+        label: "Hands-on Skills",
+        value: 88,
+        color: "bg-[#FF7711]",
+      },
+      {
+        label: "Creativity & Innovation",
+        value: 92,
+        color: "bg-[#22C55E]",
+      },
+    ],
+  },
+  {
+    id: "rohan",
+    name: "Rohan Verma",
+    avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=800&q=80",
+    photoBadge: "DESIGN IT • SLICE IT • PRINT IT",
+    quote: "3D CAD lets me turn complex math and spatial ideas into functional physical products.",
+    taglineQuote: "Precision engineering from screen to reality.",
+    tier: "Junior Champs",
+    tierColor: "bg-cyan-500/15 text-cyan-400 border-cyan-500/30",
+    domain: "3D Printing",
+    domainEmoji: "🖨️",
+    domainColor: "bg-pink-500/15 text-pink-400 border-pink-500/30",
+    completedProject: {
+      title: "Parametric 4-Axis Robotic Arm Gripper",
+      description: "Modeled interlocking spur gears in Autodesk Fusion 360 and 3D printed a heavy-duty gripper with PLA.",
+      image: "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=800&q=80",
+      caption: "Parametric 4-Axis Gripper (V2 Prototype)",
+    },
+    workingOnProject: {
+      title: "Biomimetic Prosthetic Hand",
+      description: "Engineering flexible tendon channels and lightweight ergonomic finger joints.",
+      image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+      caption: "Biomimetic Hand (Work in Progress)",
+    },
+    achievements: [
+      {
+        icon: "Trophy",
+        title: "Maker Faire Best Mechanical Build",
+      },
+      {
+        icon: "Award",
+        title: "Fusion 360 Certified Modeler",
+      },
+    ],
+    progress: [
+      {
+        label: "Concept Understanding",
+        value: 88,
+        color: "bg-[#38BDF8]",
+      },
+      {
+        label: "Hands-on Skills",
+        value: 94,
+        color: "bg-[#FF7711]",
+      },
+      {
+        label: "Creativity & Innovation",
+        value: 90,
+        color: "bg-[#22C55E]",
+      },
+    ],
+  },
+  {
+    id: "kavya",
+    name: "Kavya Sharma",
+    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80",
+    photoBadge: "THINK IN LOGIC • WRITE THE FUTURE",
+    quote: "Programming taught me that bugs are just puzzles waiting for creative solutions.",
+    taglineQuote: "Clean code, unlimited imagination.",
+    tier: "Junior Champs",
+    tierColor: "bg-cyan-500/15 text-cyan-400 border-cyan-500/30",
+    domain: "Coding",
+    domainEmoji: "💻",
+    domainColor: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
+    completedProject: {
+      title: "Multiplayer 2D Physics Arena Game",
+      description: "Engineered responsive game loop physics, sprite animations, collision grids, and realtime high scores.",
+      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
+      caption: "2D Physics Game (Playable Web Release)",
+    },
+    workingOnProject: {
+      title: "Community Food Rescue Web App",
+      description: "Developing a full-stack dashboard with real-time location matching for surplus food donations.",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+      caption: "Rescue App Portal (Work in Progress)",
+    },
+    achievements: [
+      {
+        icon: "Trophy",
+        title: "Inter-School Coding Champion Gold",
+      },
+      {
+        icon: "Award",
+        title: "Full-Stack Web Foundations Badge",
+      },
+    ],
+    progress: [
+      {
+        label: "Concept Understanding",
+        value: 92,
+        color: "bg-[#38BDF8]",
+      },
+      {
+        label: "Hands-on Skills",
+        value: 86,
+        color: "bg-[#FF7711]",
+      },
+      {
+        label: "Creativity & Innovation",
+        value: 94,
+        color: "bg-[#22C55E]",
+      },
+    ],
+  },
+  {
+    id: "ishaan",
+    name: "Ishaan Patel",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+    photoBadge: "AERO DYNAMICS • FLIGHT TELEMETRY",
+    quote: "Calibrating flight controllers and ESCs taught me how precision transforms power into flight.",
+    taglineQuote: "Building wings for bold ideas.",
+    tier: "Senior Champs",
+    tierColor: "bg-purple-500/15 text-purple-400 border-purple-500/30",
+    domain: "Aero Modeling",
+    domainEmoji: "🚁",
+    domainColor: "bg-amber-500/15 text-amber-400 border-amber-500/30",
+    completedProject: {
+      title: "Autonomous Aerial Survey Quadcopter",
+      description: "Assembled carbon fiber frame, calibrated 920KV brushless motors, and programmed failsafe GPS return-to-home.",
+      image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=800&q=80",
+      caption: "Survey Quadcopter (Autonomous Test Complete)",
+    },
+    workingOnProject: {
+      title: "Fixed-Wing Solar Glider UAV",
+      description: "Simulating airfoil lift-to-drag ratios and integrating ultra-light flexible solar film on composite wings.",
+      image: "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&w=800&q=80",
+      caption: "Solar Glider UAV (Work in Progress)",
+    },
+    achievements: [
+      {
+        icon: "Trophy",
+        title: "State Aero Innovation Top Honors",
+      },
+      {
+        icon: "Award",
+        title: "Certified UAV Pilot & Builder",
+      },
+    ],
+    progress: [
+      {
+        label: "Concept Understanding",
+        value: 94,
+        color: "bg-[#38BDF8]",
+      },
+      {
+        label: "Hands-on Skills",
+        value: 92,
+        color: "bg-[#FF7711]",
+      },
+      {
+        label: "Creativity & Innovation",
+        value: 88,
+        color: "bg-[#22C55E]",
+      },
+    ],
   },
 ];
 
