@@ -43,9 +43,16 @@ export const Footer: React.FC = () => {
   return (
     <footer id="contact" className="w-full bg-[#060606] border-t border-[#222222] text-[#A1A1A1] pt-16 pb-10 relative overflow-hidden">
 
-      {/* Huge NARASIMHA Stylized Background Watermark Decor */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none select-none z-0 overflow-hidden opacity-40">
-        <span className="text-[120px] sm:text-[180px] lg:text-[230px] font-extrabold tracking-widest font-mono text-outline uppercase whitespace-nowrap block">
+      {/* Huge NARASIMHA Stylized Background Watermark Decor with Vibrant Orange Shade */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none select-none z-0 overflow-hidden">
+        {/* Soft Orange Radial Glow Backdrop */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-[#FF7711]/12 blur-[130px] rounded-full pointer-events-none" />
+
+        <span className="text-[120px] sm:text-[180px] lg:text-[240px] font-black tracking-widest font-mono text-transparent bg-clip-text bg-gradient-to-b from-[#FF7711]/30 via-[#FF7711]/15 to-[#FF7711]/5 uppercase whitespace-nowrap block drop-shadow-[0_0_35px_rgba(9, 9, 8,0.25)]"
+          style={{
+            WebkitTextStroke: "1.5px rgba(9, 9, 8, 0.2)",
+          }}
+        >
           NARASIMHA
         </span>
       </div>
@@ -200,7 +207,7 @@ export const Footer: React.FC = () => {
         {/* Bottom copyright & back to top */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-[#707070] gap-4">
           <div>
-            © 2025 Narasimha Skill Sphere. All rights reserved.
+            © {new Date().getFullYear()} Narasimha Skill Sphere. All rights reserved.
           </div>
 
           <div className="flex items-center space-x-4">

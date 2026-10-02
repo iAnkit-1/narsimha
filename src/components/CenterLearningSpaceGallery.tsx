@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, ArrowRight, X, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
-import { featuredGalleryPhotos, allGalleryPhotos } from "../assets/data/galleryData";
+import { featuredGalleryPhotos } from "../assets/data/galleryData";
 
 export const CenterLearningSpaceGallery: React.FC = () => {
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
