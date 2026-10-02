@@ -1,14 +1,31 @@
 import React, { useState } from "react";
-import { Mail, ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
+import { Mail, ArrowRight, CheckCircle2, Sparkles, Loader2, AlertCircle } from "lucide-react";
+import { sendEmailNotification } from "../services/emailService";
 
 export const NewsletterCommunity: React.FC = () => {
   const [email, setEmail] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email.trim()) {
+    if (!email.trim()) return;
+
+    setIsSubmitting(true);
+    setErrorMessage(null);
+
+    const result = await sendEmailNotification({
+      formType: "newsletter_subscription",
+      email: email.trim(),
+    });
+
+    setIsSubmitting(false);
+
+    if (result.success) {
       setIsSubscribed(true);
+    } else {
+      setErrorMessage(result.message || "Failed to subscribe. Please try again.");
     }
   };
 
@@ -44,29 +61,48 @@ export const NewsletterCommunity: React.FC = () => {
             <span className="text-sm font-semibold">Thank you for subscribing to our community!</span>
           </div>
         ) : (
-          <form onSubmit={handleSubscribe} className="max-w-md mx-auto flex flex-col sm:flex-row items-center gap-2.5">
-            <div className="relative w-full">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#707070]">
-                <Mail className="w-4 h-4" />
+          <div className="max-w-md mx-auto space-y-3">
+            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row items-center gap-2.5">
+              <div className="relative w-full">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#707070]">
+                  <Mail className="w-4 h-4" />
+                </div>
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#151515] border border-[#272727] text-sm text-[#F1F1F1] placeholder-[#666666] focus:outline-none focus:border-[#FF7711] transition-colors"
+                />
               </div>
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#151515] border border-[#272727] text-sm text-[#F1F1F1] placeholder-[#666666] focus:outline-none focus:border-[#FF7711] transition-colors"
-              />
-            </div>
 
-            <button
-              type="submit"
-              className="w-full sm:w-auto btn-orange-primary px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center space-x-2 shrink-0 shadow-md hover:shadow-orange-glow transition-all cursor-pointer"
-            >
-              <span>Subscribe</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </form>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full sm:w-auto btn-orange-primary px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center space-x-2 shrink-0 shadow-md hover:shadow-orange-glow transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>Subscribing...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Subscribe</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </>
+                )}
+              </button>
+            </form>
+
+            {errorMessage && (
+              <div className="p-2.5 rounded-xl bg-red-950/40 border border-red-500/50 flex items-center justify-center space-x-2 text-xs text-red-300">
+                <AlertCircle className="w-3.5 h-3.5 shrink-0 text-red-400" />
+                <span>{errorMessage}</span>
+              </div>
+            )}
+          </div>
         )}
 
         <div className="mt-4 text-[11px] font-mono text-[#666666]">

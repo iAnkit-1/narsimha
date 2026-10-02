@@ -111,6 +111,9 @@ export interface WhyReason {
   tagline: string;
   description: string;
   highlights: string[];
+  image: string;
+  accentColor: string;
+  tag: string;
 }
 
 // 1. Weekly Offline Activities
@@ -798,6 +801,9 @@ export const whyNarasimhaReasons: WhyReason[] = [
     description:
       "Students build, experiment, test, and create with real tools, components, and technology—not just learn from textbooks.",
     highlights: ["Real microcontrollers & sensors", "Zero theoretical rote memorization", "Trial-and-error troubleshooting mindset"],
+    image: "/High tech lab .png",
+    accentColor: "#FF7711",
+    tag: "Physical Prototyping",
   },
   {
     id: "why-2",
@@ -807,6 +813,9 @@ export const whyNarasimhaReasons: WhyReason[] = [
     description:
       "From Robotics, Coding, and AI to 3D Printing and emerging technologies, students develop relevant technical skills through practical learning.",
     highlights: ["Cutting-edge industry tools", "Aligned with NEP 2020 & ATL standards", "Updated annually with emerging deep tech"],
+    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80",
+    accentColor: "#38BDF8",
+    tag: "Modern Deep-Tech",
   },
   {
     id: "why-3",
@@ -816,6 +825,9 @@ export const whyNarasimhaReasons: WhyReason[] = [
     description:
       "Mentors support students through projects, challenges, experimentation, and problem-solving—helping them build with confidence.",
     highlights: ["Low student-to-mentor ratio (1:8)", "Engineers & passionate makers", "Personalized pace for every learner"],
+    image: "/robo with students.png",
+    accentColor: "#4ADE80",
+    tag: "1:8 Mentor Ratio",
   },
   {
     id: "why-4",
@@ -825,6 +837,9 @@ export const whyNarasimhaReasons: WhyReason[] = [
     description:
       "Students apply what they learn to build working prototypes, applications, robots, and innovative solutions to real-world problems.",
     highlights: ["Working tangible prototypes", "Personal portfolio of completed projects", "Certificate with verified skill credentials"],
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
+    accentColor: "#FB923C",
+    tag: "Tangible Builds",
   },
   {
     id: "why-5",
@@ -834,6 +849,9 @@ export const whyNarasimhaReasons: WhyReason[] = [
     description:
       "Students get opportunities to explore and participate in technology, coding, innovation, and robotics competitions such as Smart India Hackathon Junior Edition, IRIS National Science Fair, Avishkaar Makeathon, INOI, HPE CodeWars, FTC, VEX Robotics, and IRC, subject to eligibility and event availability.",
     highlights: ["National & International platform prep", "Competitive hackathon mentorship", "Stage presentation confidence"],
+    image: "/Event.png",
+    accentColor: "#FACC15",
+    tag: "Competitive Arena",
   },
   {
     id: "why-6",
@@ -843,6 +861,9 @@ export const whyNarasimhaReasons: WhyReason[] = [
     description:
       "Students develop coding, technical thinking, creativity, communication, teamwork, problem-solving, and innovation skills that can support their future academic and career journeys.",
     highlights: ["Analytical computational thinking", "Resilience & debugging grit", "Verbal presentation & pitching mastery"],
+    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
+    accentColor: "#A855F7",
+    tag: "Lifelong Capability",
   },
 ];
 

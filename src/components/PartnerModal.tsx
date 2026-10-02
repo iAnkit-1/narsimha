@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { X, Building2, CheckCircle2, Send } from "lucide-react";
+import { X, Building2, CheckCircle2, Send, Loader2, AlertCircle } from "lucide-react";
 import { companyDetails } from "../assets/data/navigation";
+import { sendEmailNotification } from "../services/emailService";
 
 interface PartnerModalProps {
   isOpen: boolean;
@@ -9,6 +10,8 @@ interface PartnerModalProps {
 
 export const PartnerModal: React.FC<PartnerModalProps> = ({ isOpen, onClose }) => {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     schoolName: "",
     contactPerson: "",
@@ -21,13 +24,34 @@ export const PartnerModal: React.FC<PartnerModalProps> = ({ isOpen, onClose }) =
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setErrorMessage(null);
+
+    const result = await sendEmailNotification({
+      formType: "partner_inquiry",
+      schoolName: formData.schoolName,
+      contactPerson: formData.contactPerson,
+      email: formData.email,
+      phone: formData.phone,
+      city: formData.city,
+      interest: formData.interest,
+      message: formData.message,
+    });
+
+    setIsSubmitting(false);
+
+    if (result.success) {
+      setSubmitted(true);
+    } else {
+      setErrorMessage(result.message || "Failed to send inquiry. Please try again or call us directly.");
+    }
   };
 
   const handleReset = () => {
     setSubmitted(false);
+    setErrorMessage(null);
     onClose();
   };
 
@@ -201,16 +225,33 @@ export const PartnerModal: React.FC<PartnerModalProps> = ({ isOpen, onClose }) =
                 />
               </div>
 
-              <div className="pt-2 flex items-center justify-between">
+              {errorMessage && (
+                <div className="p-3.5 rounded-xl bg-red-950/40 border border-red-500/50 flex items-center space-x-2.5 text-xs text-red-300 animate-in fade-in">
+                  <AlertCircle className="w-4 h-4 shrink-0 text-red-400" />
+                  <span>{errorMessage}</span>
+                </div>
+              )}
+
+              <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
                 <div className="text-[11px] font-mono text-[#707070]">
-                  Immediate help? Call: <span className="text-[#FF7711]">{companyDetails.phone}</span>
+                  Immediate help? Call: <span className="text-[#FF7711] font-semibold">{companyDetails.phone}</span>
                 </div>
                 <button
                   type="submit"
-                  className="btn-orange-primary flex items-center space-x-2 px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider"
+                  disabled={isSubmitting}
+                  className="w-full sm:w-auto btn-orange-primary flex items-center justify-center space-x-2 px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 >
-                  <span>Submit Inquiry</span>
-                  <Send className="w-3.5 h-3.5" />
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                      <span>Transmitting...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Submit Inquiry</span>
+                      <Send className="w-3.5 h-3.5" />
+                    </>
+                  )}
                 </button>
               </div>
             </form>
