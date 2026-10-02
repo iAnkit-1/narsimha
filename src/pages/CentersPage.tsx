@@ -170,7 +170,7 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
       {/* ========================================================================= */}
       {/* 1. HERO SECTION                                                          */}
       {/* ========================================================================= */}
-      <section className="relative w-full bg-[#090909] border-b border-[#222222] pt-14 pb-20 lg:pt-20 lg:pb-28 overflow-hidden">
+      <section className="relative w-full bg-[#090909] border-b border-[#222222] pt-24 pb-20 sm:pt-28 lg:pt-32 lg:pb-28 overflow-hidden">
         {/* Background glow effects & technical grid */}
         <div className="absolute inset-0 tech-grid opacity-15 pointer-events-none" />
         <div className="absolute -top-24 right-0 w-[550px] h-[550px] bg-[#FF7711]/10 blur-[140px] rounded-full pointer-events-none" />

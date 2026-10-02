@@ -1,11 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Bot, BrainCircuit, Code2,
-  Printer, Compass, Sparkles, Activity, CheckCircle2,
-  Boxes, Lightbulb, Wifi
-} from "lucide-react";
 import { media } from "../assets/data/media";
+import essentialSkillsImg from "../assets/Essential Skills_ 21st Century Tech Program.png";
 
 interface HeroProps {
   onExplorePrograms?: () => void;
@@ -61,7 +57,6 @@ const HERO_SLIDES: HeroSlide[] = [
 export const Hero: React.FC<HeroProps> = () => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [typedTitle, setTypedTitle] = useState("");
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const typingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const activeSlide = HERO_SLIDES[currentSlideIndex];
@@ -97,34 +92,8 @@ export const Hero: React.FC<HeroProps> = () => {
     };
   }, [currentSlideIndex, activeSlide.title]);
 
-  // Rotating images for the compact Essential Skills Card
-  const rotatingImages = media.heroValueCardImages || [
-    { url: media.hero, tag: "High-Tech Maker Lab" }
-  ];
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % rotatingImages.length);
-    }, 4000);
-    return () => clearInterval(timer);
-  }, [rotatingImages.length]);
-
-  const skillOfferings = [
-    { name: "Robotics", icon: Bot, highlight: true },
-    { name: "IoT", icon: Wifi, highlight: false },
-    { name: "AI/ML", icon: BrainCircuit, highlight: true },
-    { name: "STEM", icon: Sparkles, highlight: false },
-    { name: "ATL", icon: Activity, highlight: true },
-    { name: "Coding", icon: Code2, highlight: false },
-    { name: "Drone Tech", icon: Compass, highlight: false },
-    { name: "AR/VR", icon: Boxes, highlight: false },
-    { name: "Entrepreneurship", icon: Lightbulb, highlight: false },
-    { name: "3D-Printing", icon: Printer, highlight: true },
-    { name: "& Many More", icon: CheckCircle2, highlight: true },
-  ];
-
   return (
-    <section className="relative w-full min-h-[600px] lg:min-h-[680px] overflow-hidden flex flex-col justify-between pt-8 sm:pt-12 pb-0">
+    <section className="relative w-full min-h-[640px] lg:min-h-[720px] overflow-hidden flex flex-col justify-between pt-24 sm:pt-28 lg:pt-32 pb-0">
 
       {/* 1. Full-Width Background Video Player with Crystal-Clear Contrast */}
       <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
@@ -133,8 +102,8 @@ export const Hero: React.FC<HeroProps> = () => {
           loop
           muted
           playsInline
-          poster={media.hero}
-          className="w-full h-full object-cover filter brightness-[0.92] contrast-[1.08] saturate-[1.1] scale-100 transition-all"
+          preload="auto"
+          className="w-full h-full object-cover filter brightness-[0.92] contrast-[1.08] saturate-[1.1] scale-100 transition-all bg-[#080808]"
         >
           <source src={media.heroVideo} type="video/mp4" />
           <source src={media.heroVideoStatic} type="video/mp4" />
@@ -207,102 +176,14 @@ export const Hero: React.FC<HeroProps> = () => {
         </div>
       </div>
 
-      {/* 3. Essential Skills Of 21st Century Card - Independently Positioned at Bottom Right */}
-      <div className="w-full lg:w-auto relative lg:absolute lg:bottom-0 lg:right-6 xl:right-10 z-20 flex justify-end px-4 sm:px-6 lg:px-0 mt-auto">
-        <div className="relative w-full sm:max-w-md lg:w-[380px] xl:w-[410px] rounded-t-2xl rounded-b-none border-t border-x border-b-0 border-white/20 shadow-2xl shadow-black/95 group hover:border-[#FF7711]/70 transition-all duration-300 overflow-hidden">
-
-          {/* Changing Background Images Carousel Layer */}
-          <div className="absolute inset-0 w-full h-full z-0 bg-[#080808]">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentImageIndex}
-                initial={{ opacity: 0, scale: 1.05 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.6, ease: "easeInOut" }}
-                className="absolute inset-0 w-full h-full"
-              >
-                <img
-                  src={rotatingImages[currentImageIndex].url}
-                  alt={rotatingImages[currentImageIndex].tag}
-                  className="w-full h-full object-cover filter brightness-[0.75] contrast-105 group-hover:brightness-[0.95] group-hover:scale-105 transition-all duration-500"
-                />
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Translucent gradient overlay - significantly lightened on hover for crystal-clear image visibility */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/55 to-black/35 group-hover:from-black/65 group-hover:via-black/35 group-hover:to-black/15 transition-all duration-500" />
-            <div className="absolute top-0 inset-x-4 h-0.5 bg-gradient-to-r from-transparent via-[#FF7711] to-transparent z-10" />
-          </div>
-
-          {/* Foreground Text, Header & Skill Badges Placed DIRECTLY OVER the Changing Image */}
-          <div className="relative z-10 p-4 sm:p-4.5 flex flex-col justify-between">
-
-            {/* Header Row: We Offer + 100% Customizable badge */}
-            <div className="flex items-center justify-between gap-2 mb-1">
-              <div className="flex items-center space-x-1.5">
-                <span className="w-2 h-2 rounded-full bg-[#FF7711] animate-pulse" />
-                <span className="text-[10px] sm:text-[11px] font-mono font-extrabold uppercase tracking-widest text-[#FF7711]">
-                  WE OFFER
-                </span>
-              </div>
-
-              <div className="px-2 py-0.5 rounded-full bg-[#FF7711]/30 text-[#FF7711] border border-[#FF7711]/60 text-[9px] sm:text-[10px] font-mono font-bold tracking-wider uppercase flex items-center space-x-1 backdrop-blur-md shadow-sm">
-                <Sparkles className="w-2.5 h-2.5" />
-                <span>100% CUSTOMIZABLE</span>
-              </div>
-            </div>
-
-            {/* Main Card Title */}
-            <h3 className="text-base sm:text-lg font-extrabold text-[#FFFFFF] tracking-tight leading-snug mb-1.5 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-              Essential Skills Of 21st Century
-            </h3>
-
-            {/* Active Rotating Tag Banner & Carousel Dots */}
-            <div className="flex items-center justify-between mb-2.5 pb-2 border-b border-white/15">
-              <div className="flex items-center space-x-1.5">
-                <span className="px-2 py-0.5 rounded bg-black/80 text-[#FF7711] border border-[#FF7711]/40 text-[10px] font-mono font-bold uppercase backdrop-blur-sm shadow-sm">
-                  {rotatingImages[currentImageIndex].tag}
-                </span>
-              </div>
-
-              {/* Carousel Progress Indicators */}
-              <div className="flex items-center space-x-1">
-                {rotatingImages.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setCurrentImageIndex(idx)}
-                    className={`h-1 rounded-full transition-all cursor-pointer ${idx === currentImageIndex
-                        ? "w-3.5 bg-[#FF7711]"
-                        : "w-1 bg-white/40 hover:bg-white/70"
-                      }`}
-                    aria-label={`Go to slide ${idx + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Compact Skill Tags Placed Directly Over Changing Images */}
-            <div className="flex flex-wrap gap-1 sm:gap-1.5">
-              {skillOfferings.map((skill) => {
-                const Icon = skill.icon;
-                return (
-                  <div
-                    key={skill.name}
-                    className={`flex items-center space-x-1 px-2 py-0.5 sm:py-0.5 rounded text-[10px] sm:text-[11px] font-mono font-medium transition-all backdrop-blur-md shadow-sm ${skill.highlight
-                        ? "bg-[#111111]/85 border border-[#FF7711]/70 text-[#FFFFFF] group-hover:bg-[#111111]/75 shadow-[0_0_10px_rgba(255,119,17,0.2)]"
-                        : "bg-[#0A0A0A]/75 border border-white/15 text-white/90 group-hover:bg-[#0A0A0A]/60 hover:text-white hover:border-white/40"
-                      }`}
-                  >
-                    <Icon className={`w-2.5 h-2.5 sm:w-3 sm:h-3 ${skill.highlight ? "text-[#FF7711]" : "text-white/70"}`} />
-                    <span>{skill.name}</span>
-                  </div>
-                );
-              })}
-            </div>
-
-          </div>
-
+      {/* 3. Essential Skills Of 21st Century Image - Independently Positioned at Bottom Right */}
+      <div className="w-full lg:w-auto relative lg:absolute lg:bottom-0 lg:right-6 xl:right-10 z-20 flex justify-end px-4 sm:px-6 lg:px-0 mt-auto pointer-events-auto">
+        <div className="relative w-full sm:max-w-md lg:w-[380px] xl:w-[420px] transition-all duration-300">
+          <img
+            src={essentialSkillsImg}
+            alt="Essential Skills: 21st Century Tech Program"
+            className="w-full h-auto object-contain block filter drop-shadow-[0_12px_30px_rgba(0,0,0,0.7)] hover:scale-[1.02] transition-transform duration-300"
+          />
         </div>
       </div>
 

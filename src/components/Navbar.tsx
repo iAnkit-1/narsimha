@@ -41,13 +41,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onPartnerClick }) => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full transition-all duration-200">
+    <header className="fixed top-0 inset-x-0 z-50 w-full transition-all duration-300 pointer-events-auto">
       {/* Main Navbar */}
       <div
-        className={`w-full transition-all duration-200 ${isScrolled
+        className={`w-full transition-all duration-300 ${
+          isScrolled
             ? "bg-[#080808]/95 backdrop-blur-md border-b border-[#272727] py-2.5 shadow-lg shadow-black/60"
-            : "bg-[#080808] border-b border-[#272727]/60 py-3.5"
-          }`}
+            : "bg-transparent border-b border-transparent py-4 sm:py-5"
+        }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Brand Logo & Name */}
