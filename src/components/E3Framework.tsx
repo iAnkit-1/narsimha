@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import pedagogyImg from "../assets/OUR PEDAGOGY.png";
 
@@ -29,7 +30,7 @@ export const E3Framework: React.FC<E3FrameworkProps> = ({ onPartnerClick }) => {
   ];
 
   return (
-    <section id="e3-pedagogy" className="w-full bg-[#080808] border-b border-[#222222] py-16 lg:py-24 relative overflow-hidden">
+    <section id="e3-pedagogy" className="w-full bg-[#080808] border-b border-[#222222] py-20 lg:py-28 relative overflow-hidden">
       
       {/* Background Ambience Glow */}
       <div className="absolute top-1/3 left-1/4 w-[600px] h-[350px] bg-[#FF7711]/10 blur-[150px] rounded-full pointer-events-none" />
@@ -38,7 +39,13 @@ export const E3Framework: React.FC<E3FrameworkProps> = ({ onPartnerClick }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center max-w-3xl mx-auto mb-14"
+        >
           <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#FF7711]/40 mb-3.5 shadow-md">
             <span className="text-sm">⚡</span>
             <span className="text-xs font-mono uppercase tracking-widest text-[#FF7711] font-bold">
@@ -56,16 +63,20 @@ export const E3Framework: React.FC<E3FrameworkProps> = ({ onPartnerClick }) => {
           <p className="text-sm sm:text-base text-[#A3A3A3] leading-relaxed">
             We bridge the gap between traditional education and future readiness through a structured, three-stage transformation process.
           </p>
-        </div>
+        </motion.div>
 
         {/* 2-Column: 3 Stage Cards (Left) | Clean Pedagogy Diagram (Right) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
           {/* Left Column (6 cols): 3 Stage Cards */}
           <div className="lg:col-span-6 space-y-4 text-left">
-            {e3Points.map((point) => (
-              <div
+            {e3Points.map((point, idx) => (
+              <motion.div
                 key={point.title}
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.55, delay: idx * 0.12, ease: [0.22, 1, 0.36, 1] }}
                 className="p-5 sm:p-6 rounded-2xl bg-[#121212] border border-white/10 hover:border-[#FF7711]/50 transition-all duration-300 shadow-xl group hover:-translate-y-0.5"
               >
                 <div className="flex items-center space-x-3 mb-2">
@@ -77,11 +88,17 @@ export const E3Framework: React.FC<E3FrameworkProps> = ({ onPartnerClick }) => {
                 <p className="text-xs sm:text-sm text-[#CCCCCC] leading-relaxed pl-9 font-normal">
                   {point.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
 
             {onPartnerClick && (
-              <div className="pt-2 pl-1">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="pt-2 pl-1"
+              >
                 <button
                   onClick={onPartnerClick}
                   className="btn-orange-primary px-6 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center space-x-2 shadow-lg hover:shadow-orange-glow transition-all cursor-pointer"
@@ -89,12 +106,18 @@ export const E3Framework: React.FC<E3FrameworkProps> = ({ onPartnerClick }) => {
                   <span>Implement E³ In Your School</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
-              </div>
+              </motion.div>
             )}
           </div>
 
           {/* Right Column (6 cols): Direct Diagram without container borders */}
-          <div className="lg:col-span-6 flex items-center justify-center p-2">
+          <motion.div
+            initial={{ opacity: 0, x: 40, scale: 0.95 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-6 flex items-center justify-center p-2"
+          >
             <div className="w-full max-w-[440px] flex items-center justify-center">
               <img
                 src={pedagogyImg}
@@ -103,7 +126,7 @@ export const E3Framework: React.FC<E3FrameworkProps> = ({ onPartnerClick }) => {
                 loading="lazy"
               />
             </div>
-          </div>
+          </motion.div>
 
         </div>
 

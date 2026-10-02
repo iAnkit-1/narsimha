@@ -27,7 +27,7 @@ export const FutureSkillsProgram: React.FC<FutureSkillsProgramProps> = ({ onBook
   ];
 
   return (
-    <section id="future-skills-program" className="relative w-full py-12 lg:py-16 bg-[#080808] overflow-hidden">
+    <section id="future-skills-program" className="relative w-full py-14 lg:py-20 bg-[#080808] overflow-hidden">
       {/* Background ambient lighting */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#FF7711]/10 blur-[130px] rounded-full pointer-events-none" />
       <div className="absolute bottom-0 right-10 w-[400px] h-[300px] bg-[#3B82F6]/10 blur-[120px] rounded-full pointer-events-none" />
@@ -35,8 +35,13 @@ export const FutureSkillsProgram: React.FC<FutureSkillsProgramProps> = ({ onBook
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Main Banner Card */}
-        <div className="relative rounded-3xl bg-gradient-to-b from-[#161616] to-[#0D0D0D] border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.8)] p-6 sm:p-8 lg:p-10 overflow-hidden">
-          
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+          className="relative rounded-3xl bg-gradient-to-b from-[#161616] to-[#0D0D0D] border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.8)] p-6 sm:p-8 lg:p-10 overflow-hidden"
+        >
           {/* Subtle grid background pattern */}
           <div 
             className="absolute inset-0 opacity-[0.04] pointer-events-none"
@@ -49,9 +54,14 @@ export const FutureSkillsProgram: React.FC<FutureSkillsProgramProps> = ({ onBook
           {/* Top Main Section: Content (Left) + Robot & Students (Right) */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center relative z-10 mb-8 lg:mb-10">
             
-            {/* Left Content (7 cols) */}
-            <div className="lg:col-span-7 flex flex-col text-left">
-              
+            {/* Left Content (7 cols) - Slides in from left */}
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+              className="lg:col-span-7 flex flex-col text-left"
+            >
               {/* Badge: Offline - Class 3 Onwards */}
               <div className="inline-flex items-center space-x-2.5 px-4 py-2 rounded-full bg-[#1A1A1A] border border-[#FF7711]/40 w-fit mb-5 shadow-lg shadow-black/40 group hover:border-[#FF7711] transition-all">
                 <div className="w-6 h-6 rounded-full bg-[#FF7711] flex items-center justify-center text-black">
@@ -89,24 +99,33 @@ export const FutureSkillsProgram: React.FC<FutureSkillsProgramProps> = ({ onBook
                 {quickBenefits.map((b, idx) => {
                   const Icon = b.icon;
                   return (
-                    <div
+                    <motion.div
                       key={idx}
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.45, delay: 0.1 + idx * 0.08 }}
                       className="flex items-center space-x-2 p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/10 hover:border-white/20 transition-all backdrop-blur-sm"
                     >
                       <Icon className={`w-4 h-4 sm:w-5 sm:h-5 ${b.color} shrink-0`} />
                       <span className="text-[11px] sm:text-xs font-semibold text-[#E5E5E5] leading-snug">
                         {b.text}
                       </span>
-                    </div>
+                    </motion.div>
                   );
                 })}
               </div>
 
-            </div>
+            </motion.div>
 
-            {/* Right Visual Image & Floating Badges (5 cols) */}
-            <div className="lg:col-span-5 relative flex items-center justify-center pt-4 lg:pt-0">
-              
+            {/* Right Visual Image & Floating Badges (5 cols) - Slides in from right */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+              className="lg:col-span-5 relative flex items-center justify-center pt-4 lg:pt-0"
+            >
               {/* Glow background behind students */}
               <div className="absolute inset-0 bg-gradient-to-tr from-[#FF7711]/20 via-[#3B82F6]/15 to-transparent rounded-3xl blur-2xl pointer-events-none" />
 
@@ -160,12 +179,18 @@ export const FutureSkillsProgram: React.FC<FutureSkillsProgramProps> = ({ onBook
                 </div>
               </motion.div>
 
-            </div>
+            </motion.div>
 
           </div>
 
           {/* Bottom Card: Weekly Classes & Pricing Strip */}
-          <div className="rounded-2xl bg-[#101010]/95 border border-white/10 p-5 sm:p-6 shadow-xl relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="rounded-2xl bg-[#101010]/95 border border-white/10 p-5 sm:p-6 shadow-xl relative z-10"
+          >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
               
               {/* Left Details (7 cols) */}
@@ -254,9 +279,9 @@ export const FutureSkillsProgram: React.FC<FutureSkillsProgramProps> = ({ onBook
               </div>
 
             </div>
-          </div>
+          </motion.div>
 
-        </div>
+        </motion.div>
 
       </div>
     </section>

@@ -73,9 +73,9 @@ export const CoreOfferings: React.FC<CoreOfferingsProps> = ({ onPartnerClick }) 
       id: "innovation-fests",
       title: "Innovation Fests",
       tagline: "COMPETITIONS & EVENTS",
-      shortLabel: "Innovation Fests",
-      description: "We organize innovation fests, competitions, exhibitions, and events where students can showcase their ideas, build projects, and experience real-world problem solving.",
-      benefit: "Inter-school hackathons, awards & portfolio credentials.",
+      shortLabel: "Fests",
+      description: "We organize STEM exhibitions, robotics competitions, science fairs, and innovation challenges to give students a platform to showcase their ideas and projects.",
+      benefit: "Inter-school hackathons, regional expos & trophies.",
       icon: Trophy,
       image: media.event,
       accentColor: "#EC4899",
@@ -83,7 +83,7 @@ export const CoreOfferings: React.FC<CoreOfferingsProps> = ({ onPartnerClick }) 
   ];
 
   return (
-    <section id="atl-solutions" className="w-full bg-[#080808] border-b border-[#222222] py-16 lg:py-24 relative overflow-hidden">
+    <section id="atl-solutions" className="w-full bg-[#080808] border-b border-[#222222] py-20 lg:py-28 relative overflow-hidden">
 
       {/* Ambient background glow */}
       <div className="absolute top-1/4 left-1/3 w-[600px] h-[350px] bg-[#FF7711]/10 blur-[150px] rounded-full pointer-events-none" />
@@ -92,7 +92,13 @@ export const CoreOfferings: React.FC<CoreOfferingsProps> = ({ onPartnerClick }) 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center max-w-3xl mx-auto mb-14"
+        >
           <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#FF7711]/40 mb-3.5 shadow-md">
             <Sparkles className="w-3.5 h-3.5 text-[#FF7711]" />
             <span className="text-xs font-mono uppercase tracking-widest text-[#FF7711] font-bold">
@@ -110,17 +116,21 @@ export const CoreOfferings: React.FC<CoreOfferingsProps> = ({ onPartnerClick }) 
           <p className="text-sm sm:text-base text-[#A3A3A3] leading-relaxed">
             Everything a school needs to establish a thriving ecosystem of innovation. Hover or tap across any card to expand its capabilities.
           </p>
-        </div>
+        </motion.div>
 
         {/* Expanding Accordion Gallery Deck */}
         <div className="flex flex-col lg:flex-row gap-3 sm:gap-4 h-auto lg:h-[460px] w-full mb-14">
-          {offerings.map((offering) => {
+          {offerings.map((offering, idx) => {
             const Icon = offering.icon;
             const isExpanded = activeOfferingId === offering.id;
 
             return (
-              <div
+              <motion.div
                 key={offering.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
                 onMouseEnter={() => setActiveOfferingId(offering.id)}
                 onClick={() => setActiveOfferingId(offering.id)}
                 className={`relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 ease-out bg-[#111111] border shadow-2xl ${isExpanded
@@ -207,13 +217,19 @@ export const CoreOfferings: React.FC<CoreOfferingsProps> = ({ onPartnerClick }) 
                   )}
                 </AnimatePresence>
 
-              </div>
+              </motion.div>
             );
           })}
         </div>
 
         {/* Modular Ecosystem Integration Callout Banner */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#141414] via-[#111111] to-[#141414] border border-white/15 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#141414] via-[#111111] to-[#141414] border border-white/15 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl"
+        >
           <div className="space-y-1.5 text-left">
             <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-[#FF7711]/15 text-[#FF7711] border border-[#FF7711]/30 text-[11px] font-mono font-bold uppercase mb-1">
               <Sparkles className="w-3 h-3" />
@@ -234,7 +250,7 @@ export const CoreOfferings: React.FC<CoreOfferingsProps> = ({ onPartnerClick }) 
             <span>Discuss School Requirements</span>
             <ArrowRight className="w-4 h-4" />
           </button>
-        </div>
+        </motion.div>
 
       </div>
     </section>

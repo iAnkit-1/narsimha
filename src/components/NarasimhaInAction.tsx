@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { Camera, ArrowRight, ArrowUpRight, MapPin } from "lucide-react";
 import { media } from "../assets/data/media";
 
@@ -92,7 +93,13 @@ export const NarasimhaInAction: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Section Header (Centered) */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center max-w-3xl mx-auto mb-14"
+        >
           <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#FF7711]/40 mb-3.5 shadow-md">
             <Camera className="w-3.5 h-3.5 text-[#FF7711]" />
             <span className="text-xs font-mono uppercase tracking-widest text-[#FF7711] font-bold">
@@ -120,15 +127,19 @@ export const NarasimhaInAction: React.FC = () => {
             <span>Follow Our Journey</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </a>
-        </div>
+        </motion.div>
 
         {/* Gallery Story-Cards Grid (Image-First with Varied Slide Hover Effects) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {stories.map((story, idx) => {
             const isFeatured = idx === 6; // India's Next Step Forward / wide card
             return (
-              <div
+              <motion.div
                 key={story.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.55, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
                 className={`relative rounded-3xl overflow-hidden group border border-white/10 hover:border-[#FF7711]/60 transition-all duration-500 shadow-xl bg-[#111111] h-[280px] sm:h-[320px] ${isFeatured ? "md:col-span-2 lg:col-span-3 lg:h-[340px]" : ""
                   }`}
               >
@@ -188,7 +199,7 @@ export const NarasimhaInAction: React.FC = () => {
                   </div>
                 </div>
 
-              </div>
+              </motion.div>
             );
           })}
         </div>

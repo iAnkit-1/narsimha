@@ -556,10 +556,14 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
                   return (
                     <motion.div
                       key={step.num}
-                      initial={{ opacity: 0, x: -15 }}
+                      initial={{ opacity: 0, x: -60 }}
                       whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: idx * 0.1 }}
+                      viewport={{ once: true, amount: 0.15 }}
+                      transition={{
+                        duration: 0.65,
+                        delay: idx * 0.15,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
                       className={`p-4 sm:p-5 rounded-2xl bg-[#121212]/95 border border-white/10 ${step.hoverBorder} transition-all duration-300 group flex items-start space-x-3.5 shadow-lg hover:-translate-y-0.5`}
                     >
                       <div className={`w-10 h-10 rounded-xl ${step.bg} border ${step.border} flex items-center justify-center ${step.color} shrink-0 mt-0.5 group-hover:scale-110 transition-transform`}>
@@ -633,10 +637,14 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
                   return (
                     <motion.div
                       key={step.num}
-                      initial={{ opacity: 0, x: 15 }}
+                      initial={{ opacity: 0, x: 60 }}
                       whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: idx * 0.1 }}
+                      viewport={{ once: true, amount: 0.15 }}
+                      transition={{
+                        duration: 0.65,
+                        delay: idx * 0.15,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
                       className={`p-4 sm:p-5 rounded-2xl bg-[#121212]/95 border border-white/10 ${step.hoverBorder} transition-all duration-300 group flex items-start space-x-3.5 shadow-lg hover:-translate-y-0.5`}
                     >
                       <div className={`w-10 h-10 rounded-xl ${step.bg} border ${step.border} flex items-center justify-center ${step.color} shrink-0 mt-0.5 group-hover:scale-110 transition-transform`}>
