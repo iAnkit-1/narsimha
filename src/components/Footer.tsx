@@ -27,6 +27,7 @@ export const Footer: React.FC = () => {
 
   const companyLinks = [
     { label: "About Us", href: "#about-us" },
+    { label: "Gallery", href: "/gallery" },
     { label: "Our Team", href: "#why-narasimha" },
     { label: "Careers", href: "#contact" },
     { label: "Success Stories", href: "#proven-results" },

@@ -1,92 +1,14 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { Camera, ArrowRight, ArrowUpRight, MapPin } from "lucide-react";
-import { media } from "../assets/data/media";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Camera, ArrowRight, X, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
+import { featuredGalleryPhotos, type GalleryPhoto } from "../assets/data/galleryData";
 
 export const NarasimhaInAction: React.FC = () => {
-  const stories = [
-    {
-      id: "s1",
-      title: "Preparing IoT Project",
-      tag: "HARDWARE & SENSORS",
-      location: "Active Tinkering Lab",
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
-      description: "Students breadboarding ESP32 nodes to construct real-time telemetry environmental monitors.",
-      direction: "bottom",
-    },
-    {
-      id: "s2",
-      title: "Drone Testing Field Day",
-      tag: "FLIGHT LAB",
-      location: "Outdoor Campus Grounds",
-      image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=800&q=80",
-      description: "Live outdoor quadcopter flight calibrations, PID tuning, and safety clearance drills.",
-      direction: "left",
-    },
-    {
-      id: "s3",
-      title: "Drone Training Session",
-      tag: "AEROMODELLING",
-      location: "Maker Space",
-      image: "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&w=800&q=80",
-      description: "Assembling ESCs, brushless motors, and carbon fiber propellers step-by-step.",
-      direction: "right",
-    },
-    {
-      id: "s4",
-      title: "AI Logic Building",
-      tag: "MACHINE LEARNING",
-      location: "Computer Lab",
-      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
-      description: "Training OpenCV vision models and testing gesture-controlled robotic rovers.",
-      direction: "top",
-    },
-    {
-      id: "s5",
-      title: "Workshop - Hands-on Soldering",
-      tag: "TACTILE SKILLS",
-      location: "Electronics Bench",
-      image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
-      description: "Mastering safe soldering, component polarity, heat sinks, and PCB circuit trace soldering.",
-      direction: "bottom",
-    },
-    {
-      id: "s6",
-      title: "Mentorship - 1-on-1 Guidance",
-      tag: "FACULTY SUPPORT",
-      location: "FDP & Student Desk",
-      image: media.fdp,
-      description: "Dedicated Narasimha instructors assisting students through complex debugging loops.",
-      direction: "left",
-    },
-    {
-      id: "s7",
-      title: "Live Action - India’s Next Step Forward",
-      tag: "NATIONAL STAGE",
-      location: "Innovation Fest Showcase",
-      image: media.event,
-      description: "Young makers pitching their functional prototypes to industry judges and parents.",
-      direction: "bottom",
-    },
-  ];
-
-  const getSlideClass = (dir: string) => {
-    switch (dir) {
-      case "left":
-        return "-translate-x-full group-hover:translate-x-0";
-      case "right":
-        return "translate-x-full group-hover:translate-x-0";
-      case "top":
-        return "-translate-y-full group-hover:translate-y-0";
-      case "bottom":
-      default:
-        return "translate-y-full group-hover:translate-y-0";
-    }
-  };
+  const [activePreview, setActivePreview] = useState<GalleryPhoto | null>(null);
 
   return (
     <section id="narasimha-in-action" className="w-full bg-[#080808] border-b border-[#272727] py-20 lg:py-28 relative overflow-hidden">
-
       {/* Background ambient lighting */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#FF7711]/5 blur-[140px] pointer-events-none" />
 
@@ -114,97 +36,131 @@ export const NarasimhaInAction: React.FC = () => {
             </span>
           </h2>
 
-          <p className="text-sm sm:text-base text-[#A3A3A3] mb-5 leading-relaxed max-w-2xl mx-auto">
-            Real labs, real students, real results. See how our training programs transform campuses into hubs of innovation.
+          <p className="text-sm sm:text-base text-[#A3A3A3] leading-relaxed max-w-2xl mx-auto">
+            Real labs, real students, real results. See how our experiential learning programs transform campuses into hubs of innovation.
           </p>
-
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center space-x-1.5 text-xs font-mono text-[#FF7711] hover:underline font-bold px-4 py-2 rounded-full bg-[#141414] border border-[#FF7711]/30 hover:border-[#FF7711] transition-all shadow-md"
-          >
-            <span>Follow Our Journey</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </a>
         </motion.div>
 
-        {/* Gallery Story-Cards Grid (Image-First with Varied Slide Hover Effects) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {stories.map((story, idx) => {
-            const isFeatured = idx === 6; // India's Next Step Forward / wide card
-            return (
-              <motion.div
-                key={story.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.55, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                className={`relative rounded-3xl overflow-hidden group border border-white/10 hover:border-[#FF7711]/60 transition-all duration-500 shadow-xl bg-[#111111] h-[280px] sm:h-[320px] ${isFeatured ? "md:col-span-2 lg:col-span-3 lg:h-[340px]" : ""
-                  }`}
-              >
-                {/* Full Card Background Image */}
+        {/* Gallery Cards Grid (3 Columns just like attached reference image) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {featuredGalleryPhotos.map((photo, idx) => (
+            <motion.div
+              key={photo.id}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{
+                duration: 0.5,
+                delay: idx * 0.08,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              onClick={() => setActivePreview(photo)}
+              className="group relative rounded-3xl overflow-hidden bg-[#141414] border border-white/10 hover:border-[#FF7711]/70 transition-all duration-300 shadow-xl cursor-pointer aspect-[4/3]"
+            >
+              {/* Image */}
+              <img
+                src={photo.image}
+                alt={photo.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-[0.92] group-hover:brightness-100"
+                loading="lazy"
+              />
+
+              {/* Bottom Scrim Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
+
+              {/* Category Tag Badge */}
+              <div className="absolute top-3.5 left-3.5">
+                <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-black/80 backdrop-blur-md text-[#FF7711] font-bold border border-white/15 shadow-sm">
+                  {photo.categoryLabel}
+                </span>
+              </div>
+
+              {/* Text Info */}
+              <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5">
+                {photo.location && (
+                  <div className="flex items-center space-x-1 text-[10px] font-mono text-[#A1A1A1] mb-1">
+                    <MapPin className="w-3 h-3 text-[#FF7711]" />
+                    <span>{photo.location}</span>
+                  </div>
+                )}
+                <h3 className="text-base font-bold text-white group-hover:text-[#FF7711] transition-colors leading-snug mb-1">
+                  {photo.title}
+                </h3>
+                <p className="text-xs text-[#CCCCCC] leading-snug line-clamp-2">
+                  {photo.caption}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Prominent Centered "View All" Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-center mt-12 sm:mt-14"
+        >
+          <Link
+            to="/gallery"
+            className="btn-orange-primary px-8 py-3.5 rounded-2xl text-xs font-bold uppercase tracking-wider inline-flex items-center space-x-2 shadow-xl hover:shadow-orange-glow transition-all hover:scale-105 active:scale-95"
+          >
+            <span>View All Gallery Photos</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </motion.div>
+
+      </div>
+
+      {/* Lightbox Modal Preview */}
+      <AnimatePresence>
+        {activePreview && (
+          <div
+            className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4"
+            onClick={() => setActivePreview(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.25 }}
+              className="relative max-w-4xl w-full bg-[#121212] border border-[#2C2C2C] rounded-3xl overflow-hidden shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="relative h-80 sm:h-[480px] bg-black flex items-center justify-center">
                 <img
-                  src={story.image}
-                  alt={story.title}
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 filter brightness-[0.85] contrast-105"
-                  loading="lazy"
+                  src={activePreview.image}
+                  alt={activePreview.title}
+                  className="w-full h-full object-contain"
                 />
+                <button
+                  onClick={() => setActivePreview(null)}
+                  className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/80 text-white flex items-center justify-center border border-[#333333] hover:bg-[#FF7711] hover:text-black transition-colors cursor-pointer"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
 
-                {/* Ambient Bottom Gradient for Visible Heading in Default State */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none" />
-
-                {/* Top Tag Badge */}
-                <div className="absolute top-4 left-4 z-10">
-                  <span className="px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/15 text-[10px] font-mono text-[#FF7711] font-bold uppercase shadow-md">
-                    {story.tag}
+              <div className="p-6 bg-[#121212]">
+                <div className="flex items-center space-x-2 mb-2">
+                  <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#1C1C1C] text-[#FF7711] font-bold border border-[#2E2E2E]">
+                    {activePreview.categoryLabel}
                   </span>
                 </div>
 
-                {/* Default Visible Heading at Bottom */}
-                <div className="absolute bottom-0 inset-x-0 p-5 sm:p-6 z-10 transition-all duration-300 group-hover:opacity-0 group-hover:translate-y-2 pointer-events-none">
-                  <div className="flex items-center space-x-1.5 text-[11px] font-mono text-[#A3A3A3] mb-1">
-                    <MapPin className="w-3 h-3 text-[#FF7711]" />
-                    <span>{story.location}</span>
-                  </div>
-                  <h3 className="text-lg sm:text-xl font-black text-white tracking-tight leading-snug drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-                    {story.title}
-                  </h3>
-                </div>
-
-                {/* Dynamic Directional Slide-in Hover Overlay */}
-                <div
-                  className={`absolute inset-0 p-6 z-20 flex flex-col justify-end bg-gradient-to-t from-black/95 via-black/85 to-black/40 backdrop-blur-[2px] transition-transform duration-500 ease-out transform ${getSlideClass(
-                    story.direction
-                  )}`}
-                >
-                  <div className="flex items-center space-x-2 text-[10px] font-mono text-[#FF7711] font-bold uppercase mb-1.5">
-                    <span>📍 {story.location}</span>
-                  </div>
-
-                  <h3 className="text-lg sm:text-xl font-black text-white tracking-tight leading-tight mb-2 text-[#FF7711]">
-                    {story.title}
-                  </h3>
-
-                  <p className="text-xs sm:text-sm text-[#E5E5E5] leading-relaxed mb-4 font-normal">
-                    {story.description}
-                  </p>
-
-                  <div className="pt-3 border-t border-white/15 flex items-center justify-between text-xs font-mono text-white/80">
-                    <span className="text-[11px] text-[#A3A3A3]">Narasimha Live Campus</span>
-                    <span className="flex items-center space-x-1 text-[#FF7711] font-semibold">
-                      <span>View Story</span>
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </span>
-                  </div>
-                </div>
-
-              </motion.div>
-            );
-          })}
-        </div>
-
-      </div>
+                <h3 className="text-xl font-bold text-white mb-1">
+                  {activePreview.title}
+                </h3>
+                <p className="text-xs sm:text-sm text-[#A1A1A1]">
+                  {activePreview.caption}
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
+

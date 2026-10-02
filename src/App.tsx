@@ -8,6 +8,7 @@ import { PartnerModal } from "./components/PartnerModal";
 import { ProgramModal } from "./components/ProgramModal";
 import { HomePage } from "./pages/HomePage";
 import { CentersPage } from "./pages/CentersPage";
+import { GalleryPage } from "./pages/GalleryPage";
 import type { Course } from "./assets/data/specializedCourses";
 
 export function App() {
@@ -72,6 +73,14 @@ export function App() {
             path="/centers"
             element={
               <CentersPage
+                onOpenPartnerModal={() => setIsPartnerModalOpen(true)}
+              />
+            }
+          />
+          <Route
+            path="/gallery"
+            element={
+              <GalleryPage
                 onOpenPartnerModal={() => setIsPartnerModalOpen(true)}
               />
             }
