@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { Phone, Mail, MapPin, ArrowUp, Building } from "lucide-react";
 import { companyDetails } from "../assets/data/navigation";
 import { media } from "../assets/data/media";
@@ -13,9 +13,8 @@ export const Footer: React.FC = () => {
   };
 
   const handleLinkClick = (href: string) => {
-    if (href === "/" || href === "/centers") {
+    if (href.startsWith("/")) {
       navigate(href);
-      window.scrollTo({ top: 0, behavior: "smooth" });
     } else if (href.startsWith("#")) {
       if (location.pathname !== "/") {
         navigate("/" + href);
@@ -58,19 +57,19 @@ export const Footer: React.FC = () => {
           {/* Brand Block (4 cols) */}
           <div className="lg:col-span-4 flex flex-col justify-between">
             <div>
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="w-11 h-11 rounded-xl bg-[#111111] border border-[#272727] p-1 flex items-center justify-center shadow-md">
+              <Link to="/" className="flex items-center space-x-3 mb-4 group cursor-pointer inline-flex">
+                <div className="w-11 h-11 rounded-xl bg-[#111111] border border-[#272727] p-1 flex items-center justify-center shadow-md group-hover:border-[#FF7711]/60 transition-colors">
                   <img src={media.logo} alt="Narasimha Skill Sphere Logo" className="w-full h-full object-contain" />
                 </div>
                 <div>
-                  <h3 className="text-base font-extrabold text-[#F1F1F1] tracking-tight">
+                  <h3 className="text-base font-extrabold text-[#F1F1F1] tracking-tight group-hover:text-[#FF7711] transition-colors">
                     NARASIMHA <span className="text-[#FF7711]">SKILL SPHERE</span>
                   </h3>
                   <p className="text-[10px] font-mono text-[#707070] uppercase">
                     Private Limited
                   </p>
                 </div>
-              </div>
+              </Link>
 
               <p className="text-xs sm:text-sm text-[#CCCCCC] leading-relaxed max-w-sm mb-5">
                 To bridge classroom learning with real-world skill through affordable, accessible, high-quality, hands-on education.

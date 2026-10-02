@@ -45,7 +45,7 @@ export interface CourseDetail {
   build: string[];
   buildLabel: string;
   image: string;
-  level: "STARTER" | "LEARNER";
+  level: "STARTER" | "LEARNER" | "PERFORMER";
 }
 
 export interface StudentProject {
@@ -461,6 +461,81 @@ export const learnerCourses: CourseDetail[] = [
     buildLabel: "Students Build:",
     image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80",
     level: "LEARNER",
+  },
+];
+
+export const performerCourses: CourseDetail[] = [
+  {
+    id: "performer-robotics",
+    domain: "ROBOTICS",
+    emoji: "🤖",
+    title: "Industrial & Autonomous Robotics",
+    detail: "Master ROS (Robot Operating System), inverse kinematics, LiDAR SLAM navigation, and industrial automation.",
+    learn: ["ROS 2", "LiDAR SLAM", "Inverse Kinematics", "Industrial PLCs", "Computer Vision Integration", "Edge Compute", "Safety Norms"],
+    build: ["Autonomous Mapping Rover", "6-DOF Industrial Robotic Arm", "Vision-Guided Sorting Robot", "Factory AGV Prototype"],
+    buildLabel: "Students Build & Deploy:",
+    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80",
+    level: "PERFORMER",
+  },
+  {
+    id: "performer-coding",
+    domain: "CODING",
+    emoji: "💻",
+    title: "Full-Stack & Cloud Architecture",
+    detail: "Build scalable microservices, secure REST/GraphQL APIs, DevOps CI/CD pipelines, and high-performance applications.",
+    learn: ["Advanced Python/TypeScript", "React & Next.js", "FastAPI / Node", "Docker & Kubernetes", "PostgreSQL & Redis", "Cloud AWS/GCP", "System Design"],
+    build: ["Enterprise SaaS Platform", "Real-Time Telemetry Cloud", "Distributed Microservices", "Open-Source Contributions"],
+    buildLabel: "Students Architect & Build:",
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
+    level: "PERFORMER",
+  },
+  {
+    id: "performer-ai",
+    domain: "AI / ML",
+    emoji: "🧠",
+    title: "Deep Learning & Edge AI Engineering",
+    detail: "Train custom neural architectures, fine-tune transformer models, and optimize inference on embedded edge accelerators.",
+    learn: ["PyTorch & TensorFlow", "Deep Neural Networks (CNNs/RNNs)", "Transformer Models", "Edge AI (Nvidia Jetson)", "Model Quantization", "MLOps"],
+    build: ["Real-Time Edge Detection System", "Custom LLM Fine-Tuned Agent", "Autonomous Driving Perception Stack", "Biometric Diagnostic Tool"],
+    buildLabel: "Students Build & Publish:",
+    image: "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=800&q=80",
+    level: "PERFORMER",
+  },
+  {
+    id: "performer-3d",
+    domain: "3D PRINTING",
+    emoji: "🖨️",
+    title: "Parametric Engineering & Digital Fabrication",
+    detail: "Advanced generative design, finite element analysis (FEA), CNC machining protocols, and industrial rapid prototyping.",
+    learn: ["Autodesk Fusion 360 FEA", "Generative Design", "Multi-Material Slicing", "CNC G-Code", "Composite Filament Prototyping", "Design for Assembly"],
+    build: ["Topology-Optimized Aerospace Drone Frame", "High-Stress Gearbox Assembly", "Custom Ergonomic Bionic Prosthetics", "Injection Molding Die Design"],
+    buildLabel: "Students Fabricate:",
+    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    level: "PERFORMER",
+  },
+  {
+    id: "performer-drone",
+    domain: "DRONE TECHNOLOGY",
+    emoji: "🚁",
+    title: "Autonomous UAVs & Aeronautical Engineering",
+    detail: "Custom Pixhawk / ArduPilot integration, companion computers for optical flow, RTK GPS precision, and mission flight planning.",
+    learn: ["Pixhawk 6X & PX4 Stack", "Companion Computer (Raspberry Pi/Jetson)", "Optical Flow & Obstacle Avoidance", "RTK GPS Precision", "DGCA Regulations", "Aerodynamic Lift Analysis"],
+    build: ["Custom Heavy-Lift Hexacopter", "Autonomous Crop Health Inspection UAV", "Long-Range Telemetry Ground Station", "VTOL Hybrid Wing Prototype"],
+    buildLabel: "Students Build & Fly:",
+    image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=800&q=80",
+    level: "PERFORMER",
+  },
+  {
+    id: "performer-entrepreneur",
+    domain: "ENTREPRENEUR MINDSET",
+    emoji: "🚀",
+    title: "Venture Incubation & Patent Prototyping",
+    detail: "Transform high-tech student innovations into validated MVPs, file provisional patents, pitch to angel investors, and compete globally.",
+    learn: ["Product-Market Fit", "Provisional Patent Drafting", "Investor Pitch Decks", "Financial Modeling & Unit Economics", "Grant Application Strategy", "Global Hackathon Defense"],
+    build: ["Defensible MVP Prototype", "Provisional Patent Specification", "Institutional Pitch Deck", "National Innovation Competition Entry"],
+    buildLabel: "Students Deliver:",
+    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80",
+    level: "PERFORMER",
   },
 ];
 

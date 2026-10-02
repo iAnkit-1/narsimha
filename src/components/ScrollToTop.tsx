@@ -6,16 +6,23 @@ export const ScrollToTop = () => {
 
   useEffect(() => {
     if (hash) {
-      setTimeout(() => {
-        const element = document.querySelector(hash);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 100);
+      // In-page anchor hash navigation
+      const element = document.querySelector(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      } else {
+        const timer = setTimeout(() => {
+          const el = document.querySelector(hash);
+          el?.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+        return () => clearTimeout(timer);
+      }
     } else {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      // Instant reset to top on page route transition (SPA standard)
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
     }
   }, [pathname, hash]);
 
   return null;
 };
+

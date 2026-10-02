@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   ChevronLeft,
@@ -10,6 +10,7 @@ import {
   BarChart3,
   Users,
   ArrowRight,
+  Sparkles,
 } from "lucide-react";
 import { studentPortfolioProfiles } from "../assets/data/centersPageData";
 
@@ -21,6 +22,21 @@ export const CenterStudentPortfolio: React.FC<CenterStudentPortfolioProps> = ({
   onOpenPartnerModal,
 }) => {
   const [selectedStudentIndex, setSelectedStudentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const AUTO_PLAY_INTERVAL = 5000; // 5 seconds per student
+
+  // Automatic slide rotation
+  useEffect(() => {
+    if (isPaused) return;
+
+    const timer = setInterval(() => {
+      setSelectedStudentIndex((prev) =>
+        prev === studentPortfolioProfiles.length - 1 ? 0 : prev + 1
+      );
+    }, AUTO_PLAY_INTERVAL);
+
+    return () => clearInterval(timer);
+  }, [isPaused, selectedStudentIndex]);
 
   const handlePrevStudent = () => {
     setSelectedStudentIndex((prev) =>
@@ -75,8 +91,37 @@ export const CenterStudentPortfolio: React.FC<CenterStudentPortfolioProps> = ({
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
           className="relative max-w-6xl mx-auto mb-8"
         >
+          {/* Top Auto-Rotation Micro Indicator */}
+          <div className="flex items-center justify-between px-2 mb-2">
+            <span className="text-[10px] font-mono text-[#707070] flex items-center space-x-1.5">
+              <Sparkles className="w-3 h-3 text-[#38BDF8]" />
+              <span>
+                {isPaused
+                  ? "Auto-play paused on hover"
+                  : `Innovator ${selectedStudentIndex + 1} of ${studentPortfolioProfiles.length} • Auto-advancing`}
+              </span>
+            </span>
+
+            {/* Micro progress pill bars */}
+            <div className="flex items-center space-x-1.5">
+              {studentPortfolioProfiles.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setSelectedStudentIndex(i)}
+                  aria-label={`Go to student profile ${i + 1}`}
+                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                    selectedStudentIndex === i
+                      ? "w-7 bg-[#38BDF8] shadow-sm shadow-[#38BDF8]/50"
+                      : "w-2 bg-[#222222] hover:bg-[#444444]"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
           {/* Desktop Left / Right Floating Circular Navigation Buttons */}
           <button
             onClick={handlePrevStudent}
@@ -270,6 +315,8 @@ export const CenterStudentPortfolio: React.FC<CenterStudentPortfolioProps> = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
           className="flex flex-wrap items-center justify-center gap-3 mt-8 mb-8"
         >
           {studentPortfolioProfiles.map((student, idx) => (

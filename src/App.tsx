@@ -39,10 +39,8 @@ export function App() {
 
     if (role === "student") {
       navigate("/centers");
-      window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       navigate("/");
-      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 

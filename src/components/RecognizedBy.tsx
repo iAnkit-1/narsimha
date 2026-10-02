@@ -1,118 +1,98 @@
 import React from "react";
 import { ShieldCheck } from "lucide-react";
 
+import startupBiharLogo from "../assets/recognition/1. Startup Bihar.png";
+import dpiitLogo from "../assets/recognition/2. DPIIT LOGO.png";
+import deptIndustriesLogo from "../assets/recognition/3. Department-of-Industries-Bihar.png";
+import cimpLogo from "../assets/recognition/4. CIMP.png";
+import cimpBiifLogo from "../assets/recognition/5. CIMP bIIF.png";
+import iitPatnaLogo from "../assets/recognition/6. IC IIT PATNA.png";
+import msmeLogo from "../assets/recognition/7. MSME.png";
+import aicLogo from "../assets/recognition/8. AIC ALL.png";
+import ecellMceLogo from "../assets/recognition/9. ecellmcemotihari_logo.jpeg";
+
 interface OrganizationLogo {
   id: string;
   name: string;
   department: string;
   tag: string;
-  authority: string;
-  accentColor: string;
   badgeBg: string;
-  logoSvg: React.ReactNode;
+  logoSrc: string;
 }
 
 export const RecognizedBy: React.FC = () => {
   const organizations: OrganizationLogo[] = [
     {
-      id: "startup-india",
-      name: "STARTUP INDIA",
-      department: "DPIIT Recognized",
-      tag: "DPIIT / GOVT. OF INDIA",
-      authority: "Department for Promotion of Industry and Internal Trade",
-      accentColor: "#FF7711",
-      badgeBg: "bg-[#FF7711]/15 border-[#FF7711]/30 text-[#FF7711]",
-      logoSvg: (
-        <svg viewBox="0 0 120 120" className="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="60" cy="60" r="56" stroke="#FF7711" strokeWidth="3" fill="#181818" />
-          <path d="M60 22L72 46H48L60 22Z" fill="#FF7711" />
-          <path d="M42 54H78L60 90L42 54Z" fill="#06B6D4" />
-          <circle cx="60" cy="54" r="7" fill="#FFFFFF" />
-        </svg>
-      ),
-    },
-    {
       id: "startup-bihar",
       name: "STARTUP BIHAR",
-      department: "Dept. of Industries",
+      department: "Dept. of Industries, Govt. of Bihar",
       tag: "GOVT. OF BIHAR",
-      authority: "Department of Industries, Government of Bihar",
-      accentColor: "#10B981",
-      badgeBg: "bg-[#10B981]/15 border-[#10B981]/30 text-[#10B981]",
-      logoSvg: (
-        <svg viewBox="0 0 120 120" className="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="60" cy="60" r="56" stroke="#10B981" strokeWidth="3" fill="#181818" />
-          <path d="M60 25C48 35 40 50 40 68C40 82 50 92 60 95C70 92 80 82 80 68C80 50 72 35 60 25Z" fill="#10B981" fillOpacity="0.3" stroke="#10B981" strokeWidth="2.5" />
-          <path d="M60 38V85M48 55C54 60 66 60 72 55M52 70C56 74 64 74 68 70" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" />
-        </svg>
-      ),
+      badgeBg: "bg-emerald-500/15 border-emerald-500/30 text-emerald-400",
+      logoSrc: startupBiharLogo,
     },
     {
-      id: "aic-bihar-vidyapith",
-      name: "AIC BIHAR VIDYAPITH",
-      department: "Atal Incubation Centre",
-      tag: "AIM / NITI AAYOG SUPPORTED",
-      authority: "Atal Incubation Centre - Bihar Vidyapith",
-      accentColor: "#38BDF8",
-      badgeBg: "bg-[#38BDF8]/15 border-[#38BDF8]/30 text-[#38BDF8]",
-      logoSvg: (
-        <svg viewBox="0 0 120 120" className="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="60" cy="60" r="56" stroke="#38BDF8" strokeWidth="3" fill="#181818" />
-          <rect x="35" y="42" width="50" height="42" rx="6" stroke="#38BDF8" strokeWidth="2.5" fill="#38BDF8" fillOpacity="0.2" />
-          <path d="M48 64L57 73L74 52" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M60 26L78 38H42L60 26Z" fill="#38BDF8" />
-        </svg>
-      ),
-    },
-    {
-      id: "atal-incubation",
-      name: "ATAL INCUBATION CENTRE",
-      department: "Atal Innovation Mission",
-      tag: "AIM ECOSYSTEM",
-      authority: "NITI Aayog Atal Innovation Mission Incubator",
-      accentColor: "#F59E0B",
-      badgeBg: "bg-[#F59E0B]/15 border-[#F59E0B]/30 text-[#F59E0B]",
-      logoSvg: (
-        <svg viewBox="0 0 120 120" className="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="60" cy="60" r="56" stroke="#F59E0B" strokeWidth="3" fill="#181818" />
-          <circle cx="60" cy="60" r="28" stroke="#F59E0B" strokeWidth="2" strokeDasharray="4 4" />
-          <path d="M60 30V40M60 80V90M30 60H40M80 60H90" stroke="#F59E0B" strokeWidth="3" strokeLinecap="round" />
-          <path d="M52 52L68 68M68 52L52 68" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" />
-        </svg>
-      ),
-    },
-    {
-      id: "niti-aayog",
-      name: "NITI AAYOG",
-      department: "National Institution for Transforming India",
+      id: "dpiit-startup-india",
+      name: "DPIIT • STARTUP INDIA",
+      department: "Min. of Commerce & Industry, Govt. of India",
       tag: "GOVT. OF INDIA",
-      authority: "Premier Policy Think Tank, Government of India",
-      accentColor: "#A855F7",
-      badgeBg: "bg-[#A855F7]/15 border-[#A855F7]/30 text-[#A855F7]",
-      logoSvg: (
-        <svg viewBox="0 0 120 120" className="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="60" cy="60" r="56" stroke="#A855F7" strokeWidth="3" fill="#181818" />
-          <circle cx="60" cy="60" r="22" fill="#A855F7" fillOpacity="0.25" stroke="#A855F7" strokeWidth="2" />
-          <circle cx="60" cy="60" r="6" fill="#FFFFFF" />
-          <path d="M60 24V34M60 86V96M24 60H34M86 60H96M35 35L42 42M78 78L85 85M35 85L42 78M78 42L85 35" stroke="#A855F7" strokeWidth="2.5" strokeLinecap="round" />
-        </svg>
-      ),
+      badgeBg: "bg-orange-500/15 border-orange-500/30 text-orange-400",
+      logoSrc: dpiitLogo,
+    },
+    {
+      id: "dept-industries-bihar",
+      name: "DEPT. OF INDUSTRIES",
+      department: "Government of Bihar",
+      tag: "STATE GOVT.",
+      badgeBg: "bg-cyan-500/15 border-cyan-500/30 text-cyan-400",
+      logoSrc: deptIndustriesLogo,
+    },
+    {
+      id: "cimp",
+      name: "CIMP",
+      department: "Chandragupt Institute of Management Patna",
+      tag: "ACADEMIC PARTNER",
+      badgeBg: "bg-blue-500/15 border-blue-500/30 text-blue-400",
+      logoSrc: cimpLogo,
+    },
+    {
+      id: "cimp-biif",
+      name: "CIMP - BIIF",
+      department: "Business Incubation & Innovation Foundation",
+      tag: "INCUBATION PARTNER",
+      badgeBg: "bg-amber-500/15 border-amber-500/30 text-amber-400",
+      logoSrc: cimpBiifLogo,
+    },
+    {
+      id: "ic-iit-patna",
+      name: "IC IIT PATNA",
+      department: "Incubation Centre, IIT Patna",
+      tag: "TECH INCUBATION",
+      badgeBg: "bg-purple-500/15 border-purple-500/30 text-purple-400",
+      logoSrc: iitPatnaLogo,
     },
     {
       id: "msme",
       name: "MINISTRY OF MSME",
-      department: "Micro, Small & Medium Enterprises",
-      tag: "GOVT. OF INDIA",
-      authority: "Ministry of MSME, Government of India",
-      accentColor: "#EC4899",
-      badgeBg: "bg-[#EC4899]/15 border-[#EC4899]/30 text-[#EC4899]",
-      logoSvg: (
-        <svg viewBox="0 0 120 120" className="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="60" cy="60" r="56" stroke="#EC4899" strokeWidth="3" fill="#181818" />
-          <path d="M36 78V48L60 34L84 48V78L60 92L36 78Z" stroke="#EC4899" strokeWidth="2.5" fill="#EC4899" fillOpacity="0.2" />
-          <path d="M60 48V76M46 56L74 68M46 68L74 56" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" />
-        </svg>
-      ),
+      department: "Govt. of India Registered Enterprise",
+      tag: "MSME REGISTERED",
+      badgeBg: "bg-pink-500/15 border-pink-500/30 text-pink-400",
+      logoSrc: msmeLogo,
+    },
+    {
+      id: "aic-aim",
+      name: "ATAL INCUBATION CENTRE",
+      department: "Atal Innovation Mission • NITI Aayog",
+      tag: "AIM / NITI AAYOG",
+      badgeBg: "bg-yellow-500/15 border-yellow-500/30 text-yellow-400",
+      logoSrc: aicLogo,
+    },
+    {
+      id: "ecell-mce-motihari",
+      name: "E-CELL MCE MOTIHARI",
+      department: "Motihari College of Engineering",
+      tag: "ECOSYSTEM PARTNER",
+      badgeBg: "bg-teal-500/15 border-teal-500/30 text-teal-400",
+      logoSrc: ecellMceLogo,
     },
   ];
 
@@ -157,11 +137,16 @@ export const RecognizedBy: React.FC = () => {
           {marqueeItems.map((org, index) => (
             <div
               key={`${org.id}-${index}`}
-              className="group flex items-center space-x-4 px-5 sm:px-6 py-4 rounded-2xl bg-[#111111] border border-white/10 hover:border-[#FF7711]/60 transition-all duration-300 shadow-xl shrink-0 w-[290px] sm:w-[330px] cursor-pointer"
+              className="group flex items-center space-x-4 px-5 sm:px-6 py-4 rounded-2xl bg-[#111111] border border-white/10 hover:border-[#FF7711]/60 transition-all duration-300 shadow-xl shrink-0 w-[300px] sm:w-[340px] cursor-pointer"
             >
-              {/* Logo Emblem Icon */}
-              <div className="shrink-0 transform group-hover:scale-110 transition-transform duration-300">
-                {org.logoSvg}
+              {/* Real Official Logo Badge (White background well for perfect logo clarity) */}
+              <div className="w-14 h-14 rounded-xl bg-white p-1.5 flex items-center justify-center shrink-0 shadow-md border border-white/30 group-hover:scale-105 group-hover:shadow-lg transition-transform duration-300 overflow-hidden">
+                <img
+                  src={org.logoSrc}
+                  alt={`${org.name} official recognition logo`}
+                  className="w-full h-full object-contain filter contrast-[1.02]"
+                  loading="lazy"
+                />
               </div>
 
               {/* Text Info */}

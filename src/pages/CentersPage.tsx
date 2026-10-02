@@ -8,9 +8,7 @@ import { CenterStudentPortfolio } from "../components/CenterStudentPortfolio";
 import { CenterParentMessage } from "../components/CenterParentMessage";
 import { CenterWhyChoose } from "../components/CenterWhyChoose";
 import { CenterLearningSpaceGallery } from "../components/CenterLearningSpaceGallery";
-import { ThreeDGallery } from "../components/ThreeDGallery";
 import { CenterBookingCTA } from "../components/CenterBookingCTA";
-import { CenterFooterNav } from "../components/CenterFooterNav";
 import type { GalleryItem } from "../assets/data/centersPageData";
 
 interface CentersPageProps {
@@ -55,14 +53,8 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
       {/* 8. CENTER GALLERY (Inside Our Learning Space) */}
       <CenterLearningSpaceGallery onOpenPreview={(item) => setActiveGalleryPreview(item)} />
 
-      {/* 3D ROTATING GALLERY CAROUSEL */}
-      <ThreeDGallery onItemClick={(item) => setActiveGalleryPreview(item)} />
-
       {/* 9. FINAL CALL TO ACTION & BOOKING FORM */}
       <CenterBookingCTA onOpenPartnerModal={onOpenPartnerModal} />
-
-      {/* 10. RETURN TO HOMEPAGE & PARTNER NAVIGATION */}
-      <CenterFooterNav onOpenPartnerModal={onOpenPartnerModal} />
 
       {/* Lightbox Modal Preview */}
       {activeGalleryPreview && (
