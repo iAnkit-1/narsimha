@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Camera, X, ChevronLeft, ChevronRight, MapPin, ArrowRight } from "lucide-react";
+import { Camera, X, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { allGalleryPhotos, type GalleryPhoto } from "../assets/data/galleryData";
 import { Link } from "react-router-dom";
 
@@ -66,12 +66,6 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onOpenPartnerModal }) 
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           className="text-center max-w-3xl mx-auto mb-12"
         >
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#FF7711]/40 mb-4 shadow-md">
-            <Camera className="w-3.5 h-3.5 text-[#FF7711]" />
-            <span className="text-xs font-mono uppercase tracking-widest text-[#FF7711] font-bold">
-              OFFICIAL PHOTO GALLERY
-            </span>
-          </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
             Narasimha{" "}
@@ -108,7 +102,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onOpenPartnerModal }) 
         </motion.div>
 
         {/* Gallery Cards Grid (3 Columns just like reference image) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {filteredPhotos.map((photo, idx) => (
             <motion.div
               key={photo.id}
@@ -121,41 +115,15 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onOpenPartnerModal }) 
                 ease: [0.22, 1, 0.36, 1],
               }}
               onClick={() => handleOpenPreview(photo)}
-              className="group relative rounded-3xl overflow-hidden bg-[#141414] border border-white/10 hover:border-[#FF7711]/70 transition-all duration-300 shadow-xl cursor-pointer aspect-[4/3]"
+              className="group relative rounded-2xl sm:rounded-3xl overflow-hidden bg-[#141414] border border-white/10 hover:border-[#FF7711]/70 transition-all duration-300 shadow-xl cursor-pointer aspect-square sm:aspect-4/3"
             >
-              {/* Image */}
+              {/* Clean Image */}
               <img
                 src={photo.image}
-                alt={photo.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-[0.92] group-hover:brightness-100"
+                alt="Narasimha Gallery Photo"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                 loading="lazy"
               />
-
-              {/* Bottom Scrim Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
-
-              {/* Category Badge */}
-              <div className="absolute top-3.5 left-3.5">
-                <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-black/80 backdrop-blur-md text-[#FF7711] font-bold border border-white/15 shadow-sm">
-                  {photo.categoryLabel}
-                </span>
-              </div>
-
-              {/* Text Info */}
-              <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5">
-                {photo.location && (
-                  <div className="flex items-center space-x-1 text-[10px] font-mono text-[#A1A1A1] mb-1">
-                    <MapPin className="w-3 h-3 text-[#FF7711]" />
-                    <span>{photo.location}</span>
-                  </div>
-                )}
-                <h3 className="text-base font-bold text-white group-hover:text-[#FF7711] transition-colors leading-snug mb-1">
-                  {photo.title}
-                </h3>
-                <p className="text-xs text-[#CCCCCC] leading-snug line-clamp-2">
-                  {photo.caption}
-                </p>
-              </div>
             </motion.div>
           ))}
         </div>

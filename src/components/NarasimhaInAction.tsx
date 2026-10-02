@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Camera, ArrowRight, X, MapPin } from "lucide-react";
+import { Camera, ArrowRight, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { featuredGalleryPhotos, type GalleryPhoto } from "../assets/data/galleryData";
 
@@ -42,7 +42,7 @@ export const NarasimhaInAction: React.FC = () => {
         </motion.div>
 
         {/* Gallery Cards Grid (3 Columns just like attached reference image) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {featuredGalleryPhotos.map((photo, idx) => (
             <motion.div
               key={photo.id}
@@ -55,41 +55,15 @@ export const NarasimhaInAction: React.FC = () => {
                 ease: [0.22, 1, 0.36, 1],
               }}
               onClick={() => setActivePreview(photo)}
-              className="group relative rounded-3xl overflow-hidden bg-[#141414] border border-white/10 hover:border-[#FF7711]/70 transition-all duration-300 shadow-xl cursor-pointer aspect-[4/3]"
+              className="group relative rounded-2xl sm:rounded-3xl overflow-hidden bg-[#141414] border border-white/10 hover:border-[#FF7711]/70 transition-all duration-300 shadow-xl cursor-pointer aspect-square sm:aspect-4/3"
             >
-              {/* Image */}
+              {/* Clean Image */}
               <img
                 src={photo.image}
-                alt={photo.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-[0.92] group-hover:brightness-100"
+                alt="Narasimha Gallery Photo"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                 loading="lazy"
               />
-
-              {/* Bottom Scrim Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
-
-              {/* Category Tag Badge */}
-              <div className="absolute top-3.5 left-3.5">
-                <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-black/80 backdrop-blur-md text-[#FF7711] font-bold border border-white/15 shadow-sm">
-                  {photo.categoryLabel}
-                </span>
-              </div>
-
-              {/* Text Info */}
-              <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5">
-                {photo.location && (
-                  <div className="flex items-center space-x-1 text-[10px] font-mono text-[#A1A1A1] mb-1">
-                    <MapPin className="w-3 h-3 text-[#FF7711]" />
-                    <span>{photo.location}</span>
-                  </div>
-                )}
-                <h3 className="text-base font-bold text-white group-hover:text-[#FF7711] transition-colors leading-snug mb-1">
-                  {photo.title}
-                </h3>
-                <p className="text-xs text-[#CCCCCC] leading-snug line-clamp-2">
-                  {photo.caption}
-                </p>
-              </div>
             </motion.div>
           ))}
         </div>
@@ -106,7 +80,7 @@ export const NarasimhaInAction: React.FC = () => {
             to="/gallery"
             className="btn-orange-primary px-8 py-3.5 rounded-2xl text-xs font-bold uppercase tracking-wider inline-flex items-center space-x-2 shadow-xl hover:shadow-orange-glow transition-all hover:scale-105 active:scale-95"
           >
-            <span>View All Gallery Photos</span>
+            <span>View All</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>
