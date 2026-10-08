@@ -51,8 +51,11 @@ export const CenterLearningSpaceGallery: React.FC = () => {
                 CENTER GALLERY
               </span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FFFFFF] tracking-tight leading-tight">
-              Inside Our <span className="font-serif italic font-normal text-[#FF7711]">Learning Space</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.08]">
+              Inside Our{" "}
+              <span className="bg-gradient-to-r from-[#FF7711] via-[#FFA149] to-[#FF5500] bg-clip-text text-transparent">
+                Learning Space
+              </span>
             </h2>
             <p className="text-sm sm:text-base text-[#FF7711] font-mono mt-2">
               Learn. Build. Create. Repeat.

@@ -10,8 +10,7 @@ import {
   ExternalLink,
   CheckCircle2,
   AlertCircle,
-  Loader2,
-  Send,
+  MessageSquare,
 } from "lucide-react";
 import { companyDetails } from "../assets/data/navigation";
 import { sendEmailNotification } from "../services/emailService";
@@ -24,24 +23,46 @@ export const CenterBookingCTA: React.FC<CenterBookingCTAProps> = ({
   onOpenPartnerModal,
 }) => {
   const [visitSubmitted, setVisitSubmitted] = useState(false);
-  const [isVisitSubmitting, setIsVisitSubmitting] = useState(false);
   const [visitErrorMessage, setVisitErrorMessage] = useState<string | null>(null);
   const [visitForm, setVisitForm] = useState({
     parentName: "",
     studentName: "",
-    studentGrade: "Grades 6-8 (Learner / Junior Champs)",
+    studentGrade: "Grades 6-8 (Learner)",
     phone: "",
     email: "",
     preferredDate: "",
-    interestedTrack: "Robotics & Hardware",
+    interestedTrack: "🤖 Robotics & Hardware",
   });
 
-  const handleBookingSubmit = async (e: React.FormEvent) => {
+  const handleBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsVisitSubmitting(true);
     setVisitErrorMessage(null);
 
-    const result = await sendEmailNotification({
+    if (!visitForm.parentName.trim() || !visitForm.studentName.trim() || !visitForm.phone.trim()) {
+      setVisitErrorMessage("Please fill all required fields.");
+      return;
+    }
+
+    const formattedMessage = `👋 *Hello Narasimha Skill Sphere Team!*
+
+I would like to book a *45-Minute Free Trial Demo & Center Visit* at your offline center.
+
+📋 *Registration Details:*
+• *Parent / Guardian Name:* ${visitForm.parentName.trim()}
+• *Student / Child Name:* ${visitForm.studentName.trim()}
+• *Grade / Learning Level:* ${visitForm.studentGrade}
+• *Contact Mobile:* ${visitForm.phone.trim()}
+• *Preferred Track / Interest:* ${visitForm.interestedTrack}
+
+📍 *Location:* Patna Offline Center (Kankarbagh Lab)
+📞 Please share available batch slots and mentor consultation timings. Thank you!`;
+
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=919709719731&text=${encodeURIComponent(
+      formattedMessage
+    )}`;
+
+    // Background email logging
+    sendEmailNotification({
       formType: "center_trial_booking",
       parentName: visitForm.parentName,
       studentName: visitForm.studentName,
@@ -49,24 +70,21 @@ export const CenterBookingCTA: React.FC<CenterBookingCTAProps> = ({
       phone: visitForm.phone,
       interestedTrack: visitForm.interestedTrack,
       centerLocation: "Patna Learning Center",
-    });
+    }).catch(() => {});
 
-    setIsVisitSubmitting(false);
+    // Open WhatsApp in new tab
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
 
-    if (result.success) {
-      setVisitSubmitted(true);
-      try {
-        confetti({
-          particleCount: 80,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ["#FF7711", "#FF8A33", "#38BDF8", "#4ADE80", "#FFFFFF"],
-        });
-      } catch {
-        // ignore
-      }
-    } else {
-      setVisitErrorMessage(result.message || "Failed to submit booking. Please retry or call us directly.");
+    setVisitSubmitted(true);
+    try {
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ["#FF7711", "#FF8A33", "#38BDF8", "#4ADE80", "#FFFFFF"],
+      });
+    } catch {
+      // ignore
     }
   };
 
@@ -91,9 +109,9 @@ export const CenterBookingCTA: React.FC<CenterBookingCTAProps> = ({
             </div>
 
             {/* Headline */}
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FFFFFF] tracking-tight leading-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.08] mb-4">
               Their Future Starts With What They{" "}
-              <span className="font-serif italic font-normal text-[#FF7711]">
+              <span className="bg-gradient-to-r from-[#FF7711] via-[#FFA149] to-[#FF5500] bg-clip-text text-transparent">
                 Build Today.
               </span>
             </h2>
@@ -276,20 +294,10 @@ export const CenterBookingCTA: React.FC<CenterBookingCTAProps> = ({
 
                 <button
                   type="submit"
-                  disabled={isVisitSubmitting}
-                  className="w-full btn-orange-primary py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center space-x-2 mt-4 cursor-pointer shadow-lg hover:shadow-orange-glow transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full btn-orange-primary py-3.5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center justify-center space-x-2 mt-4 cursor-pointer shadow-lg hover:shadow-orange-glow transition-all"
                 >
-                  {isVisitSubmitting ? (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Reserving Trial Slot...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Confirm Free Trial Booking</span>
-                      <Send className="w-3.5 h-3.5" />
-                    </>
-                  )}
+                  <MessageSquare className="w-4 h-4" />
+                  <span>Confirm & Book on WhatsApp</span>
                 </button>
               </form>
             )}

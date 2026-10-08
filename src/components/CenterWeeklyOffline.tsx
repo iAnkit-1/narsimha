@@ -59,7 +59,7 @@ export const CenterWeeklyOffline: React.FC = () => {
               <h2 className="text-3xl sm:text-5xl lg:text-5xl font-black text-white tracking-tight leading-[1.08] mb-3">
                 Learning Happens <br />
                 <span className="bg-gradient-to-r from-[#FF7711] via-[#FFA149] to-[#FF5500] bg-clip-text text-transparent">
-                  Beyond the Screen.
+                  Beyond the Screen
                 </span>
               </h2>
 

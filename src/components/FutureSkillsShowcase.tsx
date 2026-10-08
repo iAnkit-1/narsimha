@@ -3,8 +3,19 @@ import { motion, AnimatePresence } from "framer-motion";
 import { 
   Sparkles, Activity, Cpu, Bot, BrainCircuit, 
   Code2, Printer, Compass, Palette, Lightbulb,
-  ArrowUpRight, ChevronLeft, ChevronRight, Pause, Play
+  ArrowUpRight, ChevronLeft, ChevronRight
 } from "lucide-react";
+
+import legoRoboticsImg from "../assets/champs/LEGO-style Robotics.png";
+import robotBuildingImg from "../assets/champs/Robot Building & Automation.png";
+import basicElectronicsImg from "../assets/champs/Basic Electronics.png";
+import advancedRoboticsImg from "../assets/champs/Advanced Robotic.png";
+import pythonAppliedAiImg from "../assets/champs/Python & Applied AI.png";
+import blockCodingImg from "../assets/champs/Block Coding.png";
+import threeDCadImg from "../assets/champs/3D.png";
+import droneSystemsImg from "../assets/champs/Drone Systems.png";
+import threeDPrintingPensImg from "../assets/champs/3D Printing Pens.png";
+import iotImg from "../assets/champs/Internet of Things.png";
 
 interface FutureSkillsShowcaseProps {
   onExploreSkill?: (skillTitle: string) => void;
@@ -36,7 +47,7 @@ export const FutureSkillsShowcase: React.FC<FutureSkillsShowcaseProps> = ({ onEx
       ribbonLabel: "STEM",
       description: "Learn Science, Technology, Engineering, and Mathematics through practical activities, experiments, and real-world projects.",
       icon: Sparkles,
-      image: "https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=1200&q=80",
+      image: legoRoboticsImg,
       accentColor: "#FF7711",
       badgeBg: "bg-[#FF7711]/20 text-[#FF7711] border-[#FF7711]/40",
     },
@@ -47,7 +58,7 @@ export const FutureSkillsShowcase: React.FC<FutureSkillsShowcaseProps> = ({ onEx
       ribbonLabel: "ATL Lab",
       description: "A hands-on innovation space where students explore ideas, build prototypes, experiment, and solve real-world problems.",
       icon: Activity,
-      image: "/High tech lab .png",
+      image: robotBuildingImg,
       accentColor: "#10B981",
       badgeBg: "bg-[#10B981]/20 text-[#10B981] border-[#10B981]/40",
     },
@@ -58,7 +69,7 @@ export const FutureSkillsShowcase: React.FC<FutureSkillsShowcaseProps> = ({ onEx
       ribbonLabel: "Electronics",
       description: "Understand circuits, sensors, components, and basic electronics by building and testing practical projects.",
       icon: Cpu,
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
+      image: basicElectronicsImg,
       accentColor: "#38BDF8",
       badgeBg: "bg-[#38BDF8]/20 text-[#38BDF8] border-[#38BDF8]/40",
     },
@@ -69,7 +80,7 @@ export const FutureSkillsShowcase: React.FC<FutureSkillsShowcaseProps> = ({ onEx
       ribbonLabel: "Robotics",
       description: "Learn how to design, build, and program robots to perform tasks and solve real-world challenges.",
       icon: Bot,
-      image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80",
+      image: advancedRoboticsImg,
       accentColor: "#F59E0B",
       badgeBg: "bg-[#F59E0B]/20 text-[#F59E0B] border-[#F59E0B]/40",
     },
@@ -80,7 +91,7 @@ export const FutureSkillsShowcase: React.FC<FutureSkillsShowcaseProps> = ({ onEx
       ribbonLabel: "AI & ML",
       description: "Explore how machines can learn, recognize patterns, understand information, and make smart decisions.",
       icon: BrainCircuit,
-      image: "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=1200&q=80",
+      image: pythonAppliedAiImg,
       accentColor: "#A855F7",
       badgeBg: "bg-[#A855F7]/20 text-[#A855F7] border-[#A855F7]/40",
     },
@@ -91,7 +102,7 @@ export const FutureSkillsShowcase: React.FC<FutureSkillsShowcaseProps> = ({ onEx
       ribbonLabel: "Coding",
       description: "Learn to create programs, games, websites, and applications while developing logical and problem-solving skills.",
       icon: Code2,
-      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80",
+      image: blockCodingImg,
       accentColor: "#EC4899",
       badgeBg: "bg-[#EC4899]/20 text-[#EC4899] border-[#EC4899]/40",
     },
@@ -102,7 +113,7 @@ export const FutureSkillsShowcase: React.FC<FutureSkillsShowcaseProps> = ({ onEx
       ribbonLabel: "3D Design",
       description: "Design ideas as 3D models using digital tools and turn them into real objects using 3D printing technology.",
       icon: Printer,
-      image: "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=1200&q=80",
+      image: threeDCadImg,
       accentColor: "#06B6D4",
       badgeBg: "bg-[#06B6D4]/20 text-[#06B6D4] border-[#06B6D4]/40",
     },
@@ -113,7 +124,7 @@ export const FutureSkillsShowcase: React.FC<FutureSkillsShowcaseProps> = ({ onEx
       ribbonLabel: "Drones",
       description: "Learn the basics of drones, including their design, components, control, safety, and practical applications.",
       icon: Compass,
-      image: "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&w=1200&q=80",
+      image: droneSystemsImg,
       accentColor: "#3B82F6",
       badgeBg: "bg-[#3B82F6]/20 text-[#38BDF8] border-[#3B82F6]/40",
     },
@@ -124,7 +135,7 @@ export const FutureSkillsShowcase: React.FC<FutureSkillsShowcaseProps> = ({ onEx
       ribbonLabel: "Digital Design",
       description: "Develop creativity through graphic design, digital content, visual communication, and technology-based creative projects.",
       icon: Palette,
-      image: "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=1200&q=80",
+      image: threeDPrintingPensImg,
       accentColor: "#F43F5E",
       badgeBg: "bg-[#F43F5E]/20 text-[#F43F5E] border-[#F43F5E]/40",
     },
@@ -135,7 +146,7 @@ export const FutureSkillsShowcase: React.FC<FutureSkillsShowcaseProps> = ({ onEx
       ribbonLabel: "Entrepreneurship",
       description: "Learn how to turn ideas into solutions, identify problems, develop products, and understand the basics of building a venture.",
       icon: Lightbulb,
-      image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80",
+      image: iotImg,
       accentColor: "#EAB308",
       badgeBg: "bg-[#EAB308]/20 text-[#EAB308] border-[#EAB308]/40",
     },
@@ -242,34 +253,13 @@ export const FutureSkillsShowcase: React.FC<FutureSkillsShowcaseProps> = ({ onEx
               {/* Gentle Translucent Gradient Overlay to let the image shine through clearly */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/10 group-hover:from-black/90 group-hover:via-black/50 group-hover:to-black/15 transition-all duration-300" />
 
-              {/* Top Bar: Icon + Category Badge + Counter */}
-              <div className="absolute top-5 inset-x-5 flex items-center justify-between z-10">
-                <div className="flex items-center space-x-2.5">
-                  <div 
-                    className="w-11 h-11 rounded-2xl bg-black/70 backdrop-blur-md border border-white/25 flex items-center justify-center shadow-lg"
-                    style={{ color: activeSkill.accentColor }}
-                  >
-                    <ActiveIcon className="w-5 h-5" />
-                  </div>
-                  <span className={`text-xs font-mono px-3 py-1 rounded-full border backdrop-blur-md font-bold shadow-md ${activeSkill.badgeBg}`}>
-                    {activeSkill.shortTag}
-                  </span>
-                </div>
-
-                <div className="flex items-center space-x-2">
-                  <span className="text-xs font-mono px-3 py-1 rounded-full bg-black/70 border border-white/20 text-white/90 backdrop-blur-md font-bold">
-                    {String(activeIndex + 1).padStart(2, "0")} / 10
-                  </span>
-                </div>
-              </div>
-
               {/* Default Bottom State (Visible by default, slides out on hover) */}
               <div className="absolute bottom-0 inset-x-0 p-6 sm:p-8 z-10 transition-all duration-300 transform group-hover:opacity-0 group-hover:-translate-y-3 pointer-events-none">
                 <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight leading-snug mb-1.5 drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
                   {activeSkill.title}
                 </h3>
                 <div className="flex items-center space-x-2 text-xs sm:text-sm font-mono font-semibold text-[#FFA149] drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
-                  <span>Hover to reveal detailed curriculum</span>
+                  <span>Click to know more</span>
                   <ArrowUpRight className="w-4 h-4" />
                 </div>
               </div>
@@ -289,17 +279,9 @@ export const FutureSkillsShowcase: React.FC<FutureSkillsShowcaseProps> = ({ onEx
                   </h3>
                 </div>
 
-                <p className="text-sm sm:text-base text-[#F5F5F5] leading-relaxed mb-5 max-w-2xl font-normal drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
+                <p className="text-sm sm:text-base text-[#F5F5F5] leading-relaxed max-w-2xl font-normal drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
                   {activeSkill.description}
                 </p>
-
-                <div className="pt-3 border-t border-white/25 flex items-center justify-between text-xs sm:text-sm font-mono">
-                  <span className="text-[#FF7711] font-bold">Experiential Lab Track</span>
-                  <span className="flex items-center space-x-1.5 text-white font-semibold">
-                    <span>Explore Track Details</span>
-                    <ArrowUpRight className="w-4 h-4 text-[#FF7711]" />
-                  </span>
-                </div>
 
               </div>
 
@@ -330,17 +312,8 @@ export const FutureSkillsShowcase: React.FC<FutureSkillsShowcaseProps> = ({ onEx
             <ChevronRight className="w-6 h-6" />
           </button>
 
-          {/* Bottom Overlaid Navigation Strip inside viewer (Play Button + Dots) */}
-          <div className="absolute bottom-3.5 inset-x-6 z-20 flex items-center justify-between pointer-events-auto">
-            {/* Play/Pause Button */}
-            <button
-              onClick={() => setIsPaused((prev) => !prev)}
-              className="p-1.5 rounded-lg bg-black/70 hover:bg-black border border-white/20 text-white/90 hover:text-white transition-all cursor-pointer backdrop-blur-md flex items-center space-x-1 text-[10px] font-mono"
-            >
-              {isPaused ? <Play className="w-3 h-3 text-[#FF7711]" /> : <Pause className="w-3 h-3 text-[#FF7711]" />}
-              <span className="hidden sm:inline">{isPaused ? "Play" : "Pause"}</span>
-            </button>
-
+          {/* Bottom Overlaid Navigation Strip inside viewer (Dots) */}
+          <div className="absolute bottom-3.5 inset-x-0 z-20 flex items-center justify-center pointer-events-auto">
             {/* Carousel Dot Indicators */}
             <div className="flex items-center space-x-1.5 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15">
               {skillsData.map((_, idx) => (
@@ -356,10 +329,6 @@ export const FutureSkillsShowcase: React.FC<FutureSkillsShowcaseProps> = ({ onEx
                 />
               ))}
             </div>
-
-            <span className="text-[10px] font-mono text-white/70 bg-black/60 px-2 py-1 rounded-md border border-white/10 hidden sm:inline">
-              10 DOMAINS
-            </span>
           </div>
 
         </div>

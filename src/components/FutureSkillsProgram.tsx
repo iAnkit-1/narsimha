@@ -244,7 +244,7 @@ export const FutureSkillsProgram: React.FC<FutureSkillsProgramProps> = ({ onBook
                 {/* Price tag */}
                 <div className="flex items-center space-x-2 mb-1">
                   <span className="text-2xl sm:text-3xl font-black text-[#FF7711] tracking-tight">
-                    ₹ 2,000
+                    ₹ 1,999
                   </span>
                   <span className="text-sm font-bold text-white/80">/ Month</span>
                 </div>

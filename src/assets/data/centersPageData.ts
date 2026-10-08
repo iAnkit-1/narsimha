@@ -1,5 +1,18 @@
 // Data source for /centers page at Narasimha Skill Sphere
 
+import legoRoboticsImg from "../champs/LEGO-style Robotics.png";
+import robotBuildingImg from "../champs/Robot Building & Automation.png";
+import basicElectronicsImg from "../champs/Basic Electronics.png";
+import advancedRoboticsImg from "../champs/Advanced Robotic.png";
+import pythonAppliedAiImg from "../champs/Python & Applied AI.png";
+import blockCodingImg from "../champs/Block Coding.png";
+import threeDCadImg from "../champs/3D.png";
+import droneSystemsImg from "../champs/Drone Systems.png";
+import threeDPrintingPensImg from "../champs/3D Printing Pens.png";
+import iotImg from "../champs/Internet of Things.png";
+import basicAiImg from "../champs/Basic Ai.png";
+import arduinoCImg from "../champs/Arduino & C.png";
+
 export interface WeeklyActivity {
   id: string;
   title: string;
@@ -300,7 +313,7 @@ export const starterCourses: CourseDetail[] = [
     detail: "Learn electronics, circuits, motors, sensors, mechanical systems, and basic robotics.",
     build: ["Line Follower", "Sensor Robot", "Obstacle Detection", "Basic Automation"],
     buildLabel: "Students Build:",
-    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80",
+    image: legoRoboticsImg,
     level: "STARTER",
   },
   {
@@ -312,7 +325,7 @@ export const starterCourses: CourseDetail[] = [
     learn: ["Computer Basics", "Coding Logic", "Algorithms", "Variables", "Loops", "Game Development", "AI Basics"],
     build: ["Games", "Animations", "Interactive Apps", "Simple Coding Projects"],
     buildLabel: "Students Build:",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
+    image: blockCodingImg,
     level: "STARTER",
   },
   {
@@ -324,7 +337,7 @@ export const starterCourses: CourseDetail[] = [
     learn: ["AI Fundamentals", "Data Basics", "Machine Learning Concepts", "Pattern Recognition", "AI Tools", "Responsible AI"],
     build: ["Simple AI Models", "Prediction Projects", "Image Recognition", "AI Experiments"],
     buildLabel: "Students Build:",
-    image: "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=800&q=80",
+    image: basicAiImg,
     level: "STARTER",
   },
   {
@@ -336,7 +349,7 @@ export const starterCourses: CourseDetail[] = [
     learn: ["3D Printing", "CAD Basics", "Tinkercad", "3D Modelling", "Materials", "Slicing"],
     build: ["Keychains", "Mini Models", "Mechanical Parts", "Custom Designs"],
     buildLabel: "Students Build:",
-    image: "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=800&q=80",
+    image: threeDPrintingPensImg,
     level: "STARTER",
   },
   {
@@ -348,7 +361,7 @@ export const starterCourses: CourseDetail[] = [
     learn: ["Drone Basics", "Components", "Flight Principles", "Propellers", "Motors", "Safety"],
     build: ["Flight Activities", "Basic Drone Projects"],
     buildLabel: "Students Build / Explore:",
-    image: "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&w=800&q=80",
+    image: droneSystemsImg,
     level: "STARTER",
   },
   {
@@ -360,7 +373,7 @@ export const starterCourses: CourseDetail[] = [
     learn: ["Money Basics", "Saving", "Budgeting", "Needs vs Wants", "Banking", "Smart Spending"],
     build: ["Personal Budget", "Savings Plan", "Money Management Activities"],
     buildLabel: "Students Create:",
-    image: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&w=800&q=80",
+    image: basicElectronicsImg,
     level: "STARTER",
   },
   {
@@ -372,7 +385,7 @@ export const starterCourses: CourseDetail[] = [
     learn: ["Idea Generation", "Problem Solving", "Creativity", "Teamwork", "Communication", "Basic Business Thinking"],
     build: ["Business Ideas", "Product Concepts", "Simple Pitches", "Innovation Projects"],
     buildLabel: "Students Create:",
-    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80",
+    image: iotImg,
     level: "STARTER",
   },
 ];
@@ -387,7 +400,7 @@ export const learnerCourses: CourseDetail[] = [
     learn: ["Arduino", "Programming", "Electronics", "Sensors", "Motor Control", "IoT", "Automation"],
     build: ["Smart Robots", "IoT Systems", "Automation Projects", "Advanced Robotics"],
     buildLabel: "Students Build:",
-    image: "https://images.unsplash.com/photo-1563770660941-20978e870e26?auto=format&fit=crop&w=800&q=80",
+    image: arduinoCImg,
     level: "LEARNER",
   },
   {
@@ -399,7 +412,7 @@ export const learnerCourses: CourseDetail[] = [
     learn: ["Python", "Java", "C/C++", "OOP", "APIs", "Data Handling", "Debugging", "Git", "AI-Assisted Coding"],
     build: ["Web Applications", "Management Systems", "Chatbots", "AI Applications", "Smart Utilities"],
     buildLabel: "Students Build:",
-    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80",
+    image: pythonAppliedAiImg,
     level: "LEARNER",
   },
   {
@@ -411,7 +424,7 @@ export const learnerCourses: CourseDetail[] = [
     learn: ["Python for AI", "Data Processing", "Machine Learning", "Model Training", "Computer Vision", "Generative AI", "AI APIs"],
     build: ["Prediction Models", "AI Assistants", "Image Recognition", "Recommendation Systems", "AI Applications"],
     buildLabel: "Students Build:",
-    image: "https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=800&q=80",
+    image: basicAiImg,
     level: "LEARNER",
   },
   {
@@ -423,7 +436,7 @@ export const learnerCourses: CourseDetail[] = [
     learn: ["Advanced CAD", "Fusion 360", "Precision Design", "Advanced Slicing", "Materials", "Prototyping", "Manufacturing"],
     build: ["Mechanical Components", "Robot Parts", "Product Prototypes", "Functional Enclosures"],
     buildLabel: "Students Build:",
-    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    image: threeDCadImg,
     level: "LEARNER",
   },
   {
@@ -435,7 +448,7 @@ export const learnerCourses: CourseDetail[] = [
     learn: ["Drone Components", "Flight Controllers", "Sensors", "Motors", "GPS", "Programming", "Automation", "Safety"],
     build: ["Drone Assembly", "Autonomous Flight Concepts", "Sensor-Based Systems", "Drone Applications"],
     buildLabel: "Students Build / Explore:",
-    image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=800&q=80",
+    image: droneSystemsImg,
     level: "LEARNER",
   },
   {
@@ -447,7 +460,7 @@ export const learnerCourses: CourseDetail[] = [
     learn: ["Budgeting", "Saving & Investing", "Banking", "Digital Payments", "Financial Planning", "Risk", "Entrepreneurship Finance"],
     build: ["Personal Financial Plan", "Investment Simulation", "Business Budget", "Financial Goals"],
     buildLabel: "Students Create:",
-    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80",
+    image: basicElectronicsImg,
     level: "LEARNER",
   },
   {
@@ -459,7 +472,7 @@ export const learnerCourses: CourseDetail[] = [
     learn: ["Design Thinking", "Market Research", "Business Models", "Product Development", "Marketing", "Communication", "Leadership"],
     build: ["Business Ideas", "Product Prototypes", "Business Models", "Pitch Decks", "Startup Projects"],
     buildLabel: "Students Build:",
-    image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80",
+    image: robotBuildingImg,
     level: "LEARNER",
   },
 ];
@@ -474,7 +487,7 @@ export const performerCourses: CourseDetail[] = [
     learn: ["ROS 2", "LiDAR SLAM", "Inverse Kinematics", "Industrial PLCs", "Computer Vision Integration", "Edge Compute", "Safety Norms"],
     build: ["Autonomous Mapping Rover", "6-DOF Industrial Robotic Arm", "Vision-Guided Sorting Robot", "Factory AGV Prototype"],
     buildLabel: "Students Build & Deploy:",
-    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80",
+    image: advancedRoboticsImg,
     level: "PERFORMER",
   },
   {
@@ -486,7 +499,7 @@ export const performerCourses: CourseDetail[] = [
     learn: ["Advanced Python/TypeScript", "React & Next.js", "FastAPI / Node", "Docker & Kubernetes", "PostgreSQL & Redis", "Cloud AWS/GCP", "System Design"],
     build: ["Enterprise SaaS Platform", "Real-Time Telemetry Cloud", "Distributed Microservices", "Open-Source Contributions"],
     buildLabel: "Students Architect & Build:",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
+    image: pythonAppliedAiImg,
     level: "PERFORMER",
   },
   {
@@ -498,7 +511,7 @@ export const performerCourses: CourseDetail[] = [
     learn: ["PyTorch & TensorFlow", "Deep Neural Networks (CNNs/RNNs)", "Transformer Models", "Edge AI (Nvidia Jetson)", "Model Quantization", "MLOps"],
     build: ["Real-Time Edge Detection System", "Custom LLM Fine-Tuned Agent", "Autonomous Driving Perception Stack", "Biometric Diagnostic Tool"],
     buildLabel: "Students Build & Publish:",
-    image: "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=800&q=80",
+    image: pythonAppliedAiImg,
     level: "PERFORMER",
   },
   {
@@ -510,7 +523,7 @@ export const performerCourses: CourseDetail[] = [
     learn: ["Autodesk Fusion 360 FEA", "Generative Design", "Multi-Material Slicing", "CNC G-Code", "Composite Filament Prototyping", "Design for Assembly"],
     build: ["Topology-Optimized Aerospace Drone Frame", "High-Stress Gearbox Assembly", "Custom Ergonomic Bionic Prosthetics", "Injection Molding Die Design"],
     buildLabel: "Students Fabricate:",
-    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    image: threeDCadImg,
     level: "PERFORMER",
   },
   {
@@ -522,7 +535,7 @@ export const performerCourses: CourseDetail[] = [
     learn: ["Pixhawk 6X & PX4 Stack", "Companion Computer (Raspberry Pi/Jetson)", "Optical Flow & Obstacle Avoidance", "RTK GPS Precision", "DGCA Regulations", "Aerodynamic Lift Analysis"],
     build: ["Custom Heavy-Lift Hexacopter", "Autonomous Crop Health Inspection UAV", "Long-Range Telemetry Ground Station", "VTOL Hybrid Wing Prototype"],
     buildLabel: "Students Build & Fly:",
-    image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=800&q=80",
+    image: droneSystemsImg,
     level: "PERFORMER",
   },
   {
@@ -534,7 +547,7 @@ export const performerCourses: CourseDetail[] = [
     learn: ["Product-Market Fit", "Provisional Patent Drafting", "Investor Pitch Decks", "Financial Modeling & Unit Economics", "Grant Application Strategy", "Global Hackathon Defense"],
     build: ["Defensible MVP Prototype", "Provisional Patent Specification", "Institutional Pitch Deck", "National Innovation Competition Entry"],
     buildLabel: "Students Deliver:",
-    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80",
+    image: robotBuildingImg,
     level: "PERFORMER",
   },
 ];

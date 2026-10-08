@@ -267,7 +267,6 @@ export const StudentLearningPath: React.FC<StudentLearningPathProps> = ({
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 mb-12"
           >
             {currentTierData.modules.map((mod, idx) => {
-              const Icon = mod.icon;
               const slideDirections = ["bottom", "left", "right", "top"];
               const dir = slideDirections[idx % slideDirections.length];
               const slideClass =
@@ -288,40 +287,22 @@ export const StudentLearningPath: React.FC<StudentLearningPathProps> = ({
                   onClick={() => onSelectCourseModal && onSelectCourseModal(mod.title)}
                   className="group relative h-[330px] rounded-2xl overflow-hidden border border-white/15 hover:border-[#FF7711]/60 transition-all duration-500 shadow-2xl cursor-pointer bg-[#101010]"
                 >
-                  {/* Background Image - Bright and clear */}
+                  {/* Clean Background Image */}
                   <img
                     src={mod.image}
                     alt={mod.title}
-                    className="absolute inset-0 w-full h-full object-cover filter brightness-[0.85] contrast-[1.05] group-hover:scale-110 group-hover:brightness-[0.95] transition-transform duration-700 ease-out"
+                    className="absolute inset-0 w-full h-full object-cover filter brightness-[1.0] group-hover:scale-110 group-hover:brightness-[0.95] transition-transform duration-700 ease-out"
                   />
 
-                  {/* Gentle gradient scrim to keep text legible while image stays clearly visible */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/10 pointer-events-none" />
-
-                  {/* Top Badges */}
-                  <div className="absolute top-3.5 inset-x-3.5 flex items-center justify-between z-10">
-                    <div 
-                      className="w-9 h-9 rounded-xl bg-black/60 backdrop-blur-md border border-white/25 flex items-center justify-center shadow-lg"
-                      style={{ color: currentTierData.accentColor }}
-                    >
-                      <Icon className="w-4 h-4" />
-                    </div>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-black/70 border border-white/20 text-white font-bold backdrop-blur-md shadow-sm">
-                      {mod.tag}
-                    </span>
-                  </div>
-
-                  {/* Default Bottom Content (Visible by default, slides out on hover) */}
-                  <div className="absolute bottom-0 inset-x-0 p-5 z-10 transition-all duration-300 transform group-hover:opacity-0 group-hover:-translate-y-3 pointer-events-none">
-                    <div className="flex items-center space-x-1.5 mb-1.5">
+                  {/* Default Bottom Content: Title and Detail with localized dark shadow mask */}
+                  <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5 z-10 transition-all duration-300 transform group-hover:opacity-0 group-hover:-translate-y-3 pointer-events-none bg-gradient-to-t from-black/95 via-black/75 to-transparent pt-12 pb-4">
+                    <div className="flex items-center space-x-1.5 mb-1">
                       <span className="text-base drop-shadow-md">{mod.iconEmoji}</span>
                       <h4 className="text-base font-bold text-white tracking-tight leading-snug drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
                         {mod.title}
                       </h4>
                     </div>
-                    <p className="text-xs text-[#E5E5E5] line-clamp-2 leading-relaxed drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
-                      {mod.detail}
-                    </p>
+
                   </div>
 
                   {/* Hover Overlay: Directional Slide-in Drawer showing full syllabus details */}

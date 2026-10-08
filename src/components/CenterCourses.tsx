@@ -3,14 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Laptop,
   CheckCircle2,
-  Bot,
-  Code2,
-  BrainCircuit,
-  Printer,
-  Compass,
-  Coins,
   Rocket,
-  Sparkles,
   MapPin,
   Calendar,
   PhoneCall,
@@ -20,9 +13,11 @@ import {
 } from "lucide-react";
 import { starterCourses, learnerCourses, performerCourses } from "../assets/data/centersPageData";
 import { companyDetails } from "../assets/data/navigation";
+import { TrialClassModal } from "./TrialClassModal";
 
 export const CenterCourses: React.FC = () => {
   const [activeCourseLevel, setActiveCourseLevel] = useState<"STARTER" | "LEARNER" | "PERFORMER">("STARTER");
+  const [isTrialModalOpen, setIsTrialModalOpen] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -96,27 +91,6 @@ export const CenterCourses: React.FC = () => {
     setIsDragging(false);
   };
 
-  const getCourseDomainIcon = (domain: string) => {
-    switch (domain.toUpperCase()) {
-      case "ROBOTICS":
-        return Bot;
-      case "CODING":
-        return Code2;
-      case "AI / ML":
-        return BrainCircuit;
-      case "3D PRINTING":
-        return Printer;
-      case "DRONE TECHNOLOGY":
-        return Compass;
-      case "FINANCIAL LITERACY":
-        return Coins;
-      case "ENTREPRENEUR MINDSET":
-        return Rocket;
-      default:
-        return Sparkles;
-    }
-  };
-
   return (
     <section id="our-courses" className="w-full bg-[#0B0B0B] border-b border-[#222222] py-20 lg:py-28 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -136,8 +110,11 @@ export const CenterCourses: React.FC = () => {
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FFFFFF] tracking-tight leading-tight mb-3">
-            OUR <span className="font-serif italic font-normal text-[#FF7711]">COURSES</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.08] mb-3">
+            OUR{" "}
+            <span className="bg-gradient-to-r from-[#FF7711] via-[#FFA149] to-[#FF5500] bg-clip-text text-transparent">
+              COURSES
+            </span>
           </h2>
 
           <p className="text-sm sm:text-base text-[#A1A1A1] leading-relaxed">
@@ -156,46 +133,41 @@ export const CenterCourses: React.FC = () => {
           <div className="inline-flex flex-wrap items-center justify-center p-1.5 rounded-2xl bg-[#141414] border border-[#2B2B2B] shadow-2xl gap-1.5 sm:gap-2">
             <button
               onClick={() => setActiveCourseLevel("STARTER")}
-              className={`px-5 sm:px-7 py-2.5 sm:py-3 rounded-xl font-mono text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center space-x-1.5 sm:space-x-2 ${
+              className={`px-5 sm:px-7 py-2 sm:py-2.5 rounded-xl font-mono text-xs sm:text-sm font-bold transition-all cursor-pointer flex flex-col items-center justify-center text-center ${
                 activeCourseLevel === "STARTER"
                   ? "bg-[#FF7711] text-black shadow-lg shadow-[#FF7711]/25 scale-[1.02]"
                   : "text-[#A1A1A1] hover:text-white hover:bg-[#1C1C1C]"
               }`}
             >
               <span>🌱 STARTER</span>
-              <span className="text-[10px] opacity-80">(Grades 1–4)</span>
+              <span className="text-[10px] opacity-80 font-normal mt-0.5">(Grades 1–4)</span>
             </button>
 
             <button
               onClick={() => setActiveCourseLevel("LEARNER")}
-              className={`px-5 sm:px-7 py-2.5 sm:py-3 rounded-xl font-mono text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center space-x-1.5 sm:space-x-2 ${
+              className={`px-5 sm:px-7 py-2 sm:py-2.5 rounded-xl font-mono text-xs sm:text-sm font-bold transition-all cursor-pointer flex flex-col items-center justify-center text-center ${
                 activeCourseLevel === "LEARNER"
                   ? "bg-[#38BDF8] text-black shadow-lg shadow-[#38BDF8]/25 scale-[1.02]"
                   : "text-[#A1A1A1] hover:text-white hover:bg-[#1C1C1C]"
               }`}
             >
               <span>⚡ LEARNER</span>
-              <span className="text-[10px] opacity-80">(Grades 5–8)</span>
+              <span className="text-[10px] opacity-80 font-normal mt-0.5">(Grades 5–8)</span>
             </button>
 
             <button
               onClick={() => setActiveCourseLevel("PERFORMER")}
-              className={`px-5 sm:px-7 py-2.5 sm:py-3 rounded-xl font-mono text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center space-x-1.5 sm:space-x-2 ${
+              className={`px-5 sm:px-7 py-2 sm:py-2.5 rounded-xl font-mono text-xs sm:text-sm font-bold transition-all cursor-pointer flex flex-col items-center justify-center text-center ${
                 activeCourseLevel === "PERFORMER"
                   ? "bg-[#4ADE80] text-black shadow-lg shadow-[#4ADE80]/25 scale-[1.02]"
                   : "text-[#A1A1A1] hover:text-white hover:bg-[#1C1C1C]"
               }`}
             >
               <span>🏆 PERFORMER</span>
-              <span className="text-[10px] opacity-80">(Grades 9–12)</span>
+              <span className="text-[10px] opacity-80 font-normal mt-0.5">(Grades 9–12)</span>
             </button>
           </div>
 
-          <span className="text-[11px] font-mono text-white/50 mt-4 text-center">
-            {activeCourseLevel === "PERFORMER"
-              ? "🏢 Performer level is exclusively conducted through in-person lab incubation at our center"
-              : "✨ Auto-moving cards • Drag with mouse/touch or swipe horizontally to freely explore"}
-          </span>
         </motion.div>
 
       </div>
@@ -204,11 +176,7 @@ export const CenterCourses: React.FC = () => {
       {activeCourseLevel !== "PERFORMER" && (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative w-full overflow-hidden py-4 group/carousel rounded-3xl">
-            {/* Left Blur + Gradient Fade Mask */}
-            <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-36 lg:w-44 bg-gradient-to-r from-[#0B0B0B] via-[#0B0B0B]/90 to-transparent backdrop-blur-[2px] z-20 pointer-events-none rounded-l-3xl" />
-
-            {/* Right Blur + Gradient Fade Mask */}
-            <div className="absolute right-0 top-0 bottom-0 w-20 sm:w-36 lg:w-44 bg-gradient-to-l from-[#0B0B0B] via-[#0B0B0B]/90 to-transparent backdrop-blur-[2px] z-20 pointer-events-none rounded-r-3xl" />
+    
 
             {/* Horizontally Scrollable & Draggable Track */}
             <div
@@ -234,7 +202,6 @@ export const CenterCourses: React.FC = () => {
             >
             {/* Duplicated list for infinite seamless wrap-around */}
             {[...activeCourseList, ...activeCourseList, ...activeCourseList].map((course, idx) => {
-              const DomainIcon = getCourseDomainIcon(course.domain);
               const slideDirections = [
                 "translate-y-full group-hover:translate-y-0",
                 "-translate-x-full group-hover:translate-x-0",
@@ -253,36 +220,17 @@ export const CenterCourses: React.FC = () => {
                     src={course.image}
                     alt={course.title}
                     draggable={false}
-                    className="absolute inset-0 w-full h-full object-cover filter brightness-[0.85] contrast-[1.05] group-hover:scale-110 group-hover:brightness-[0.95] transition-transform duration-700 ease-out pointer-events-none"
+                    className="absolute inset-0 w-full h-full object-cover filter brightness-[0.92] contrast-[1.03] group-hover:scale-110 group-hover:brightness-[0.98] transition-transform duration-700 ease-out pointer-events-none"
                   />
 
-                  {/* Gentle gradient scrim */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/15 pointer-events-none" />
+                  {/* Localized Bottom Gradient Mask only behind title */}
+                  <div className="absolute bottom-0 inset-x-0 h-28 bg-gradient-to-t from-black/95 via-black/60 to-transparent pointer-events-none" />
 
-                  {/* Top Badges */}
-                  <div className="absolute top-3.5 inset-x-3.5 flex items-center justify-between z-10 pointer-events-none">
-                    <div className="w-9 h-9 rounded-xl bg-black/70 backdrop-blur-md border border-white/25 flex items-center justify-center shadow-lg text-[#FF7711]">
-                      <DomainIcon className="w-4 h-4" />
-                    </div>
-                    <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-black/80 border border-white/20 text-white font-bold backdrop-blur-md shadow-sm">
-                      {course.domain}
-                    </span>
-                  </div>
-
-                  {/* Default Bottom Content (Visible by default, slides out on hover) */}
+                  {/* Default Bottom Content (Title only, slides out on hover) */}
                   <div className="absolute bottom-0 inset-x-0 p-5 z-10 transition-all duration-300 transform group-hover:opacity-0 group-hover:-translate-y-3 pointer-events-none">
-                    <div className="flex items-center space-x-1.5 mb-1">
-                      <span className="text-base drop-shadow-md">{course.emoji}</span>
-                      <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#FF7711]">
-                        {course.domain}
-                      </span>
-                    </div>
-                    <h4 className="text-lg font-bold text-white tracking-tight leading-snug drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] mb-1.5">
+                    <h4 className="text-lg font-bold text-white tracking-tight leading-snug drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
                       {course.title}
                     </h4>
-                    <p className="text-xs text-[#E5E5E5] line-clamp-2 leading-relaxed drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
-                      {course.detail}
-                    </p>
                   </div>
 
                   {/* Hover Overlay: Directional Slide-in Drawer */}
@@ -427,14 +375,14 @@ export const CenterCourses: React.FC = () => {
                     </p>
 
                     <div className="flex flex-col space-y-2.5 pt-2">
-                      <a
-                        href="#book-visit"
-                        className="btn-orange-primary w-full py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center space-x-2 shadow-lg hover:shadow-orange-glow transition-all text-center"
+                      <button
+                        onClick={() => setIsTrialModalOpen(true)}
+                        className="btn-orange-primary w-full py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center space-x-2 shadow-lg hover:shadow-orange-glow transition-all text-center cursor-pointer"
                       >
                         <Calendar className="w-4 h-4" />
                         <span>Book 45-Min Center Visit</span>
                         <ArrowRight className="w-3.5 h-3.5" />
-                      </a>
+                      </button>
 
                       <a
                         href={`tel:${companyDetails.phone.replace(/\s+/g, "")}`}
@@ -479,14 +427,20 @@ export const CenterCourses: React.FC = () => {
               Our mentors evaluate the student's background and map the best level for optimal growth.
             </p>
           </div>
-          <a
-            href="#book-visit"
-            className="btn-orange-primary px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider shrink-0"
+          <button
+            onClick={() => setIsTrialModalOpen(true)}
+            className="btn-orange-primary px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider shrink-0 cursor-pointer shadow-lg hover:shadow-orange-glow transition-all"
           >
             Request Syllabus & Trial
-          </a>
+          </button>
         </motion.div>
       </div>
+
+      {/* Trial Class / Syllabus Request Modal with WhatsApp Redirection */}
+      <TrialClassModal
+        isOpen={isTrialModalOpen}
+        onClose={() => setIsTrialModalOpen(false)}
+      />
     </section>
   );
 };

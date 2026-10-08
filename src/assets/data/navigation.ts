@@ -28,7 +28,7 @@ export const companyDetails = {
   shortName: "Narasimha Skill Sphere",
   tagline: "Learning-By-Doing",
   websiteUrl: "https://www.narasimhaskillsphere.com",
-  phone: "97 09 71 97 31",
+  phone: "97 0 97 1 97 31",
   email: "narasimhasphillsphere@gmail.com",
   brandDescription: "To bridge classroom learning with real-world skill through affordable, accessible, high-quality, hands-on education.",
   address: {

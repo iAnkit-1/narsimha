@@ -23,8 +23,11 @@ export const CenterWhyChoose: React.FC = () => {
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FFFFFF] tracking-tight leading-tight mb-4">
-            WHY <span className="font-serif italic font-normal text-[#FF7711]">NARASIMHA SKILL SPHERE?</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.08] mb-4">
+            WHY{" "}
+            <span className="bg-gradient-to-r from-[#FF7711] via-[#FFA149] to-[#FF5500] bg-clip-text text-transparent">
+              NARASIMHA SKILL SPHERE?
+            </span>
           </h2>
 
           <p className="text-sm sm:text-base text-[#A1A1A1] leading-relaxed">

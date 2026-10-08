@@ -55,12 +55,11 @@ export const CenterHero: React.FC<CenterHeroProps> = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="text-3xl sm:text-5xl lg:text-[54px] xl:text-[60px] font-extrabold text-[#FFFFFF] tracking-tight leading-[1.1] mb-4 drop-shadow-[0_3px_12px_rgba(0,0,0,0.95)]"
+            className="text-3xl sm:text-5xl lg:text-[54px] xl:text-[60px] font-black text-white tracking-tight leading-[1.08] mb-4 drop-shadow-[0_3px_12px_rgba(0,0,0,0.95)]"
           >
             Where Curiosity <br />
-            Becomes{" "}
-            <span className="bg-gradient-to-r from-[#FF7711] via-[#FFA149] to-[#FF5500] bg-clip-text text-transparent font-serif italic font-normal">
-              Creation.
+            <span className="bg-gradient-to-r from-[#FF7711] via-[#FFA149] to-[#FF5500] bg-clip-text text-transparent">
+              Becomes Creation.
             </span>
           </motion.h1>
 
@@ -71,7 +70,7 @@ export const CenterHero: React.FC<CenterHeroProps> = () => {
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
             className="text-base sm:text-xl font-bold text-[#38BDF8] tracking-tight mb-4 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
           >
-            Learning by Doing. Building Skills for Tomorrow.
+            Learning by Doing. Building Skills for Tomorrow
           </motion.p>
 
           {/* Primary Textual Content */}
@@ -81,9 +80,7 @@ export const CenterHero: React.FC<CenterHeroProps> = () => {
             transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
             className="space-y-2 mb-8 max-w-2xl"
           >
-            <p className="text-sm sm:text-base lg:text-[17px] text-[#E2E8F0] leading-relaxed font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
-              At Narasimha Skill Sphere, students don't just learn technology — they experience it, build with it, and turn ideas into real-world projects.
-            </p>
+           
             <p className="text-xs sm:text-sm text-[#CCCCCC] leading-relaxed font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
               From Robotics and Coding with AI to 3D Printing, our center provides a hands-on environment where young learners explore, experiment, solve problems, and create.
             </p>

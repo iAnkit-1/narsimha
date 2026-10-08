@@ -9,7 +9,6 @@ import {
   Award,
   BarChart3,
   Users,
-  ArrowRight,
   Sparkles,
 } from "lucide-react";
 import { studentPortfolioProfiles } from "../assets/data/centersPageData";
@@ -351,23 +350,6 @@ export const CenterStudentPortfolio: React.FC<CenterStudentPortfolioProps> = ({
           >
             <Users className="w-3.5 h-3.5 text-[#38BDF8]" />
             <span>Many More Innovators...</span>
-          </button>
-        </motion.div>
-
-        {/* Bottom CTA Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mt-6"
-        >
-          <button
-            onClick={onOpenPartnerModal}
-            className="btn-orange-primary px-8 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider inline-flex items-center space-x-2 shadow-lg hover:shadow-orange-glow transition-all cursor-pointer"
-          >
-            <span>Explore More Student Projects</span>
-            <ArrowRight className="w-4 h-4" />
           </button>
         </motion.div>
 
