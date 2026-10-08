@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Calendar, Sparkles, Compass, Cpu, Bot } from "lucide-react";
+import centerHeroVid from "../assets/center_hero.mp4";
 
 interface CenterHeroProps {
   onExploreCourses?: () => void;
@@ -9,147 +10,137 @@ interface CenterHeroProps {
 
 export const CenterHero: React.FC<CenterHeroProps> = () => {
   return (
-    <section className="relative w-full bg-[#090909] border-b border-[#222222] pt-24 pb-20 sm:pt-28 lg:pt-32 lg:pb-28 overflow-hidden">
-      {/* Background glow effects & technical grid */}
-      <div className="absolute inset-0 tech-grid opacity-15 pointer-events-none" />
-      <div className="absolute -top-24 right-0 w-[550px] h-[550px] bg-[#FF7711]/10 blur-[140px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 left-10 w-[450px] h-[450px] bg-[#38BDF8]/5 blur-[160px] rounded-full pointer-events-none" />
+    <section className="relative w-full min-h-[640px] lg:min-h-[720px] overflow-hidden flex flex-col justify-between pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 lg:pb-20">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      {/* 1. Full-Width Background Video Player with Contrast Gradient Overlays */}
+      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="w-full h-full object-cover filter brightness-[0.92] contrast-[1.08] saturate-[1.1] scale-100 transition-all bg-[#080808]"
+        >
+          <source src={centerHeroVid} type="video/mp4" />
+        </video>
 
-          {/* Left Content Column */}
+        {/* Multi-layered translucent gradient to ensure crisp text contrast over live video */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/35" />
+        <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[#080808]/90 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#080808] to-transparent" />
+      </div>
+
+      {/* 2. Hero Content Container */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col justify-center text-left my-auto">
+        <div className="max-w-3xl flex flex-col items-start text-left">
+
+          {/* Eyebrow Badge */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-7"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#111111]/90 border border-[#FF7711]/50 w-fit mb-5 backdrop-blur-md shadow-lg shadow-black/60"
           >
-            {/* Center Badge */}
-            <div className="inline-flex items-center space-x-2.5 px-3.5 py-1.5 rounded-full bg-[#141414] border border-[#2D2D2D] mb-6 shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#FF7711] animate-ping" />
-              <span className="text-[11px] font-mono tracking-widest text-[#FF7711] font-bold uppercase">
-                OUR CENTER • OFFLINE LEARNING LAB
-              </span>
-            </div>
-
-            {/* Main Headlines */}
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#FFFFFF] tracking-tight leading-[1.08] mb-4">
-              Where Curiosity <br className="hidden sm:inline" />
-              Becomes{" "}
-              <span className="font-serif italic font-normal text-[#FF7711]">
-                Creation.
-              </span>
-            </h1>
-
-            {/* Subhead */}
-            <p className="text-lg sm:text-xl font-medium text-[#E2E8F0] mb-5">
-              Learning by Doing. Building Skills for Tomorrow.
-            </p>
-
-            {/* Description */}
-            <p className="text-sm sm:text-base text-[#A1A1A1] leading-relaxed max-w-2xl font-normal mb-8">
-              At Narasimha Skill Sphere, students don't just learn technology — they experience it, build with it, and turn ideas into real-world projects. From Robotics and Coding with AI to 3D Printing, our center provides a hands-on environment where young learners explore, experiment, solve problems, and create.
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap items-center gap-4">
-              <a
-                href="#our-courses"
-                className="btn-orange-primary px-7 py-3.5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center space-x-2 shadow-lg hover:shadow-orange-glow transition-all cursor-pointer"
-              >
-                <span>Explore Our Courses</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
-
-              <a
-                href="#book-visit"
-                className="btn-dark-secondary px-6 py-3.5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center space-x-2 hover:border-[#FF7711] transition-all cursor-pointer"
-              >
-                <Calendar className="w-4 h-4 text-[#FF7711]" />
-                <span>Visit Our Center</span>
-              </a>
-            </div>
+            <span className="w-2 h-2 rounded-full bg-[#FF7711] animate-ping" />
+            <span className="text-xs font-mono uppercase tracking-widest text-[#FF7711] font-bold">
+              OUR CENTER
+            </span>
+            <span className="text-xs text-white/50">•</span>
+            <span className="text-xs font-mono text-white/80">Offline Innovation Lab</span>
           </motion.div>
 
-          {/* Right Interactive Lab Card & Visual Showcase */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.94, y: 20 }}
-            whileInView={{ opacity: 1, scale: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.75, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-5"
+          {/* Main Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="text-3xl sm:text-5xl lg:text-[54px] xl:text-[60px] font-extrabold text-[#FFFFFF] tracking-tight leading-[1.1] mb-4 drop-shadow-[0_3px_12px_rgba(0,0,0,0.95)]"
           >
-            <div className="relative rounded-3xl bg-gradient-to-b from-[#181818] via-[#121212] to-[#0D0D0D] border border-[#2A2A2A] p-2 shadow-2xl overflow-hidden group">
+            Where Curiosity <br />
+            Becomes{" "}
+            <span className="bg-gradient-to-r from-[#FF7711] via-[#FFA149] to-[#FF5500] bg-clip-text text-transparent font-serif italic font-normal">
+              Creation.
+            </span>
+          </motion.h1>
 
-              {/* Visual Image with Overlay */}
-              <div className="relative h-64 sm:h-72 rounded-2xl overflow-hidden bg-[#181818]">
-                <img
-                  src="/High tech lab .png"
-                  alt="Narasimha Skill Sphere Robotics & Innovation Lab"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0E0E0E] via-[#0E0E0E]/40 to-transparent" />
+          {/* Subhead Tagline */}
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            className="text-base sm:text-xl font-bold text-[#38BDF8] tracking-tight mb-4 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
+          >
+            Learning by Doing. Building Skills for Tomorrow.
+          </motion.p>
 
-                {/* Floating Live Badge */}
-                <div className="absolute top-3 left-3 inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-[#333333] text-[10px] font-mono font-bold text-[#FF7711]">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>PATNA FLAGSHIP LAB</span>
-                </div>
+          {/* Primary Textual Content */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+            className="space-y-2 mb-8 max-w-2xl"
+          >
+            <p className="text-sm sm:text-base lg:text-[17px] text-[#E2E8F0] leading-relaxed font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
+              At Narasimha Skill Sphere, students don't just learn technology — they experience it, build with it, and turn ideas into real-world projects.
+            </p>
+            <p className="text-xs sm:text-sm text-[#CCCCCC] leading-relaxed font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
+              From Robotics and Coding with AI to 3D Printing, our center provides a hands-on environment where young learners explore, experiment, solve problems, and create.
+            </p>
+          </motion.div>
 
-                {/* Floating Metric Badge */}
-                <div className="absolute bottom-3 right-3 px-3 py-1.5 rounded-xl bg-black/85 backdrop-blur-md border border-[#333333] text-right">
-                  <span className="text-[10px] font-mono text-[#888888] block">STUDENT RATIO</span>
-                  <span className="text-xs font-mono font-bold text-white">1:8 Dedicated Mentorship</span>
-                </div>
-              </div>
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+            className="flex flex-wrap items-center gap-4 mb-8"
+          >
+            <a
+              href="#our-courses"
+              className="btn-orange-primary px-7 py-3.5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center space-x-2 shadow-[0_4px_20px_rgba(255,119,17,0.45)] hover:shadow-[0_4px_30px_rgba(255,119,17,0.7)] hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+            >
+              <span>Explore Our Courses</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
 
-              {/* Card Features Info */}
-              <div className="p-5 sm:p-6">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs font-mono text-[#FF7711] font-bold tracking-wider uppercase">
-                    IN-CENTER IMMERSION
-                  </span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#202020] text-[#CCCCCC]">
-                    Grades K – 12
-                  </span>
-                </div>
+            <a
+              href="#book-visit"
+              className="btn-dark-secondary px-6 py-3.5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center space-x-2 hover:border-[#FF7711] backdrop-blur-md bg-black/40 transition-all cursor-pointer"
+            >
+              <Calendar className="w-4 h-4 text-[#FF7711]" />
+              <span>Visit Our Center</span>
+            </a>
+          </motion.div>
 
-                <h3 className="text-base sm:text-lg font-bold text-white mb-2">
-                  Robotics, IoT, 3D Printing & AI Workbenches
-                </h3>
-
-                <p className="text-xs text-[#A1A1A1] leading-relaxed mb-5">
-                  Equipped with real microcontrollers, additive manufacturing 3D printers, autonomous rovers, and sensor testing enclosures.
-                </p>
-
-                {/* 4 Mini Stat Pills */}
-                <div className="grid grid-cols-2 gap-2.5 pt-3 border-t border-[#222222] text-[11px] font-mono">
-                  <div className="flex items-center space-x-2 p-2 rounded-lg bg-[#141414] text-[#E2E8F0]">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#FF7711] shrink-0" />
-                    <span>100% Hands-On</span>
-                  </div>
-                  <div className="flex items-center space-x-2 p-2 rounded-lg bg-[#141414] text-[#38BDF8] shrink-0">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#38BDF8] shrink-0" />
-                    <span>7 Core Tracks</span>
-                  </div>
-                  <div className="flex items-center space-x-2 p-2 rounded-lg bg-[#141414] text-[#E2E8F0]">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#4ADE80] shrink-0" />
-                    <span>Real Hardware Kits</span>
-                  </div>
-                  <div className="flex items-center space-x-2 p-2 rounded-lg bg-[#141414] text-[#E2E8F0]">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-purple-400 shrink-0" />
-                    <span>Hackathon Prep</span>
-                  </div>
-                </div>
-              </div>
-
+          {/* Quick Pillar Highlights Strip */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="flex flex-wrap items-center gap-3 pt-4 border-t border-white/10 text-xs font-mono text-white/80"
+          >
+            <div className="flex items-center space-x-1.5 px-3 py-1 rounded-lg bg-black/50 border border-white/10 backdrop-blur-sm">
+              <Bot className="w-3.5 h-3.5 text-[#FF7711]" />
+              <span>Robotics & Drone Lab</span>
+            </div>
+            <div className="flex items-center space-x-1.5 px-3 py-1 rounded-lg bg-black/50 border border-white/10 backdrop-blur-sm">
+              <Cpu className="w-3.5 h-3.5 text-[#38BDF8]" />
+              <span>AI & Coding Workbench</span>
+            </div>
+            <div className="flex items-center space-x-1.5 px-3 py-1 rounded-lg bg-black/50 border border-white/10 backdrop-blur-sm">
+              <Compass className="w-3.5 h-3.5 text-[#4ADE80]" />
+              <span>3D Printing & Making</span>
+            </div>
+            <div className="flex items-center space-x-1.5 px-3 py-1 rounded-lg bg-black/50 border border-white/10 backdrop-blur-sm">
+              <Sparkles className="w-3.5 h-3.5 text-[#F59E0B]" />
+              <span>100% Hands-On</span>
             </div>
           </motion.div>
 
         </div>
       </div>
+
     </section>
   );
 };

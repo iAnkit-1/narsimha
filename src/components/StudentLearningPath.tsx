@@ -5,6 +5,22 @@ import {
   Layers, ArrowRight, Sparkles, Terminal, Rocket, CheckCircle2
 } from "lucide-react";
 
+// Real High-Definition Champs Assets from /assets/champs
+import basicElectronicsImg from "../assets/champs/Basic Electronics.png";
+import blockCodingImg from "../assets/champs/Block Coding.png";
+import legoRoboticsImg from "../assets/champs/LEGO-style Robotics.png";
+import threeDPrintingPensImg from "../assets/champs/3D Printing Pens.png";
+
+import arduinoAndCImg from "../assets/champs/Arduino & C.png";
+import iotImg from "../assets/champs/Internet of Things.png";
+import robotBuildingImg from "../assets/champs/Robot Building & Automation.png";
+import threeDCadImg from "../assets/champs/3D.png";
+
+import pythonAppliedAiImg from "../assets/champs/Python & Applied AI.png";
+import droneSystemsImg from "../assets/champs/Drone Systems.png";
+import advancedRoboticsImg from "../assets/champs/Advanced Robotic.png";
+import basicAiImg from "../assets/champs/Basic Ai.png";
+
 interface StudentLearningPathProps {
   onSelectCourseModal?: (courseTitle: string) => void;
   onPartnerClick?: () => void;
@@ -33,7 +49,7 @@ export const StudentLearningPath: React.FC<StudentLearningPathProps> = ({
           detail: "Sensors, LEDs and motors.",
           skills: ["Sensors & LEDs", "Motors & Switches", "Breadboard Basics"],
           tag: "Hardware Basics",
-          image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
+          image: basicElectronicsImg,
         },
         {
           icon: Code2,
@@ -42,7 +58,7 @@ export const StudentLearningPath: React.FC<StudentLearningPathProps> = ({
           detail: "Visual logic and sequencing with Scratch & MIT App Inventor.",
           skills: ["Algorithmic Logic", "Event Triggers", "Game Loops"],
           tag: "Visual Logic",
-          image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
+          image: blockCodingImg,
         },
         {
           icon: Bot,
@@ -51,7 +67,7 @@ export const StudentLearningPath: React.FC<StudentLearningPathProps> = ({
           detail: "Mechanical assembly and motion.",
           skills: ["Gears & Pulleys", "Chassis Assembly", "Motor Drives"],
           tag: "Mechanics",
-          image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80",
+          image: legoRoboticsImg,
         },
         {
           icon: Printer,
@@ -60,7 +76,7 @@ export const StudentLearningPath: React.FC<StudentLearningPathProps> = ({
           detail: "Spatial thinking and making.",
           skills: ["3D Geometry", "Spatial Thinking", "Hands-on Prototyping"],
           tag: "Spatial Design",
-          image: "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=800&q=80",
+          image: threeDPrintingPensImg,
         },
       ],
     },
@@ -80,7 +96,7 @@ export const StudentLearningPath: React.FC<StudentLearningPathProps> = ({
           detail: "Programming and automation.",
           skills: ["Arduino C++", "Python Scripting", "Web & Automation"],
           tag: "Embedded Code",
-          image: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&w=800&q=80",
+          image: arduinoAndCImg,
         },
         {
           icon: Wifi,
@@ -89,7 +105,7 @@ export const StudentLearningPath: React.FC<StudentLearningPathProps> = ({
           detail: "Cloud-connected projects.",
           skills: ["Wi-Fi Nodes", "Sensor Relays", "Smart Home Systems"],
           tag: "Cloud IoT",
-          image: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&w=800&q=80",
+          image: iotImg,
         },
         {
           icon: Bot,
@@ -98,7 +114,7 @@ export const StudentLearningPath: React.FC<StudentLearningPathProps> = ({
           detail: "Build, wire and program robots using sensors, motors and controllers.",
           skills: ["Obstacle Navigation", "Sensors & Controllers", "Kinematics"],
           tag: "Autonomous Systems",
-          image: "https://images.unsplash.com/photo-1563770660941-20978e870e26?auto=format&fit=crop&w=800&q=80",
+          image: robotBuildingImg,
         },
         {
           icon: Compass,
@@ -107,7 +123,7 @@ export const StudentLearningPath: React.FC<StudentLearningPathProps> = ({
           detail: "Design and export prototypes for additive manufacturing.",
           skills: ["Solid Modeling", "Slicing Software", "Iterative Design"],
           tag: "Digital Fabrication",
-          image: "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=800&q=80",
+          image: threeDCadImg,
         },
       ],
     },
@@ -127,7 +143,7 @@ export const StudentLearningPath: React.FC<StudentLearningPathProps> = ({
           detail: "Train computer vision models and deploy neural nets on embedded edge chips.",
           skills: ["OpenCV Vision", "TensorFlow Lite", "Edge Telemetry"],
           tag: "Edge AI",
-          image: "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=800&q=80",
+          image: pythonAppliedAiImg,
         },
         {
           icon: Rocket,
@@ -136,7 +152,7 @@ export const StudentLearningPath: React.FC<StudentLearningPathProps> = ({
           detail: "Flight controllers, telemetry, PID tuning and aeromodelling.",
           skills: ["Flight Controllers", "PID Tuning", "Payload Dynamics"],
           tag: "Aeronautics",
-          image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=800&q=80",
+          image: droneSystemsImg,
         },
         {
           icon: Printer,
@@ -145,7 +161,7 @@ export const StudentLearningPath: React.FC<StudentLearningPathProps> = ({
           detail: "FDM 3D printing, laser fabrication, and assembly for hackathon-grade prototypes.",
           skills: ["G-Code Optimization", "Tolerance Engineering", "Mechatronics"],
           tag: "Industrial Design",
-          image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
+          image: advancedRoboticsImg,
         },
         {
           icon: Layers,
@@ -154,7 +170,7 @@ export const StudentLearningPath: React.FC<StudentLearningPathProps> = ({
           detail: "Turn an invention into a viable patent disclosure and pitch deck.",
           skills: ["Patent Documentation", "Pitch Deck Design", "Market Validation"],
           tag: "Intellectual Property",
-          image: "https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=800&q=80",
+          image: basicAiImg,
         },
       ],
     },
