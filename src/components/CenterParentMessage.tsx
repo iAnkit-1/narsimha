@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Users, Heart, ArrowRight } from "lucide-react";
+import parentMessageImg from "../assets/gallery/1770302025979.jpg";
 
 export const CenterParentMessage: React.FC = () => {
   return (
@@ -92,7 +93,7 @@ export const CenterParentMessage: React.FC = () => {
             >
               <div className="relative rounded-3xl overflow-hidden border border-white/15 bg-[#161616] shadow-2xl group">
                 <img
-                  src="/parents_child_robotics.jpg"
+                  src={parentMessageImg}
                   alt="Parents and child exploring robotics and STEM learning together"
                   className="w-full h-full object-cover object-center filter brightness-[0.95] contrast-[1.05] group-hover:scale-105 transition-transform duration-700"
                 />
