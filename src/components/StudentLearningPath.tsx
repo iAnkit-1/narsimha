@@ -179,7 +179,7 @@ export const StudentLearningPath: React.FC<StudentLearningPathProps> = ({
   const currentTierData = learningTiers[activeTier];
 
   return (
-    <section id="student-pathways" className="w-full bg-[#080808] border-b border-[#222222] py-20 lg:py-28 relative overflow-hidden">
+    <section id="student-pathways" className="w-full bg-[#080808] border-b border-[#222222] py-12 sm:py-14 lg:py-16 relative overflow-hidden">
       
       {/* Background Ambient Aura */}
       <div 

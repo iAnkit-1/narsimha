@@ -51,7 +51,7 @@ export const CenterStudentPortfolio: React.FC<CenterStudentPortfolioProps> = ({
   const currentStudent = studentPortfolioProfiles[selectedStudentIndex] || studentPortfolioProfiles[0];
 
   return (
-    <section className="w-full bg-[#080808] border-b border-[#222222] py-20 lg:py-28 relative overflow-hidden">
+    <section className="w-full bg-[#080808] border-b border-[#222222] py-12 sm:py-14 lg:py-16 relative overflow-hidden">
       {/* Background ambient lighting */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-[#FF7711]/5 blur-[160px] pointer-events-none rounded-full" />
       <div className="absolute top-10 left-10 w-96 h-96 bg-[#38BDF8]/5 blur-[140px] pointer-events-none rounded-full" />

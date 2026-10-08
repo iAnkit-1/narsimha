@@ -89,7 +89,7 @@ I would like to book a *45-Minute Free Trial Demo & Center Visit* at your offlin
   };
 
   return (
-    <section id="book-visit" className="w-full bg-[#080808] border-b border-[#222222] py-20 lg:py-28 relative">
+    <section id="book-visit" className="w-full bg-[#080808] border-b border-[#222222] py-12 sm:py-14 lg:py-16 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">

@@ -14,7 +14,7 @@ import stairsImg from "../assets/stairs.png";
 
 export const CenterLearningJourney: React.FC = () => {
   return (
-    <div className="mb-20">
+    <div className="mb-12 sm:mb-14">
       {/* Top Heading & Description */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}

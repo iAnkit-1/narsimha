@@ -10,7 +10,7 @@ interface CenterHeroProps {
 
 export const CenterHero: React.FC<CenterHeroProps> = () => {
   return (
-    <section className="relative w-full min-h-[640px] lg:min-h-[720px] overflow-hidden flex flex-col justify-between pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 lg:pb-20">
+    <section className="relative w-full min-h-[640px] lg:min-h-[720px] overflow-hidden flex flex-col justify-between pt-24 sm:pt-28 lg:pt-32 pb-6 sm:pb-8 lg:pb-10">
 
       {/* 1. Full-Width Background Video Player with Contrast Gradient Overlays */}
       <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">

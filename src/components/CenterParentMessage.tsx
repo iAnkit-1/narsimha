@@ -4,7 +4,7 @@ import { Users, Heart, ArrowRight } from "lucide-react";
 
 export const CenterParentMessage: React.FC = () => {
   return (
-    <section className="w-full bg-[#090909] border-b border-[#222222] py-20 lg:py-28 relative overflow-hidden">
+    <section className="w-full bg-[#090909] border-b border-[#222222] py-12 sm:py-14 lg:py-16 relative overflow-hidden">
       {/* Glow ambient background accents */}
       <div className="absolute top-1/2 right-10 -translate-y-1/2 w-[550px] h-[550px] bg-[#38BDF8]/5 blur-[160px] rounded-full pointer-events-none" />
       <div className="absolute bottom-10 left-10 w-[500px] h-[500px] bg-[#FF7711]/5 blur-[160px] rounded-full pointer-events-none" />

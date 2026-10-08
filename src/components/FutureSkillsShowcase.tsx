@@ -196,7 +196,7 @@ export const FutureSkillsShowcase: React.FC<FutureSkillsShowcaseProps> = ({ onEx
   };
 
   return (
-    <section id="future-skills" className="w-full bg-[#090909] border-b border-[#222222] py-16 lg:py-24 relative overflow-hidden">
+    <section id="future-skills" className="w-full bg-[#090909] border-b border-[#222222] py-12 sm:py-14 lg:py-16 relative overflow-hidden">
       
       {/* Background Ambience Glow tuned to active skill color */}
       <div 

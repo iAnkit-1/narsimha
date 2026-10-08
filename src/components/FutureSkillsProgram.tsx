@@ -30,7 +30,7 @@ export const FutureSkillsProgram: React.FC<FutureSkillsProgramProps> = ({ onBook
   ];
 
   return (
-    <section id="future-skills-program" className="relative w-full py-14 lg:py-20 bg-[#080808] overflow-hidden">
+    <section id="future-skills-program" className="relative w-full py-10 sm:py-14 lg:py-16 bg-[#080808] overflow-hidden">
       {/* Background ambient lighting */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#FF7711]/10 blur-[130px] rounded-full pointer-events-none" />
       <div className="absolute bottom-0 right-10 w-[400px] h-[300px] bg-[#3B82F6]/10 blur-[120px] rounded-full pointer-events-none" />

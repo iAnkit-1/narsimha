@@ -109,7 +109,7 @@ export const ProvenResults: React.FC = () => {
   ];
 
   return (
-    <section id="proven-results" className="w-full bg-[#080808] border-b border-[#272727] py-20 lg:py-28 relative overflow-hidden">
+    <section id="proven-results" className="w-full bg-[#080808] border-b border-[#272727] py-12 sm:py-14 lg:py-16 relative overflow-hidden">
       
       {/* Subtle Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[320px] bg-[#FF7711]/10 blur-[130px] rounded-full pointer-events-none" />

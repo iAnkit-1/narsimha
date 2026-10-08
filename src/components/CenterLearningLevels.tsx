@@ -59,14 +59,14 @@ export const CenterLearningLevels: React.FC = () => {
   ];
 
   return (
-    <div className="pt-16 border-t border-[#222222]">
+    <div className="pt-10 sm:pt-12 border-t border-[#222222]">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 25 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className="text-center max-w-3xl mx-auto mb-14"
+        className="text-center max-w-3xl mx-auto mb-10"
       >
         <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#161616] border border-[#FF7711]/40 mb-3.5 shadow-md">
           <Sparkles className="w-3.5 h-3.5 text-[#FF7711]" />

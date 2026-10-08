@@ -34,7 +34,7 @@ export const CenterLearningSpaceGallery: React.FC = () => {
   const activePhoto = selectedPhotoIndex !== null ? featuredGalleryPhotos[selectedPhotoIndex] : null;
 
   return (
-    <section className="w-full bg-[#0C0C0C] border-b border-[#222222] py-20 lg:py-28 relative">
+    <section className="w-full bg-[#0C0C0C] border-b border-[#222222] py-12 sm:py-14 lg:py-16 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div

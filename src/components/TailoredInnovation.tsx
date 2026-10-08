@@ -25,7 +25,7 @@ export const TailoredInnovation: React.FC<TailoredInnovationProps> = ({ onReques
   ];
 
   return (
-    <section id="tailored-innovation" className="w-full bg-[#0D0D0D] border-b border-[#272727] py-20 lg:py-28 relative overflow-hidden">
+    <section id="tailored-innovation" className="w-full bg-[#0D0D0D] border-b border-[#272727] py-12 sm:py-14 lg:py-16 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Card Container */}

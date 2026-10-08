@@ -30,7 +30,7 @@ export const E3Framework: React.FC<E3FrameworkProps> = ({ onPartnerClick }) => {
   ];
 
   return (
-    <section id="e3-pedagogy" className="w-full bg-[#080808] border-b border-[#222222] py-20 lg:py-28 relative overflow-hidden">
+    <section id="e3-pedagogy" className="w-full bg-[#080808] border-b border-[#222222] py-12 sm:py-14 lg:py-16 relative overflow-hidden">
       
       {/* Background Ambience Glow */}
       <div className="absolute top-1/3 left-1/4 w-[600px] h-[350px] bg-[#FF7711]/10 blur-[150px] rounded-full pointer-events-none" />

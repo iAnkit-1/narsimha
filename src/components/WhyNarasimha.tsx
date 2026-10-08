@@ -93,7 +93,7 @@ export const WhyNarasimha: React.FC<WhyNarasimhaProps> = ({ onPartnerClick }) =>
   ];
 
   return (
-    <section id="why-narasimha" className="w-full py-16 lg:py-24 relative overflow-hidden bg-[#080808]">
+    <section id="why-narasimha" className="w-full py-12 sm:py-14 lg:py-16 relative overflow-hidden bg-[#080808]">
       
       {/* Background Brand Logo Ambient Glow (Subtle opacity watermark) */}
       <div className="absolute inset-0 z-0 flex items-center justify-center overflow-hidden pointer-events-none">

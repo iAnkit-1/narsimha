@@ -24,7 +24,7 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
       <CenterWeeklyOffline />
 
       {/* 3. LEARNING JOURNEY & LEVELS */}
-      <section className="w-full bg-[#080808] border-b border-[#222222] py-20 lg:py-28 relative">
+      <section className="w-full bg-[#080808] border-b border-[#222222] py-12 sm:py-14 lg:py-16 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* 3A. LEARNING JOURNEY (Think, Design, Create, Improve, Explain, Showcase) */}
           <CenterLearningJourney />

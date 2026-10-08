@@ -83,7 +83,7 @@ export const CoreOfferings: React.FC<CoreOfferingsProps> = ({ onPartnerClick }) 
   ];
 
   return (
-    <section id="atl-solutions" className="w-full bg-[#080808] border-b border-[#222222] py-20 lg:py-28 relative overflow-hidden">
+    <section id="atl-solutions" className="w-full bg-[#080808] border-b border-[#222222] py-12 sm:py-14 lg:py-16 relative overflow-hidden">
 
       {/* Ambient background glow */}
       <div className="absolute top-1/4 left-1/3 w-[600px] h-[350px] bg-[#FF7711]/10 blur-[150px] rounded-full pointer-events-none" />

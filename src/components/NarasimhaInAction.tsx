@@ -59,7 +59,7 @@ export const NarasimhaInAction: React.FC = () => {
   };
 
   return (
-    <section id="narasimha-in-action" className="w-full bg-[#080808] border-b border-[#272727] py-20 lg:py-28 relative overflow-hidden">
+    <section id="narasimha-in-action" className="w-full bg-[#080808] border-b border-[#272727] py-12 sm:py-14 lg:py-16 relative overflow-hidden">
       {/* Background ambient lighting */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#FF7711]/5 blur-[140px] pointer-events-none" />
 

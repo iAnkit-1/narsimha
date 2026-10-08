@@ -11,7 +11,7 @@ export const NewsletterCommunity: React.FC = () => {
   };
 
   return (
-    <section className="w-full bg-[#090909] border-b border-[#222222] py-16 sm:py-20 relative overflow-hidden">
+    <section className="w-full bg-[#090909] border-b border-[#222222] py-12 sm:py-14 lg:py-16 relative overflow-hidden">
       
       {/* Background radial accent glows */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[350px] bg-[#FF7711]/10 blur-[150px] pointer-events-none rounded-full" />

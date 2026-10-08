@@ -70,7 +70,7 @@ export const RecognizedBy: React.FC = () => {
   const marqueeItems = [...organizations, ...organizations, ...organizations];
 
   return (
-    <section className="w-full bg-[#070707] border-b border-[#222222] py-14 lg:py-18 relative overflow-hidden">
+    <section className="w-full bg-[#070707] border-b border-[#222222] py-10 sm:py-12 lg:py-14 relative overflow-hidden">
       
       {/* Background Ambience Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[250px] bg-[#FF7711]/5 blur-[140px] rounded-full pointer-events-none" />
