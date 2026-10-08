@@ -243,22 +243,25 @@ export const FutureSkillsShowcase: React.FC<FutureSkillsShowcaseProps> = ({ onEx
               onClick={() => onExploreSkill && onExploreSkill(activeSkill.title)}
               className="group relative w-full h-[320px] sm:h-[380px] lg:h-[440px] rounded-3xl overflow-hidden border border-white/20 hover:border-white/30 transition-all duration-500 shadow-[0_20px_60px_rgba(0,0,0,0.9)] cursor-pointer bg-[#121212]"
             >
-              {/* High-Resolution Horizontal Image with High Visibility */}
+              {/* High-Resolution Horizontal Image with Full Clarity & Brightness */}
               <img
                 src={activeSkill.image}
                 alt={activeSkill.title}
-                className="absolute inset-0 w-full h-full object-cover filter brightness-[0.88] contrast-[1.06] saturate-[1.1] group-hover:scale-105 group-hover:brightness-[0.95] transition-all duration-700"
+                className="absolute inset-0 w-full h-full object-cover filter brightness-100 contrast-[1.02] saturate-[1.05] group-hover:scale-105 transition-all duration-700"
               />
 
-              {/* Gentle Translucent Gradient Overlay to let the image shine through clearly */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/10 group-hover:from-black/90 group-hover:via-black/50 group-hover:to-black/15 transition-all duration-300" />
+              {/* Dark Mask Active ONLY on Hover */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none" />
+
+              {/* Localized subtle bottom shadow for default title visibility without whole-image mask */}
+              <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-black/80 via-black/30 to-transparent group-hover:opacity-0 transition-opacity duration-300 pointer-events-none" />
 
               {/* Default Bottom State (Visible by default, slides out on hover) */}
               <div className="absolute bottom-0 inset-x-0 p-6 sm:p-8 z-10 transition-all duration-300 transform group-hover:opacity-0 group-hover:-translate-y-3 pointer-events-none">
-                <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight leading-snug mb-1.5 drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
+                <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight leading-snug mb-1.5 drop-shadow-[0_3px_12px_rgba(0,0,0,1)]">
                   {activeSkill.title}
                 </h3>
-                <div className="flex items-center space-x-2 text-xs sm:text-sm font-mono font-semibold text-[#FFA149] drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+                <div className="flex items-center space-x-2 text-xs sm:text-sm font-mono font-semibold text-[#FFA149] drop-shadow-[0_2px_6px_rgba(0,0,0,1)]">
                   <span>Click to know more</span>
                   <ArrowUpRight className="w-4 h-4" />
                 </div>
