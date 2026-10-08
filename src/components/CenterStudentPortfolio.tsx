@@ -9,7 +9,6 @@ import {
   Award,
   BarChart3,
   Users,
-  Sparkles,
 } from "lucide-react";
 import { studentPortfolioProfiles } from "../assets/data/centersPageData";
 
@@ -96,14 +95,7 @@ export const CenterStudentPortfolio: React.FC<CenterStudentPortfolioProps> = ({
         >
           {/* Top Auto-Rotation Micro Indicator */}
           <div className="flex items-center justify-between px-2 mb-2">
-            <span className="text-[10px] font-mono text-[#707070] flex items-center space-x-1.5">
-              <Sparkles className="w-3 h-3 text-[#38BDF8]" />
-              <span>
-                {isPaused
-                  ? "Auto-play paused on hover"
-                  : `Innovator ${selectedStudentIndex + 1} of ${studentPortfolioProfiles.length} • Auto-advancing`}
-              </span>
-            </span>
+    
 
             {/* Micro progress pill bars */}
             <div className="flex items-center space-x-1.5">
