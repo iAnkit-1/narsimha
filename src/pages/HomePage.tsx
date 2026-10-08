@@ -40,7 +40,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       <SkillTicker />
 
       {/* 3. FUTURE SKILLS CONTINUOUS PROGRAM (Offline - Class 3 Onwards) */}
-      <FutureSkillsProgram onBookTrial={onOpenPartnerModal} />
+      <FutureSkillsProgram />
 
       {/* 4. CHAMPS LEARNING PATHWAY (Think, Design, Create, Improve, Explain, Showcase) */}
       <ChampsLearningPathway />

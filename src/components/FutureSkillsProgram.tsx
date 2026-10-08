@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { 
   MapPin, Users, GraduationCap, TrendingUp,
@@ -6,12 +6,15 @@ import {
   ShieldCheck, UserCheck, Star, Sparkles, Lightbulb, Bot
 } from "lucide-react";
 import roboWithStudentsImg from "../assets/robo with students.png";
+import { TrialClassModal } from "./TrialClassModal";
 
 interface FutureSkillsProgramProps {
-  onBookTrial: () => void;
+  onBookTrial?: () => void;
 }
 
 export const FutureSkillsProgram: React.FC<FutureSkillsProgramProps> = ({ onBookTrial }) => {
+  const [isTrialModalOpen, setIsTrialModalOpen] = useState(false);
+
   const quickBenefits = [
     { icon: MapPin, text: "At our nearest center", color: "text-[#FF7711]" },
     { icon: Users, text: "Learn with peers", color: "text-[#A855F7]" },
@@ -251,7 +254,10 @@ export const FutureSkillsProgram: React.FC<FutureSkillsProgramProps> = ({ onBook
 
                 {/* Book Free Trial Button */}
                 <button
-                  onClick={onBookTrial}
+                  onClick={() => {
+                    setIsTrialModalOpen(true);
+                    if (onBookTrial) onBookTrial();
+                  }}
                   className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#FF7711] via-[#FF5500] to-[#E11D48] text-white font-bold text-sm tracking-wide shadow-[0_4px_20px_rgba(255,119,17,0.45)] hover:shadow-[0_4px_30px_rgba(255,119,17,0.7)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center space-x-2 cursor-pointer mb-3"
                 >
                   <span>Book a Free Trial Class</span>
@@ -284,6 +290,12 @@ export const FutureSkillsProgram: React.FC<FutureSkillsProgramProps> = ({ onBook
         </motion.div>
 
       </div>
+
+      {/* Book a Free Trial Class WhatsApp Popup Modal */}
+      <TrialClassModal
+        isOpen={isTrialModalOpen}
+        onClose={() => setIsTrialModalOpen(false)}
+      />
     </section>
   );
 };

@@ -84,7 +84,7 @@ export const Footer: React.FC = () => {
               </p>
 
               <div className="inline-block px-3 py-1 rounded bg-[#111111] border border-[#272727] text-xs font-mono text-[#FF7711] font-semibold">
-                Tagline: Learning-By-Doing
+                Our Center: Nc/10B, Near: Gayatri Shaktipith, Kankarbagh, Patna-20
               </div>
             </div>
 
