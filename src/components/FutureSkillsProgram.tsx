@@ -86,10 +86,10 @@ export const FutureSkillsProgram: React.FC<FutureSkillsProgramProps> = ({ onBook
 
               {/* Technology Topics List */}
               <p className="text-xs sm:text-sm text-[#A3A3A3] font-mono font-medium leading-relaxed mb-1">
-                Robotics <span className="text-[#FF7711]">|</span> Coding <span className="text-[#FF7711]">|</span> AI <span className="text-[#FF7711]">|</span> 3D-Design <span className="text-[#FF7711]">|</span> IoT <span className="text-[#FF7711]">|</span> AR/VR <span className="text-[#FF7711]">|</span> Drone
-              </p>
+                Robotics <span className="text-[#FF7711]">|</span> Coding <span className="text-[#FF7711]">|</span> AI <span className="text-[#FF7711]">|</span> 3D-Design
+            </p>
               <p className="text-xs sm:text-sm text-[#A3A3A3] font-mono font-medium leading-relaxed mb-3">
-                Entrepreneurial mindset <span className="text-[#FF7711]">|</span> Emerging Tech — All Year Round
+                Entrepreneurial mindset <span className="text-[#FF7711]">|</span> Emerging Tech
               </p>
 
               {/* Tagline */}
@@ -212,9 +212,9 @@ export const FutureSkillsProgram: React.FC<FutureSkillsProgramProps> = ({ onBook
                 </div>
 
                 <p className="text-xs sm:text-sm text-[#D4D4D4] font-medium mb-4">
-                  Three age-mapped tiers —{" "}
-                  <span className="text-[#FF7711] font-bold">Junior (7–9 Y)</span>,{" "}
-                  <span className="text-[#FF7711] font-bold">Middle (10–13 Y)</span>,{" "}
+                  Three age-mapped tiers: {" "}
+                  <span className="text-[#FF7711] font-bold">Junior (7–9 Y)</span> | {" "}
+                  <span className="text-[#FF7711] font-bold">Middle (10–13 Y)</span> |{" "}
                   <span className="text-[#FF7711] font-bold">Senior (14–18 Y)</span>
                 </p>
 

@@ -85,8 +85,10 @@ export const RecognizedBy: React.FC = () => {
           </span>
         </div>
 
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight mb-2">
-          Recognised & Supported By
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight mb-3">
+          Recognised & <span className="bg-gradient-to-r from-[#FF7711] via-[#FFA149] to-[#FF5500] bg-clip-text text-transparent">
+              Supported By
+            </span>
         </h2>
 
         <p className="text-xs sm:text-sm text-[#A3A3A3] max-w-2xl mx-auto">

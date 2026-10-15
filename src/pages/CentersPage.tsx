@@ -1,6 +1,5 @@
 import React from "react";
 import { CenterHero } from "../components/CenterHero";
-import { CenterWeeklyOffline } from "../components/CenterWeeklyOffline";
 import { CenterLearningJourney } from "../components/CenterLearningJourney";
 import { CenterLearningLevels } from "../components/CenterLearningLevels";
 import { CenterCourses } from "../components/CenterCourses";
@@ -9,6 +8,7 @@ import { CenterParentMessage } from "../components/CenterParentMessage";
 import { CenterWhyChoose } from "../components/CenterWhyChoose";
 import { CenterLearningSpaceGallery } from "../components/CenterLearningSpaceGallery";
 import { CenterBookingCTA } from "../components/CenterBookingCTA";
+import { FutureSkillsProgram } from "../components/FutureSkillsProgram";
 
 interface CentersPageProps {
   onOpenPartnerModal: () => void;
@@ -19,9 +19,8 @@ export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) 
     <div className="w-full bg-[#080808] text-[#F1F1F1] min-h-screen selection:bg-[#FF7711] selection:text-black">
       {/* 1. HERO SECTION */}
       <CenterHero />
-
-      {/* 2. WEEKLY OFFLINE (Learning Beyond Screen & Hands-on Sessions) */}
-      <CenterWeeklyOffline />
+      
+        <FutureSkillsProgram />
 
       {/* 3. LEARNING JOURNEY & LEVELS */}
       <section className="w-full bg-[#080808] border-b border-[#222222] py-12 sm:py-14 lg:py-16 relative">

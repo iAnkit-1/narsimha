@@ -192,7 +192,7 @@ export const AudienceModal: React.FC<AudienceModalProps> = ({ isOpen, onSelectRo
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
 
               {/* Centered Floating Badge */}
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 z-10">
+              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-10">
                 <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-b from-[#00A2FF] to-[#0055EE] border-2 border-white shadow-lg flex items-center justify-center text-white">
                   {/* School / Building Icon */}
                   <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
@@ -211,8 +211,7 @@ export const AudienceModal: React.FC<AudienceModalProps> = ({ isOpen, onSelectRo
               <div className="flex items-start justify-between">
                 <div>
                   <h4 className="text-xl sm:text-2xl font-extrabold text-white leading-tight tracking-tight">
-                    School / <br />
-                    Institution
+                    School / Institution
                   </h4>
                 </div>
                 
@@ -291,7 +290,7 @@ export const AudienceModal: React.FC<AudienceModalProps> = ({ isOpen, onSelectRo
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
 
               {/* Centered Floating Badge */}
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 z-10">
+              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-10">
                 <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-b from-[#FFA726] to-[#E65100] border-2 border-white shadow-lg flex items-center justify-center text-white">
                   {/* Users / People Group Icon */}
                   <Users className="w-6 h-6" />
@@ -306,8 +305,7 @@ export const AudienceModal: React.FC<AudienceModalProps> = ({ isOpen, onSelectRo
               <div className="flex items-start justify-between">
                 <div>
                   <h4 className="text-xl sm:text-2xl font-extrabold text-white leading-tight tracking-tight">
-                    Student / <br />
-                    Parent
+                    Student / Parent
                   </h4>
                 </div>
                 

@@ -5,6 +5,8 @@ import {
   Presentation, Trophy, ArrowRight, CheckCircle2, Sparkles
 } from "lucide-react";
 import { media } from "../assets/data/media";
+import labInfrastructureImg from "../assets/3D.png";
+import workshopAndSeminarImg from "../assets/workshop_and_seminar.png";
 
 interface CoreOfferingsProps {
   onPartnerClick?: () => void;
@@ -44,7 +46,7 @@ export const CoreOfferings: React.FC<CoreOfferingsProps> = ({ onPartnerClick }) 
       description: "We provide the complete lab infrastructure along with expert mentor support to help schools run engaging, practical, and project-based learning programs.",
       benefit: "Dedicated on-campus STEM engineers & routine project guidance.",
       icon: Users,
-      image: "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=1000&q=80",
+      image: labInfrastructureImg,
       accentColor: "#10B981",
     },
     {
@@ -66,7 +68,7 @@ export const CoreOfferings: React.FC<CoreOfferingsProps> = ({ onPartnerClick }) 
       description: "We conduct interactive workshops and seminars on STEM, Robotics, AI, Innovation, and emerging technologies to build awareness and spark curiosity.",
       benefit: "Hands-on masterclasses covering Robotics, AI & IoT trends.",
       icon: Presentation,
-      image: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&w=1000&q=80",
+      image: workshopAndSeminarImg,
       accentColor: "#F59E0B",
     },
     {

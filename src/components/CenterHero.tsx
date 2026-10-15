@@ -119,7 +119,7 @@ export const CenterHero: React.FC<CenterHeroProps> = () => {
           >
             <div className="flex items-center space-x-1.5 px-3 py-1 rounded-lg bg-black/50 border border-white/10 backdrop-blur-sm">
               <Bot className="w-3.5 h-3.5 text-[#FF7711]" />
-              <span>Robotics & Drone Lab</span>
+              <span>Robotics Lab</span>
             </div>
             <div className="flex items-center space-x-1.5 px-3 py-1 rounded-lg bg-black/50 border border-white/10 backdrop-blur-sm">
               <Cpu className="w-3.5 h-3.5 text-[#38BDF8]" />

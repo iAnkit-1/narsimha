@@ -128,7 +128,7 @@ export const ProvenResults: React.FC = () => {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight mb-3">
             We don’t just teach.{" "}
             <span className="bg-gradient-to-r from-[#FF7711] via-[#FFA149] to-[#FF5500] bg-clip-text text-transparent">
-              We create impact.
+              We create meaningful impact
             </span>
           </h2>
 

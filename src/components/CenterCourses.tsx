@@ -140,7 +140,6 @@ export const CenterCourses: React.FC = () => {
               }`}
             >
               <span>🌱 STARTER</span>
-              <span className="text-[10px] opacity-80 font-normal mt-0.5">(Grades 1–4)</span>
             </button>
 
             <button
@@ -152,7 +151,6 @@ export const CenterCourses: React.FC = () => {
               }`}
             >
               <span>⚡ LEARNER</span>
-              <span className="text-[10px] opacity-80 font-normal mt-0.5">(Grades 5–8)</span>
             </button>
 
             <button
@@ -164,7 +162,6 @@ export const CenterCourses: React.FC = () => {
               }`}
             >
               <span>🏆 PERFORMER</span>
-              <span className="text-[10px] opacity-80 font-normal mt-0.5">(Grades 9–12)</span>
             </button>
           </div>
 
@@ -223,14 +220,20 @@ export const CenterCourses: React.FC = () => {
                     className="absolute inset-0 w-full h-full object-cover filter brightness-[0.92] contrast-[1.03] group-hover:scale-110 group-hover:brightness-[0.98] transition-transform duration-700 ease-out pointer-events-none"
                   />
 
-                  {/* Localized Bottom Gradient Mask only behind title */}
-                  <div className="absolute bottom-0 inset-x-0 h-28 bg-gradient-to-t from-black/95 via-black/60 to-transparent pointer-events-none" />
+                  {/* Localized Bottom Gradient Mask behind title and domain */}
+                  <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-black/95 via-black/60 to-transparent pointer-events-none" />
 
-                  {/* Default Bottom Content (Title only, slides out on hover) */}
+                  {/* Default Bottom Content (Title and Domain below it, slides out on hover) */}
                   <div className="absolute bottom-0 inset-x-0 p-5 z-10 transition-all duration-300 transform group-hover:opacity-0 group-hover:-translate-y-3 pointer-events-none">
                     <h4 className="text-lg font-bold text-white tracking-tight leading-snug drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
                       {course.title}
                     </h4>
+                    <div className="flex items-center space-x-1.5 mt-1.5">
+                      {course.emoji && <span className="text-sm">{course.emoji}</span>}
+                      <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#FF7711] drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+                        {course.domain}
+                      </span>
+                    </div>
                   </div>
 
                   {/* Hover Overlay: Directional Slide-in Drawer */}
