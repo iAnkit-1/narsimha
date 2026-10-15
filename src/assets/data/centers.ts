@@ -25,7 +25,7 @@ export const skillCentersList: SkillCenter[] = [
     landmark: "Near Gayatri Shaktipith",
     phone: "9709719731",
     email: "narasimhasphillsphere@gmail.com",
-    hours: "Mon – Sat: 9:00 AM – 6:30 PM (Sunday by Appointment)",
+    hours: "Tue - Sun: 9:00 AM – 6:30 PM (Monday Closed)",
     facilities: [
       "Robotics Prototyping Arena",
       "Industrial FDM 3D Printing Bay",

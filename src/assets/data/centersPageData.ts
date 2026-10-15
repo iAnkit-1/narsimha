@@ -259,13 +259,17 @@ export const learningLevelsList: LearningLevel[] = [
   {
     id: "starter",
     name: "STARTER",
-    tagline: "Explore • Learn • Create",
+    tagline: "Build strong foundations, develop curiosity, and create a “learning by doing” mindset.",
     badge: "Foundation Level",
     description:
-      "Students begin their learning journey by exploring technology through hands-on activities, experiments, creativity, and guided projects.",
+      "Build strong foundations, develop curiosity, and create a “learning by doing” mindset.",
     goal: "Build strong foundations, develop curiosity, and create a “learning by doing” mindset.",
     targetAudience: "Grades K-5 & Beginners",
-    skills: ["Hands-On Curiosity", "Basic Circuits & Motors", "Block Coding & Logic", "3D Tinkering", "Creative Problem Solving"],
+    skills: [
+      "Build strong foundations",
+      "Develop curiosity",
+      "Create a “learning by doing” mindset",
+    ],
     color: "#FF7711",
     bgGradient: "from-[#FF7711]/10 via-[#161616] to-[#0E0E0E]",
     borderColor: "border-[#FF7711]/40",
@@ -274,13 +278,17 @@ export const learningLevelsList: LearningLevel[] = [
   {
     id: "learner",
     name: "LEARNER",
-    tagline: "Build • Apply • Innovate",
+    tagline: "Turn learning into practical skills, innovation, and impressive projects.",
     badge: "Intermediate Level",
     description:
-      "Students move beyond the basics and begin applying their knowledge through meaningful projects, teamwork, experimentation, and real-world problem-solving.",
+      "Turn learning into practical skills, innovation, and impressive projects.",
     goal: "Turn learning into practical skills, innovation, and impressive projects.",
     targetAudience: "Grades 6-8 & Intermediate Makers",
-    skills: ["Microcontroller Programming", "Text Coding in Python/C++", "Parametric 3D CAD", "AI & Computer Vision", "Team Innovation Sprints"],
+    skills: [
+      "Turn learning into practical skills",
+      "Drive innovation",
+      "Build impressive projects",
+    ],
     color: "#38BDF8",
     bgGradient: "from-[#38BDF8]/10 via-[#161616] to-[#0E0E0E]",
     borderColor: "border-[#38BDF8]/40",
@@ -289,13 +297,17 @@ export const learningLevelsList: LearningLevel[] = [
   {
     id: "performer",
     name: "PERFORMER",
-    tagline: "Master • Build • Get Career-Ready",
+    tagline: "Transform technical skills into strong portfolios, professional confidence, internship opportunities, and job & placement readiness.",
     badge: "Advanced Level",
     description:
-      "Learners take their skills further through advanced projects, professional skill development, portfolio building, industry-oriented training, and real-world problem-solving.",
+      "Transform technical skills into strong portfolios, professional confidence, internship opportunities, and job & placement readiness.",
     goal: "Transform technical skills into strong portfolios, professional confidence, internship opportunities, and job & placement readiness.",
     targetAudience: "Grades 9-12 & Advanced Innovators",
-    skills: ["Full-Stack Engineering", "Industrial IoT & Kinematics", "Deep Learning & Neural Networks", "Rapid Manufacturing & Fusion 360", "Venture Pitch & Hackathon Mastery"],
+    skills: [
+      "Transform technical skills into strong portfolios",
+      "Develop professional confidence",
+      "Internship opportunities and job & placement readiness",
+    ],
     color: "#4ADE80",
     bgGradient: "from-[#4ADE80]/10 via-[#161616] to-[#0E0E0E]",
     borderColor: "border-[#4ADE80]/40",
@@ -620,7 +632,7 @@ export const studentPortfolioProfiles: StudentPortfolioProfile[] = [
   {
     id: "azad",
     name: "Azad",
-    avatar: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80",
+    avatar: "https://fadcdn.s3.ap-south-1.amazonaws.com/media/1277/Lead_image_63465.jpg",
     photoBadge: "BUILD EXPLORE LEARN REPEAT",
     quote: "I love building things that solve real problems.",
     taglineQuote: "Small ideas. Big possibilities.",
@@ -672,7 +684,7 @@ export const studentPortfolioProfiles: StudentPortfolioProfile[] = [
   {
     id: "ananya",
     name: "Ananya Singh",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
+    avatar: "https://media.istockphoto.com/id/181068826/photo/cheerful-indian-school-girl-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=ntdCzVkCAcdx9EXYeQXfFxBefJGxXJVI4CjsD--I1es=",
     photoBadge: "AI FOR GOOD • SOLVE WITH CODE",
     quote: "Teaching neural models to recognize patterns feels like building tomorrow's assistants today.",
     taglineQuote: "Curiosity decoded into intelligence.",
@@ -724,7 +736,7 @@ export const studentPortfolioProfiles: StudentPortfolioProfile[] = [
   {
     id: "rohan",
     name: "Rohan Verma",
-    avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=800&q=80",
+    avatar: "https://fadcdn.s3.ap-south-1.amazonaws.com/media/1249/Lead_image_59822.jpg",
     photoBadge: "DESIGN IT • SLICE IT • PRINT IT",
     quote: "3D CAD lets me turn complex math and spatial ideas into functional physical products.",
     taglineQuote: "Precision engineering from screen to reality.",
@@ -776,7 +788,7 @@ export const studentPortfolioProfiles: StudentPortfolioProfile[] = [
   {
     id: "kavya",
     name: "Kavya Sharma",
-    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80",
+    avatar: "https://www.classroompoems.com/images/a-hunger-free-world-21959570.jpg",
     photoBadge: "THINK IN LOGIC • WRITE THE FUTURE",
     quote: "Programming taught me that bugs are just puzzles waiting for creative solutions.",
     taglineQuote: "Clean code, unlimited imagination.",
@@ -828,7 +840,7 @@ export const studentPortfolioProfiles: StudentPortfolioProfile[] = [
   {
     id: "ishaan",
     name: "Ishaan Patel",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+    avatar: "https://eduadvice.in/media/uploads/blog/Image___Rishab.JPG?imageOpt=1&crop=870,326,x0,y0",
     photoBadge: "AERO DYNAMICS • FLIGHT TELEMETRY",
     quote: "Calibrating flight controllers and ESCs taught me how precision transforms power into flight.",
     taglineQuote: "Building wings for bold ideas.",
@@ -889,7 +901,7 @@ export const whyNarasimhaReasons: WhyReason[] = [
     description:
       "Students build, experiment, test, and create with real tools, components, and technology—not just learn from textbooks.",
     highlights: ["Real microcontrollers & sensors", "Zero theoretical rote memorization", "Trial-and-error troubleshooting mindset"],
-    image: "/High tech lab .png",
+    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
     accentColor: "#FF7711",
     tag: "Physical Prototyping",
   },
@@ -913,7 +925,7 @@ export const whyNarasimhaReasons: WhyReason[] = [
     description:
       "Mentors support students through projects, challenges, experimentation, and problem-solving—helping them build with confidence.",
     highlights: ["Low student-to-mentor ratio (1:8)", "Engineers & passionate makers", "Personalized pace for every learner"],
-    image: "/robo with students.png",
+    image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80",
     accentColor: "#4ADE80",
     tag: "1:8 Mentor Ratio",
   },
@@ -925,7 +937,7 @@ export const whyNarasimhaReasons: WhyReason[] = [
     description:
       "Students apply what they learn to build working prototypes, applications, robots, and innovative solutions to real-world problems.",
     highlights: ["Working tangible prototypes", "Personal portfolio of completed projects", "Certificate with verified skill credentials"],
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&w=800&q=80",
     accentColor: "#FB923C",
     tag: "Tangible Builds",
   },
@@ -937,7 +949,7 @@ export const whyNarasimhaReasons: WhyReason[] = [
     description:
       "Students get opportunities to explore and participate in technology, coding, innovation, and robotics competitions such as Smart India Hackathon Junior Edition, IRIS National Science Fair, Avishkaar Makeathon, INOI, HPE CodeWars, FTC, VEX Robotics, and IRC, subject to eligibility and event availability.",
     highlights: ["National & International platform prep", "Competitive hackathon mentorship", "Stage presentation confidence"],
-    image: "/Event.png",
+    image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=80",
     accentColor: "#FACC15",
     tag: "Competitive Arena",
   },
@@ -949,7 +961,7 @@ export const whyNarasimhaReasons: WhyReason[] = [
     description:
       "Students develop coding, technical thinking, creativity, communication, teamwork, problem-solving, and innovation skills that can support their future academic and career journeys.",
     highlights: ["Analytical computational thinking", "Resilience & debugging grit", "Verbal presentation & pitching mastery"],
-    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1531482615713-2285223f0449?auto=format&fit=crop&w=800&q=80",
     accentColor: "#A855F7",
     tag: "Lifelong Capability",
   },

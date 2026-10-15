@@ -67,7 +67,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onPartnerClick }) => {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center space-x-1">
+          <nav className="hidden lg:flex items-center space-x-2">
             {mainNavLinks.map((link) => {
               const isRoute = link.href.startsWith("/");
 
@@ -78,10 +78,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onPartnerClick }) => {
                     to={link.href}
                     end={link.href === "/"}
                     className={({ isActive }) =>
-                      `px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
+                      `relative px-3 py-2 text-sm font-medium transition-colors border-b-2 ${
                         isActive
-                          ? "text-[#FF7711] bg-[#151515] border border-[#272727]"
-                          : "text-[#A1A1A1] hover:text-[#F1F1F1] hover:bg-[#111111]"
+                          ? "text-[#FF7711] border-[#FF7711]"
+                          : "text-[#A1A1A1] border-transparent hover:text-[#F1F1F1]"
                       }`
                     }
                   >
@@ -94,7 +94,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onPartnerClick }) => {
                 <button
                   key={link.label}
                   onClick={() => handleHashLinkClick(link.href)}
-                  className="px-3 py-1.5 rounded-md text-sm font-medium text-[#A1A1A1] hover:text-[#F1F1F1] hover:bg-[#111111] transition-all cursor-pointer"
+                  className="px-3 py-2 text-sm font-medium text-[#A1A1A1] hover:text-[#F1F1F1] transition-colors border-b-2 border-transparent cursor-pointer"
                 >
                   {link.label}
                 </button>
@@ -142,15 +142,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onPartnerClick }) => {
                       end={link.href === "/"}
                       onClick={() => setIsMobileMenuOpen(false)}
                       className={({ isActive }) =>
-                        `flex items-center justify-between px-3 py-2.5 rounded-lg text-sm transition-all ${
+                        `flex items-center justify-between px-3 py-2.5 text-sm transition-all border-b ${
                           isActive
-                            ? "text-[#FF7711] bg-[#151515] font-semibold"
-                            : "text-[#F1F1F1] hover:bg-[#151515]"
+                            ? "text-[#FF7711] border-b-2 border-b-[#FF7711] font-semibold"
+                            : "text-[#F1F1F1] border-transparent hover:text-[#FF7711]"
                         }`
                       }
                     >
-                      <span>{link.label}</span>
-                      <ArrowRight className="w-4 h-4 text-[#707070]" />
+                      {({ isActive }) => (
+                        <>
+                          <span>{link.label}</span>
+                          <ArrowRight className={`w-4 h-4 ${isActive ? "text-[#FF7711]" : "text-[#707070]"}`} />
+                        </>
+                      )}
                     </NavLink>
                   );
                 }
@@ -159,7 +163,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onPartnerClick }) => {
                   <button
                     key={link.label}
                     onClick={() => handleHashLinkClick(link.href)}
-                    className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm text-[#F1F1F1] hover:bg-[#151515] text-left cursor-pointer"
+                    className="flex items-center justify-between px-3 py-2.5 text-sm text-[#F1F1F1] hover:text-[#FF7711] text-left cursor-pointer border-b border-transparent"
                   >
                     <span>{link.label}</span>
                     <ArrowRight className="w-4 h-4 text-[#707070]" />

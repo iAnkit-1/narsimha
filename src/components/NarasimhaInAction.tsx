@@ -134,7 +134,7 @@ export const NarasimhaInAction: React.FC = () => {
                 {/* Clean Background Image */}
                 <img
                   src={photo.image}
-                  alt={photo.title}
+                  alt="Narasimha Innovation Gallery"
                   draggable={false}
                   className="w-full h-full object-cover filter brightness-[0.95] contrast-[1.03] group-hover:scale-108 group-hover:brightness-105 transition-transform duration-700 ease-out pointer-events-none"
                   loading="lazy"

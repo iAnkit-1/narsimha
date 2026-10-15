@@ -199,46 +199,27 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onOpenPartnerModal }) 
               <ChevronRight className="w-6 h-6" />
             </button>
 
-            {/* Modal Card */}
+            {/* Modal Card - Pure Image View */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.25 }}
-              className="relative max-w-4xl w-full bg-[#121212] border border-[#2C2C2C] rounded-3xl overflow-hidden shadow-2xl"
+              className="relative max-w-5xl max-h-[90vh] w-full bg-black/90 border border-white/15 rounded-3xl overflow-hidden shadow-2xl flex items-center justify-center"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="relative h-80 sm:h-[480px] bg-black flex items-center justify-center">
-                <img
-                  src={currentPreviewPhoto.image}
-                  alt={currentPreviewPhoto.title}
-                  className="w-full h-full object-contain"
-                />
-                <button
-                  onClick={() => setActivePreviewIndex(null)}
-                  className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/80 text-white flex items-center justify-center border border-[#333333] hover:bg-[#FF7711] hover:text-black transition-colors cursor-pointer"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-
-              <div className="p-6 bg-[#121212]">
-                <div className="flex items-center justify-between gap-4 mb-2">
-                  <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#1C1C1C] text-[#FF7711] font-bold border border-[#2E2E2E]">
-                    {currentPreviewPhoto.categoryLabel}
-                  </span>
-                  <span className="text-xs font-mono text-[#707070]">
-                    Photo {activePreviewIndex + 1} of {filteredPhotos.length}
-                  </span>
-                </div>
-
-                <h3 className="text-xl font-bold text-white mb-1">
-                  {currentPreviewPhoto.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-[#A1A1A1]">
-                  {currentPreviewPhoto.caption}
-                </p>
-              </div>
+              <img
+                src={currentPreviewPhoto.image}
+                alt="Narasimha Gallery Preview"
+                className="w-full max-h-[85vh] object-contain rounded-3xl"
+              />
+              <button
+                onClick={() => setActivePreviewIndex(null)}
+                aria-label="Close photo preview"
+                className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/80 text-white flex items-center justify-center border border-[#333333] hover:bg-[#FF7711] hover:text-black transition-colors cursor-pointer z-10"
+              >
+                <X className="w-5 h-5" />
+              </button>
             </motion.div>
           </div>
         )}

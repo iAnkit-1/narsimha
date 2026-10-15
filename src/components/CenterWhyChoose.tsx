@@ -35,126 +35,87 @@ export const CenterWhyChoose: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* 6 Reasons Cards Grid with Images and Varied Hover Effects */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        {/* 6 Reasons Cards Grid - Modern Horizontal Cards Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-7">
           {whyNarasimhaReasons.map((reason, idx) => {
-            // Varied hover transition styles for each card
-            const hoverVariants = [
-              {
-                drawer: "translate-y-full group-hover:translate-y-0",
-                defaultExit: "group-hover:-translate-y-6 group-hover:opacity-0",
-              },
-              {
-                drawer: "-translate-x-full group-hover:translate-x-0",
-                defaultExit: "group-hover:translate-x-6 group-hover:opacity-0",
-              },
-              {
-                drawer: "translate-x-full group-hover:translate-x-0",
-                defaultExit: "group-hover:-translate-x-6 group-hover:opacity-0",
-              },
-              {
-                drawer: "-translate-y-full group-hover:translate-y-0",
-                defaultExit: "group-hover:translate-y-6 group-hover:opacity-0",
-              },
-              {
-                drawer: "scale-90 opacity-0 group-hover:scale-100 group-hover:opacity-100",
-                defaultExit: "group-hover:scale-95 group-hover:opacity-0",
-              },
-              {
-                drawer: "translate-x-full translate-y-full group-hover:translate-x-0 group-hover:translate-y-0",
-                defaultExit: "group-hover:-translate-x-4 group-hover:-translate-y-4 group-hover:opacity-0",
-              },
-            ];
-
-            const variant = hoverVariants[idx % hoverVariants.length];
             const accent = reason.accentColor || "#FF7711";
 
             return (
               <motion.div
                 key={reason.id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.12 }}
+                viewport={{ once: true, amount: 0.15 }}
                 transition={{
-                  duration: 0.6,
-                  delay: idx * 0.1,
+                  duration: 0.55,
+                  delay: idx * 0.08,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="group relative h-[440px] sm:h-[480px] rounded-3xl overflow-hidden border border-white/10 hover:border-white/25 transition-all duration-500 shadow-2xl bg-[#0D0D0D] cursor-pointer flex flex-col justify-between"
-                style={{
-                  boxShadow: "0 10px 30px -10px rgba(0,0,0,0.8)",
-                }}
+                className="group relative rounded-3xl overflow-hidden border border-white/10 hover:border-white/30 transition-all duration-300 shadow-xl hover:shadow-2xl bg-[#111111] flex flex-col sm:flex-row hover:-translate-y-1"
               >
-                {/* Background Image with Zoom & High Clarity */}
-                {reason.image && (
-                  <img
-                    src={reason.image}
-                    alt={reason.title}
-                    className="absolute inset-0 w-full h-full object-cover brightness-95 contrast-[1.05] transition-all duration-700 ease-out group-hover:scale-105 group-hover:brightness-[0.40]"
-                    loading="lazy"
-                  />
-                )}
-
-                {/* Dynamic Colored Ambient Glow on Hover */}
+                {/* Ambient Glow */}
                 <div
-                  className="absolute -top-20 -right-20 w-44 h-44 rounded-full blur-3xl opacity-0 group-hover:opacity-40 transition-opacity duration-500 pointer-events-none"
+                  className="absolute -top-12 -right-12 w-36 h-36 rounded-full blur-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none"
                   style={{ backgroundColor: accent }}
                 />
 
-                {/* Default Bottom Content with Gradient Mask ONLY behind Title & Tagline */}
-                <div
-                  className={`absolute bottom-0 inset-x-0 z-10 p-6 pt-20 bg-gradient-to-t from-black/95 via-black/70 to-transparent transition-all duration-500 ease-out pointer-events-none ${variant.defaultExit}`}
-                >
-                  <p
-                    className="text-xs font-mono font-bold uppercase tracking-wider mb-1.5 drop-shadow-md"
-                    style={{ color: accent }}
-                  >
-                    {reason.tagline}
-                  </p>
-                  <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight drop-shadow-md">
-                    {reason.title}
-                  </h3>
+                {/* Left: Horizontal Image Container */}
+                <div className="relative w-full sm:w-[210px] md:w-[230px] shrink-0 h-48 sm:h-auto overflow-hidden bg-black">
+                  <img
+                    src={reason.image}
+                    alt={reason.title}
+                    className="w-full h-full object-cover object-center filter brightness-[0.92] contrast-[1.05] group-hover:scale-108 group-hover:brightness-105 transition-all duration-700 ease-out"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-black/80 sm:from-transparent to-transparent pointer-events-none" />
+
+                  {/* Corner Badge */}
+                  {reason.tag && (
+                    <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/15 text-[10px] font-mono font-bold text-white shadow-md">
+                      {reason.tag}
+                    </span>
+                  )}
                 </div>
 
-                {/* Hover Drawer Overlay (Translucent Glassmorphic Backdrop) */}
-                <div
-                  className={`absolute inset-0 z-20 bg-black/75 backdrop-blur-md p-6 sm:p-7 flex flex-col justify-between transition-all duration-500 ease-in-out border border-white/20 rounded-3xl shadow-2xl ${variant.drawer}`}
-                >
-                  {/* Drawer Top Header */}
+                {/* Right: Content Section */}
+                <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-4">
-                      <div className="flex items-center space-x-2">
-                        <span className="text-xl">{reason.emoji}</span>
-                        <span
-                          className="text-xs font-mono font-bold uppercase tracking-wider"
-                          style={{ color: accent }}
-                        >
-                          {reason.tagline}
-                        </span>
-                      </div>
+                    {/* Emoji + Tagline Header */}
+                    <div className="flex items-center space-x-2 mb-2">
+                      <span className="text-lg">{reason.emoji}</span>
+                      <span
+                        className="text-[11px] font-mono font-bold uppercase tracking-wider"
+                        style={{ color: accent }}
+                      >
+                        {reason.tagline}
+                      </span>
                     </div>
 
-                    <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight mb-3">
+                    {/* Title */}
+                    <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight leading-snug mb-2.5 group-hover:text-white transition-colors">
                       {reason.title}
                     </h3>
 
-                    <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-normal mb-5">
+                    {/* Description */}
+                    <p className="text-xs sm:text-[13px] text-[#A1A1A1] leading-relaxed mb-4">
                       {reason.description}
                     </p>
                   </div>
 
-                  {/* Drawer Highlights Checklist */}
-                  <div className="space-y-2 pt-3 border-t border-white/10">
+                  {/* Highlights Checklist */}
+                  <div className="space-y-1.5 pt-3.5 border-t border-white/10">
                     {reason.highlights.map((item) => (
                       <div
                         key={item}
-                        className="flex items-start space-x-2.5 text-xs text-neutral-200"
+                        className="flex items-center space-x-2 text-xs text-[#E2E8F0]"
                       >
                         <CheckCircle2
-                          className="w-4 h-4 shrink-0 mt-0.5"
+                          className="w-3.5 h-3.5 shrink-0"
                           style={{ color: accent }}
                         />
-                        <span className="leading-snug">{item}</span>
+                        <span className="font-medium text-[11px] sm:text-xs text-[#CCCCCC] leading-tight">
+                          {item}
+                        </span>
                       </div>
                     ))}
                   </div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, ArrowRight, X, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
+import { Sparkles, ArrowRight, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { featuredGalleryPhotos } from "../assets/data/galleryData";
 
@@ -145,42 +145,17 @@ export const CenterLearningSpaceGallery: React.FC = () => {
             </button>
 
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
+              initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
+              exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-4xl max-h-[88vh] bg-[#121212] border border-[#282828] rounded-2xl overflow-hidden shadow-2xl flex flex-col"
+              className="relative max-w-5xl max-h-[90vh] w-full bg-black/90 border border-white/15 rounded-3xl overflow-hidden shadow-2xl flex items-center justify-center"
             >
-              <div className="relative overflow-hidden flex items-center justify-center bg-black max-h-[70vh]">
-                <img
-                  src={activePhoto.image}
-                  alt={activePhoto.title}
-                  className="max-h-[70vh] w-auto max-w-full object-contain"
-                />
-              </div>
-
-              <div className="p-5 bg-[#121212] border-t border-[#222222] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div>
-                  <div className="inline-block px-2.5 py-0.5 rounded-full bg-[#FF7711]/15 text-[#FF7711] text-[11px] font-mono font-bold uppercase mb-1">
-                    {activePhoto.category}
-                  </div>
-                  <h3 className="text-lg font-bold text-white">{activePhoto.title}</h3>
-                  {activePhoto.location && (
-                    <p className="text-xs text-[#A1A1A1] flex items-center gap-1 mt-0.5">
-                      <MapPin className="w-3 h-3 text-[#FF7711]" />
-                      {activePhoto.location}
-                    </p>
-                  )}
-                </div>
-
-                <Link
-                  to="/gallery"
-                  className="btn-orange-primary inline-flex items-center justify-center space-x-2 px-5 py-2.5 rounded-lg text-xs font-mono font-bold uppercase shrink-0"
-                >
-                  <span>Open Full Gallery</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
+              <img
+                src={activePhoto.image}
+                alt="Center Learning Space"
+                className="w-full max-h-[85vh] object-contain rounded-3xl"
+              />
             </motion.div>
           </motion.div>
         )}

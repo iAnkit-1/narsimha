@@ -8,17 +8,14 @@ import {
   Trophy,
   Award,
   BarChart3,
-  Users,
 } from "lucide-react";
 import { studentPortfolioProfiles } from "../assets/data/centersPageData";
 
 interface CenterStudentPortfolioProps {
-  onOpenPartnerModal: () => void;
+  onOpenPartnerModal?: () => void;
 }
 
-export const CenterStudentPortfolio: React.FC<CenterStudentPortfolioProps> = ({
-  onOpenPartnerModal,
-}) => {
+export const CenterStudentPortfolio: React.FC<CenterStudentPortfolioProps> = () => {
   const [selectedStudentIndex, setSelectedStudentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const AUTO_PLAY_INTERVAL = 5000; // 5 seconds per student
@@ -74,8 +71,8 @@ export const CenterStudentPortfolio: React.FC<CenterStudentPortfolioProps> = ({
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FFFFFF] tracking-tight leading-tight mb-4">
-            Don't Just Tell <span className="text-[#38BDF8]">Us What You Learned.</span><br />
-            Show Us What You <span className="text-[#FF7711]">Built.</span>
+            Don't Just Tell <span className="text-[#38BDF8]">What You Learned</span><br />
+            Show Us <span className="text-[#FF7711]">What You Built</span>
           </h2>
 
           <p className="text-sm sm:text-base text-[#A1A1A1] max-w-3xl mx-auto leading-relaxed">
@@ -247,9 +244,9 @@ export const CenterStudentPortfolio: React.FC<CenterStudentPortfolioProps> = ({
               </div>
 
               {/* Column 3: Achievements & Progress Bars (3 cols) */}
-              <div className="lg:col-span-3 flex flex-col justify-between space-y-3.5">
+              <div className="lg:col-span-3 flex flex-col space-y-3.5">
                 {/* Achievements Box */}
-                <div className="p-4 rounded-2xl bg-[#1A1813] border border-amber-500/25 shadow-md flex-1 flex flex-col justify-between">
+                <div className="p-4 rounded-2xl bg-[#1A1813] border border-amber-500/25 shadow-md flex-1 flex flex-col justify-start">
                   <div className="flex items-center space-x-2 text-amber-400 text-xs font-mono font-bold uppercase tracking-wider mb-2.5">
                     <Trophy className="w-4 h-4 text-amber-400" />
                     <span>Achievements</span>
@@ -271,7 +268,7 @@ export const CenterStudentPortfolio: React.FC<CenterStudentPortfolioProps> = ({
                 </div>
 
                 {/* Progress Metrics Box */}
-                <div className="p-4 rounded-2xl bg-[#0E1624] border border-blue-500/25 shadow-md flex-1 flex flex-col justify-between">
+                <div className="p-4 rounded-2xl bg-[#0E1624] border border-blue-500/25 shadow-md flex-1 flex flex-col justify-start">
                   <div className="flex items-center space-x-2 text-[#38BDF8] text-xs font-mono font-bold uppercase tracking-wider mb-2.5">
                     <BarChart3 className="w-4 h-4 text-[#38BDF8]" />
                     <span>Progress</span>
@@ -335,14 +332,6 @@ export const CenterStudentPortfolio: React.FC<CenterStudentPortfolioProps> = ({
               </div>
             </button>
           ))}
-
-          <button
-            onClick={onOpenPartnerModal}
-            className="px-4 py-2 rounded-2xl border border-[#333333] bg-[#141414] hover:bg-[#1C1C1C] hover:border-[#38BDF8]/60 text-white transition-all cursor-pointer flex items-center space-x-2 text-xs font-mono shadow-md"
-          >
-            <Users className="w-3.5 h-3.5 text-[#38BDF8]" />
-            <span>Many More Innovators...</span>
-          </button>
         </motion.div>
 
       </div>

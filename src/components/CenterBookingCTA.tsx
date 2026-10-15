@@ -24,6 +24,7 @@ export const CenterBookingCTA: React.FC<CenterBookingCTAProps> = ({
 }) => {
   const [visitSubmitted, setVisitSubmitted] = useState(false);
   const [visitErrorMessage, setVisitErrorMessage] = useState<string | null>(null);
+  const [customTrack, setCustomTrack] = useState("");
   const [visitForm, setVisitForm] = useState({
     parentName: "",
     studentName: "",
@@ -31,7 +32,7 @@ export const CenterBookingCTA: React.FC<CenterBookingCTAProps> = ({
     phone: "",
     email: "",
     preferredDate: "",
-    interestedTrack: "🤖 Robotics & Hardware",
+    interestedTrack: "",
   });
 
   const handleBookingSubmit = (e: React.FormEvent) => {
@@ -43,6 +44,16 @@ export const CenterBookingCTA: React.FC<CenterBookingCTAProps> = ({
       return;
     }
 
+    if (visitForm.interestedTrack === "Other" && !customTrack.trim()) {
+      setVisitErrorMessage("Please specify your preferred track or interest in the text box.");
+      return;
+    }
+
+    const resolvedTrack =
+      visitForm.interestedTrack === "Other"
+        ? customTrack.trim()
+        : visitForm.interestedTrack || "General STEM & Robotics Exploration";
+
     const formattedMessage = `👋 *Hello Narasimha Skill Sphere Team!*
 
 I would like to book a *45-Minute Free Trial Demo & Center Visit* at your offline center.
@@ -52,7 +63,7 @@ I would like to book a *45-Minute Free Trial Demo & Center Visit* at your offlin
 • *Student / Child Name:* ${visitForm.studentName.trim()}
 • *Grade / Learning Level:* ${visitForm.studentGrade}
 • *Contact Mobile:* ${visitForm.phone.trim()}
-• *Preferred Track / Interest:* ${visitForm.interestedTrack}
+• *Preferred Track / Interest:* ${resolvedTrack}
 
 📍 *Location:* Patna Offline Center (Kankarbagh Lab)
 📞 Please share available batch slots and mentor consultation timings. Thank you!`;
@@ -68,7 +79,7 @@ I would like to book a *45-Minute Free Trial Demo & Center Visit* at your offlin
       studentName: visitForm.studentName,
       studentGrade: visitForm.studentGrade,
       phone: visitForm.phone,
-      interestedTrack: visitForm.interestedTrack,
+      interestedTrack: resolvedTrack,
       centerLocation: "Patna Learning Center",
     }).catch(() => {});
 
@@ -135,7 +146,7 @@ I would like to book a *45-Minute Free Trial Demo & Center Visit* at your offlin
                 <Clock className="w-4 h-4 text-[#FF7711] shrink-0" />
                 <div>
                   <span className="text-[#888888] block text-[10px]">OPERATING HOURS</span>
-                  <span className="font-bold text-white">Mon – Sat: 9:00 AM – 6:30 PM (Sunday By Appointment)</span>
+                  <span className="font-bold text-white">Tue - Sun: 9:00 AM – 6:30 PM (Monday Closed)</span>
                 </div>
               </div>
 
@@ -151,15 +162,15 @@ I would like to book a *45-Minute Free Trial Demo & Center Visit* at your offlin
             <div className="flex flex-wrap items-center gap-3">
               <a
                 href="#our-courses"
-                className="btn-dark-secondary px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center space-x-2"
+                className="btn-orange-primary px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center space-x-2 shadow-md hover:shadow-orange-glow transition-all"
               >
-                <BookOpen className="w-4 h-4 text-[#FF7711]" />
+                <BookOpen className="w-4 h-4 text-black" />
                 <span>Explore Programs</span>
               </a>
 
               <button
                 onClick={onOpenPartnerModal}
-                className="btn-dark-secondary px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center space-x-2 hover:border-[#FF7711]"
+                className="btn-orange-primary px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center space-x-2 shadow-md hover:shadow-orange-glow transition-all cursor-pointer"
               >
                 <span>For Schools: Setup Lab</span>
                 <ExternalLink className="w-4 h-4" />
@@ -274,6 +285,9 @@ I would like to book a *45-Minute Free Trial Demo & Center Visit* at your offlin
                       onChange={(e) => setVisitForm({ ...visitForm, interestedTrack: e.target.value })}
                       className="w-full px-4 py-3 rounded-xl bg-[#161616] border border-[#2C2C2C] text-xs text-[#F1F1F1] focus:outline-none focus:border-[#FF7711] transition-colors"
                     >
+                      <option value="" disabled className="text-[#777777]">
+                        -- Select Preferred Track / Interest --
+                      </option>
                       <option value="Robotics & Hardware">🤖 Robotics & Hardware</option>
                       <option value="Coding & Software">💻 Coding & Programming</option>
                       <option value="Artificial Intelligence">🧠 AI & Machine Learning</option>
@@ -281,7 +295,24 @@ I would like to book a *45-Minute Free Trial Demo & Center Visit* at your offlin
                       <option value="Drone Technology">🚁 Drone Technology</option>
                       <option value="Financial Literacy">💰 Financial Literacy</option>
                       <option value="Entrepreneur Mindset">🚀 Entrepreneur Mindset</option>
+                      <option value="Other">✨ Other</option>
                     </select>
+
+                    {visitForm.interestedTrack === "Other" && (
+                      <div className="mt-2.5 animate-in fade-in">
+                        <label className="block text-[11px] font-mono text-[#FF7711] mb-1">
+                          Specify Your Interest / Track *
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          placeholder="e.g. Competitive Coding, Aeromodelling, IoT..."
+                          value={customTrack}
+                          onChange={(e) => setCustomTrack(e.target.value)}
+                          className="w-full px-4 py-2.5 rounded-xl bg-[#161616] border border-[#FF7711]/60 text-xs text-[#F1F1F1] placeholder-[#666666] focus:outline-none focus:border-[#FF7711] transition-colors"
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
 

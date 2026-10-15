@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, Sparkles, Compass, Cpu, Bot } from "lucide-react";
 import centerHeroVid from "../assets/center_hero.mp4";
@@ -9,6 +9,32 @@ interface CenterHeroProps {
 }
 
 export const CenterHero: React.FC<CenterHeroProps> = () => {
+  const fullPhrase = "Becomes Creation";
+  const [typedText, setTypedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>;
+
+    if (!isDeleting && typedText.length < fullPhrase.length) {
+      timeout = setTimeout(() => {
+        setTypedText(fullPhrase.slice(0, typedText.length + 1));
+      }, 110);
+    } else if (!isDeleting && typedText.length === fullPhrase.length) {
+      timeout = setTimeout(() => {
+        setIsDeleting(true);
+      }, 3500);
+    } else if (isDeleting && typedText.length > 0) {
+      timeout = setTimeout(() => {
+        setTypedText(fullPhrase.slice(0, typedText.length - 1));
+      }, 60);
+    } else if (isDeleting && typedText.length === 0) {
+      setIsDeleting(false);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [typedText, isDeleting]);
+
   return (
     <section className="relative w-full min-h-[640px] lg:min-h-[720px] overflow-hidden flex flex-col justify-between pt-24 sm:pt-28 lg:pt-32 pb-6 sm:pb-8 lg:pb-10">
 
@@ -58,8 +84,11 @@ export const CenterHero: React.FC<CenterHeroProps> = () => {
             className="text-3xl sm:text-5xl lg:text-[54px] xl:text-[60px] font-black text-white tracking-tight leading-[1.08] mb-4 drop-shadow-[0_3px_12px_rgba(0,0,0,0.95)]"
           >
             Where Curiosity <br />
-            <span className="bg-gradient-to-r from-[#FF7711] via-[#FFA149] to-[#FF5500] bg-clip-text text-transparent">
-              Becomes Creation.
+            <span className="inline-block bg-gradient-to-r from-[#FF7711] via-[#FFA149] to-[#FF5500] bg-clip-text text-transparent min-h-[1.12em]">
+              {typedText}
+            </span>
+            <span className="inline-block text-[#FF7711] font-mono font-light animate-pulse ml-1 select-none">
+              |
             </span>
           </motion.h1>
 
