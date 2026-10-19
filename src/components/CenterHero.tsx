@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Calendar, Sparkles, Compass, Cpu, Bot } from "lucide-react";
 import centerHeroVid from "../assets/center_hero.mp4";
 
@@ -8,32 +8,89 @@ interface CenterHeroProps {
   onBookVisit?: () => void;
 }
 
+interface CenterHeroQuote {
+  id: number;
+  badge: string;
+  badgeIcon: string;
+  title: string;
+  description: string;
+}
+
+const CENTER_HERO_QUOTES: CenterHeroQuote[] = [
+  {
+    id: 1,
+    badge: "Curiosity to Innovation",
+    badgeIcon: "🚀",
+    title: "From Curiosity to Innovation",
+    description: "Turning Ideas into Impact. Learn Future Skills for a Brighter Future.",
+  },
+  {
+    id: 2,
+    badge: "Logic to Code",
+    badgeIcon: "💻",
+    title: "From Logic to Code",
+    description: "Think Creatively. Code Smartly. Learn Future Skills for a Brighter Future.",
+  },
+  {
+    id: 3,
+    badge: "Data to Intelligence",
+    badgeIcon: "🧠",
+    title: "From Data to Intelligence",
+    description: "Explore AI. Unlock Possibilities. Learn Future Skills for a Brighter Future.",
+  },
+  {
+    id: 4,
+    badge: "Imagination to Creation",
+    badgeIcon: "✨",
+    title: "From Imagination to Creation",
+    description: "Design the Future. Bring Ideas to Life. Learn Future Skills for a Brighter Future.",
+  },
+  {
+    id: 5,
+    badge: "Problems to Possibilities",
+    badgeIcon: "⚙️",
+    title: "From Problems to Possibilities",
+    description: "Think Beyond Limits. Create Real-World Solutions. Learn Future Skills for a Brighter Future.",
+  },
+];
+
 export const CenterHero: React.FC<CenterHeroProps> = () => {
-  const fullPhrase = "Becomes Creation";
-  const [typedText, setTypedText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
+  const [typedTitle, setTypedTitle] = useState("");
+  const typingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  const activeQuote = CENTER_HERO_QUOTES[currentQuoteIndex];
+
+  // Typing animation effect for the quote title (just like Hero.tsx)
   useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>;
+    const fullText = activeQuote.title;
+    setTypedTitle("");
+    let charIndex = 0;
 
-    if (!isDeleting && typedText.length < fullPhrase.length) {
-      timeout = setTimeout(() => {
-        setTypedText(fullPhrase.slice(0, typedText.length + 1));
-      }, 110);
-    } else if (!isDeleting && typedText.length === fullPhrase.length) {
-      timeout = setTimeout(() => {
-        setIsDeleting(true);
-      }, 3500);
-    } else if (isDeleting && typedText.length > 0) {
-      timeout = setTimeout(() => {
-        setTypedText(fullPhrase.slice(0, typedText.length - 1));
-      }, 60);
-    } else if (isDeleting && typedText.length === 0) {
-      setIsDeleting(false);
+    if (typingTimerRef.current) {
+      clearInterval(typingTimerRef.current);
     }
 
-    return () => clearTimeout(timeout);
-  }, [typedText, isDeleting]);
+    const typeInterval = setInterval(() => {
+      if (charIndex <= fullText.length) {
+        setTypedTitle(fullText.slice(0, charIndex));
+        charIndex++;
+      } else {
+        clearInterval(typeInterval);
+        // After finishing typing, wait before moving to next slide
+        typingTimerRef.current = setTimeout(() => {
+          setCurrentQuoteIndex((prev) => (prev + 1) % CENTER_HERO_QUOTES.length);
+        }, 4200);
+      }
+    }, 45);
+
+    return () => {
+      clearInterval(typeInterval);
+      if (typingTimerRef.current) {
+        clearTimeout(typingTimerRef.current);
+      }
+    };
+  }, [currentQuoteIndex, activeQuote.title]);
 
   return (
     <section className="relative w-full min-h-[640px] lg:min-h-[720px] overflow-hidden flex flex-col justify-between pt-24 sm:pt-28 lg:pt-32 pb-6 sm:pb-8 lg:pb-10">
@@ -62,58 +119,61 @@ export const CenterHero: React.FC<CenterHeroProps> = () => {
         <div className="max-w-3xl flex flex-col items-start text-left">
 
           {/* Eyebrow Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#111111]/90 border border-[#FF7711]/50 w-fit mb-5 backdrop-blur-md shadow-lg shadow-black/60"
-          >
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#111111]/90 border border-[#FF7711]/50 w-fit mb-5 backdrop-blur-md shadow-lg shadow-black/60">
             <span className="w-2 h-2 rounded-full bg-[#FF7711] animate-ping" />
             <span className="text-xs font-mono uppercase tracking-widest text-[#FF7711] font-bold">
               OUR CENTER
             </span>
             <span className="text-xs text-white/50">•</span>
             <span className="text-xs font-mono text-white/80">Offline Innovation Lab</span>
-          </motion.div>
+          </div>
 
-          {/* Main Headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="text-3xl sm:text-5xl lg:text-[54px] xl:text-[60px] font-black text-white tracking-tight leading-[1.08] mb-4 drop-shadow-[0_3px_12px_rgba(0,0,0,0.95)]"
-          >
-            Where Curiosity <br />
-            <span className="inline-block bg-gradient-to-r from-[#FF7711] via-[#FFA149] to-[#FF5500] bg-clip-text text-transparent min-h-[1.12em]">
-              {typedText}
-            </span>
-            <span className="inline-block text-[#FF7711] font-mono font-light animate-pulse ml-1 select-none">
-              |
-            </span>
-          </motion.h1>
+          {/* Animated Quote Slide with Real-Time Typing Animation */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeQuote.id}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              className="w-full flex flex-col items-start text-left"
+            >
+              {/* Main Headline with Real-Time Typing Animation */}
+              <h1 className="text-3xl sm:text-5xl lg:text-[54px] xl:text-[60px] font-black text-white tracking-tight leading-[1.08] mb-3 min-h-[75px] sm:min-h-[120px] drop-shadow-[0_3px_12px_rgba(0,0,0,0.95)]">
+                <span>{typedTitle}</span>
+                <span className="inline-block w-1.5 h-[0.88em] bg-[#FF7711] ml-2 align-middle animate-pulse" />
+              </h1>
 
-          {/* Subhead Tagline */}
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-            className="text-base sm:text-xl font-bold text-[#38BDF8] tracking-tight mb-4 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
-          >
-            Learning by Doing. Building Skills for Tomorrow
-          </motion.p>
+              {/* Subhead Tagline Quote */}
+              <p className="text-base sm:text-xl font-bold text-[#38BDF8] tracking-tight mb-3 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
+                {activeQuote.description}
+              </p>
+            </motion.div>
+          </AnimatePresence>
 
-          {/* Primary Textual Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-            className="space-y-2 mb-8 max-w-2xl"
-          >
-           
-            <p className="text-xs sm:text-sm text-[#CCCCCC] leading-relaxed font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
-              From Robotics and Coding with AI to 3D Printing, our center provides a hands-on environment where young learners explore, experiment, solve problems, and create.
-            </p>
-          </motion.div>
+
+          {/* Slide Progress Dots / Indicators */}
+          <div className="flex items-center space-x-2.5 mb-7 pt-2 border-t border-white/10 w-fit">
+          
+            <div className="flex items-center space-x-1.5 pl-2">
+              {CENTER_HERO_QUOTES.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => {
+                    if (typingTimerRef.current) clearTimeout(typingTimerRef.current);
+                    setCurrentQuoteIndex(idx);
+                  }}
+                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                    idx === currentQuoteIndex
+                      ? "w-7 bg-[#FF7711]"
+                      : "w-2 bg-white/30 hover:bg-white/60"
+                  }`}
+                  aria-label={`Quote ${idx + 1}`}
+                />
+              ))}
+            </div>
+       
+          </div>
 
           {/* CTA Buttons */}
           <motion.div

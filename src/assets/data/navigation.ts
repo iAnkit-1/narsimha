@@ -8,7 +8,6 @@ export const mainNavLinks: NavLink[] = [
   { label: "Home", href: "/" },
   { label: "Our Center", href: "/centers" },
   { label: "School Program", href: "#school-program" },
-  { label: "ATL Solutions", href: "#atl-solutions" },
   { label: "About Us", href: "#about-us" },
   { label: "Gallery", href: "/gallery" },
   { label: "Contact Us", href: "#contact" },

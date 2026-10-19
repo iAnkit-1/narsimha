@@ -28,13 +28,10 @@ export const Footer: React.FC = () => {
   const companyLinks = [
     { label: "About Us", href: "#about-us" },
     { label: "Gallery", href: "/gallery" },
-    { label: "Our Team", href: "#why-narasimha" },
-    { label: "Careers", href: "#contact" },
     { label: "Success Stories", href: "#proven-results" },
   ];
 
   const solutionLinks = [
-    { label: "ATL Solutions", href: "#atl-solutions" },
     { label: "Robotics Curriculum", href: "#courses-learning-path" },
     { label: "IoT Workshops", href: "#courses-learning-path" },
     { label: "Teacher Training", href: "#atl-solutions" },

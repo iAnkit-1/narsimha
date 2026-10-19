@@ -961,7 +961,7 @@ export const whyNarasimhaReasons: WhyReason[] = [
     description:
       "Students develop coding, technical thinking, creativity, communication, teamwork, problem-solving, and innovation skills that can support their future academic and career journeys.",
     highlights: ["Analytical computational thinking", "Resilience & debugging grit", "Verbal presentation & pitching mastery"],
-    image: "https://images.unsplash.com/photo-1531482615713-2285223f0449?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80",
     accentColor: "#A855F7",
     tag: "Lifelong Capability",
   },

@@ -64,6 +64,12 @@ export const CenterWhyChoose: React.FC = () => {
                   <img
                     src={reason.image}
                     alt={reason.title}
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      if (!target.src.includes("1522202176988")) {
+                        target.src = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80";
+                      }
+                    }}
                     className="w-full h-full object-cover object-center filter brightness-[0.92] contrast-[1.05] group-hover:scale-108 group-hover:brightness-105 transition-all duration-700 ease-out"
                     loading="lazy"
                   />
