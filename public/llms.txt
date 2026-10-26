@@ -1,0 +1,41 @@
+# Narasimha Skill Sphere
+
+> Hands-on, practical learning-by-doing in STEM, Robotics, Artificial Intelligence, IoT, Atal Tinkering Labs (ATL), Coding, and 3D Printing for schools, educators, and K-12 students.
+
+Narasimha Skill Sphere Private Limited (NSS) is a DPIIT (Startup India) recognized, Startup Bihar supported, and MSME registered educational technology enterprise headquartered in Bihar, India. NSS bridges classroom learning with real-world technological capability by establishing cutting-edge STEM/ATL labs in partner schools and running direct offline innovation learning centers.
+
+## Core Offerings & Pages
+
+- [Home & School Partnerships](https://www.narasimhaskillsphere.com/): Comprehensive overview of our mission, pedagogy, school lab partnerships, curriculum, and national recognitions.
+- [Patna Innovation Center](https://www.narasimhaskillsphere.com/centers): Flagship offline center at Kankarbagh, Patna offering structured weekend and evening tracks in Robotics, Coding, Drones, and IoT for Grades 1–12.
+- [Student Projects & Event Gallery](https://www.narasimhaskillsphere.com/gallery): Filterable visual showcase of student inventions, drone tests, robotic combat leagues, championship awards, and ATL sessions.
+- [Curriculum & Programs](https://www.narasimhaskillsphere.com/#specialized-courses): Detailed tracks including Block Coding, Scratch, Python & Applied AI, Arduino C++, IoT & Smart Home, 3D Design, 3D Printing, Drone Tech, and Mechanical Robotics.
+
+## Institutional Recognitions & Credentials
+
+- **Startup India (DPIIT)**: Recognized under Govt. of India's flagship startup initiative.
+- **Startup Bihar**: Department of Industries, Government of Bihar supported startup.
+- **NITI Aayog / AIM Ecosystem**: Facilitator and implementer of Atal Tinkering Labs (ATL) and maker pedagogy aligned with NEP 2020.
+- **Skill India**: Aligned with modern national vocational and digital literacy initiatives.
+- **MSME Registered**: Enterprise registered under the Ministry of Micro, Small & Medium Enterprises, Govt. of India.
+- **ISO 9001:2015**: Certified quality management for education and technical training delivery.
+
+## Learning Methodology & Age Tiers
+
+Our proprietary pedagogy is based on the **"Learning-By-Doing"** philosophy and the **E3 Framework** (Explore, Experiment, Excel):
+1. **Starter Track (Grades 1–4, Ages 6–9)**: Visual block coding, LEGO-compatible motorized mechanics, basic electronics, simple sensors, and spatial reasoning.
+2. **Learner Track (Grades 5–8, Ages 10–13)**: Arduino microcontroller programming, C/C++ basics, Python fundamentals, IoT sensor interfacing, mechanical gear systems, and 3D CAD modeling.
+3. **Performer Track (Grades 9–12 & College, Ages 14+)**: Applied AI & Machine Learning, computer vision, autonomous drone assembly & PID tuning, industrial IoT, PCB design, 3D rapid prototyping, and competitive robotics.
+
+## Contact & Location
+
+- **Flagship Center**: NC/10B, Near Gayatri Shaktipith, Kankarbagh, Patna, Bihar - 800020
+- **Corporate Head Office**: G-7, Shardanagar, Rosera, Samastipur, Bihar - 848210
+- **Branches & Reach**: Patna, Champaran, Nalanda, Purnia, Jamshedpur
+- **Official Website**: https://www.narasimhaskillsphere.com
+- **Official Email**: narasimhaskillsphere@gmail.com
+- **Phone / WhatsApp**: +91 9709719731
+
+## Extended Documentation
+
+- [Full LLM Knowledge Document](https://www.narasimhaskillsphere.com/llms-full.txt): Detailed syllabus topics, hardware toolkits, ATL implementation models, and FAQ.

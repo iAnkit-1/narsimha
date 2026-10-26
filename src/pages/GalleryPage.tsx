@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { allGalleryPhotos, type GalleryPhoto } from "../assets/data/galleryData";
 import { Link } from "react-router-dom";
+import { SEO } from "../components/SEO";
 
 interface GalleryPageProps {
   onOpenPartnerModal?: () => void;
@@ -54,6 +55,12 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onOpenPartnerModal }) 
 
   return (
     <div className="w-full bg-[#080808] text-[#F1F1F1] min-h-screen selection:bg-[#FF7711] selection:text-black pt-24 pb-20">
+      <SEO
+        title="Student Inventions & Robotics Gallery"
+        description="Explore student robotics prototypes, drone flights, Atal Tinkering Lab competitions, award ceremonies, and innovation workshops."
+        path="/gallery"
+      />
+
       {/* Background ambient lighting */}
       <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#FF7711]/5 blur-[160px] pointer-events-none rounded-full" />
 

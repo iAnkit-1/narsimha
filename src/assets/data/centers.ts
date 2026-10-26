@@ -24,7 +24,7 @@ export const skillCentersList: SkillCenter[] = [
     address: "NC/10B, Kankarbagh",
     landmark: "Near Gayatri Shaktipith",
     phone: "9709719731",
-    email: "narasimhasphillsphere@gmail.com",
+    email: "narasimhaskillsphere@gmail.com",
     hours: "Tue - Sun: 9:00 AM – 6:30 PM (Monday Closed)",
     facilities: [
       "Robotics Prototyping Arena",

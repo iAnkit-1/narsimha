@@ -9,6 +9,7 @@ import { CenterWhyChoose } from "../components/CenterWhyChoose";
 import { CenterLearningSpaceGallery } from "../components/CenterLearningSpaceGallery";
 import { CenterBookingCTA } from "../components/CenterBookingCTA";
 import { FutureSkillsProgram } from "../components/FutureSkillsProgram";
+import { SEO } from "../components/SEO";
 
 interface CentersPageProps {
   onOpenPartnerModal: () => void;
@@ -17,6 +18,12 @@ interface CentersPageProps {
 export const CentersPage: React.FC<CentersPageProps> = ({ onOpenPartnerModal }) => {
   return (
     <div className="w-full bg-[#080808] text-[#F1F1F1] min-h-screen selection:bg-[#FF7711] selection:text-black">
+      <SEO
+        title="Patna Innovation Center | Robotics, AI & Coding Lab"
+        description="Join hands-on weekend and evening robotics, drone technology, AI, coding, and IoT programs at Narasimha Skill Sphere Patna Center in Kankarbagh."
+        path="/centers"
+      />
+
       {/* 1. HERO SECTION */}
       <CenterHero />
       

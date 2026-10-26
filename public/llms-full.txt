@@ -1,0 +1,93 @@
+# Narasimha Skill Sphere — Comprehensive Information & Curriculum Reference
+
+> Organization: Narasimha Skill Sphere Private Limited (NSS)
+> Tagline: Learning-By-Doing
+> Website: https://www.narasimhaskillsphere.com
+> Primary Inquiries: narasimhaskillsphere@gmail.com | +91 9709719731
+> Head Office: G-7, Shardanagar, Rosera, Samastipur, Bihar - 848210
+> Learning Center: NC/10B, Near Gayatri Shaktipith, Kankarbagh, Patna, Bihar - 800020
+
+---
+
+## 1. Executive Summary & Vision
+
+Narasimha Skill Sphere Private Limited is an educational innovation company founded in Bihar, India. The company works directly with schools, institutions, colleges, and young learners to transform traditional memorization-based education into experiential, hands-on STEM (Science, Technology, Engineering, and Mathematics) excellence.
+
+The organization is formally recognized under:
+- Startup India (DPIIT - Department for Promotion of Industry and Internal Trade)
+- Startup Bihar (Department of Industries, Govt. of Bihar)
+- MSME (Ministry of Micro, Small and Medium Enterprises, Govt. of India)
+- Atal Innovation Mission (AIM) / NITI Aayog ecosystem
+- ISO 9001:2015 Quality Management Standard
+
+---
+
+## 2. Institutional School Partnerships & ATL Lab Setup
+
+Narasimha Skill Sphere partners with schools to implement turnkey STEM & Innovation Labs:
+- **Atal Tinkering Lab (ATL) Setup**: Full compliance with NITI Aayog guidelines, including complete lab layout, workbench equipment, 3D printers, electronics workbenches, drone testing cages, and robotic kits.
+- **NEP 2020 Aligned Curriculum**: Standardized weekly lesson plans from Grade 1 to 12 blending experiential science, coding, and design thinking.
+- **Certified Full-time / Part-time STEM Mentors**: Providing trained instructors to manage labs, run daily sessions, and mentor student projects.
+- **Faculty Development Programs (FDP)**: Upskilling school teachers to adopt activity-based learning and troubleshoot hardware toolkits.
+- **Annual Robotics Exhibitions & Hackathons**: Organizing inter-school competitions, science fairs, and community showcases.
+
+---
+
+## 3. Patna Innovation Center (Direct Student Program)
+
+Located in Kankarbagh, Patna, this flagship center provides weekend (Saturday-Sunday) and after-school interactive tracks:
+- **Student-to-Kit Ratio**: 1:1 or 2:1 hands-on hardware access.
+- **Trial Classes**: Free personalized assessment and trial workshop for students and parents.
+- **Capstone Portfolios**: Every student builds real working prototypes (e.g., obstacle-avoiding cars, automatic irrigation systems, gesture-controlled rovers, mini-drones) and receives verified project certificates.
+
+---
+
+## 4. Comprehensive Course Tracks
+
+### Track A: Block Coding & Logical Reasoning (Grades 1–4)
+- Algorithmic thinking using visual drag-and-drop environments (Scratch, Blockly).
+- Event handling, loops, conditionals, variables, sound synthesis, and interactive storytelling.
+- Building mini games, digital animations, and introductory logic games.
+
+### Track B: Starter Robotics & Basic Electronics (Grades 3–6)
+- Circuits, breadboards, LEDs, resistors, DC motors, servo motors, buzzer modules, and switches.
+- Modular robotic chassis assembly, mechanical gear ratios, wheel traction, and battery management.
+- Hands-on line-follower robots, light-activated rovers, and sound-triggered machines.
+
+### Track C: Microcontrollers & Arduino C++ (Grades 5–8)
+- Arduino Uno/Nano microcontroller architecture, digital & analog I/O pins, PWM signals.
+- Writing embedded C/C++ in Arduino IDE: Serial monitor debugging, sensor calibration.
+- Interfacing ultrasonic distance sensors, IR sensors, PIR motion detectors, and LCD displays.
+- Ultrasonic obstacle-avoiding rovers and Bluetooth remote-controlled cars.
+
+### Track D: Internet of Things (IoT) & Smart Systems (Grades 7–10)
+- ESP8266 and ESP32 Wi-Fi/Bluetooth microcontrollers.
+- Cloud platforms (Blynk, Adafruit IO, MQTT protocol), HTTP web servers on microcontrollers.
+- Home automation: smart lighting, remote temperature monitoring, water-level indicators.
+
+### Track E: Python Programming & Applied AI (Grades 7–12)
+- Core Python syntax: data types, functions, object-oriented concepts, and modules.
+- Computer vision with OpenCV: face detection, color tracking, hand gesture recognition.
+- Intro to Machine Learning: train classifiers using Teachable Machine and Python scikit-learn.
+- Voice-assisted smart bots, automated attendance cameras, and predictive analytics.
+
+### Track F: 3D Design & 3D Printing (Grades 5–12)
+- 3D spatial thinking, CAD modeling with Tinkercad and Autodesk Fusion 360.
+- Slicing software (UltiMaker Cura), infill density, print speeds, layer heights, support structures.
+- FDM 3D printer operation, PLA filament handling, rapid prototyping for robotic parts.
+
+### Track G: Drones & Aeronautics (Grades 8–12)
+- Aerodynamics, quadcopter physics, lift, thrust, pitch, roll, and yaw.
+- Frame assembly, brushless DC motors, Electronic Speed Controllers (ESCs), flight controllers.
+- Safe flying simulation, transmitter binding, PID tuning, and autonomous waypoint navigation.
+
+---
+
+## 5. Web Platform URLs
+
+- Homepage: https://www.narasimhaskillsphere.com/
+- Patna Center: https://www.narasimhaskillsphere.com/centers
+- Gallery: https://www.narasimhaskillsphere.com/gallery
+- Sitemap: https://www.narasimhaskillsphere.com/sitemap.xml
+- LLM Directive: https://www.narasimhaskillsphere.com/llms.txt
+- Robots Directive: https://www.narasimhaskillsphere.com/robots.txt

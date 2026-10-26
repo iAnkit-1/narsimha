@@ -26,12 +26,11 @@ function emailApiDevPlugin(): Plugin {
           try {
             const data = JSON.parse(body || "{}");
             const SMTP_HOST = process.env.SMTP_HOST || "smtp.gmail.com";
-            const SMTP_PORT = parseInt(process.env.SMTP_PORT || "465", 10);
+            const SMTP_PORT = process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : 465;
             const SMTP_SECURE = process.env.SMTP_SECURE !== "false";
-            const SMTP_USER = process.env.SMTP_USER || "narasimhasphillsphere@gmail.com";
-            const SMTP_PASS = process.env.SMTP_PASS || "srqnhsejhzizijnt";
-            const RECIPIENT_EMAIL =
-              process.env.RECIPIENT_EMAIL || "narasimhasphillsphere@gmail.com";
+            const SMTP_USER = process.env.SMTP_USER || "";
+            const SMTP_PASS = process.env.SMTP_PASS || "";
+            const RECIPIENT_EMAIL = process.env.RECIPIENT_EMAIL || SMTP_USER;
 
             const transporter = nodemailer.createTransport({
               host: SMTP_HOST,

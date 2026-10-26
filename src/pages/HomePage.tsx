@@ -15,6 +15,7 @@ import { NarasimhaInAction } from "../components/NarasimhaInAction";
 import { NewsletterCommunity } from "../components/NewsletterCommunity";
 import type { Course } from "../assets/data/specializedCourses";
 import { specializedCourses } from "../assets/data/specializedCourses";
+import { SEO } from "../components/SEO";
 
 interface HomePageProps {
   onOpenPartnerModal: () => void;
@@ -27,6 +28,12 @@ export const HomePage: React.FC<HomePageProps> = ({
 }) => {
   return (
     <>
+      <SEO
+        title="Learning-By-Doing | STEM, Robotics & AI Education"
+        description="Narasimha Skill Sphere empowers schools and young minds through hands-on learning in STEM, Atal Tinkering Labs (ATL), Robotics, Artificial Intelligence, IoT, and 3D printing."
+        path="/"
+      />
+
       {/* 1. HERO SECTION */}
       <Hero
         onExplorePrograms={() => {

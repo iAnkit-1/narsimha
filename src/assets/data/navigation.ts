@@ -28,7 +28,7 @@ export const companyDetails = {
   tagline: "Learning-By-Doing",
   websiteUrl: "https://www.narasimhaskillsphere.com",
   phone: "97 0 97 1 97 31",
-  email: "narasimhasphillsphere@gmail.com",
+  email: "narasimhaskillsphere@gmail.com",
   brandDescription: "To bridge classroom learning with real-world skill through affordable, accessible, high-quality, hands-on education.",
   address: {
     headOffice: "G-7, Shardanagar, Rosera, Samastipur - 848210",
