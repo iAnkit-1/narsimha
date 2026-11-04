@@ -9,6 +9,7 @@ const SMTP_SECURE = process.env.SMTP_SECURE !== "false";
 const SMTP_USER = process.env.SMTP_USER || "";
 const SMTP_PASS = process.env.SMTP_PASS || "";
 const RECIPIENT_EMAIL = process.env.RECIPIENT_EMAIL || SMTP_USER;
+const GOOGLE_SHEET_WEBAPP_URL = process.env.GOOGLE_SHEET_WEBAPP_URL || "";
 
 // Create reusable Nodemailer transporter
 export const mailTransporter = nodemailer.createTransport({
@@ -134,13 +135,51 @@ export default async function handler(req: any, res: any) {
       html,
     };
 
-    const info = await mailTransporter.sendMail(mailOptions);
+    // Task 1: Dispatch Nodemailer email
+    const emailPromise = mailTransporter.sendMail(mailOptions);
+
+    // Task 2: Google Apps Script Webhook (simultaneous)
+    const sheetPromise = (async () => {
+      const webhookUrl = GOOGLE_SHEET_WEBAPP_URL || process.env.GOOGLE_SHEET_WEBAPP_URL;
+      if (!webhookUrl) {
+        console.log("[Google Sheets] No GOOGLE_SHEET_WEBAPP_URL configured; skipping sheet sync.");
+        return { synced: false, reason: "URL not configured" };
+      }
+      try {
+        const response = await fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        const resText = await response.text();
+        return { synced: response.ok, response: resText };
+      } catch (err: any) {
+        console.warn("[Google Sheets Webhook Warning]:", err?.message || err);
+        return { synced: false, error: err?.message || String(err) };
+      }
+    })();
+
+    // Run both tasks concurrently
+    const [emailResult, sheetResult] = await Promise.allSettled([
+      emailPromise,
+      sheetPromise,
+    ]);
+
+    if (emailResult.status === "rejected") {
+      throw emailResult.reason;
+    }
+
+    const info = emailResult.value;
     console.log("[SMTP] Email dispatched successfully:", info.messageId);
+
+    const sheetInfo = sheetResult.status === "fulfilled" ? sheetResult.value : { synced: false };
+    console.log("[Google Sheets] Status:", sheetInfo);
 
     return res.status(200).json({
       success: true,
       message: "Notification email dispatched successfully.",
       messageId: info.messageId,
+      sheetSynced: sheetInfo?.synced ?? false,
     });
   } catch (error: any) {
     console.error("[SMTP Error]:", error);

@@ -95,7 +95,7 @@ function emailApiDevPlugin(): Plugin {
               </div>
             `;
 
-            const info = await transporter.sendMail({
+            const emailPromise = transporter.sendMail({
               from: `"NSS Portal" <${SMTP_USER}>`,
               to: RECIPIENT_EMAIL,
               replyTo: data.email || undefined,
@@ -103,7 +103,41 @@ function emailApiDevPlugin(): Plugin {
               html,
             });
 
+            const sheetWebhookUrl = process.env.GOOGLE_SHEET_WEBAPP_URL;
+            const sheetPromise = (async () => {
+              if (!sheetWebhookUrl) {
+                console.log("[Dev Server] No GOOGLE_SHEET_WEBAPP_URL configured; skipping sheet sync.");
+                return { synced: false, reason: "URL not configured" };
+              }
+              try {
+                const response = await fetch(sheetWebhookUrl, {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(data),
+                });
+                const resText = await response.text();
+                return { synced: response.ok, response: resText };
+              } catch (err: any) {
+                console.warn("[Dev Server Google Sheets Sync Warning]:", err?.message || err);
+                return { synced: false, error: err?.message || String(err) };
+              }
+            })();
+
+            const [emailResult, sheetResult] = await Promise.allSettled([
+              emailPromise,
+              sheetPromise,
+            ]);
+
+            if (emailResult.status === "rejected") {
+              throw emailResult.reason;
+            }
+
+            const info = emailResult.value;
             console.log("[Dev Email Plugin] Sent message:", info.messageId);
+
+            const sheetInfo = sheetResult.status === "fulfilled" ? sheetResult.value : { synced: false };
+            console.log("[Dev Google Sheets] Status:", sheetInfo);
+
             res.statusCode = 200;
             res.setHeader("Content-Type", "application/json");
             res.end(
@@ -111,6 +145,7 @@ function emailApiDevPlugin(): Plugin {
                 success: true,
                 message: "Email sent successfully",
                 messageId: info.messageId,
+                sheetSynced: sheetInfo?.synced ?? false,
               })
             );
           } catch (err: any) {
