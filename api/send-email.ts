@@ -150,6 +150,7 @@ export default async function handler(req: any, res: any) {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
+          redirect: "follow",
         });
         const resText = await response.text();
         return { synced: response.ok, response: resText };

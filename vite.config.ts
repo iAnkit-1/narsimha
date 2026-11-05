@@ -114,6 +114,7 @@ function emailApiDevPlugin(): Plugin {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify(data),
+                  redirect: "follow",
                 });
                 const resText = await response.text();
                 return { synced: response.ok, response: resText };
