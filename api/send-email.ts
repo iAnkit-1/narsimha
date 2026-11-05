@@ -166,21 +166,45 @@ export default async function handler(req: any, res: any) {
       sheetPromise,
     ]);
 
-    if (emailResult.status === "rejected") {
-      throw emailResult.reason;
+    // Analyze results from both simultaneous tasks
+    const isEmailSent = emailResult.status === "fulfilled";
+    const isSheetSynced =
+      sheetResult.status === "fulfilled" && Boolean((sheetResult.value as any)?.synced);
+
+    if (isEmailSent) {
+      console.log("[SMTP] Email dispatched successfully:", (emailResult.value as any)?.messageId);
+    } else {
+      console.error(
+        "[SMTP Error]:",
+        (emailResult as PromiseRejectedResult).reason?.message ||
+          (emailResult as PromiseRejectedResult).reason
+      );
     }
 
-    const info = emailResult.value;
-    console.log("[SMTP] Email dispatched successfully:", info.messageId);
+    if (isSheetSynced) {
+      console.log("[Google Sheets] Saved row successfully");
+    } else {
+      console.warn(
+        "[Google Sheets Warning]:",
+        sheetResult.status === "rejected" ? sheetResult.reason : sheetResult.value
+      );
+    }
 
-    const sheetInfo = sheetResult.status === "fulfilled" ? sheetResult.value : { synced: false };
-    console.log("[Google Sheets] Status:", sheetInfo);
+    // If at least one channel (Email or Google Sheet) succeeded, do NOT crash the form submission!
+    if (!isEmailSent && !isSheetSynced) {
+      const primaryError =
+        (emailResult as PromiseRejectedResult).reason?.message ||
+        "Failed to dispatch inquiry via both email and Google Sheets.";
+      return res.status(500).json({ error: primaryError });
+    }
 
     return res.status(200).json({
       success: true,
-      message: "Notification email dispatched successfully.",
-      messageId: info.messageId,
-      sheetSynced: sheetInfo?.synced ?? false,
+      message: "Inquiry received and processed successfully.",
+      emailSent: isEmailSent,
+      sheetSynced: isSheetSynced,
+      ...(isEmailSent ? { messageId: (emailResult.value as any)?.messageId } : {}),
+      ...(!isEmailSent ? { warning: "Email dispatch failed; lead saved to Google Sheet." } : {}),
     });
   } catch (error: any) {
     console.error("[SMTP Error]:", error);

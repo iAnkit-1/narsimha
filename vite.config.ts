@@ -129,24 +129,49 @@ function emailApiDevPlugin(): Plugin {
               sheetPromise,
             ]);
 
-            if (emailResult.status === "rejected") {
-              throw emailResult.reason;
+            const isEmailSent = emailResult.status === "fulfilled";
+            const isSheetSynced =
+              sheetResult.status === "fulfilled" && Boolean((sheetResult.value as any)?.synced);
+
+            if (isEmailSent) {
+              console.log("[Dev Email Plugin] Sent message:", (emailResult.value as any)?.messageId);
+            } else {
+              console.error(
+                "[Dev Email Error]:",
+                (emailResult as PromiseRejectedResult).reason?.message ||
+                  (emailResult as PromiseRejectedResult).reason
+              );
             }
 
-            const info = emailResult.value;
-            console.log("[Dev Email Plugin] Sent message:", info.messageId);
+            if (isSheetSynced) {
+              console.log("[Dev Google Sheets] Saved row successfully");
+            } else {
+              console.warn(
+                "[Dev Google Sheets Warning]:",
+                sheetResult.status === "rejected" ? sheetResult.reason : sheetResult.value
+              );
+            }
 
-            const sheetInfo = sheetResult.status === "fulfilled" ? sheetResult.value : { synced: false };
-            console.log("[Dev Google Sheets] Status:", sheetInfo);
+            if (!isEmailSent && !isSheetSynced) {
+              const primaryError =
+                (emailResult as PromiseRejectedResult).reason?.message ||
+                "Failed to send email and sync to Google Sheets in dev server";
+              res.statusCode = 500;
+              res.setHeader("Content-Type", "application/json");
+              res.end(JSON.stringify({ error: primaryError }));
+              return;
+            }
 
             res.statusCode = 200;
             res.setHeader("Content-Type", "application/json");
             res.end(
               JSON.stringify({
                 success: true,
-                message: "Email sent successfully",
-                messageId: info.messageId,
-                sheetSynced: sheetInfo?.synced ?? false,
+                message: "Inquiry processed successfully",
+                emailSent: isEmailSent,
+                sheetSynced: isSheetSynced,
+                ...(isEmailSent ? { messageId: (emailResult.value as any)?.messageId } : {}),
+                ...(!isEmailSent ? { warning: "Email dispatch failed; lead saved to Google Sheet." } : {}),
               })
             );
           } catch (err: any) {
